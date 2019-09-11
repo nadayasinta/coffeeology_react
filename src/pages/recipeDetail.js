@@ -5,6 +5,7 @@ import { actionsRecipes } from "../store/store";
 // import component
 import StepCard from "../components/stepCard";
 import Header from "../components/header";
+import Navbar from "../components/navbar";
 
 // test
 import Radar from "../components/radar";
@@ -14,14 +15,15 @@ class RecipeSelection extends React.Component {
         return (
             <div>
                 <Header />
-                {this.props.recipes.map(value => {
+                <Radar data={this.props.recipeDetails} />
+                {this.props.recipeSteps.map(recipeStep => {
                     return (
                         <div className="col-12">
-                            <StepCard data={this.props.recipeSteps} />
+                            <StepCard data={recipeStep} />
                         </div>
                     );
                 })}
-                <Radar data={this.props.recipeDetails} />
+                <Navbar />
             </div>
         );
     }
