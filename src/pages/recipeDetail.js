@@ -3,28 +3,31 @@ import { connect } from "unistore/react";
 import { actionsRecipes } from "../store/store";
 
 // import component
-import RecipeCard from "../components/recipeCard";
+import StepCard from "../components/stepCard";
 import Header from "../components/header";
 
-class RecipesSelection extends React.Component {
+// test
+import Radar from "../components/radar";
+
+class RecipeSelection extends React.Component {
     render() {
         return (
             <div>
                 <Header />
-                <h2>Recipes Selection</h2>
                 {this.props.recipes.map(value => {
                     return (
                         <div className="col-12">
-                            <RecipeCard data={value} />
+                            <StepCard data={this.props.recipeSteps} />
                         </div>
                     );
                 })}
+                <Radar data={this.props.recipeDetails} />
             </div>
         );
     }
 }
 
 export default connect(
-    "recipes,stepTypes,recipeDetails",
+    "recipes,stepTypes,recipeDetails, recipeSteps",
     actionsRecipes
-)(RecipesSelection);
+)(RecipeSelection);
