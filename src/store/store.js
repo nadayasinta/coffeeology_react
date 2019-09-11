@@ -14,6 +14,7 @@ import method6 from '../assets/images/methodV60.png';
 import stepTypes from './stepTypes';
 
 const initialState = {
+
   // data recipe
   recipes: [
     {
@@ -80,6 +81,11 @@ const initialState = {
 
   // step Types
   stepTypes: stepTypes
+  // data recipe steps
+    recipe: [{ time: 610 }, { time: 310 }, { time: 100 }],
+    timerNow: 0,
+    timerUp: 0
+
 };
 
 const store = createStore(initialState);
@@ -91,4 +97,18 @@ const actionsRecipes = store => ({
   }
 });
 
-export { store, actionsRecipes };
+const actionsTimerTime = store => ({
+    // setter data
+    setTimerTime(state, value) {
+        if (value === 0) {
+            return { timerUp: 0 };
+        } else {
+            return { timerNow: value };
+        }
+    },
+    setTimerIndex(state, value) {
+        return { timerNowIndex: value };
+    }
+});
+
+export { store, actionsRecipes, actionsTimerTime };
