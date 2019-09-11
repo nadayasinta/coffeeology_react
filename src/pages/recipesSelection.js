@@ -2,14 +2,23 @@ import React from 'react';
 import { connect } from 'unistore/react';
 import { actionsRecipes } from '../store/store';
 
+//import component
+import RecipeCard from '../components/recipeCard';
+import Header from '../components/header';
+
 class RecipesSelection extends React.Component {
   render() {
-    console.log(this.props.stepTypes.stir.icon);
     return (
       <div>
-        <h2>Tessss</h2>
-        <h3>{this.props.stepTypes.stir.name}</h3>
-        <img src={this.props.stepTypes.stir.icon} />
+        <Header />
+        <h2>Recipes Selection</h2>
+        {this.props.recipes.map(value => {
+          return (
+            <div className="col-12">
+              <RecipeCard data={value} />
+            </div>
+          );
+        })}
       </div>
     );
   }
