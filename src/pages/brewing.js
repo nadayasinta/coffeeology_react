@@ -8,10 +8,10 @@ import Timer from "../components/timer";
 
 class Brewing extends React.Component {
     isTimerZero = () => {
-        console.log("recipetime", this.props.recipe[0].time);
+        console.log("recipetime", this.props.recipeSteps[0].time);
         if (this.props.timerUp === 0) {
-            this.props.setTimerTime(this.props.recipe[0].time);
-            return <Timer startCount={this.props.recipe[0].time} />;
+            this.props.setTimerTime(this.props.recipeSteps[0].time);
+            return <Timer startCount={this.props.recipeSteps[0].time} />;
         }
     };
 
@@ -44,6 +44,6 @@ class Brewing extends React.Component {
 }
 
 export default connect(
-    "methods,recipe, timerNowIndex, timerUp",
+    "methods,recipeSteps, timerNowIndex, timerUp",
     actionsTimerTime
 )(Brewing);
