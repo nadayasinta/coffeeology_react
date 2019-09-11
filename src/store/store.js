@@ -43,8 +43,17 @@ const initialState = {
       icon: require('../assets/images/StepIcon/stir.png')
     }
   ],
-  recipe: {},
-
+  recipeDetails: {
+    fragrance: 0.4,
+    aroma: 0.4,
+    cleanliness: 0.4,
+    sweetness: 0.3,
+    taste: 0.3,
+    acidity: 0.5,
+    aftertaste: 0.5,
+    balance: 0.5,
+    globalTaste: 0.5
+  },
   // method
   methodID: 0,
   method: {

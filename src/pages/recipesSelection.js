@@ -2,9 +2,12 @@ import React from 'react';
 import { connect } from 'unistore/react';
 import { actionsRecipes } from '../store/store';
 
-//import component
+// import component
 import RecipeCard from '../components/recipeCard';
 import Header from '../components/header';
+
+// test
+import Radar from '../components/radar';
 
 class RecipesSelection extends React.Component {
   render() {
@@ -19,12 +22,13 @@ class RecipesSelection extends React.Component {
             </div>
           );
         })}
+        <Radar tasteData={this.props.recipeDetails} />
       </div>
     );
   }
 }
 
 export default connect(
-  'recipes,stepTypes',
+  'recipes,stepTypes,recipeDetails',
   actionsRecipes
 )(RecipesSelection);

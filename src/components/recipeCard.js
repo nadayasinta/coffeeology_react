@@ -15,41 +15,36 @@ function methodCard(props) {
             <div className="col-3 text-right">
               <h5>...</h5>
             </div>
-            <div className="col-2 text-left">
-              <div className="row h-100 align-items-center">
-                <div className="col-12">{props.data.time}</div>
-              </div>
+          </div>
+          <div className="row">
+            <div className="col-2 text-right align-self-center px-0">
+              {props.data.time}
             </div>
-            <div className="col-2 text-right">
+            <div className="col-2 text-left pr-0 pl-1">
               <img
                 src={require('../assets/images/RecipeIcon/timer.png')}
-                width="150%"
+                className="w-75"
               />
             </div>
-            <div className="col-2 text-left">
-              <div className="row h-100 align-items-center">
-                <div className="col-12">{props.data.coffeeWeight}</div>
-              </div>
+            <div className="col-2 text-right align-self-center px-0">
+              {props.data.coffeeWeight}
             </div>
-            <div className="col-2 text-right">
+            <div className="col-2 text-left pr-0 pl-1">
               <img
                 src={require('../assets/images/RecipeIcon/coffee.png')}
-                width="150%"
+                className="w-75"
               />
             </div>
-            <div className="col-2 text-left">
-              <div className="row h-100 align-items-center">
-                <div className="col-12">{props.data.water}</div>
-              </div>
+            <div className="col-2 text-right align-self-center px-0">
+              {props.data.water}
             </div>
-            <div className="col-2 text-right">
+            <div className="col-2 text-left pr-0 pl-1">
               <img
                 src={require('../assets/images/RecipeIcon/water.png')}
-                width="150%"
+                className="w-75"
               />
             </div>
           </div>
-          <br />
         </div>
         <div className="col-8">
           <div className="row">
@@ -77,25 +72,29 @@ function methodCard(props) {
           <div className="row h-100">
             <div className="col-12 h-50">
               <div className="row align-items-center h-100">
-                <div className="col-6">
+                <div className="col-6 text-right px-0">
                   <img
                     src={require('../assets/images/RecipeIcon/star.png')}
-                    width="100%"
+                    className="w-50"
                   />
                 </div>
-                <div className="col-6">{props.data.rating}</div>
+                <div className="col-6 text-center px-0">
+                  {props.data.rating}
+                </div>
               </div>
             </div>
 
             <div className="col-12 h-50">
               <div className="row align-items-center h-100">
-                <div className="col-6">
+                <div className="col-6 text-right px-0">
                   <img
                     src={require('../assets/images/RecipeIcon/like.png')}
-                    width="100%"
+                    className="w-50"
                   />
                 </div>
-                <div className="col-6">{props.data.favoriteCount}</div>
+                <div className="col-6 text-center px-0">
+                  {props.data.favoriteCount}
+                </div>
               </div>
             </div>
           </div>
