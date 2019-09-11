@@ -14,6 +14,7 @@ import method6 from "../assets/images/methodV60.png";
 import stepTypes from "./stepTypes";
 
 const initialState = {
+
     // data recipe
     recipes: [
         {
@@ -94,30 +95,36 @@ const initialState = {
     stepTypes: stepTypes,
 
     timerNow: 0,
-    timerUp: 0
+	// data recipe steps
+	steps: [{ name: 'aduk1', time: 100 }, { name: 'aduk2', time: 150 }, { name: 'aduk3', time: 50 }],
+	stepIndex: -1,
+	stepsHidden: [0, 0, 0],
+
 };
 
 const store = createStore(initialState);
 
 const actionsRecipes = store => ({
+
     // setter data
     setListCategory(state, value) {
         return { listCategory: value };
     }
+
 });
 
 const actionsTimerTime = store => ({
-    // setter data
-    setTimerTime(state, value) {
-        if (value === 0) {
-            return { timerUp: 0 };
-        } else {
-            return { timerNow: value };
-        }
-    },
-    setTimerIndex(state, value) {
-        return { timerNowIndex: value };
-    }
+	// setter data
+	setTimerTime(state, value) {
+		if (value === 0) {
+			return { stepIndex: store.getState().stepIndex + 1 };
+		} else {
+			return { timerNow: value };
+		}
+	},
+	setStepIndex(state, value) {
+		return { stepIndex: value };
+	},
 });
 
 export { store, actionsRecipes, actionsTimerTime };

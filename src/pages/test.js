@@ -1,35 +1,40 @@
-import React from "react";
-import { CSSTransitionGroup } from "react-transition-group";
+import React from 'react';
+import { CSSTransitionGroup } from 'react-transition-group';
 
 class Test extends React.Component {
-    constructor(props) {
-        super(props);
-        this.onClick = this.onClick.bind(this);
-        this.state = { hidden: true };
-    }
+	constructor(props) {
+		super(props);
+		this.state = { items: ['hello', 'world', 'click', 'me'] };
+		this.handleAdd = this.handleAdd.bind(this);
+	}
 
-    onClick() {
-        this.setState((prevState, props) => ({
-            hidden: !prevState.hidden
-        })); //alert(ReactCSSTransitionGroup);
-    }
-    render() {
-        return (
-            <div>
-                <div onClick={this.onClick}>Click me1</div>
-                <CSSTransitionGroup
-                    transitionName="toggle"
-                    transitionEnterTimeout={300}
-                    transitionLeaveTimeout={300}
-                >
-                    {this.state.hidden ? null : (
-                        <div className="toggle-base">Toogle</div>
-                    )}
-                </CSSTransitionGroup>
-                <div>Something else.</div>
-            </div>
-        );
-    }
+	handleAdd() {
+		const newItems = this.state.items.concat([prompt('Enter some text')]);
+		this.setState({ items: newItems });
+	}
+
+	handleRemove(i) {
+		let newItems = this.state.items.slice();
+		newItems.splice(i, 1);
+		this.setState({ items: newItems });
+	}
+
+	render() {
+		const items = this.state.items.map((item, i) => (
+			<div key={item} onClick={() => this.handleRemove(i)}>
+				{item}
+			</div>
+		));
+
+		return (
+			<div>
+				<button onClick={this.handleAdd}>Add Item</button>
+				<CSSTransitionGroup transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
+					{items}
+				</CSSTransitionGroup>
+			</div>
+		);
+	}
 }
 
 export { Test };

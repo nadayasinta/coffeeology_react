@@ -5,7 +5,9 @@
     font-size: 20px;
 }
 .recipeCard h6 {
-    font-size: 0.8em;
+
+  font-size: 0.8em;
+
 }
 .toggle-base {
     height: 20px;
@@ -29,12 +31,14 @@
     }
 }
 @keyframes fade-out {
-    from {
-        opacity: 1;
-        height: 20px;
-    }
-    to {
-        opacity: 0;
-        height: 0px;
-    }
+
+  from {
+    opacity: 1;
+    height: 20px;
+  }
+  to {
+    opacity: 0;
+    height: 0px;
+  }
+
 }
