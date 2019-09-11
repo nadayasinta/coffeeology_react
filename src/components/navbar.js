@@ -1,9 +1,4 @@
 import React from "react";
-import navbarProfile from "../assets/images/navbarProfile.png";
-import navbarSearch from "../assets/images/navbarSearch.png";
-import navbarBeans from "../assets/images/navbarBeans.png";
-import navbarBrew from "../assets/images/navbarBrew.png";
-import navbarActivity from "../assets/images/navbarActivity.png";
 import { Link } from "react-router-dom";
 
 function Navbar(props) {
