@@ -14,101 +14,100 @@ import method6 from '../assets/images/methodV60.png';
 import stepTypes from './stepTypes';
 
 const initialState = {
+	// data recipe
+	recipes: [
+		{
+			name: 'Ultimate v60',
+			methodID: 1,
+			beanName: 'Beans Gayoo Bourbon',
+			beanProcess: 'Full Wash',
+			beanRoasting: 'Medium',
+			rating: 45,
+			favoriteCount: 20,
+			time: 100,
+			coffeeWeight: 17,
+			water: 200,
+			icon: require('../assets/images/StepIcon/stir.png'),
+		},
+		{
+			name: 'Ultimate v60 2',
+			methodID: 1,
+			beanName: 'Beans Gayoo Bourbon',
+			beanProcess: 'Full Wash',
+			beanRoasting: 'Medium',
+			rating: 4.5,
+			favoriteCount: 20,
+			time: 100,
+			coffeeWeight: 17,
+			water: 200,
+			icon: require('../assets/images/StepIcon/stir.png'),
+		},
+	],
+	recipeDetails: {
+		fragrance: 0.4,
+		aroma: 0.4,
+		cleanliness: 0.4,
+		sweetness: 0.3,
+		taste: 0.3,
+		acidity: 0.5,
+		aftertaste: 0.5,
+		balance: 0.5,
+		globalTaste: 0.5,
+	},
+	// method
+	methodID: 0,
+	method: {
+		id: 1,
+		name: 'v60',
+		icon: require('../assets/images/methodV60.png'),
+	},
 
-  // data recipe
-  recipes: [
-    {
-      name: 'Ultimate v60',
-      methodID: 1,
-      beanName: 'Beans Gayoo Bourbon',
-      beanProcess: 'Full Wash',
-      beanRoasting: 'Medium',
-      rating: 45,
-      favoriteCount: 20,
-      time: 100,
-      coffeeWeight: 17,
-      water: 200,
-      icon: require('../assets/images/StepIcon/stir.png')
-    },
-    {
-      name: 'Ultimate v60 2',
-      methodID: 1,
-      beanName: 'Beans Gayoo Bourbon',
-      beanProcess: 'Full Wash',
-      beanRoasting: 'Medium',
-      rating: 4.5,
-      favoriteCount: 20,
-      time: 100,
-      coffeeWeight: 17,
-      water: 200,
-      icon: require('../assets/images/StepIcon/stir.png')
-    }
-  ],
-  recipeDetails: {
-    fragrance: 0.4,
-    aroma: 0.4,
-    cleanliness: 0.4,
-    sweetness: 0.3,
-    taste: 0.3,
-    acidity: 0.5,
-    aftertaste: 0.5,
-    balance: 0.5,
-    globalTaste: 0.5
-  },
-  // method
-  methodID: 0,
-  method: {
-    id: 1,
-    name: 'v60',
-    icon: require('../assets/images/methodV60.png')
-  },
+	// data user
+	name: '',
 
-  // data user
-  name: '',
+	// url
+	baseURL: 'https://api.coffeology.shop',
 
-  // url
-  baseURL: 'https://api.coffeology.shop',
+	// data method
+	methods: [
+		{ name: 'French Press', icon: method1 },
+		{ name: 'Siphon', icon: method2 },
+		{ name: 'Chemex', icon: method3 },
+		{ name: 'Aero Press', icon: method4 },
+		{ name: 'V60', icon: method5 },
+		{ name: 'Moka Pot', icon: method6 },
+	],
 
-  // data method
-  methods: [
-    { name: 'French Press', icon: method1 },
-    { name: 'Siphon', icon: method2 },
-    { name: 'Chemex', icon: method3 },
-    { name: 'Aero Press', icon: method4 },
-    { name: 'V60', icon: method5 },
-    { name: 'Moka Pot', icon: method6 }
-  ],
-
-  // step Types
-  stepTypes: stepTypes
-  // data recipe steps
-    recipe: [{ time: 610 }, { time: 310 }, { time: 100 }],
-    timerNow: 0,
-    timerUp: 0
-
+	// step Types
+	stepTypes: stepTypes,
+	// data recipe steps
+	steps: [{ name: 'aduk1', time: 100 }, { name: 'aduk2', time: 150 }, { name: 'aduk3', time: 50 }],
+	timerNow: 0,
+	stepIndex: -1,
+	stepsHidden: [0, 0, 0],
 };
 
 const store = createStore(initialState);
 
 const actionsRecipes = store => ({
-  // setter data
-  setListCategory(state, value) {
-    return { listCategory: value };
-  }
+	// setter data
+	setListCategory(state, value) {
+		return { listCategory: value };
+	},
 });
 
 const actionsTimerTime = store => ({
-    // setter data
-    setTimerTime(state, value) {
-        if (value === 0) {
-            return { timerUp: 0 };
-        } else {
-            return { timerNow: value };
-        }
-    },
-    setTimerIndex(state, value) {
-        return { timerNowIndex: value };
-    }
+	// setter data
+	setTimerTime(state, value) {
+		if (value === 0) {
+			return { stepIndex: store.getState().stepIndex + 1 };
+		} else {
+			return { timerNow: value };
+		}
+	},
+	setStepIndex(state, value) {
+		return { stepIndex: value };
+	},
 });
 
 export { store, actionsRecipes, actionsTimerTime };

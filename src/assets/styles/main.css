@@ -6,7 +6,7 @@
 }
 .recipeCard h6 {
   font-size: 0.8em;
-
+}
 .toggle-base {
   height: 20px;
 }
@@ -37,5 +37,4 @@
     opacity: 0;
     height: 0px;
   }
-
 }
