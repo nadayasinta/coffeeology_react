@@ -1,37 +1,35 @@
 .header {
-    height: 100px;
+  height: 125px;
+  background-color: #53686b;
 }
 .recipeCard h4 {
-    font-size: 20px;
+  font-size: 20px;
 }
 .recipeCard h6 {
-
   font-size: 0.8em;
-
 }
 .toggle-base {
-    height: 20px;
+  height: 20px;
 }
 .toggle-enter {
-    animation-name: fade-in;
-    animation-duration: 300ms;
+  animation-name: fade-in;
+  animation-duration: 300ms;
 }
 .toggle-leave {
-    animation-name: fade-out;
-    animation-duration: 300ms;
+  animation-name: fade-out;
+  animation-duration: 300ms;
 }
 @keyframes fade-in {
-    from {
-        opacity: 0;
-        height: 0px;
-    }
-    to {
-        opacity: 1;
-        height: 20px;
-    }
+  from {
+    opacity: 0;
+    height: 0px;
+  }
+  to {
+    opacity: 1;
+    height: 20px;
+  }
 }
 @keyframes fade-out {
-
   from {
     opacity: 1;
     height: 20px;
@@ -40,5 +38,11 @@
     opacity: 0;
     height: 0px;
   }
-
+}
+.navbar {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #e1e3de;
 }
