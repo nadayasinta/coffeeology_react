@@ -12,7 +12,7 @@ import Radar from '../components/radar';
 
 class RecipeSelection extends React.Component {
 	componentDidMount = async () => {
-		await this.props.getRecipe(1);
+		// await this.props.getRecipe(1);
 	};
 
 	render() {
