@@ -22,7 +22,7 @@ const initialState = {
 			beanName: 'Beans Gayoo Bourbon',
 			beanProcess: 'Full Wash',
 			beanRoasting: 'Medium',
-			rating: 45,
+			rating: 4.5,
 			favoriteCount: 20,
 			time: 100,
 			coffeeWeight: 17,
@@ -43,6 +43,19 @@ const initialState = {
 			icon: require('../assets/images/StepIcon/stir.png'),
 		},
 	],
+	recipe: {
+		name: 'Ultimate v60',
+		methodID: 1,
+		beanName: 'Beans Gayoo Bourbon',
+		beanProcess: 'Full Wash',
+		beanRoasting: 'Medium',
+		rating: 45,
+		favoriteCount: 20,
+		time: 100,
+		coffeeWeight: 17,
+		water: 200,
+		icon: require('../assets/images/StepIcon/stir.png'),
+	},
 	recipeDetails: {
 		fragrance: 0.4,
 		aroma: 0.4,
@@ -53,6 +66,10 @@ const initialState = {
 		aftertaste: 0.5,
 		balance: 0.5,
 		globalTaste: 0.5,
+		body: 0.5,
+		note: 'Lorem Isum',
+		grindSize: 'medium',
+		waterTemp: 92,
 	},
 	recipeSteps: [
 		{
@@ -78,7 +95,7 @@ const initialState = {
 	name: '',
 
 	// url
-	baseURL: 'https://api.coffeology.shop',
+	baseURL: 'https://virtserver.swaggerhub.com/farizap/Coffeology1/1.0.0/',
 
 	// data method
 	methods: [
@@ -98,6 +115,9 @@ const initialState = {
 	steps: [{ name: 'aduk1', time: 100 }, { name: 'aduk2', time: 150 }, { name: 'aduk3', time: 50 }],
 	stepIndex: 0,
 	stepsHidden: [0, 0, 0],
+	beanRatio: 3,
+	waterNow: 0,
+	waterLimit: 0,
 };
 
 const store = createStore(initialState);
@@ -106,6 +126,16 @@ const actionsRecipes = store => ({
 	// setter data
 	setListCategory(state, value) {
 		return { listCategory: value };
+	},
+	setWater(state, value) {
+		return { water: value };
+	},
+	async getRecipe(state, id) {
+		console.log('test');
+		await axios(store.getState().baseURL + 'recipes/' + id).then(response => {
+			console.log(response);
+			store.setState({ recipe: response.data }).catch(error => console.log('Error getRecipeById', error));
+		});
 	},
 });
 
