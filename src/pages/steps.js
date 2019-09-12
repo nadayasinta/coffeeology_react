@@ -5,23 +5,12 @@ import { actionsTimerTime } from '../store/store';
 
 // import component
 import Timer from '../components/timer';
+import StepCard from '../components/stepCard';
 
 class Steps extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { items: ['hello', 'world', 'click', 'me'], steps: [] };
-		this.handleAdd = this.handleAdd.bind(this);
-	}
-
-	handleAdd() {
-		const newItems = this.state.items.concat([prompt('Enter some text')]);
-		this.setState({ items: newItems });
-	}
-
-	handleRemove(i) {
-		let newItems = this.state.items.slice();
-		newItems.splice(i, 1);
-		this.setState({ items: newItems });
+		this.state = { steps: [] };
 	}
 
 	nextStep() {
@@ -31,52 +20,53 @@ class Steps extends React.Component {
 	}
 
 	componentDidMount() {
-		this.setState({ steps: this.props.steps });
+		this.setState({ steps: this.props.recipeSteps });
 	}
 
-	componentDidUpdate = (prevProps, prevState) => {
+	componentWillUpdate = (prevProps, prevState) => {
 		if (prevProps.stepIndex !== this.props.stepIndex) {
-			this.props.setTimerTime(this.props.steps[this.props.stepIndex].time);
+			console.log('didUpdate', this.props.stepIndex);
 			if (this.props.stepIndex > 0) {
 				this.nextStep();
 			}
+			if (this.state.steps !== []) {
+				this.props.setTimerTime(this.state.steps[0].time);
+			}
+			// this.props.setTimerTime(this.props.recipeSteps[this.props.stepIndex].time);
 		}
 	};
 	render() {
-		const items = this.state.items.map((item, i) => (
-			<div key={item} onClick={() => this.handleRemove(i)}>
-				{item}
-			</div>
-		));
+		if (this.state.steps === []) {
+			return <div>Loading</div>;
+		} else {
+			console.log('stepindex', this.props.stepIndex);
+			return (
+				<div>
+					<Timer />
 
-		return (
-			<div>
-				<Timer />
-				<button onClick={this.handleAdd}>Add Item</button>
-
-				{this.props.steps.map((value, index) => {
-					return (
-						<div>
-							<CSSTransitionGroup
-								transitionName="example"
-								transitionEnterTimeout={500}
-								transitionLeaveTimeout={300}
-							>
-								<div>
-									{value.name} dan {value.time}
-								</div>
-							</CSSTransitionGroup>
-						</div>
-					);
-				})}
-				{items}
-			</div>
-		);
+					{this.props.recipeSteps.map((recipeStep, index) => {
+						return (
+							<div>
+								<CSSTransitionGroup
+									transitionName="example"
+									transitionEnterTimeout={500}
+									transitionLeaveTimeout={300}
+								>
+									<div>
+										<StepCard data={recipeStep} />
+									</div>
+								</CSSTransitionGroup>
+							</div>
+						);
+					})}
+				</div>
+			);
+		}
 	}
 }
 
 // export default Steps;
 export default connect(
-	'steps, stepIndex',
+	'recipeSteps, stepIndex',
 	actionsTimerTime
 )(Steps);
