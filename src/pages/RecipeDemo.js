@@ -15,7 +15,7 @@ class Steps extends React.Component {
         this.state = { steps: [] };
     }
 
-    nextStep() {
+    nextStep = () => {
         let newSteps = this.props.recipeSteps;
         newSteps.shift();
         this.setState({ steps: newSteps });
@@ -54,24 +54,31 @@ class Steps extends React.Component {
             return (
                 <div>
                     <Header />
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-12">
 
-                    <Timer />
-
-                    {this.props.recipeSteps.map((recipeStep, index) => {
-                        return (
-                            <div>
-                                <CSSTransitionGroup
-                                    transitionName="example"
-                                    transitionEnterTimeout={500}
-                                    transitionLeaveTimeout={300}
-                                >
-                                    <div>
-                                        <StepCard data={recipeStep} />
-                                    </div>
-                                </CSSTransitionGroup>
+                                <Timer />
                             </div>
-                        );
-                    })}
+                            <div className="col-12">
+                                {this.props.recipeSteps.map((recipeStep, index) => {
+                                    return (
+                                        <div>
+                                            <CSSTransitionGroup
+                                                transitionName="example"
+                                                transitionEnterTimeout={500}
+                                                transitionLeaveTimeout={300}
+                                            >
+                                                <div>
+                                                    <StepCard data={recipeStep} />
+                                                </div>
+                                            </CSSTransitionGroup>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    </div>
                     <Navbar />
                 </div>
             );

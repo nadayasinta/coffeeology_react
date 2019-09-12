@@ -9,14 +9,15 @@
     "less": "^3.10.3",
     "react": "^16.9.0",
     "react-bootstrap": "^1.0.0-beta.12",
+    "react-compound-slider": "^2.3.0",
     "react-compound-timer": "^1.1.5",
     "react-dom": "^16.9.0",
     "react-radar": "^2.0.0-beta.111",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1",
     "react-svg-radar-chart": "git+https://github.com/Spyna/react-svg-radar-chart.git",
-    "typescript": "^3.6.3",
     "react-transition-group": "^1.2.1",
+    "typescript": "^3.6.3",
     "unistore": "^3.4.1"
   },
   "scripts": {
