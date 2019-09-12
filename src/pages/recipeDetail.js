@@ -16,6 +16,7 @@ class RecipeSelection extends React.Component {
             <div>
                 <Header />
                 <Radar data={this.props.recipeDetails} />
+                <div className="col">Tahapan</div>
                 {this.props.recipeSteps.map(recipeStep => {
                     return (
                         <div className="col-12">
