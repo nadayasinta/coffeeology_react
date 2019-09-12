@@ -29,7 +29,7 @@ class Timer extends React.Component {
                 this.props.waterNow === this.props.waterLimit
                     ? this.props.waterNow
                     : this.props.waterNow +
-                          this.props.stepWater / this.props.stepTime
+                    this.props.stepWater / this.props.stepTime
             );
             console.log(this.props.stepWater / this.props.stepTime);
         }, 100);
@@ -78,23 +78,23 @@ class Timer extends React.Component {
                         {this.state.status}
                     </button>
                 ) : (
-                    <button
-                        type="button"
-                        class="btn btn-danger"
-                        onClick={this.pauseTimer}
-                    >
-                        {this.state.status}
-                    </button>
-                )}
+                        <button
+                            type="button"
+                            class="btn btn-danger"
+                            onClick={this.pauseTimer}
+                        >
+                            {this.state.status}
+                        </button>
+                    )}
                 <button
                     type="button"
                     class="btn btn-warning"
-                    onClick={() => this.props.setTimer(0)}
+                    onClick={() => { this.props.setTimer(0); this.props.setWaterNow(this.props.waterLimit) }}
                 >
                     Skip
                 </button>
                 <h1>Water : {Math.ceil(this.props.waterNow)} </h1>
-            </div>
+            </div >
         );
     }
 }

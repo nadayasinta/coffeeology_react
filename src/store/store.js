@@ -14,7 +14,6 @@ import method6 from "../assets/images/methodV60.png";
 import stepTypes from "./stepTypes";
 
 const initialState = {
-
     // data recipe
     recipes: [
         {
@@ -44,6 +43,19 @@ const initialState = {
             icon: require("../assets/images/StepIcon/stir.png")
         }
     ],
+    recipe: {
+        name: "Ultimate v60",
+        methodID: 1,
+        beanName: "Beans Gayoo Bourbon",
+        beanProcess: "Full Wash",
+        beanRoasting: "Medium",
+        rating: 45,
+        favoriteCount: 20,
+        time: 100,
+        coffeeWeight: 17,
+        water: 200,
+        icon: require("../assets/images/StepIcon/stir.png")
+    },
     recipeDetails: {
         fragrance: 0.4,
         aroma: 0.4,
@@ -53,7 +65,11 @@ const initialState = {
         acidity: 0.5,
         aftertaste: 0.5,
         balance: 0.5,
-        globalTaste: 0.5
+        globalTaste: 0.5,
+        body: 0.5,
+        note: "lorem isum",
+        grindSize: "medium",
+        waterTemp: 92
     },
     recipeSteps: [
         {
@@ -89,14 +105,11 @@ const initialState = {
         icon: require("../assets/images/methodV60.png")
     },
 
-
     // data user
     name: "",
 
-
-	// url
-	baseURL: 'https://virtserver.swaggerhub.com/farizap/Coffeology1/1.0.0/',
-
+    // url
+    baseURL: "https://virtserver.swaggerhub.com/farizap/Coffeology1/1.0.0/",
 
     // data method
     methods: [
@@ -111,7 +124,6 @@ const initialState = {
     // step Types
     stepTypes: stepTypes,
 
-
     // data recipe steps
     timerNow: 0,
     // steps: [
@@ -125,13 +137,11 @@ const initialState = {
     waterLimit: 0,
     stepTime: 0,
     stepWater: 0
-
 };
 
 const store = createStore(initialState);
 
 const actionsRecipes = store => ({
-
     // setter data
     setListCategory(state, value) {
         return { listCategory: value };
@@ -141,17 +151,20 @@ const actionsRecipes = store => ({
         return { beanRatio: value };
     },
 
-	setWater(state, value) {
-		return { water: value };
-	},
-	async getRecipe(state, id) {
-		console.log('test');
-		await axios(store.getState().baseURL + 'recipes/' + id).then(response => {
-			console.log(response);
-			store.setState({ recipe: response.data }).catch(error => console.log('Error getRecipeById', error));
-		});
-	},
-
+    setWater(state, value) {
+        return { water: value };
+    },
+    async getRecipe(state, id) {
+        console.log("test");
+        await axios(store.getState().baseURL + "recipes/" + id).then(
+            response => {
+                console.log(response);
+                store
+                    .setState({ recipe: response.data })
+                    .catch(error => console.log("Error getRecipeById", error));
+            }
+        );
+    }
 });
 
 const actionsTimer = store => ({
