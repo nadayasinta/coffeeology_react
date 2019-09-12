@@ -44,7 +44,7 @@ function stepCard(props) {
                             </div>
                         </div>
                     </div>
-                    {props.data.amount != null ? (
+                    {props.data.amount !== 0 ? (
                         <div className="row">
                             <div className="col-1 px-0">
                                 <img
@@ -53,7 +53,7 @@ function stepCard(props) {
                                 />
                             </div>
                             <div className="col-11 px-0 text-left align-self-center">
-                                {props.data.amount}
+                                {props.beanRatio * props.data.amount}
                             </div>
                         </div>
                     ) : (
@@ -76,4 +76,4 @@ function stepCard(props) {
         </div>
     );
 }
-export default connect("stepTypes")(stepCard);
+export default connect("stepTypes, beanRatio")(stepCard);

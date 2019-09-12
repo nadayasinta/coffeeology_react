@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "unistore/react";
-import { actionsTimerTime } from "../store/store";
+import { actionsTimer } from "../store/store";
 import Header from "../components/header";
 import MethodCard from "../components/methodCard";
 import Navbar from "../components/navbar";
@@ -45,5 +45,5 @@ class Brewing extends React.Component {
 
 export default connect(
     "methods,recipeSteps, timerNowIndex, timerUp",
-    actionsTimerTime
+    actionsTimer
 )(Brewing);
