@@ -4,14 +4,12 @@ import { actionsRecipes } from "../store/store";
 
 // import component
 import RecipeCard from "../components/recipeCard";
-import Header from "../components/header";
 import Navbar from "../components/navbar";
 
 class RecipesSelection extends React.Component {
   render() {
     return (
       <div>
-        <Header />
         <h2>Recipes Selection</h2>
         {this.props.recipes.map(value => {
           return (

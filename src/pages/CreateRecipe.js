@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'unistore/react';
-import Header from '../components/header';
 import Navbar from '../components/navbar';
 import Radar from '../components/radar';
 import { actionsCreateRecipe } from '../store/store'
@@ -78,7 +77,6 @@ class CreateRecipe extends React.Component {
   render() {
     return (
       <div>
-        <Header />
         <div className="container">
 
           <form onSubmit={this.submitRecipe}>
@@ -322,7 +320,7 @@ class CreateRecipe extends React.Component {
             </div>
           </form>
         </div>
-
+        <Navbar />
       </div>
     );
   }

@@ -4,7 +4,6 @@ import { connect } from "unistore/react";
 import { actionsTimer } from "../store/store";
 
 // import component
-import Header from "../components/header";
 import Timer from "../components/timer";
 import StepCard from "../components/stepCard";
 import Navbar from "../components/navbar";
@@ -53,7 +52,6 @@ class Steps extends React.Component {
             console.log("stepindex", this.props.stepIndex);
             return (
                 <div>
-                    <Header />
                     <div className="container">
                         <div className="row">
                             <div className="col-12">
