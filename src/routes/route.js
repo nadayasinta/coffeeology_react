@@ -8,11 +8,11 @@ import { transitions, positions, Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
 
 // import pages
-import RecipesSelection from "../pages/recipesSelection";
-import Brewing from "../pages/brewing";
-import RecipeDetail from "../pages/recipeDetail";
+import RecipesSelection from "../pages/RecipesSelection";
+import Brewing from "../pages/Brewing";
+import RecipeDetail from "../pages/RecipeDetail";
 import { Test } from "../pages/test";
-import RecipeDemo from "../pages/recipeDemo";
+import RecipeDemo from "../pages/RecipeDemo";
 import Login from "../pages/loginTest";
 import Register from "../pages/register";
 import Activity from "../pages/activity";
