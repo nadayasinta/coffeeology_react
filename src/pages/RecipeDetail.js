@@ -4,7 +4,6 @@ import { actionsRecipes } from '../store/store';
 
 // import component
 import StepCard from '../components/stepCard';
-import Header from '../components/header';
 import Navbar from '../components/navbar';
 
 // test
@@ -14,7 +13,6 @@ class RecipeSelection extends React.Component {
   render() {
     return (
       <div>
-        <Header />
         <div className="container">
           <div className="row mx-0 mt-3">
             <div className="col-4 text-left">

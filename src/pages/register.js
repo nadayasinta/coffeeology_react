@@ -13,7 +13,6 @@ import { connect } from "unistore/react";
 import useStyles from "../store/style";
 
 // import component
-import Header from "../components/header";
 
 const Register = props => {
   const classes = useStyles();
@@ -70,7 +69,6 @@ const Register = props => {
 
   return (
     <div>
-      <Header />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>

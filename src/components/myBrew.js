@@ -1,31 +1,29 @@
-import React from "react";
-import { connect } from "unistore/react";
-import { actionsRecipes } from "../store/store";
+import React from 'react';
+import { connect } from 'unistore/react';
 import { Link } from "react-router-dom";
+import { actionsRecipes } from "../store/store";
 
 // import component
-import RecipeCard from "../components/recipeCard";
+import RecipeCard from "./recipeCard";
 
 class MyBrew extends React.Component {
   render() {
     return (
       <div>
-        <Link to="/tambah">
+        <Link to="/recipecreate">
           <button className="btn btn-primary">Tambah Guide</button>
         </Link>
-        {this.props.recipes.map(value => {
-          return (
+        {this.props.recipes.map((value) => (
             <div className="col-12">
               <RecipeCard data={value} />
             </div>
-          );
-        })}
+          ))}
       </div>
     );
   }
 }
 
 export default connect(
-  "recipes,stepTypes,recipeDetails",
-  actionsRecipes
+  'recipes,stepTypes,recipeDetails',
+  actionsRecipes,
 )(MyBrew);
