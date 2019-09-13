@@ -1,7 +1,7 @@
-import React from "react";
 import createStore from "unistore";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
+import React from "react";
 // import method image
 import method1 from "../assets/images/methodAeroPress.png";
 import method2 from "../assets/images/methodChemex.png";
@@ -13,9 +13,6 @@ import method6 from "../assets/images/methodV60.png";
 // import json
 import stepTypes from "./stepTypes";
 
-// import style
-import { makeStyles } from "@material-ui/core/styles";
-
 const initialState = {
   // data recipe
   recipes: [
@@ -25,7 +22,6 @@ const initialState = {
       beanName: "Beans Gayoo Bourbon",
       beanProcess: "Full Wash",
       beanRoasting: "Medium",
-
       rating: 45,
       favoriteCount: 20,
       time: 100,
@@ -39,7 +35,6 @@ const initialState = {
       beanName: "Beans Gayoo Bourbon",
       beanProcess: "Full Wash",
       beanRoasting: "Medium",
-
       rating: 4.5,
       favoriteCount: 20,
       time: 100,
@@ -100,8 +95,7 @@ const initialState = {
       note: "wow",
       time: 50,
       amount: 80
-    },
-    activiy - fariz
+    }
   ],
   // method
   methodID: 0,
@@ -115,64 +109,34 @@ const initialState = {
   name: "",
 
   // url
-  baseURL: "http://0.0.0.0:5000",
+  baseURL: "http://0.0.0.0:5000/",
 
   // data method
   methods: [
-    { id: 1, name: "French Press", icon: method1 },
-    { id: 2, name: "Siphon", icon: method2 },
-    { id: 3, name: "Chemex", icon: method3 },
-    { id: 4, name: "Aero Press", icon: method4 },
-    { id: 5, name: "V60", icon: method5 },
-    { id: 6, name: "Moka Pot", icon: method6 }
+    { name: "French Press", icon: method1 },
+    { name: "Siphon", icon: method2 },
+    { name: "Chemex", icon: method3 },
+    { name: "Aero Press", icon: method4 },
+    { name: "V60", icon: method5 },
+    { name: "Moka Pot", icon: method6 }
   ],
 
   // step Types
-  stepTypes,
+  stepTypes: stepTypes,
 
-  // recipe demo data
+  // data recipe steps
   timerNow: 0,
+  // steps: [
+  //     { name: "aduk1", time: 100, amount: 200 },
+  //     { name: "aduk2", time: 150, amount: 0 },
+  //     { name: "aduk3", time: 50, amount: 10 }
+  // ],
   stepIndex: 0,
   beanRatio: 1,
   waterNow: 0,
   waterLimit: 0,
   stepTime: 0,
-  stepWater: 0,
-
-  // grind size data
-  grinds: [
-    { name: "sangat halus" },
-    { name: "halus" },
-    { name: "sedang" },
-    { name: "kasar" },
-    { name: "sangat kasar" }
-  ],
-
-  // flavor data
-  flavors: [
-    "fragrance",
-    "aroma",
-    "cleanliness",
-    "sweetness",
-    "taste",
-    "acidity",
-    "aftertaste",
-    "balance",
-    "global",
-    "body"
-  ],
-
-  // origin data
-  origins: [
-    { id: 1, name: "jawa" },
-    { id: 2, name: "sumatera" },
-    { id: 3, name: "flores" },
-    { id: 4, name: "toraja" }
-  ],
-
-  // data create recipe
-  tempRecipe: {},
-  tempRecipeDetail: {}
+  stepWater: 0
 };
 
 const store = createStore(initialState);
@@ -229,21 +193,4 @@ const actionsTimer = store => ({
   }
 });
 
-const actionsCreateRecipe = store => ({
-  // setter data
-  setTempRecipe(state, key, value) {
-    return { tempRecipe: value };
-  },
-
-  setTempRecipeNote(state, value) {
-    const newRecipe = store.getState().tempRecipes;
-    newRecipe.notes = value;
-    return { tempRecipe: newRecipe };
-  },
-
-  setTempRecipeDetail(state, value) {
-    return { tempRecipeDetail: value };
-  }
-});
-
-export { store, actionsRecipes, actionsTimer, actionsCreateRecipe };
+export { store, actionsRecipes, actionsTimer };

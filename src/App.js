@@ -6,11 +6,11 @@ import "./assets/styles/bootstrap.min.css";
 import Routes from "./routes/route";
 
 function App() {
-    return (
-        <div className="App px-0">
-            <Routes />
-        </div>
-    );
+  return (
+    <div className="App px-0">
+      <Routes />
+    </div>
+  );
 }
 
 export default App;
