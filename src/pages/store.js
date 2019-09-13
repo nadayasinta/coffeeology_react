@@ -13,9 +13,6 @@ import method6 from "../assets/images/methodV60.png";
 // import json
 import stepTypes from "./stepTypes";
 
-// import style
-import { makeStyles } from "@material-ui/core/styles";
-
 const initialState = {
   // data recipe
   recipes: [
@@ -112,7 +109,7 @@ const initialState = {
   name: "",
 
   // url
-  baseURL: "http://0.0.0.0:5000",
+  baseURL: "http://0.0.0.0:5000/",
 
   // data method
   methods: [

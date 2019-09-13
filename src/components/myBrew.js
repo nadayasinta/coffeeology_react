@@ -1,18 +1,18 @@
 import React from "react";
 import { connect } from "unistore/react";
 import { actionsRecipes } from "../store/store";
+import { Link } from "react-router-dom";
 
 // import component
 import RecipeCard from "../components/recipeCard";
-import Header from "../components/header";
-import Navbar from "../components/navbar";
 
-class RecipesSelection extends React.Component {
+class MyBrew extends React.Component {
   render() {
     return (
       <div>
-        <Header />
-        <h2>Recipes Selection</h2>
+        <Link to="/tambah">
+          <button className="btn btn-primary">Tambah Guide</button>
+        </Link>
         {this.props.recipes.map(value => {
           return (
             <div className="col-12">
@@ -20,7 +20,6 @@ class RecipesSelection extends React.Component {
             </div>
           );
         })}
-        <Navbar />
       </div>
     );
   }
@@ -29,4 +28,4 @@ class RecipesSelection extends React.Component {
 export default connect(
   "recipes,stepTypes,recipeDetails",
   actionsRecipes
-)(RecipesSelection);
+)(MyBrew);
