@@ -1,10 +1,10 @@
 import React from "react";
 import { connect } from "unistore/react";
-import { actionsTimer } from "../store/store";
+import { act, actionsRecipes } from "../store/store";
 import Header from "../components/header";
 import Plus from "../assets/images/plus.png";
 import { Link } from "react-router-dom";
-import timer from "../assets/images/RecipeIcon/timer.png"
+import timer from "../assets/images/RecipeIcon/timer.png";
 import { async } from "q";
 
 class AddStep extends React.Component {
@@ -13,31 +13,63 @@ class AddStep extends React.Component {
     this.state = {
       stepTemporary: []
     };
+    this.note = React.createRef();
   }
 
-  componentDidMount= async ()=>{
-    await this.setState({ stepTemporary: JSON.parse(sessionStorage.getItem("stepTemporary")) })
-  }
+  componentDidMount = async () => {
+    console.log("did mount",sessionStorage.getItem("stepTemporary"))
+    if (sessionStorage.getItem("stepTemporary") !== null) {
+      await this.setState({
+        stepTemporary: JSON.parse(sessionStorage.getItem("stepTemporary"))
+      });
+      console.log("if ", this.state.stepTemporary);
+    }
+  };
 
   convertSeconds(value) {
-    let minutes = Math.floor(parseInt(value)/60)
-    let seconds = parseInt(value) - minutes*60
-    if (minutes < 10 ) {
-        minutes =  `0${minutes}`
-    } 
-    if (seconds < 10 ) {
-        seconds = `0${seconds}`
+    let minutes = Math.floor(parseInt(value) / 60);
+    let seconds = parseInt(value) - minutes * 60;
+    if (minutes < 10) {
+      minutes = `0${minutes}`;
     }
-    return `${minutes}:${seconds}`
-}
+    if (seconds < 10) {
+      seconds = `0${seconds}`;
+    }
+    return `${minutes}:${seconds}`;
+  }
 
-  deteleStep = async (index) => {
-    await this.setState({ stepTemporary : this.state.stepTemporary.splice(parseInt(index),1) })
-    sessionStorage.setItem("stepTemporary", JSON.stringify(this.state.stepTemporary))
+  deteleStep = async (event,idx) => {
+    event.preventDefault()
+
+    const temp = this.state.stepTemporary.filter((step,index) => index !== idx)
+    await this.setState({
+      stepTemporary: temp
+    }, ()=> {
+      sessionStorage.setItem(
+      "stepTemporary",
+      JSON.stringify(this.state.stepTemporary)
+    );});    
+  };
+
+  postData = (e) => {
+    e.preventDefault()
+    let recipes = JSON.parse(sessionStorage.getItem("Recipe"))
+    let recipeDetails = JSON.parse(sessionStorage.getItem("RecipeDetail"))
+    let steps = JSON.parse(sessionStorage.getItem("stepTemporary"))
+    recipes["note"] = this.note.current.value
+    let data = {
+      recipes: recipes,
+      recipeDetails: recipeDetails,
+      steps: steps
+    }
+    this.props.postRecipe(data)
+    // sessionStorage.removeItem("Recipe")
+    // sessionStorage.removeItem("RecipeDetail")
+    // sessionStorage.removeItem("stepTemporary")
+    this.props.history.push("/activity")
   }
 
   render() {
-    console.log("seconds ", this.convertSeconds(100));
     return (
       <div>
         <Header />
@@ -54,6 +86,9 @@ class AddStep extends React.Component {
                     className="form-control"
                     id="note"
                     rows="3"
+                    placeholder="catatan"
+                    maxLength="250"
+                    ref={this.note}
                   ></textarea>
                 </div>
               </form>
@@ -61,29 +96,37 @@ class AddStep extends React.Component {
                 Tahapan
               </div>
               <div className="card">
-                {this.state.stepTemporary.map(
-                  (step, index) => {
-                    return (
-                      <div className="card-body">
-                        <div className="row justify-content-end">
-                        <button type="button" onClick={this.deteleStep(index)} class="btn btn-primary">X</button>
-                        </div>
-                        <div className="row justify-content-between">
-                          <div className="col-4">
-                            <img src={this.props.stepTypes[step.stepTypeID].icon} width="100%" />
-                          </div>
-                          <div className="col-4">
-                          {this.props.stepTypes[step.stepTypeID].name}
-                          </div>
-                          <div className="col-4">
-                             <img className="mr-2" src={timer} width="20%" /> 
-                             {this.convertSeconds(step.time)}</div>
-                        </div>
-                        <hr></hr>
+                {this.state.stepTemporary.map((step, index) => {
+                  return (
+                    <div className="card-body" key={index}>
+                      <div className="row justify-content-end">
+                        <button
+                          type="button"
+                          onClick={ e =>this.deteleStep(e,index)}
+                          className="btn btn-primary"
+                        >
+                          X
+                        </button>
                       </div>
-                    );
-                  }
-                )}
+                      <div className="row justify-content-between">
+                        <div className="col-4">
+                          <img
+                            src={this.props.stepTypes[step.stepTypeID].icon}
+                            width="100%"
+                          />
+                        </div>
+                        <div className="col-4">
+                          {this.props.stepTypes[step.stepTypeID].name}
+                        </div>
+                        <div className="col-4">
+                          <img className="mr-2" src={timer} width="20%" />
+                          {this.convertSeconds(step.time)}
+                        </div>
+                      </div>
+                      <hr></hr>
+                    </div>
+                  );
+                })}
                 <hr />
                 <div className="card-body">
                   <Link to="/inputstep">
@@ -92,7 +135,7 @@ class AddStep extends React.Component {
                   </Link>
                 </div>
               </div>
-              <button type="button" className="btn btn-primary mt-4">
+              <button type="button" className="btn btn-primary mt-4" onClick={e =>this.postData(e)}>
                 Simpan
               </button>
             </div>
@@ -105,5 +148,4 @@ class AddStep extends React.Component {
 
 export default connect(
   "stepTypes, stepTemporary",
-  actionsTimer
 )(AddStep);

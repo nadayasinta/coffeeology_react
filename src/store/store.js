@@ -170,6 +170,20 @@ const actionsRecipes = store => ({
                     .catch(error => console.log("Error getRecipeById", error));
             }
         );
+    },
+    setStepTypeNumberSelected: (state, value) => {
+        return{ stepTypeNumberSelected: value };
+    },
+    async postRecipe(state, value) {
+        console.log("test");
+        await axios(store.getState().baseURL + "recipes/").then(
+            response => {
+                console.log(response);
+                store
+                    .setState({ recipe: response.data })
+                    .catch(error => console.log("Error getRecipeById", error));
+            }
+        );
     }
 });
 
@@ -198,20 +212,6 @@ const actionsTimer = store => ({
     },
     setWaterLimit(state, value) {
         return { waterLimit: value };
-    },
-    setStepTypeNumberSelected: (state, value) => {
-        return{ stepTypeNumberSelected: value };
-    },
-    convertSeconds(state, value) {
-        let minutes = Math.floor(parseInt(value)/60)
-        let seconds = parseInt(value) - minutes*60
-        if (minutes < 10 ) {
-            minutes =  `0${minutes}`
-        } 
-        if (seconds < 10 ) {
-            seconds = `0${seconds}`
-        }
-        return `${minutes}:${seconds}`
     }
 });
 

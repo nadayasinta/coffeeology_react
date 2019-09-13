@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "unistore/react";
-import { actionsTimer } from "../store/store";
+import { actionsRecipes } from "../store/store";
 import Header from "../components/header";
 import { async } from "q";
 
@@ -17,13 +17,18 @@ class InputStep extends React.Component {
     this.second = React.createRef();
   }
 
-  // componentDidMount = async () => {
-  //   console.log(sessionStorage.getItem("stepTemporary"))
-  //   if (sessionStorage.getItem("stepTemporary") !== null){
-  //      this.setState({stepTemporary : JSON.parse(sessionStorage.getItem("stepTemporary")) })
-  //   }
-  //   console.log("steptemporary did mount", this.state.stepTemporary)
-  // }
+  componentDidMount = async () => {
+    if (sessionStorage.getItem("stepTemporary") === null) {
+      sessionStorage.setItem(
+        "stepTemporary",
+        JSON.stringify([])
+      );
+    } else {
+      this.setState({
+        stepTemporary: JSON.parse(sessionStorage.getItem("stepTemporary"))
+      });
+    }
+  }
 
   // to handle change in "pilih tahapan"
   handleChange = event => {
@@ -34,19 +39,6 @@ class InputStep extends React.Component {
   handleSubmit = async event => {
     event.preventDefault();
 
-    if (sessionStorage.getItem("stepTemporary") !== null) {
-      this.setState({
-        stepTemporary: JSON.parse(sessionStorage.getItem("stepTemporary"))
-      });
-      console.log("if ", this.state.stepTemporary);
-    } else {
-      sessionStorage.setItem(
-        "stepTemporary",
-        JSON.stringify([])
-      );
-      console.log("else ", this.state.stepTemporary);
-    }
-
     if (parseInt(this.waterAmount.current.value) > 0) {
       this.setState({
         waterAmount: parseInt(this.waterAmount.current.value)
@@ -56,7 +48,7 @@ class InputStep extends React.Component {
     let timeData =
       parseInt(this.minute.current.value) * 60 +
       parseInt(this.second.current.value);
-
+    // data to save in session storage
     let data = {
       stepTypeID: this.props.stepTypeNumberSelected,
       note: this.note.current.value,
@@ -64,21 +56,13 @@ class InputStep extends React.Component {
       amount: this.state.waterAmount
     };
 
-    // console.log("data ", data);
-    // console.log("stepTemporary", this.state.stepTemporary);
-    // let temp = this.state.stepTemporary.push(data)
-    // console.log("temp", temp)
-     this.setState({ stepTemporary: this.state.stepTemporary.push(data) });
-     sessionStorage.setItem(
+    let temp = this.state.stepTemporary.concat([data])
+    await sessionStorage.setItem(
       "stepTemporary",
-      JSON.stringify(this.state.stepTemporary)
+      JSON.stringify(temp)
     );
-    // console.log(
-    //   "sessiion strorafe",
-    //   sessionStorage.getItem("stepTemporary")
-    // );
-    // //  sessionStorage.setItem("stepTemporary", JSON.stringify(temp))
-    // this.props.history.push("/addstep");
+
+    this.props.history.push("/addstep")
   };
 
   render() {
@@ -135,6 +119,7 @@ class InputStep extends React.Component {
                     placeholder="200 ml"
                     ref={this.waterAmount}
                     min="0"
+                    required
                   />
                 </div>
                 {/* form catatan */}
@@ -144,6 +129,8 @@ class InputStep extends React.Component {
                     className="form-control"
                     id="Catatan"
                     rows="3"
+                    placeholder="catatan"
+                    maxLength="250"
                     ref={this.note}
                   ></textarea>
                 </div>
@@ -159,6 +146,7 @@ class InputStep extends React.Component {
                       placeholder="0 menit"
                       min="0"
                       ref={this.minute}
+                      required
                     />
                   </div>
                   <div className="col">
@@ -171,6 +159,7 @@ class InputStep extends React.Component {
                       min="0"
                       max="59"
                       ref={this.second}
+                      required
                     />
                   </div>
                 </div>
@@ -196,5 +185,5 @@ class InputStep extends React.Component {
 
 export default connect(
   "stepTypeNumberSelected, stepTypes, stepTypeNumber, stepNumber, stepTemporary",
-  actionsTimer
+  actionsRecipes
 )(InputStep);
