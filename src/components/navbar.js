@@ -7,7 +7,7 @@ import navbarBeans from '../assets/images/navbarBeans.png';
 import navbarBrew from '../assets/images/navbarBrew.png';
 import navbarActivity from '../assets/images/navbarActivity.png';
 
-function Navbar(props) {
+function navbar(props) {
   return (
     <div className="container-fluid navbar shadow px-0 py-3 fixed-bottom">
       <div className="row justify-content-center">
@@ -46,4 +46,4 @@ function Navbar(props) {
   );
 }
 
-export default Navbar;
+export default navbar;
