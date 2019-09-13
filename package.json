@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.4.2",
     "@material-ui/icons": "^4.4.1",
+    "@material-ui/lab": "^4.0.0-alpha.26",
     "@types/react-transition-group": "^4.2.2",
     "axios": "^0.19.0",
     "eslint-config-airbnb-base": "^14.0.0",
@@ -23,6 +24,7 @@
     "react-svg-radar-chart": "git+https://github.com/Spyna/react-svg-radar-chart.git",
     "react-swipeable-views": "^0.13.3",
     "react-transition-group": "^1.2.1",
+    "sweetalert2": "^8.17.1",
     "typescript": "^3.6.3",
     "unistore": "^3.4.1"
   },

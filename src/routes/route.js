@@ -17,6 +17,7 @@ import Login from '../pages/loginTest';
 import Register from '../pages/register';
 import Activity from '../pages/activity';
 import CreateRecipe from '../pages/CreateRecipe';
+import Review from '../pages/Review';
 
 const options = {
   // you can also just use 'bottom center'
@@ -42,6 +43,7 @@ function Routes() {
             <Route exact path="/register" component={Register} />
             <Route exact path="/activity" component={Activity} />
             <Route exact path="/recipecreate" component={CreateRecipe} />
+            <Route exact path="/recipereview" component={Review} />
           </Switch>
         </BrowserRouter>
       </AlertProvider>

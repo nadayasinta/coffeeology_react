@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,900|Nunito:300,400,400i,600,700,800,900|Oswald:300,400,500,600,700|Roboto:300,400,400i,500,700,900&display=swap");
 .allpage {
-  font-family: "Nunito", sans-serif;
+  font-family: "Nunito", sans-serif !important;
 }
 .header {
   height: 100px;
@@ -64,4 +64,8 @@
 .activity .MuiBox-root-97 {
   padding-left: 0;
   padding-right: 0;
+  font-family: "Nunito", sans-serif !important;
+}
+.activity h6 {
+  font-family: "Nunito", sans-serif !important;
 }

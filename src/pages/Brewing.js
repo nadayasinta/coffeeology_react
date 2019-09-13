@@ -3,7 +3,6 @@ import { connect } from 'unistore/react';
 import { actionsTimer } from '../store/store';
 import MethodCard from '../components/methodCard';
 import Navbar from '../components/navbar';
-import Timer from '../components/timer';
 
 class Brewing extends React.Component {
   render() {
