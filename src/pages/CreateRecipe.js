@@ -41,7 +41,7 @@ class CreateRecipe extends React.Component {
   }
 
   submitRecipe = async (event) => {
-    await this.props.setTempRecipe(
+    await sessionStorage.setItem("Recipe", JSON.stringify(
       {
         name: this.state.recipeName,
         methodID: this.state.brewMethod,
@@ -52,9 +52,9 @@ class CreateRecipe extends React.Component {
         difficulty: this.state.difficulty,
         coffeeWeight: this.state.beanNumber,
         water: this.state.waterNumber
-      }
+      })
     )
-    await this.props.setTempRecipeDetail(
+    await sessionStorage.setItem("RecipeDetail", JSON.stringify(
       {
 
         fragrance: this.state.fragrance,
@@ -65,11 +65,11 @@ class CreateRecipe extends React.Component {
         acidity: this.state.acidity,
         aftertaste: this.state.aftertaste,
         balance: this.state.balance,
-        global: this.state.global,
+        globalTaste: this.state.global,
         body: this.state.body,
         grindSize: this.state.grind,
         water: this.state.temperature
-      }
+      })
     )
     this.props.history.push("/");
   }
@@ -104,9 +104,9 @@ class CreateRecipe extends React.Component {
               <label htmlFor="difficulty">Tingkat Kesulitan</label>
 
               <select className="form-control" id="difficulty" name="difficulty" onChange={this.handleChangeRecipe}>
-                <option>Mudah</option>
-                <option>Sedang</option>)
-                <option>Sulit</option>)
+                <option value="1">Mudah</option>
+                <option value="2">Sedang</option>)
+                <option value="3">Sulit</option>)
 
               </select>
             </div>
@@ -193,7 +193,7 @@ class CreateRecipe extends React.Component {
                   <div className=" col-9 px-0">
 
                     <select className="form-control" id="grind" name="grind" onChange={this.handleChangeRecipe}>
-                      {this.props.grinds.map((grind, index) => <option>{grind.name}</option>)}
+                      {this.props.grinds.map((grind, index) => <option value={grind.id}>{grind.name}</option>)}
                     </select>
 
                   </div>
@@ -327,4 +327,4 @@ class CreateRecipe extends React.Component {
 }
 
 // export default Steps;
-export default connect('methods, grinds, flavors, origins, recipeDetails, tempRecipe', actionsCreateRecipe)(CreateRecipe);
+export default connect('methods, grinds, flavors, origins, recipeDetails')(CreateRecipe);

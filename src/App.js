@@ -13,9 +13,9 @@ function App() {
   return (
     <div className="App container-fluid px-0 ">
       <Header />
-      <div className="container">
+      <div className="container allpage">
         <div className="row   justify-content-center">
-          <div className="col-12" style={{ maxWidth: '480px', paddingBottom: '100px' }}>
+          <div className="col-12" style={{ maxWidth: '480px', paddingBottom: '100px', paddingTop: '100px' }}>
             <Routes />
           </div>
         </div>

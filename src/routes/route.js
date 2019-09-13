@@ -3,9 +3,9 @@ import { Provider, connect } from 'unistore/react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 // import alert
-import { transitions, positions, Provider as AlertProvider } from "react-alert";
-import AlertTemplate from "react-alert-template-basic";
-import { store } from "../store/store";
+import { transitions, positions, Provider as AlertProvider } from 'react-alert';
+import AlertTemplate from 'react-alert-template-basic';
+import { store } from '../store/store';
 
 // import pages
 import RecipesSelection from '../pages/RecipesSelection';

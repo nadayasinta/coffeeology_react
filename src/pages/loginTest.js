@@ -11,8 +11,8 @@ import Container from '@material-ui/core/Container';
 import { Link } from 'react-router-dom';
 
 // import store
-import { connect } from "unistore/react";
-import actionsUsers from "../store/actionUsers";
+import { connect } from 'unistore/react';
+import actionsUsers from '../store/actionUsers';
 import useStyles from '../store/style';
 
 // import component
