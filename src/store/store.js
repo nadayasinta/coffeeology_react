@@ -3,6 +3,7 @@ import createStore from "unistore";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 // import method image
+import { makeStyles } from "@material-ui/core/styles";
 import method1 from "../assets/images/methodAeroPress.png";
 import method2 from "../assets/images/methodChemex.png";
 import method3 from "../assets/images/methodFrenchPress.png";
@@ -14,7 +15,6 @@ import method6 from "../assets/images/methodV60.png";
 import stepTypes from "./stepTypes";
 
 // import style
-import { makeStyles } from "@material-ui/core/styles";
 
 const initialState = {
   // data recipe
@@ -142,11 +142,11 @@ const initialState = {
 
   // grind size data
   grinds: [
-    { name: "sangat halus" },
-    { name: "halus" },
-    { name: "sedang" },
-    { name: "kasar" },
-    { name: "sangat kasar" }
+    { id: 1, name: "sangat halus" },
+    { id: 2, name: "halus" },
+    { id: 3, name: "sedang" },
+    { id: 4, name: "kasar" },
+    { id: 5, name: "sangat kasar" }
   ],
 
   // flavor data
@@ -169,11 +169,7 @@ const initialState = {
     { id: 2, name: "sumatera" },
     { id: 3, name: "flores" },
     { id: 4, name: "toraja" }
-  ],
-
-  // data create recipe
-  tempRecipe: {},
-  tempRecipeDetail: {}
+  ]
 };
 
 const store = createStore(initialState);
@@ -193,7 +189,7 @@ const actionsRecipes = store => ({
   },
   async getRecipe(state, id) {
     console.log("test");
-    await axios(store.getState().baseURL + "recipes/" + id).then(response => {
+    await axios(`${store.getState().baseURL}recipes/${id}`).then(response => {
       console.log(response);
       store
         .setState({ recipe: response.data })
@@ -220,9 +216,8 @@ const actionsTimer = store => ({
     if (value === 0) {
       console.log("nambah");
       return { stepIndex: store.getState().stepIndex + 1 };
-    } else {
-      return { timerNow: value };
     }
+    return { timerNow: value };
   },
   setStepIndex(state, value) {
     console.log("sett");
@@ -242,21 +237,4 @@ const actionsTimer = store => ({
   }
 });
 
-const actionsCreateRecipe = store => ({
-  // setter data
-  setTempRecipe(state, key, value) {
-    return { tempRecipe: value };
-  },
-
-  setTempRecipeNote(state, value) {
-    const newRecipe = store.getState().tempRecipes;
-    newRecipe.notes = value;
-    return { tempRecipe: newRecipe };
-  },
-
-  setTempRecipeDetail(state, value) {
-    return { tempRecipeDetail: value };
-  }
-});
-
-export { store, actionsRecipes, actionsTimer, actionsCreateRecipe };
+export { store, actionsRecipes, actionsTimer };

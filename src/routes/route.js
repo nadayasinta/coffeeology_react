@@ -1,15 +1,10 @@
 import React from "react";
-<<<<<<< HEAD
 import { Provider, connect } from "unistore/react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 // import alert
 import { transitions, positions, Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
-=======
-import { Provider } from "unistore/react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
->>>>>>> origin/activiy-fariz
 import { store } from "../store/store";
 
 // import pages
@@ -24,6 +19,7 @@ import Activity from "../pages/activity";
 import CreateRecipe from "../pages/CreateRecipe";
 import AddStep from "../pages/addStep";
 import InputStep from "../pages/inputStep";
+import Review from "../pages/Review";
 
 const options = {
   // you can also just use 'bottom center'
@@ -51,6 +47,7 @@ function Routes() {
             <Route exact path="/recipecreate" component={CreateRecipe} />
             <Route exact path="/addstep" component={AddStep} />
             <Route exact path="/inputstep" component={InputStep} />
+            <Route exact path="/review" component={Review} />
           </Switch>
         </BrowserRouter>
       </AlertProvider>

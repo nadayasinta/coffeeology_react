@@ -66,7 +66,7 @@ export default function FullWidthTabs() {
 
   return (
     <div className="">
-      <div className="container activity">
+      <div className="container-fluid activity">
         <div className="row">
           <div className="col-12">
             <div className={classes.root}>
