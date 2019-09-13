@@ -127,8 +127,10 @@ const initialState = {
   ],
 
   // step Types
-  stepTypes,
+  stepTypes: stepTypes,
+  stepTypeNumber: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
 
+  stepTypeNumberSelected: 1,
   // recipe demo data
   timerNow: 0,
   stepIndex: 0,
@@ -192,6 +194,18 @@ const actionsRecipes = store => ({
   async getRecipe(state, id) {
     console.log("test");
     await axios(store.getState().baseURL + "recipes/" + id).then(response => {
+      console.log(response);
+      store
+        .setState({ recipe: response.data })
+        .catch(error => console.log("Error getRecipeById", error));
+    });
+  },
+  setStepTypeNumberSelected: (state, value) => {
+    return { stepTypeNumberSelected: value };
+  },
+  async postRecipe(state, value) {
+    console.log("test");
+    await axios(store.getState().baseURL + "recipes/").then(response => {
       console.log(response);
       store
         .setState({ recipe: response.data })

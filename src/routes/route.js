@@ -1,6 +1,6 @@
-import React from 'react';
-import { Provider, connect } from 'unistore/react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import React from "react";
+import { Provider, connect } from "unistore/react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 // import alert
 import { transitions, positions, Provider as AlertProvider } from "react-alert";
@@ -8,23 +8,25 @@ import AlertTemplate from "react-alert-template-basic";
 import { store } from "../store/store";
 
 // import pages
-import RecipesSelection from '../pages/RecipesSelection';
-import Brewing from '../pages/Brewing';
-import RecipeDetail from '../pages/RecipeDetail';
-import { Test } from '../pages/test';
-import RecipeDemo from '../pages/RecipeDemo';
-import Login from '../pages/loginTest';
-import Register from '../pages/register';
-import Activity from '../pages/activity';
-import CreateRecipe from '../pages/CreateRecipe';
+import RecipesSelection from "../pages/RecipesSelection";
+import Brewing from "../pages/Brewing";
+import RecipeDetail from "../pages/RecipeDetail";
+import { Test } from "../pages/test";
+import RecipeDemo from "../pages/RecipeDemo";
+import Login from "../pages/loginTest";
+import Register from "../pages/register";
+import Activity from "../pages/activity";
+import CreateRecipe from "../pages/CreateRecipe";
+import AddStep from "../pages/addStep";
+import InputStep from "../pages/inputStep";
 
 const options = {
   // you can also just use 'bottom center'
   position: positions.BOTTOM_CENTER,
   timeout: 5000,
-  offset: '30px',
+  offset: "30px",
   // you can also just use 'scale'
-  transition: transitions.SCALE,
+  transition: transitions.SCALE
 };
 
 function Routes() {
@@ -42,6 +44,8 @@ function Routes() {
             <Route exact path="/register" component={Register} />
             <Route exact path="/activity" component={Activity} />
             <Route exact path="/recipecreate" component={CreateRecipe} />
+            <Route exact path="/addstep" component={AddStep} />
+            <Route exact path="/inputstep" component={InputStep} />
           </Switch>
         </BrowserRouter>
       </AlertProvider>
