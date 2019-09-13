@@ -100,8 +100,7 @@ const initialState = {
       note: "wow",
       time: 50,
       amount: 80
-    },
-    activiy - fariz
+    }
   ],
   // method
   methodID: 0,
