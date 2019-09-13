@@ -1,0 +1,106 @@
+@import url("https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,900|Nunito:300,400,400i,600,700,800,900|Oswald:300,400,500,600,700|Roboto:300,400,400i,500,700,900&display=swap");
+
+@fontoswald: "Oswald", sans-serif;
+@fontlato: "Lato", sans-serif;
+@fontnunito: "Nunito", sans-serif;
+@fontroboto: "Roboto", sans-serif;
+
+@blue :#53686b;
+
+.allpage{
+  font-family: @fontnunito !important;
+}
+.header {
+  height: 100px;
+  background-color: @blue;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+
+
+.recipeCard {
+  h4 {
+    font-size: 20px;
+  }
+
+  h6 {
+    font-size: 0.8em;
+  }
+}
+
+// steps
+
+.toggle-base {
+  height: 20px;
+}
+
+.toggle-enter {
+  animation-name: fade-in;
+  animation-duration: 300ms;
+}
+
+.toggle-leave {
+  animation-name: fade-out;
+  animation-duration: 300ms;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    height: 0px;
+  }
+
+  to {
+    opacity: 1;
+    height: 20px;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+    height: 20px;
+  }
+
+  to {
+    opacity: 0;
+    height: 0px;
+  }
+}
+
+// navbar
+.navbar {
+  background-color: #e1e3de;
+
+
+
+  a {
+    text-decoration: none !important;
+    color: #451503;
+    h6{
+      margin-bottom: 0;
+    };
+};
+
+a:hover {
+  color:  #663f30 ;
+}
+img:hover{
+  transform: scale(1.1)
+};
+}
+
+// activity
+.activity {
+  .MuiBox-root-97 {
+    padding-left: 0;
+    padding-right: 0;
+    font-family: @fontnunito !important;
+
+  }
+  h6{
+    font-family: @fontnunito !important;
+
+  }
+}
