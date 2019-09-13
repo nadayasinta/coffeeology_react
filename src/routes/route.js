@@ -1,17 +1,22 @@
 import React from "react";
+<<<<<<< HEAD
 import { Provider, connect } from "unistore/react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 // import alert
 import { transitions, positions, Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
+=======
+import { Provider } from "unistore/react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+>>>>>>> origin/activiy-fariz
 import { store } from "../store/store";
 
 // import pages
 import RecipesSelection from "../pages/RecipesSelection";
 import Brewing from "../pages/Brewing";
 import RecipeDetail from "../pages/RecipeDetail";
-import { Test } from "../pages/test";
+import Test from "../pages/test";
 import RecipeDemo from "../pages/RecipeDemo";
 import Login from "../pages/loginTest";
 import Register from "../pages/register";

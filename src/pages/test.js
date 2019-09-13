@@ -1,40 +1,34 @@
-import React from 'react';
-import { CSSTransitionGroup } from 'react-transition-group';
+import React, { Component } from "react";
+import NotificationAlert from "react-notification-alert";
 
-class Test extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { items: ['hello', 'world', 'click', 'me'] };
-    this.handleAdd = this.handleAdd.bind(this);
+var options = {};
+options = {
+  place: "tl",
+  message: (
+    <div>
+      <div>
+        Welcome to <b>Now UI Dashboard React</b> - a beautiful freebie for every
+        web developer.
+      </div>
+    </div>
+  ),
+  type: "danger",
+  icon: "now-ui-icons ui-1_bell-53",
+  autoDismiss: 7
+};
+
+class App extends Component {
+  myFunc() {
+    this.refs.notify.notificationAlert(options);
   }
-
-  handleAdd() {
-    const newItems = this.state.items.concat([prompt('Enter some text')]);
-    this.setState({ items: newItems });
-  }
-
-  handleRemove(i) {
-    const newItems = this.state.items.slice();
-    newItems.splice(i, 1);
-    this.setState({ items: newItems });
-  }
-
   render() {
-    const items = this.state.items.map((item, i) => (
-  <div key={item} onClick={() => this.handleRemove(i)}>
-  {item}
-			</div>
-    ));
-
     return (
-  <div>
-  <button onClick={this.handleAdd}>Add Item</button>
-  <CSSTransitionGroup transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
-  {items}
-				</CSSTransitionGroup>
-			</div>
+      <div>
+        <NotificationAlert ref="notify" />
+        <button onClick={() => this.myFunc()}>Hey</button>
+      </div>
     );
   }
 }
 
-export { Test };
+export default App;
