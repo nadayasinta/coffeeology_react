@@ -22,7 +22,7 @@ class RecipeSelection extends React.Component {
 				<div className="container">
 					<div className="row mx-0 mt-3">
 						<div className="col-4 text-left">
-							<img height="100px" src={require('../assets/images/methodV60.png')} />
+							<img height="100px" src={require('../assets/images/methodV60.png')} alt="alt tag"/>
 						</div>
 						<div className="col-6 text-left">
 							<div className="row">

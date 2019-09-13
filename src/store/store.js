@@ -124,6 +124,12 @@ const initialState = {
     // step Types
     stepTypes: stepTypes,
 
+    stepTypeNumber : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+
+    stepTypeNumberSelected : 1,
+
+    // save step
+
     // data recipe steps
     timerNow: 0,
     // steps: [
@@ -192,6 +198,20 @@ const actionsTimer = store => ({
     },
     setWaterLimit(state, value) {
         return { waterLimit: value };
+    },
+    setStepTypeNumberSelected: (state, value) => {
+        return{ stepTypeNumberSelected: value };
+    },
+    convertSeconds(state, value) {
+        let minutes = Math.floor(parseInt(value)/60)
+        let seconds = parseInt(value) - minutes*60
+        if (minutes < 10 ) {
+            minutes =  `0${minutes}`
+        } 
+        if (seconds < 10 ) {
+            seconds = `0${seconds}`
+        }
+        return `${minutes}:${seconds}`
     }
 });
 

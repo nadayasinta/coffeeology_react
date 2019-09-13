@@ -17,9 +17,9 @@ function stepCard(props) {
                                         src={
                                             props.stepTypes[
                                                 props.data.stepNumber
-                                            ].icon
+                                            ].icon 
                                         }
-                                        className="w-100"
+                                        className="w-100" alt="alt tag"
                                     />
                                 </div>
                                 <div className="col-9 text-left align-self-center">
@@ -35,7 +35,7 @@ function stepCard(props) {
                                 <div className="col-2 px-0">
                                     <img
                                         src={require("../assets/images/methodV60.png")}
-                                        className="w-100"
+                                        className="w-100" alt="alt tag"
                                     />
                                 </div>
                                 <div className="col-10 px-0 text-left align-self-center">
@@ -49,7 +49,7 @@ function stepCard(props) {
                             <div className="col-1 px-0">
                                 <img
                                     src={require("../assets/images/methodV60.png")}
-                                    className="w-100"
+                                    className="w-100" alt="alt tag"
                                 />
                             </div>
                             <div className="col-11 px-0 text-left align-self-center">
@@ -64,7 +64,7 @@ function stepCard(props) {
                         <div className="col-1 px-0">
                             <img
                                 src={require("../assets/images/methodV60.png")}
-                                className="w-100"
+                                className="w-100" alt="alt tag"
                             />
                         </div>
                         <div className="col-11 px-0 text-left align-self-center">

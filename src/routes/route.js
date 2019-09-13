@@ -10,6 +10,9 @@ import Brewing from "../pages/brewing";
 import RecipeDetail from "../pages/recipeDetail";
 import { Test } from "../pages/test";
 import RecipeDemo from "../pages/recipeDemo";
+import AddStep from "../pages/addStep";
+import InputStep from "../pages/inputStep";
+
 
 function Routes() {
     return (
@@ -20,6 +23,8 @@ function Routes() {
                     <Route exact path="/test" component={Test} />
                     <Route exact path="/recipes" component={RecipesSelection} />
                     <Route exact path="/recipedemo" component={RecipeDemo} />
+                    <Route exact path="/addstep" component={AddStep} />
+                    <Route exact path="/inputstep" component={InputStep} />
                     <Route
                         exact
                         path="/recipedetail"

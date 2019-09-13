@@ -5,7 +5,7 @@ function methodCard(props) {
         <div className="container-fluid recipeCard border mt-3">
             <div className="row h-100 pt-2">
                 <div className="col-3 text-center">
-                    <img src={props.data.icon} className="w-100" />
+                    <img src={props.data.icon} className="w-100" alt="alt tag"/>
                 </div>
                 <div className="col-9">
                     <div className="row">
@@ -23,7 +23,7 @@ function methodCard(props) {
                         <div className="col-2 text-left pr-0 pl-1">
                             <img
                                 src={require("../assets/images/RecipeIcon/timer.png")}
-                                className="w-75"
+                                className="w-75" alt="alt tag"
                             />
                         </div>
                         <div className="col-2 text-right align-self-center px-0">
@@ -32,8 +32,8 @@ function methodCard(props) {
                         <div className="col-2 text-left pr-0 pl-1">
                             <img
                                 src={require("../assets/images/RecipeIcon/coffee.png")}
-                                className="w-75"
-                            />
+                                className="w-75" alt="alt tag"
+                            /> 
                         </div>
                         <div className="col-2 text-right align-self-center px-0">
                             {props.data.water}
@@ -41,7 +41,7 @@ function methodCard(props) {
                         <div className="col-2 text-left pr-0 pl-1">
                             <img
                                 src={require("../assets/images/RecipeIcon/water.png")}
-                                className="w-75"
+                                className="w-75" alt="alt tag"
                             />
                         </div>
                     </div>
@@ -75,7 +75,7 @@ function methodCard(props) {
                                 <div className="col-6 text-right px-0">
                                     <img
                                         src={require("../assets/images/RecipeIcon/star.png")}
-                                        className="w-50"
+                                        className="w-50" alt="alt tag"
                                     />
                                 </div>
                                 <div className="col-6 text-center px-0">
@@ -89,7 +89,7 @@ function methodCard(props) {
                                 <div className="col-6 text-right px-0">
                                     <img
                                         src={require("../assets/images/RecipeIcon/like.png")}
-                                        className="w-50"
+                                        className="w-50" alt="alt tag"
                                     />
                                 </div>
                                 <div className="col-6 text-center px-0">
