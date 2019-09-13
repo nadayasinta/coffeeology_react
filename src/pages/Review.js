@@ -15,6 +15,24 @@ class Review extends React.Component {
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value }, console.log(event.target.name, event.target.value));
   }
+
+  submitRecipe = async (event) => {
+    await sessionStorage.setItem("Recipe", JSON.stringify(
+      {
+        name: this.state.recipeName,
+        methodID: this.state.brewMethod,
+        originID: this.state.origin,
+        beanName: this.state.beans,
+        beanProcess: this.state.process,
+        beanRoasting: this.state.roasting,
+        difficulty: this.state.difficulty,
+        coffeeWeight: this.state.beanNumber,
+        water: this.state.waterNumber
+      })
+    )
+    // this.props.history.push("/");
+  }
+
   render() {
     return (
       <div>
