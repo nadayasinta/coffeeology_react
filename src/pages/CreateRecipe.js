@@ -3,19 +3,23 @@ import { connect } from 'unistore/react';
 import Header from '../components/header';
 import Navbar from '../components/navbar';
 import Radar from '../components/radar';
+import { actionsCreateRecipe } from '../store/store'
 
 class CreateRecipe extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      recipeName: '',
+      brewMethod: '',
+      difficulty: '',
       beanNumber: '',
       waterNumber: '',
       grind: '',
+      temperature: '',
       beans: '',
+      origin: '',
       process: '',
       roasting: '',
-      brewMethod: '',
-      grind: '',
       fragrance: 0,
       aroma: 0,
       cleanliness: 0,
@@ -26,253 +30,303 @@ class CreateRecipe extends React.Component {
       balance: 0,
       global: 0,
       body: 0,
-      tempFlavor: {
-        fragrance: 0,
-        aroma: 0,
-        cleanliness: 0,
-        sweetness: 0,
-        taste: 0,
-        acidity: 0,
-        aftertaste: 0,
-        balance: 0,
-        globalTaste: 0,
-        body: 0
+    }
+  }
+
+  handleChangeRecipe = (event) => {
+    this.setState({ [event.target.name]: event.target.value }, console.log(event.target.name, event.target.value));
+  }
+
+  handleChangeRecipeDetail = (event) => {
+    this.setState({ [event.target.name]: parseFloat(event.target.value) });
+  }
+
+  submitRecipe = async (event) => {
+    await this.props.setTempRecipe(
+      {
+        name: this.state.recipeName,
+        methodID: this.state.brewMethod,
+        originID: this.state.origin,
+        beanName: this.state.beans,
+        beanProcess: this.state.process,
+        beanRoasting: this.state.roasting,
+        difficulty: this.state.difficulty,
+        coffeeWeight: this.state.beanNumber,
+        water: this.state.waterNumber
       }
-    }
+    )
+    await this.props.setTempRecipeDetail(
+      {
 
-    componentDidUpdate(){
-      this.setState({
-        tempFlavor: {
-          fragrance: this.state.fragrance,
-          aroma: this.state.aroma,
-          cleanliness: this.state.cleanliness,
-          sweetness: this.state.sweetness,
-          taste: this.state.taste,
-          acidity: this.state.acidity,
-          aftertaste: this.state.aftertaste,
-          balance: this.state.balance,
-          globalTaste: this.state.global,
-          body: this.state.body
-        }
-      })
-    }
+        fragrance: this.state.fragrance,
+        aroma: this.state.aroma,
+        cleanliness: this.state.cleanliness,
+        sweetness: this.state.sweetness,
+        taste: this.state.taste,
+        acidity: this.state.acidity,
+        aftertaste: this.state.aftertaste,
+        balance: this.state.balance,
+        global: this.state.global,
+        body: this.state.body,
+        grindSize: this.state.grind,
+        water: this.state.temperature
+      }
+    )
+    this.props.history.push("/");
+  }
 
-    handleChange = (event) => {
-      this.setState({ [event.target.name]: event.target.value }, console.log(event.target.name, event.target.value));
-    }
+  render() {
+    return (
+      <div>
+        <Header />
+        <div className="container">
 
-    render() {
-      return (
-        <div>
-          <Header />
-          <div className="container">
-
-            <form onSubmit={this.doEditProfile}>
-              <div className="row form-group">
-                <label htmlFor="brewMethod">Pilih Metode Brew</label>
-
-                <select className="form-control" id="brewMethod" name="brewMethod" onChange={this.handleChange}>
-                  {this.props.methods.map((method, index) => <option>{method.name}</option>)}
-                </select>
-              </div>
-
-              <div className=" row ">
-                <div className=" col-3  ">
-                  <div className=" row justify-content-center border">
-                    <div className=" col-12">
-                      <label htmlFor="beanNumber">
-                        Jumlah
-                      <br />
-                        Biji
-                    </label>
-                    </div>
-                    <div className=" col-12">
-                      <img
-                        src={require('../assets/images/RecipeIcon/coffee.png')}
-                        className="w-50 py-2"
-                      />
-                    </div>
-                    <div className=" col-9 px-0">
-                      <input
-                        className="form-control"
-                        type="number"
-                        name="beanNumber"
-                        placeholder="16"
-                        onChange={this.handleChange}
-                      />
-                    </div>
-                    <div className=" col-2 px-0 align-self-center">
-                      g
-                  </div>
-                  </div>
-                </div>
-
-                <div className=" col-3  ">
-                  <div className=" row justify-content-center border">
-                    <div className=" col-12">
-                      <label htmlFor="waterNumber">
-                        Jumlah
-                      <br />
-                        Air
-                    </label>
-
-                    </div>
-                    <div className=" col-12">
-                      <img
-                        src={require('../assets/images/RecipeIcon/water.png')}
-                        className="w-50 py-2"
-                      />
-                    </div>
-                    <div className=" col-9 px-0">
-                      <input
-                        className="form-control"
-                        type="number"
-                        name="waterNumber"
-                        placeholder="200"
-                        onChange={this.handleChange}
-
-                      />
-                    </div>
-                    <div className=" col-2 px-0 align-self-center">
-                      ml
-                  </div>
-                  </div>
-                </div>
-
-                <div className=" col-3 ">
-                  <div className=" row justify-content-center border">
-                    <div className=" col-12">
-                      <label htmlFor="grind">
-                        Ukuran
-                      <br />
-                        Butir
-                    </label>
-                    </div>
-                    <div className=" col-12">
-                      <img
-                        src={require('../assets/images/RecipeIcon/coffee-grinder.png')}
-                        className="w-50 py-2"
-                      />
-                    </div>
-                    <div className=" col-9 px-0">
-
-                      <select className="form-control" id="grind" name="grind" onChange={this.handleChange}>
-                        {this.props.grinds.map((grind, index) => <option>{grind.name}</option>)}
-                      </select>
-
-                    </div>
-                  </div>
-                </div>
-
-                <div className=" col-3">
-                  <div className=" row justify-content-center border">
-                    <div className=" col-12">
-                      <label htmlFor="temperature">
-                        Suhu
-                      <br />
-                        Air
-                    </label>
-                    </div>
-                    <div className=" col-12">
-                      <img
-                        src={require('../assets/images/RecipeIcon/thermometer.png')}
-                        className="w-50 py-2"
-                      />
-                    </div>
-                    <div className=" col-9 px-0">
-                      <input
-                        className="form-control"
-                        type="number"
-                        name="temperature"
-                        placeholder="92"
-                        onChange={this.handleChange}
-
-                      />
-                    </div>
-                    <div className=" col-2 px-0 align-self-center">
-                      &deg;C
-                  </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className=" row justify-content-center bg-warning">
-                Profile Biji
+          <form onSubmit={this.submitRecipe}>
+            <div className=" row ">
+              <label htmlFor="recipeName">Nama Resep</label>
             </div>
 
-              <div className=" row ">
-                <label htmlFor="beans">Biji :</label>
+            <div className=" row justify-content-center text-center">
+              <input
+                className="form-control"
+                type="text"
+                name="recipeName"
+                onChange={this.handleChangeRecipe}
+
+              />
+            </div>
+            <div className="row form-group">
+              <label htmlFor="brewMethod">Pilih Metode Brew</label>
+
+              <select className="form-control" id="brewMethod" name="brewMethod" onChange={this.handleChangeRecipe}>
+                {this.props.methods.map((method, index) => <option value={method.id}>{method.name}</option>)}
+              </select>
+            </div>
+            <div className="row form-group">
+              <label htmlFor="difficulty">Tingkat Kesulitan</label>
+
+              <select className="form-control" id="difficulty" name="difficulty" onChange={this.handleChangeRecipe}>
+                <option>Mudah</option>
+                <option>Sedang</option>)
+                <option>Sulit</option>)
+
+              </select>
+            </div>
+            <div className=" row ">
+              <div className=" col-3  ">
+                <div className=" row justify-content-center border">
+                  <div className=" col-12">
+                    <label htmlFor="beanNumber">
+                      Jumlah
+                      <br />
+                      Biji
+                    </label>
+                  </div>
+                  <div className=" col-12">
+                    <img
+                      src={require('../assets/images/RecipeIcon/coffee.png')}
+                      className="w-50 py-2"
+                    />
+                  </div>
+                  <div className=" col-9 px-0">
+                    <input
+                      className="form-control"
+                      type="number"
+                      name="beanNumber"
+                      placeholder="16"
+                      onChange={this.handleChangeRecipe}
+                    />
+
+
+                  </div>
+                  <div className=" col-2 px-0 align-self-center">
+                    g
+                  </div>
+                </div>
               </div>
 
-              <div className=" row justify-content-center text-center">
-                <input
-                  className="form-control"
-                  type="text"
-                  name="beans"
-                  placeholder="biji"
-                  onChange={this.handleChange}
-                />
+              <div className=" col-3  ">
+                <div className=" row justify-content-center border">
+                  <div className=" col-12">
+                    <label htmlFor="waterNumber">
+                      Jumlah
+                      <br />
+                      Air
+                    </label>
+
+                  </div>
+                  <div className=" col-12">
+                    <img
+                      src={require('../assets/images/RecipeIcon/water.png')}
+                      className="w-50 py-2"
+                    />
+                  </div>
+                  <div className=" col-9 px-0">
+                    <input
+                      className="form-control"
+                      type="number"
+                      name="waterNumber"
+                      placeholder="200"
+                      onChange={this.handleChangeRecipe}
+
+                    />
+                  </div>
+                  <div className=" col-2 px-0 align-self-center">
+                    ml
+                  </div>
+                </div>
               </div>
 
-              <div className=" row ">
-                <label htmlFor="process">Proses :</label>
+              <div className=" col-3 ">
+                <div className=" row justify-content-center border">
+                  <div className=" col-12">
+                    <label htmlFor="grind">
+                      Ukuran
+                      <br />
+                      Butir
+                    </label>
+                  </div>
+                  <div className=" col-12">
+                    <img
+                      src={require('../assets/images/RecipeIcon/coffee-grinder.png')}
+                      className="w-50 py-2"
+                    />
+                  </div>
+                  <div className=" col-9 px-0">
+
+                    <select className="form-control" id="grind" name="grind" onChange={this.handleChangeRecipe}>
+                      {this.props.grinds.map((grind, index) => <option>{grind.name}</option>)}
+                    </select>
+
+                  </div>
+                </div>
               </div>
 
-              <div className=" row justify-content-center text-center">
-                <input
-                  className="form-control"
-                  type="text"
-                  name="process"
-                  placeholder="proses"
-                  onChange={this.handleChange}
+              <div className=" col-3">
+                <div className=" row justify-content-center border">
+                  <div className=" col-12">
+                    <label htmlFor="temperature">
+                      Suhu
+                      <br />
+                      Air
+                    </label>
+                  </div>
+                  <div className=" col-12">
+                    <img
+                      src={require('../assets/images/RecipeIcon/thermometer.png')}
+                      className="w-50 py-2"
+                    />
+                  </div>
+                  <div className=" col-9 px-0">
+                    <input
+                      className="form-control"
+                      type="number"
+                      name="temperature"
+                      placeholder="92"
+                      onChange={this.handleChangeRecipe}
 
-                />
+                    />
+                  </div>
+                  <div className=" col-2 px-0 align-self-center">
+                    &deg;C
+                  </div>
+                </div>
               </div>
+            </div>
 
-              <div className=" row ">
-                <label htmlFor="roasting">Roasting :</label>
-              </div>
+            <div className=" row justify-content-center bg-warning">
+              Profile Biji
+            </div>
 
-              <div className=" row justify-content-center text-center">
-                <input
-                  className="form-control"
-                  type="text"
-                  name="roasting"
-                  placeholder="roasting"
-                  onChange={this.handleChange}
+            <div className=" row ">
+              <label htmlFor="beans">Biji :</label>
+            </div>
 
-                />
-              </div>
+            <div className=" row justify-content-center text-center">
+              <input
+                className="form-control"
+                type="text"
+                name="beans"
+                placeholder="biji"
+                onChange={this.handleChangeRecipe}
+              />
+            </div>
 
+            <div className="row form-group">
+              <label htmlFor="origin">Origin : </label>
 
-              <div className=" row justify-content-center text-center">
-                <input
-                  className=" btn btn-dark btn-block my-3"
-                  type="submit"
-                  value="Next"
-                />
-              </div>
-            </form>
-          </div>
+              <select className="form-control" id="origin" name="origin" onChange={this.handleChangeRecipe}>
+                {this.props.origins.map((origin, index) => <option value={origin.id}>{origin.name}</option>)}
+                <option>lainnya</option>)
+              </select>
+            </div>
 
-          <Radar data={this.state.tempFlavor} />
-          <div className="container">
+            <div className=" row ">
+              <label htmlFor="process">Proses :</label>
+            </div>
+
+            <div className=" row justify-content-center text-center">
+              <input
+                className="form-control"
+                type="text"
+                name="process"
+                placeholder="proses"
+                onChange={this.handleChangeRecipe}
+
+              />
+            </div>
+
+            <div className=" row ">
+              <label htmlFor="roasting">Roasting :</label>
+            </div>
+
+            <div className=" row justify-content-center text-center">
+              <input
+                className="form-control"
+                type="text"
+                name="roasting"
+                placeholder="roasting"
+                onChange={this.handleChangeRecipe}
+              />
+            </div>
+            <Radar data={{
+              fragrance: this.state.fragrance,
+              aroma: this.state.aroma,
+              cleanliness: this.state.cleanliness,
+              sweetness: this.state.sweetness,
+              taste: this.state.taste,
+              acidity: this.state.acidity,
+              aftertaste: this.state.aftertaste,
+              balance: this.state.balance,
+              globalTaste: this.state.global,
+              body: this.state.body
+            }} />
+
             {this.props.flavors.map((flavor, index) => (
               <div className="row">
                 <div className="col-3">
                   <label htmlFor="customRange1">{flavor}</label>
                 </div>
                 <div className="col-9">
-                  <input type="range" className="custom-range" min="0" max="1" step="0.01" id={flavor} name={flavor} onChange={this.handleChange} />
+                  <input type="range" className="custom-range" min="0" max="1" step="0.01" value={this.state[flavor]} id={flavor} name={flavor} onChange={this.handleChangeRecipeDetail} />
                 </div>
               </div>
             ))}
 
-
-          </div>
+            <div className=" row justify-content-center text-center">
+              <input
+                className=" btn btn-dark btn-block my-3"
+                type="submit"
+                value="Next"
+              />
+            </div>
+          </form>
         </div>
-      );
-    }
-  }
 
-  export default connect('methods, grinds, flavors, recipeDetails')(CreateRecipe);
+      </div>
+    );
+  }
+}
+
+// export default Steps;
+export default connect('methods, grinds, flavors, origins, recipeDetails, tempRecipe', actionsCreateRecipe)(CreateRecipe);
