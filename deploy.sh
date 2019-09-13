@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo docker stop helloworld
-sudo docker rm helloworld
-sudo docker rmi farizap/helloworld
-sudo docker run -d --name helloworld -p 3000:80 farizap/helloworld:latest
+sudo docker stop coffeology_react
+sudo docker rm coffeology_react
+sudo docker rmi farizap/coffeology_react
+sudo docker run -d --name coffeology_react -p 3000:80 farizap/coffeology_react:latest
