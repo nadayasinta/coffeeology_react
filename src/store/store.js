@@ -112,6 +112,7 @@ const initialState = {
 
   // data user
   name: "",
+  emailValidStatus: false,
 
   // url
   baseURL: "http://0.0.0.0:5000",
@@ -199,14 +200,22 @@ const actionsRecipes = store => ({
   setStepTypeNumberSelected: (state, value) => {
     return { stepTypeNumberSelected: value };
   },
-  async postRecipe(state, value) {
+  async postRecipe(state, data) {
     console.log("test");
-    await axios(store.getState().baseURL + "recipes/").then(response => {
-      console.log(response);
-      store
-        .setState({ recipe: response.data })
-        .catch(error => console.log("Error getRecipeById", error));
-    });
+    let config = {
+      method: "post",
+      url: store.getState().baseURL + "/recipes",
+      data: data,
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token")
+      }
+    };
+    await axios(config)
+      .then(response => {
+        console.log(response);
+        store.setState({ recipe: response.data });
+      })
+      .catch(error => console.log("Error getRecipeById", error));
   }
 });
 

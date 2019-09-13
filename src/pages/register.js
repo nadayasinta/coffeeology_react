@@ -23,14 +23,17 @@ const Register = props => {
     passwordRepeat: "",
     name: ""
   };
-
+  const validateEmail = email => {
+    var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    return re.test(String(email).toLowerCase());
+  };
   const handleOnSubmit = event => {
     event.preventDefault();
 
     if (data.email === "") {
       return alert("email tidak boleh kosong");
     }
-    if (props.validateEmail(data.email)) {
+    if (!validateEmail(data.email)) {
       return alert("email tidak valid");
     }
     if (data.password === "") {

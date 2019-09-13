@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "unistore/react";
-import { act, actionsRecipes } from "../store/store";
+import { actionsRecipes } from "../store/store";
 import Header from "../components/header";
 import Plus from "../assets/images/plus.png";
 import { Link } from "react-router-dom";
@@ -17,7 +17,7 @@ class AddStep extends React.Component {
   }
 
   componentDidMount = async () => {
-    console.log("did mount",sessionStorage.getItem("stepTemporary"))
+    console.log("did mount", sessionStorage.getItem("stepTemporary"));
     if (sessionStorage.getItem("stepTemporary") !== null) {
       await this.setState({
         stepTemporary: JSON.parse(sessionStorage.getItem("stepTemporary"))
@@ -38,36 +38,43 @@ class AddStep extends React.Component {
     return `${minutes}:${seconds}`;
   }
 
-  deteleStep = async (event,idx) => {
-    event.preventDefault()
+  deteleStep = async (event, idx) => {
+    event.preventDefault();
 
-    const temp = this.state.stepTemporary.filter((step,index) => index !== idx)
-    await this.setState({
-      stepTemporary: temp
-    }, ()=> {
-      sessionStorage.setItem(
-      "stepTemporary",
-      JSON.stringify(this.state.stepTemporary)
-    );});    
+    const temp = this.state.stepTemporary.filter(
+      (step, index) => index !== idx
+    );
+    await this.setState(
+      {
+        stepTemporary: temp
+      },
+      () => {
+        sessionStorage.setItem(
+          "stepTemporary",
+          JSON.stringify(this.state.stepTemporary)
+        );
+      }
+    );
   };
 
-  postData = (e) => {
-    e.preventDefault()
-    let recipes = JSON.parse(sessionStorage.getItem("Recipe"))
-    let recipeDetails = JSON.parse(sessionStorage.getItem("RecipeDetail"))
-    let steps = JSON.parse(sessionStorage.getItem("stepTemporary"))
-    recipes["note"] = this.note.current.value
+  postData = e => {
+    e.preventDefault();
+    let recipes = JSON.parse(sessionStorage.getItem("Recipe"));
+    let recipeDetails = JSON.parse(sessionStorage.getItem("RecipeDetail"));
+    let steps = JSON.parse(sessionStorage.getItem("stepTemporary"));
+    recipes["note"] = this.note.current.value;
     let data = {
       recipes: recipes,
       recipeDetails: recipeDetails,
       steps: steps
-    }
-    this.props.postRecipe(data)
+    };
+    console.log(this.props);
+    this.props.postRecipe(data);
     // sessionStorage.removeItem("Recipe")
     // sessionStorage.removeItem("RecipeDetail")
     // sessionStorage.removeItem("stepTemporary")
-    this.props.history.push("/activity")
-  }
+    this.props.history.push("/activity");
+  };
 
   render() {
     return (
@@ -102,7 +109,7 @@ class AddStep extends React.Component {
                       <div className="row justify-content-end">
                         <button
                           type="button"
-                          onClick={ e =>this.deteleStep(e,index)}
+                          onClick={e => this.deteleStep(e, index)}
                           className="btn btn-primary"
                         >
                           X
@@ -135,7 +142,11 @@ class AddStep extends React.Component {
                   </Link>
                 </div>
               </div>
-              <button type="button" className="btn btn-primary mt-4" onClick={e =>this.postData(e)}>
+              <button
+                type="button"
+                className="btn btn-primary mt-4"
+                onClick={e => this.postData(e)}
+              >
                 Simpan
               </button>
             </div>
@@ -148,4 +159,5 @@ class AddStep extends React.Component {
 
 export default connect(
   "stepTypes, stepTemporary",
+  actionsRecipes
 )(AddStep);

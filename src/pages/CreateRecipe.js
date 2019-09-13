@@ -1,24 +1,24 @@
-import React from 'react';
-import { connect } from 'unistore/react';
-import Navbar from '../components/navbar';
-import Radar from '../components/radar';
-import { actionsCreateRecipe } from '../store/store'
+import React from "react";
+import { connect } from "unistore/react";
+import Navbar from "../components/navbar";
+import Radar from "../components/radar";
+import { actionsCreateRecipe } from "../store/store";
 
 class CreateRecipe extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      recipeName: '',
-      brewMethod: '',
-      difficulty: '',
-      beanNumber: '',
-      waterNumber: '',
-      grind: '',
-      temperature: '',
-      beans: '',
-      origin: '',
-      process: '',
-      roasting: '',
+      recipeName: "",
+      brewMethod: "",
+      difficulty: "",
+      beanNumber: "",
+      waterNumber: "",
+      grind: "",
+      temperature: "",
+      beans: "",
+      origin: "",
+      process: "",
+      roasting: "",
       fragrance: 0.5,
       aroma: 0.5,
       cleanliness: 0.5,
@@ -28,21 +28,25 @@ class CreateRecipe extends React.Component {
       aftertaste: 0.5,
       balance: 0.5,
       global: 0.5,
-      body: 0.5,
-    }
+      body: 0.5
+    };
   }
 
-  handleChangeRecipe = (event) => {
-    this.setState({ [event.target.name]: event.target.value }, console.log(event.target.name, event.target.value));
-  }
+  handleChangeRecipe = event => {
+    this.setState(
+      { [event.target.name]: event.target.value },
+      console.log(event.target.name, event.target.value)
+    );
+  };
 
-  handleChangeRecipeDetail = (event) => {
+  handleChangeRecipeDetail = event => {
     this.setState({ [event.target.name]: parseFloat(event.target.value) });
-  }
+  };
 
-  submitRecipe = async (event) => {
-    await sessionStorage.setItem("Recipe", JSON.stringify(
-      {
+  submitRecipe = async event => {
+    await sessionStorage.setItem(
+      "Recipe",
+      JSON.stringify({
         name: this.state.recipeName,
         methodID: this.state.brewMethod,
         originID: this.state.origin,
@@ -53,10 +57,10 @@ class CreateRecipe extends React.Component {
         coffeeWeight: this.state.beanNumber,
         water: this.state.waterNumber
       })
-    )
-    await sessionStorage.setItem("RecipeDetail", JSON.stringify(
-      {
-
+    );
+    await sessionStorage.setItem(
+      "RecipeDetail",
+      JSON.stringify({
         fragrance: this.state.fragrance,
         aroma: this.state.aroma,
         cleanliness: this.state.cleanliness,
@@ -70,15 +74,14 @@ class CreateRecipe extends React.Component {
         grindSize: this.state.grind,
         water: this.state.temperature
       })
-    )
-    this.props.history.push("/");
-  }
+    );
+    this.props.history.push("/addstep");
+  };
 
   render() {
     return (
       <div>
         <div className="container">
-
           <form onSubmit={this.submitRecipe}>
             <div className=" row ">
               <label htmlFor="recipeName">Nama Resep</label>
@@ -96,20 +99,37 @@ class CreateRecipe extends React.Component {
             <div className="row form-group">
               <label htmlFor="brewMethod">Pilih Metode Brew</label>
 
-              <select className="form-control" id="brewMethod" name="brewMethod" onChange={this.handleChangeRecipe} required>
-                <option selected disabled>-Pilih-</option>
-                {this.props.methods.map((method, index) => <option value={method.id}>{method.name}</option>)}
+              <select
+                className="form-control"
+                id="brewMethod"
+                name="brewMethod"
+                onChange={this.handleChangeRecipe}
+                required
+              >
+                <option selected disabled>
+                  -Pilih-
+                </option>
+                {this.props.methods.map((method, index) => (
+                  <option value={method.id}>{method.name}</option>
+                ))}
               </select>
             </div>
             <div className="row form-group">
               <label htmlFor="difficulty">Tingkat Kesulitan</label>
 
-              <select className="form-control" id="difficulty" name="difficulty" onChange={this.handleChangeRecipe} required>
-                <option selected disabled>-Pilih-</option>
+              <select
+                className="form-control"
+                id="difficulty"
+                name="difficulty"
+                onChange={this.handleChangeRecipe}
+                required
+              >
+                <option selected disabled>
+                  -Pilih-
+                </option>
                 <option value="1">Mudah</option>
                 <option value="2">Sedang</option>)
                 <option value="3">Sulit</option>)
-
               </select>
             </div>
             <div className=" row ">
@@ -124,7 +144,7 @@ class CreateRecipe extends React.Component {
                   </div>
                   <div className=" col-12">
                     <img
-                      src={require('../assets/images/RecipeIcon/coffee.png')}
+                      src={require("../assets/images/RecipeIcon/coffee.png")}
                       className="w-50 py-2"
                     />
                   </div>
@@ -137,12 +157,8 @@ class CreateRecipe extends React.Component {
                       onChange={this.handleChangeRecipe}
                       required
                     />
-
-
                   </div>
-                  <div className=" col-2 px-0 align-self-center">
-                    g
-                  </div>
+                  <div className=" col-2 px-0 align-self-center">g</div>
                 </div>
               </div>
 
@@ -154,11 +170,10 @@ class CreateRecipe extends React.Component {
                       <br />
                       Air
                     </label>
-
                   </div>
                   <div className=" col-12">
                     <img
-                      src={require('../assets/images/RecipeIcon/water.png')}
+                      src={require("../assets/images/RecipeIcon/water.png")}
                       className="w-50 py-2"
                     />
                   </div>
@@ -170,12 +185,9 @@ class CreateRecipe extends React.Component {
                       placeholder="200"
                       onChange={this.handleChangeRecipe}
                       required
-
                     />
                   </div>
-                  <div className=" col-2 px-0 align-self-center">
-                    ml
-                  </div>
+                  <div className=" col-2 px-0 align-self-center">ml</div>
                 </div>
               </div>
 
@@ -190,17 +202,25 @@ class CreateRecipe extends React.Component {
                   </div>
                   <div className=" col-12">
                     <img
-                      src={require('../assets/images/RecipeIcon/coffee-grinder.png')}
+                      src={require("../assets/images/RecipeIcon/coffee-grinder.png")}
                       className="w-50 py-2"
                     />
                   </div>
                   <div className=" col-9 px-0">
-
-                    <select className="form-control" id="grind" name="grind" onChange={this.handleChangeRecipe} required>
-                      <option selected disabled>-Pilih-</option>
-                      {this.props.grinds.map((grind, index) => <option value={grind.id}>{grind.name}</option>)}
+                    <select
+                      className="form-control"
+                      id="grind"
+                      name="grind"
+                      onChange={this.handleChangeRecipe}
+                      required
+                    >
+                      <option selected disabled>
+                        -Pilih-
+                      </option>
+                      {this.props.grinds.map((grind, index) => (
+                        <option value={grind.id}>{grind.name}</option>
+                      ))}
                     </select>
-
                   </div>
                 </div>
               </div>
@@ -216,7 +236,7 @@ class CreateRecipe extends React.Component {
                   </div>
                   <div className=" col-12">
                     <img
-                      src={require('../assets/images/RecipeIcon/thermometer.png')}
+                      src={require("../assets/images/RecipeIcon/thermometer.png")}
                       className="w-50 py-2"
                     />
                   </div>
@@ -230,9 +250,7 @@ class CreateRecipe extends React.Component {
                       required
                     />
                   </div>
-                  <div className=" col-2 px-0 align-self-center">
-                    &deg;C
-                  </div>
+                  <div className=" col-2 px-0 align-self-center">&deg;C</div>
                 </div>
               </div>
             </div>
@@ -259,9 +277,19 @@ class CreateRecipe extends React.Component {
             <div className="row form-group">
               <label htmlFor="origin">Origin : </label>
 
-              <select className="form-control" id="origin" name="origin" onChange={this.handleChangeRecipe} required>
-                <option selected disabled>-Pilih-</option>
-                {this.props.origins.map((origin, index) => <option value={origin.id}>{origin.name}</option>)}
+              <select
+                className="form-control"
+                id="origin"
+                name="origin"
+                onChange={this.handleChangeRecipe}
+                required
+              >
+                <option selected disabled>
+                  -Pilih-
+                </option>
+                {this.props.origins.map((origin, index) => (
+                  <option value={origin.id}>{origin.name}</option>
+                ))}
                 <option>lainnya</option>)
               </select>
             </div>
@@ -295,18 +323,20 @@ class CreateRecipe extends React.Component {
                 required
               />
             </div>
-            <Radar data={{
-              fragrance: this.state.fragrance,
-              aroma: this.state.aroma,
-              cleanliness: this.state.cleanliness,
-              sweetness: this.state.sweetness,
-              taste: this.state.taste,
-              acidity: this.state.acidity,
-              aftertaste: this.state.aftertaste,
-              balance: this.state.balance,
-              globalTaste: this.state.global,
-              body: this.state.body
-            }} />
+            <Radar
+              data={{
+                fragrance: this.state.fragrance,
+                aroma: this.state.aroma,
+                cleanliness: this.state.cleanliness,
+                sweetness: this.state.sweetness,
+                taste: this.state.taste,
+                acidity: this.state.acidity,
+                aftertaste: this.state.aftertaste,
+                balance: this.state.balance,
+                globalTaste: this.state.global,
+                body: this.state.body
+              }}
+            />
 
             {this.props.flavors.map((flavor, index) => (
               <div className="row">
@@ -314,7 +344,17 @@ class CreateRecipe extends React.Component {
                   <label htmlFor="customRange1">{flavor}</label>
                 </div>
                 <div className="col-9">
-                  <input type="range" className="custom-range" min="0" max="1" step="0.01" value={this.state[flavor]} id={flavor} name={flavor} onChange={this.handleChangeRecipeDetail} />
+                  <input
+                    type="range"
+                    className="custom-range"
+                    min="0"
+                    max="1"
+                    step="0.01"
+                    value={this.state[flavor]}
+                    id={flavor}
+                    name={flavor}
+                    onChange={this.handleChangeRecipeDetail}
+                  />
                 </div>
               </div>
             ))}
@@ -335,4 +375,6 @@ class CreateRecipe extends React.Component {
 }
 
 // export default Steps;
-export default connect('methods, grinds, flavors, origins, recipeDetails')(CreateRecipe);
+export default connect("methods, grinds, flavors, origins, recipeDetails")(
+  CreateRecipe
+);

@@ -1,48 +1,74 @@
-import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
+import React from "react";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import Grid from "@material-ui/core/Grid";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import Container from "@material-ui/core/Container";
 
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from "react-router-dom";
 
 // import store
-import { connect } from 'unistore/react';
-import actionsUsers from '../store/actionUsers';
-import useStyles from '../store/style';
+import { connect } from "unistore/react";
+import actionsUsers from "../store/actionUsers";
+import useStyles from "../store/style";
 
-// import component
+// import alert
+import Swal from "sweetalert2";
 
-const SignIn = (props) => {
+const SignIn = props => {
   const classes = useStyles();
 
   const data = {
-    email: '',
-    password: '',
+    email: "",
+    password: ""
   };
-
-  const handleOnSubmit = (event) => {
+  const validateEmail = email => {
+    var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    return re.test(String(email).toLowerCase());
+  };
+  const handleOnSubmit = event => {
     event.preventDefault();
-    if (props.validateEmail(data.email)) {
-      alert('email tidak valid');
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "center",
+      showConfirmButton: false,
+      timer: 2000
+    });
+
+    if (!validateEmail(data.email)) {
+      Toast.fire({
+        type: "error",
+        title: "Email tidak valid!"
+      });
     } else {
+      console.log(sessionStorage.getItem("token"));
       props.login(data);
+
+      if (sessionStorage.getItem("token")) {
+        Toast.fire({
+          type: "success",
+          title: "You have been signed in!"
+        });
+        setTimeout(() => {
+          props.history.replace("/");
+        }, 1000);
+      }
     }
   };
 
-  const onChangeEmail = (event) => {
+  const onChangeEmail = event => {
     data.email = event.target.value;
   };
-  const onChangePassword = (event) => {
+  const onChangePassword = event => {
     data.password = event.target.value;
   };
 
   return (
     <div>
+      {sessionStorage.getItem("token") ? <Redirect to="/" /> : <div></div>}
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
@@ -100,6 +126,6 @@ const SignIn = (props) => {
 };
 
 export default connect(
-  '',
-  actionsUsers,
+  "",
+  actionsUsers
 )(SignIn);

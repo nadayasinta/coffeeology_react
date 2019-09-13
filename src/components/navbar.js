@@ -51,7 +51,11 @@ function navbar(props) {
           </Link>
         </div>
         <div className="col-2 text-center px-0">
-          <Link to="/activity">
+          <Link
+            onClick={e => {
+              sessionStorage.removeItem("token");
+            }}
+          >
             <img
               src={navbarProfile}
               className="navbarIcon  w-50 py-1"
