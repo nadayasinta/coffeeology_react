@@ -40,7 +40,7 @@ class Review extends React.Component {
     //     photo: this.state.photo,
     //   }
     // })
-    this.props.history.push("/");
+    this.props.history.push("/activity");
   }
 
   render() {

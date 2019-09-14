@@ -26,16 +26,16 @@ function Routes() {
         <Switch>
           <Route exact path="/" component={Brewing} />
           <Route exact path="/test" component={Test} />
-          <Route exact path="/recipes" component={RecipesSelection} />
-          <Route exact path="/recipedemo" component={RecipeDemo} />
-          <Route exact path="/recipes/:recipeID" component={RecipeDetail} />
+          <Route exact path="/recipe/demo/:recipeID" component={RecipeDemo} />
+          <Route exact path="/recipe/:recipeID" component={RecipeDetail} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/activity" component={Activity} />
-          <Route exact path="/recipecreate" component={CreateRecipe} />
-          <Route exact path="/addstep" component={AddStep} />
-          <Route exact path="/inputstep" component={InputStep} />
-          <Route exact path="/recipereview" component={Review} />
+          <Route exact path="/recipes/create" component={CreateRecipe} />
+          <Route exact path="/recipes/create/addstep" component={AddStep} />
+          <Route exact path="/recipes/create/inputstep" component={InputStep} />
+          <Route exact path="/recipes/review" component={Review} />
+          <Route exact path="/recipes/:methodID" component={RecipesSelection} />
         </Switch>
       </BrowserRouter>
     </Provider>

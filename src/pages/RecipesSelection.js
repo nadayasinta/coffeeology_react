@@ -44,7 +44,7 @@ class RecipesSelection extends React.Component {
           {this.props.recipes.map(value => {
             return (
               <div className="col-12">
-                <Link to={"/recipes/" + value.id}>
+                <Link to={"/recipe/" + value.id}>
                   <RecipeCard
                     data={value}
                     methodIcon={this.props.methods[value.methodID].icon}

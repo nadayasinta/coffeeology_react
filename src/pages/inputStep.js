@@ -56,7 +56,7 @@ class InputStep extends React.Component {
     let temp = this.state.stepTemporary.concat([data]);
     await sessionStorage.setItem("stepTemporary", JSON.stringify(temp));
 
-    this.props.history.push("/addstep");
+    this.props.history.push("/recipes/create/addstep");
   };
 
   render() {
@@ -100,23 +100,23 @@ class InputStep extends React.Component {
           <form onSubmit={this.handleSubmit}>
             {/* form jumlah air */}
             {this.props.setStepTypeNumberSelected !== 1 ||
-            this.props.setStepTypeNumberSelected !== 2 ||
-            this.props.setStepTypeNumberSelected !== 12 ? (
-              <div className="form-group mt-3" style={{ textAlign: "left" }}>
-                <label for="Jumlah Air">Jumlah Air </label>
-                <input
-                  type="number"
-                  className="form-control"
-                  id="Jumlah Air"
-                  placeholder="200 ml"
-                  ref={this.waterAmount}
-                  min="0"
-                  required
-                />
-              </div>
-            ) : (
-              <div></div>
-            )}
+              this.props.setStepTypeNumberSelected !== 2 ||
+              this.props.setStepTypeNumberSelected !== 12 ? (
+                <div className="form-group mt-3" style={{ textAlign: "left" }}>
+                  <label for="Jumlah Air">Jumlah Air </label>
+                  <input
+                    type="number"
+                    className="form-control"
+                    id="Jumlah Air"
+                    placeholder="200 ml"
+                    ref={this.waterAmount}
+                    min="0"
+                    required
+                  />
+                </div>
+              ) : (
+                <div></div>
+              )}
 
             {/* form catatan */}
             <div className="form-group mb-4" style={{ textAlign: "left" }}>
