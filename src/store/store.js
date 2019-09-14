@@ -189,7 +189,11 @@ const initialState = {
   ],
 
   //history data
-  historyID: ''
+  historyID: '',
+  // recipe in page activity
+  history: [],
+
+  myBrew: []
 };
 
 const store = createStore(initialState);

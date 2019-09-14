@@ -3,21 +3,25 @@ import { Link } from "react-router-dom";
 
 // import store
 import { connect } from "unistore/react";
-import actionsRecipes from "../store/actionsRecipes";
+import actionsActivity from "../store/actionsActivity";
 
 // import component
-import RecipeCard from "./recipeCard";
+import MyBrewCard from "./myBrewCard";
 
 class MyBrew extends React.Component {
+  componentDidMount = async () => {
+    this.props.getMyBrew()
+  }
+
   render() {
     return (
       <div>
         <Link to="/recipes/create">
           <button className="btn btn-primary">Tambah Guide</button>
         </Link>
-        {this.props.recipes.map(value => (
+        {this.props.myBrew.map((value, key) => (
           <div className="col-12">
-            <RecipeCard data={value} />
+            <MyBrewCard icon={this.props.methods[value.methodID].icon} data={value} />
           </div>
         ))}
       </div>
@@ -26,6 +30,6 @@ class MyBrew extends React.Component {
 }
 
 export default connect(
-  "recipes,stepTypes,recipeDetails",
-  actionsRecipes
+  "myBrew, methods",
+  actionsActivity
 )(MyBrew);
