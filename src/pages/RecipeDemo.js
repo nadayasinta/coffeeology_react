@@ -3,7 +3,7 @@ import { CSSTransitionGroup } from "react-transition-group";
 
 // import store
 import { connect } from "unistore/react";
-import actionsTimer from "../store/actionsTimer";
+import actionsDemo from "../store/actionsDemo";
 
 // import component
 import Timer from "../components/timer";
@@ -33,8 +33,8 @@ class Steps extends React.Component {
       if (this.props.stepIndex > 0) {
         this.nextStep();
         if (this.state.steps.length === 0) {
-
-          this.props.history.push("/recipes/review");
+          this.props.postHistory({ recipeID: this.props.match.params.recipeID });
+          this.props.history.push("/recipe/review/" + this.props.match.params.recipeID);
         }
       }
       if (this.state.steps[0] !== undefined) {
@@ -88,6 +88,6 @@ class Steps extends React.Component {
 
 // export default Steps;
 export default connect(
-  "recipeSteps, stepIndex,waterLimit",
-  actionsTimer
+  "recipeSteps, stepIndex, waterLimit",
+  actionsDemo
 )(Steps);

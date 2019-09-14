@@ -186,7 +186,10 @@ const initialState = {
     { id: 2, name: "sumatera" },
     { id: 3, name: "flores" },
     { id: 4, name: "toraja" }
-  ]
+  ],
+
+  //history data
+  historyID: ''
 };
 
 const store = createStore(initialState);
