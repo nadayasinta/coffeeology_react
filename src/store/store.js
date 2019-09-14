@@ -4,103 +4,102 @@ import axios from "axios";
 import { Redirect } from "react-router-dom";
 // import method image
 import { makeStyles } from "@material-ui/core/styles";
-import method1 from "../assets/images/methodAeroPress.png";
-import method2 from "../assets/images/methodChemex.png";
-import method3 from "../assets/images/methodFrenchPress.png";
-import method4 from "../assets/images/methodMokaPot.png";
-import method5 from "../assets/images/methodSiphon.png";
-import method6 from "../assets/images/methodV60.png";
 
 // import json
 import stepTypes from "./stepTypes";
 
 // import style
+import Swal from "sweetalert2";
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: "center",
+  showConfirmButton: false,
+  timer: 2000
+});
 
 const initialState = {
   // data recipe
   recipes: [
-    {
-      name: "Ultimate v60",
-      methodID: 1,
-      beanName: "Beans Gayoo Bourbon",
-      beanProcess: "Full Wash",
-      beanRoasting: "Medium",
-
-      rating: 45,
-      favoriteCount: 20,
-      time: 100,
-      coffeeWeight: 17,
-      water: 200,
-      icon: require("../assets/images/StepIcon/stir.png")
-    },
-    {
-      name: "Ultimate v60 2",
-      methodID: 1,
-      beanName: "Beans Gayoo Bourbon",
-      beanProcess: "Full Wash",
-      beanRoasting: "Medium",
-
-      rating: 4.5,
-      favoriteCount: 20,
-      time: 100,
-      coffeeWeight: 17,
-      water: 200,
-      icon: require("../assets/images/StepIcon/stir.png")
-    }
+    // {
+    //   name: "Ultimate v60",
+    //   methodID: 1,
+    //   beanName: "Beans Gayoo Bourbon",
+    //   beanProcess: "Full Wash",
+    //   beanRoasting: "Medium",
+    //   rating: 45,
+    //   favoriteCount: 20,
+    //   time: 100,
+    //   coffeeWeight: 17,
+    //   water: 200,
+    //   icon: require("../assets/images/StepIcon/stir.png")
+    // },
+    // {
+    //   name: "Ultimate v60 2",
+    //   methodID: 1,
+    //   beanName: "Beans Gayoo Bourbon",
+    //   beanProcess: "Full Wash",
+    //   beanRoasting: "Medium",
+    //   rating: 4.5,
+    //   favoriteCount: 20,
+    //   time: 100,
+    //   coffeeWeight: 17,
+    //   water: 200,
+    //   icon: require("../assets/images/StepIcon/stir.png")
+    // }
   ],
-  recipe: {
-    name: "Ultimate v60",
-    methodID: 1,
-    beanName: "Beans Gayoo Bourbon",
-    beanProcess: "Full Wash",
-    beanRoasting: "Medium",
-    rating: 45,
-    favoriteCount: 20,
-    time: 100,
-    coffeeWeight: 17,
-    water: 200,
-    icon: require("../assets/images/StepIcon/stir.png")
-  },
+  recipe: null,
+  // name: "Ultimate v60",
+  // methodID: 1,
+  // beanName: "Beans Gayoo Bourbon",
+  // beanProcess: "Full Wash",
+  // beanRoasting: "Medium",
+  // rating: 45,
+  // favoriteCount: 20,
+  // time: 100,
+  // coffeeWeight: 17,
+  // water: 200,
+  // icon: require("../assets/images/StepIcon/stir.png")
   recipeDetails: {
-    fragrance: 0.4,
-    aroma: 0.4,
-    cleanliness: 0.4,
-    sweetness: 0.3,
-    taste: 0.3,
-    acidity: 0.5,
-    aftertaste: 0.5,
-    balance: 0.5,
-    globalTaste: 0.5,
-    body: 0.5,
-    note: "lorem isum",
-    grindSize: "medium",
-    waterTemp: 92
+    //   fragrance: 0.4,
+    //   aroma: 0.4,
+    //   cleanliness: 0.4,
+    //   sweetness: 0.3,
+    //   taste: 0.3,
+    //   acidity: 0.5,
+    //   aftertaste: 0.5,
+    //   balance: 0.5,
+    //   globalTaste: 0.5,
+    //   body: 0.5,
+    //   note: "lorem isum",
+    //   grindSize: "medium",
+    //   waterTemp: 92
   },
   recipeSteps: [
-    {
-      recipeID: 1,
-      stepNumber: 1,
-      stepType: 1,
-      note: "wow",
-      time: 100,
-      amount: 20
-    },
-    {
-      recipeID: 1,
-      stepNumber: 2,
-      stepType: 4,
-      note: "wow",
-      time: 150,
-      amount: 0
-    },
-    {
-      recipeID: 1,
-      stepNumber: 3,
-      stepType: 6,
-      note: "wow",
-      time: 50,
-      amount: 80
-    }
+    // {
+    //   recipeID: 1,
+    //   stepNumber: 1,
+    //   stepType: 1,
+    //   note: "wow",
+    //   time: 100,
+    //   amount: 20
+    // },
+    // {
+    //   recipeID: 1,
+    //   stepNumber: 2,
+    //   stepType: 4,
+    //   note: "wow",
+    //   time: 150,
+    //   amount: 0
+    // },
+    // {
+    //   recipeID: 1,
+    //   stepNumber: 3,
+    //   stepType: 6,
+    //   note: "wow",
+    //   time: 50,
+    //   amount: 80
+    // }
   ],
   // method
   methodID: 0,
@@ -119,12 +118,29 @@ const initialState = {
 
   // data method
   methods: [
-    { id: 1, name: "French Press", icon: method1 },
-    { id: 2, name: "Siphon", icon: method2 },
-    { id: 3, name: "Chemex", icon: method3 },
-    { id: 4, name: "Aero Press", icon: method4 },
-    { id: 5, name: "V60", icon: method5 },
-    { id: 6, name: "Moka Pot", icon: method6 }
+    {
+      id: 1,
+      name: "French Press",
+      icon: require("../assets/images/methodAeroPress.png")
+    },
+
+    {
+      id: 2,
+      name: "Siphon",
+      icon: require("../assets/images/methodChemex.png")
+    },
+    {
+      id: 3,
+      name: "Chemex",
+      icon: require("../assets/images/methodFrenchPress.png")
+    },
+    {
+      id: 4,
+      name: "Aero Press",
+      icon: require("../assets/images/methodMokaPot.png")
+    },
+    { id: 5, name: "V60", icon: require("../assets/images/methodSiphon.png") },
+    { id: 6, name: "Moka Pot", icon: require("../assets/images/methodV60.png") }
   ],
 
   // step Types
@@ -175,75 +191,4 @@ const initialState = {
 
 const store = createStore(initialState);
 
-const actionsRecipes = store => ({
-  // setter data
-  setListCategory(state, value) {
-    return { listCategory: value };
-  },
-
-  setBeanRatio(state, value) {
-    return { beanRatio: value };
-  },
-
-  setWater(state, value) {
-    return { water: value };
-  },
-  async getRecipe(state, id) {
-    console.log("test");
-    await axios(`${store.getState().baseURL}recipes/${id}`).then(response => {
-      console.log(response);
-      store
-        .setState({ recipe: response.data })
-        .catch(error => console.log("Error getRecipeById", error));
-    });
-  },
-  setStepTypeNumberSelected: (state, value) => {
-    return { stepTypeNumberSelected: value };
-  },
-  async postRecipe(state, data) {
-    console.log("test");
-    let config = {
-      method: "post",
-      url: store.getState().baseURL + "/recipes",
-      data: data,
-      headers: {
-        Authorization: "Bearer " + sessionStorage.getItem("token")
-      }
-    };
-    await axios(config)
-      .then(response => {
-        console.log(response);
-        store.setState({ recipe: response.data });
-      })
-      .catch(error => console.log("Error getRecipeById", error));
-  }
-});
-
-const actionsTimer = store => ({
-  // setter data
-  setTimer(state, value) {
-    if (value === 0) {
-      console.log("nambah");
-      return { stepIndex: store.getState().stepIndex + 1 };
-    }
-    return { timerNow: value };
-  },
-  setStepIndex(state, value) {
-    console.log("sett");
-    return { stepIndex: value };
-  },
-  setWaterNow(state, value) {
-    return { waterNow: value };
-  },
-  setStepWater(state, value) {
-    return { stepWater: value };
-  },
-  setStepTime(state, value) {
-    return { stepTime: value };
-  },
-  setWaterLimit(state, value) {
-    return { waterLimit: value };
-  }
-});
-
-export { store, actionsRecipes, actionsTimer };
+export default store;

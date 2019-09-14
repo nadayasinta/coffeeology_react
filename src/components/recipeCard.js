@@ -5,7 +5,7 @@ function recipeCard(props) {
     <div className="container-fluid recipeCard border mt-3">
       <div className="row h-100 pt-2">
         <div className="col-3 text-center">
-          <img src={props.data.icon} className="w-100" alt="alt tag" />
+          <img src={props.methodIcon} className="w-100" alt="alt tag" />
         </div>
         <div className="col-9">
           <div className="row">
@@ -18,7 +18,7 @@ function recipeCard(props) {
           </div>
           <div className="row">
             <div className="col-2 text-right align-self-center px-0">
-              {props.data.time}
+              {props.time0}
             </div>
             <div className="col-2 text-left pr-0 pl-1">
               <img

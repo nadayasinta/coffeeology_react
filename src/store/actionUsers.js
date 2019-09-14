@@ -1,6 +1,5 @@
-import { store } from "./store";
+import store from "./store";
 import axios from "axios";
-import { makeStyles } from "@material-ui/core/styles";
 import Swal from "sweetalert2";
 
 const Toast = Swal.mixin({
@@ -24,6 +23,7 @@ const actionsUsers = store => ({
         sessionStorage.setItem("token", response.data.token);
       })
       .catch(error => {
+        console.log(error.response);
         Toast.fire({
           type: "error",
           title: error.response.data.message
