@@ -25,6 +25,7 @@ const Register = props => {
   };
   const validateEmail = email => {
     var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    console.log(re.test(String(email).toLowerCase()));
     return re.test(String(email).toLowerCase());
   };
   const handleOnSubmit = event => {

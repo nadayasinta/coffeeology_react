@@ -1,8 +1,11 @@
 import React from "react";
+
+// import store
 import { connect } from "unistore/react";
+
+// import components
 import Navbar from "../components/navbar";
 import Radar from "../components/radar";
-import { actionsCreateRecipe } from "../store/store";
 
 class CreateRecipe extends React.Component {
   constructor(props) {

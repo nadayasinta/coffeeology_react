@@ -1,11 +1,13 @@
 import React from "react";
-import { connect } from "unistore/react";
-import { actionsRecipes } from "../store/store";
-import Header from "../components/header";
-import Plus from "../assets/images/plus.png";
 import { Link } from "react-router-dom";
+
+// import store
+import { connect } from "unistore/react";
+import actionsRecipes from "../store/actionsRecipes";
+
+// import img
+import Plus from "../assets/images/plus.png";
 import timer from "../assets/images/RecipeIcon/timer.png";
-import { async } from "q";
 
 class AddStep extends React.Component {
   constructor(props) {
@@ -71,14 +73,15 @@ class AddStep extends React.Component {
       recipeDetails: recipeDetails,
       steps: steps
     };
+    console.log(data);
     // testing
     sessionStorage.setItem("data", JSON.stringify(data));
 
-    // this.props.postRecipe(data)
+    this.props.postRecipe(data);
     // sessionStorage.removeItem("Recipe")
     // sessionStorage.removeItem("RecipeDetail")
     // sessionStorage.removeItem("stepTemporary")
-    this.props.history.push("/activity");
+    // this.props.history.push("/activity");
   };
 
   render() {

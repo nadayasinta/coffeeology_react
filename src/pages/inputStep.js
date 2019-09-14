@@ -1,7 +1,8 @@
 import React from "react";
+
+// import store
 import { connect } from "unistore/react";
-import { actionsRecipes } from "../store/store";
-import { async } from "q";
+import actionsRecipes from "../store/actionsRecipes";
 
 class InputStep extends React.Component {
   constructor(props) {
@@ -18,16 +19,13 @@ class InputStep extends React.Component {
 
   componentDidMount = async () => {
     if (sessionStorage.getItem("stepTemporary") === null) {
-      sessionStorage.setItem(
-        "stepTemporary",
-        JSON.stringify([])
-      );
+      sessionStorage.setItem("stepTemporary", JSON.stringify([]));
     } else {
       this.setState({
         stepTemporary: JSON.parse(sessionStorage.getItem("stepTemporary"))
       });
     }
-  }
+  };
 
   // to handle change in "pilih tahapan"
   handleChange = event => {
@@ -55,13 +53,10 @@ class InputStep extends React.Component {
       amount: this.state.waterAmount
     };
 
-    let temp = this.state.stepTemporary.concat([data])
-    await sessionStorage.setItem(
-      "stepTemporary",
-      JSON.stringify(temp)
-    );
+    let temp = this.state.stepTemporary.concat([data]);
+    await sessionStorage.setItem("stepTemporary", JSON.stringify(temp));
 
-    this.props.history.push("/addstep")
+    this.props.history.push("/addstep");
   };
 
   render() {
@@ -81,15 +76,13 @@ class InputStep extends React.Component {
                   onChange={this.handleChange}
                   value={this.props.stepTypeNumberSelected}
                 >
-                  {this.props.stepTypeNumber.map(
-                    (stepTypeNumber, index) => {
-                      return (
-                        <option value={stepTypeNumber}>
-                          {this.props.stepTypes[stepTypeNumber].name}
-                        </option>
-                      );
-                    }
-                  )}
+                  {this.props.stepTypeNumber.map((stepTypeNumber, index) => {
+                    return (
+                      <option value={stepTypeNumber}>
+                        {this.props.stepTypes[stepTypeNumber].name}
+                      </option>
+                    );
+                  })}
                 </select>
               </div>
             </div>
@@ -97,8 +90,7 @@ class InputStep extends React.Component {
             <div className="col-6">
               <img
                 src={
-                  this.props.stepTypes[this.props.stepTypeNumberSelected]
-                    .icon
+                  this.props.stepTypes[this.props.stepTypeNumberSelected].icon
                 }
                 width="80%"
                 alt="alt tag"
@@ -107,7 +99,9 @@ class InputStep extends React.Component {
           </div>
           <form onSubmit={this.handleSubmit}>
             {/* form jumlah air */}
-            {this.props.setStepTypeNumberSelected !== 1 || this.props.setStepTypeNumberSelected !== 2 || this.props.setStepTypeNumberSelected !== 12 ?
+            {this.props.setStepTypeNumberSelected !== 1 ||
+            this.props.setStepTypeNumberSelected !== 2 ||
+            this.props.setStepTypeNumberSelected !== 12 ? (
               <div className="form-group mt-3" style={{ textAlign: "left" }}>
                 <label for="Jumlah Air">Jumlah Air </label>
                 <input
@@ -119,8 +113,10 @@ class InputStep extends React.Component {
                   min="0"
                   required
                 />
-              </div> :
-              <div></div>}
+              </div>
+            ) : (
+              <div></div>
+            )}
 
             {/* form catatan */}
             <div className="form-group mb-4" style={{ textAlign: "left" }}>

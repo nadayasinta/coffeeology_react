@@ -1,6 +1,18 @@
 import React from "react";
 import { connect } from "unistore/react";
 
+const convertSeconds = secondsInput => {
+  let minutes = Math.floor(parseInt(secondsInput) / 60);
+  let seconds = parseInt(secondsInput) - minutes * 60;
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+  if (seconds < 10) {
+    seconds = `0${seconds}`;
+  }
+  return `${minutes}:${seconds}`;
+};
+
 function stepCard(props) {
   return (
     <div className="container-fluid stepCard border">
@@ -34,7 +46,7 @@ function stepCard(props) {
                   />
                 </div>
                 <div className="col-10 px-0 text-left align-self-center">
-                  {props.data.time}
+                  {convertSeconds(props.data.time)}
                 </div>
               </div>
             </div>

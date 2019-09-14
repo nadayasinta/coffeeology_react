@@ -1,4 +1,7 @@
 import React from "react";
+import { Link, Redirect } from "react-router-dom";
+
+// import material-ui
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -8,14 +11,12 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 
-import { Link, Redirect } from "react-router-dom";
-
 // import store
 import { connect } from "unistore/react";
 import actionsUsers from "../store/actionUsers";
-import useStyles from "../store/style";
 
 // import alert
+import useStyles from "../store/style";
 import Swal from "sweetalert2";
 
 const SignIn = props => {
