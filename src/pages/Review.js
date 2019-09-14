@@ -1,6 +1,6 @@
 import React from 'react';
-import Swal from 'sweetalert2';
-import RatingStar from '../components/ratingStar';
+import Rating from '@material-ui/lab/Rating';
+import Typography from '@material-ui/core/Typography';
 
 class Review extends React.Component {
   constructor(props) {
@@ -9,6 +9,15 @@ class Review extends React.Component {
       content: '',
       rating: '',
       photo: '',
+      ratingLabels: {
+        1: 'Useless',
+        2: 'Poor',
+        3: 'Ok',
+        4: 'Good',
+        5: 'Excellent',
+      },
+      rating: 3,
+      review: {},
     };
   }
 
@@ -16,38 +25,64 @@ class Review extends React.Component {
     this.setState({ [event.target.name]: event.target.value }, console.log(event.target.name, event.target.value));
   }
 
-  submitRecipe = async (event) => {
-    await sessionStorage.setItem("Recipe", JSON.stringify(
+  submitReview = async (event) => {
+    await sessionStorage.setItem("Review", JSON.stringify(
       {
-        name: this.state.recipeName,
-        methodID: this.state.brewMethod,
-        originID: this.state.origin,
-        beanName: this.state.beans,
-        beanProcess: this.state.process,
-        beanRoasting: this.state.roasting,
-        difficulty: this.state.difficulty,
-        coffeeWeight: this.state.beanNumber,
-        water: this.state.waterNumber
+        content: this.state.content,
+        rating: this.state.rating,
+        photo: this.state.photo,
       })
     )
-    // this.props.history.push("/");
+    // this.setState({
+    //   review: {
+    //     content: this.state.content,
+    //     rating: this.state.rating,
+    //     photo: this.state.photo,
+    //   }
+    // })
+    this.props.history.push("/");
   }
 
   render() {
     return (
       <div>
-        <RatingStar />
-        <form onSubmit={this.submitRecipe}>
-          <div className="form-group">
-            <label htmlFor="content">Review</label>
-            <textarea className="form-control" id="content" rows="3" onChange={this.handleChange} />
+        <div className='container'>
+          <div className="row justify-content-center">
+            <Typography component="legend">Rating</Typography>
           </div>
-          <input
-            className=" btn btn-dark btn-block my-3"
-            type="submit"
-            value="Sumbit"
-          />
-        </form>
+
+          <div className="row justify-content-center">
+            <Rating
+              name="rating"
+              value={this.state.rating}
+              size="large"
+              onChange={this.handleChange}
+            />
+          </div>
+
+          <div className="row justify-content-center">
+            <h3>{this.state.ratingLabels[this.state.rating]}</h3>
+          </div>
+          <div className="row justify-content-center">
+
+            <form onSubmit={this.submitReview} className="row">
+              <label htmlFor="content">Review</label>
+              <textarea className="form-control" id="content" rows="3" name="content" onChange={this.handleChange} />
+              <input
+                className=" btn btn-dark btn-block my-3"
+                type="submit"
+                value="Sumbit"
+              />
+              {/* <div class="form-group">
+            <label for="exampleInputFile">File input</label>
+            <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" />
+            <small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
+          </div> */}
+            </form>
+          </div>
+
+        </div>
+
       </div>
     );
   }

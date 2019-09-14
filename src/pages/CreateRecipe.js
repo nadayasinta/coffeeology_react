@@ -72,7 +72,7 @@ class CreateRecipe extends React.Component {
         globalTaste: this.state.global,
         body: this.state.body,
         grindSize: this.state.grind,
-        water: this.state.temperature
+        waterTemp: this.state.temperature
       })
     );
     this.props.history.push("/addstep");

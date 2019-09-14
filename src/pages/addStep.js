@@ -62,14 +62,19 @@ class AddStep extends React.Component {
     let recipes = JSON.parse(sessionStorage.getItem("Recipe"));
     let recipeDetails = JSON.parse(sessionStorage.getItem("RecipeDetail"));
     let steps = JSON.parse(sessionStorage.getItem("stepTemporary"));
-    recipes["note"] = this.note.current.value;
+    let time = 0;
+    steps.map((step, index) => (time = time + step.time));
+    recipes["time"] = time;
+    recipeDetails["note"] = this.note.current.value;
     let data = {
       recipes: recipes,
       recipeDetails: recipeDetails,
       steps: steps
     };
-    console.log(this.props);
-    this.props.postRecipe(data);
+    // testing
+    sessionStorage.setItem("data", JSON.stringify(data));
+
+    // this.props.postRecipe(data)
     // sessionStorage.removeItem("Recipe")
     // sessionStorage.removeItem("RecipeDetail")
     // sessionStorage.removeItem("stepTemporary")
@@ -79,11 +84,9 @@ class AddStep extends React.Component {
   render() {
     return (
       <div>
-        <Header />
-
         <div className="container">
           <div className="row justify-content-center">
-            <div className="col-lg-6 col-sm-12 col-md-12 col-xs-12">
+            <div className="col-12">
               <form>
                 <div className="form-group">
                   <div className="row justify-content-center bg-success mb-2">
