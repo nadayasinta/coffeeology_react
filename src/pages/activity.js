@@ -7,6 +7,8 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import { connect } from "unistore/react";
+import actionsActivity from "../store/actionsActivity";
 
 // import component
 import History from '../components/history';
@@ -50,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
   },
 }));
+
 
 export default function FullWidthTabs() {
   const classes = useStyles();

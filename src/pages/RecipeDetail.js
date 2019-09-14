@@ -17,7 +17,7 @@ class RecipeSelection extends React.Component {
   componentDidMount() {
     console.log(this.props);
     this.props.getRecipeByID(this.props.match.params.recipeID);
-    console.log(this.props.recipe);
+    console.log('aaaaaaaaaaaa', this.props.recipe);
   }
   convertSeconds(secondsInput) {
     let minutes = Math.floor(parseInt(secondsInput) / 60);
@@ -36,7 +36,7 @@ class RecipeSelection extends React.Component {
   }
 
   render() {
-    console.log(this.props.recipeDetails);
+    console.log(this.props.recipe);
     if (this.props.recipe === null) {
       return <img src={loading} alt="loading..." />;
     } else {
@@ -176,7 +176,7 @@ class RecipeSelection extends React.Component {
                   type="button"
                   className="btn btn-danger btn-block"
                   onClick={e => {
-                    this.props.history.push("/recipedemo");
+                    this.props.history.push("/recipe/demo/" + this.props.match.params.recipeID);
                   }}
                 >
                   Mulai
@@ -192,6 +192,6 @@ class RecipeSelection extends React.Component {
 }
 
 export default connect(
-  "recipe,stepTypes,recipeDetails, recipeSteps, waterLimit",
+  "recipe, stepTypes, recipeDetails, recipeSteps, waterLimit",
   actionsRecipes
 )(RecipeSelection);

@@ -61,6 +61,7 @@ const actionsRecipes = store => ({
 
     await axios(config)
       .then(response => {
+        console.log('response.data.data', response.data.data)
         store.setState({ recipeDetails: response.data.data.recipeDetails });
 
         store.setState({ recipeSteps: response.data.data.recipeSteps });
