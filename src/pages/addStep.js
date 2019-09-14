@@ -1,11 +1,13 @@
 import React from "react";
-import { connect } from "unistore/react";
-import { actionsRecipes } from "../store/store";
-import Header from "../components/header";
-import Plus from "../assets/images/plus.png";
 import { Link } from "react-router-dom";
+
+// import store
+import { connect } from "unistore/react";
+import actionsRecipes from "../store/actionsRecipes";
+
+// import img
+import Plus from "../assets/images/plus.png";
 import timer from "../assets/images/RecipeIcon/timer.png";
-import { async } from "q";
 
 class AddStep extends React.Component {
   constructor(props) {
@@ -62,28 +64,32 @@ class AddStep extends React.Component {
     let recipes = JSON.parse(sessionStorage.getItem("Recipe"));
     let recipeDetails = JSON.parse(sessionStorage.getItem("RecipeDetail"));
     let steps = JSON.parse(sessionStorage.getItem("stepTemporary"));
-    recipes["note"] = this.note.current.value;
+    let time = 0;
+    steps.map((step, index) => (time = time + step.time));
+    recipes["time"] = time;
+    recipeDetails["note"] = this.note.current.value;
     let data = {
       recipes: recipes,
       recipeDetails: recipeDetails,
       steps: steps
     };
-    console.log(this.props);
+    console.log(data);
+    // testing
+    sessionStorage.setItem("data", JSON.stringify(data));
+
     this.props.postRecipe(data);
-    // sessionStorage.removeItem("Recipe")
-    // sessionStorage.removeItem("RecipeDetail")
-    // sessionStorage.removeItem("stepTemporary")
+    sessionStorage.removeItem("Recipe")
+    sessionStorage.removeItem("RecipeDetail")
+    sessionStorage.removeItem("stepTemporary")
     this.props.history.push("/activity");
   };
 
   render() {
     return (
       <div>
-        <Header />
-
         <div className="container">
           <div className="row justify-content-center">
-            <div className="col-lg-6 col-sm-12 col-md-12 col-xs-12">
+            <div className="col-12">
               <form>
                 <div className="form-group">
                   <div className="row justify-content-center bg-success mb-2">
@@ -136,7 +142,7 @@ class AddStep extends React.Component {
                 })}
                 <hr />
                 <div className="card-body">
-                  <Link to="/inputstep">
+                  <Link to="/recipes/create/inputstep">
                     <img className="mr-2" src={Plus} alt="alt tag" width="6%" />
                     Add Steps
                   </Link>

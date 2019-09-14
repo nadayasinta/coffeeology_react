@@ -1,11 +1,12 @@
 import React from "react";
 
-function recipeCard(props) {
+function myBrewCard(props) {
+
   return (
     <div className="container-fluid recipeCard border mt-3">
       <div className="row h-100 pt-2">
         <div className="col-3 text-center">
-          <img src={props.methodIcon} className="w-100" alt="alt tag" />
+          <img src={props.icon} className="w-100" alt="alt tag" />
         </div>
         <div className="col-9">
           <div className="row">
@@ -109,4 +110,4 @@ function recipeCard(props) {
   );
 }
 
-export default recipeCard;
+export default myBrewCard;
