@@ -78,10 +78,10 @@ class AddStep extends React.Component {
     sessionStorage.setItem("data", JSON.stringify(data));
 
     this.props.postRecipe(data);
-    // sessionStorage.removeItem("Recipe")
-    // sessionStorage.removeItem("RecipeDetail")
-    // sessionStorage.removeItem("stepTemporary")
-    // this.props.history.push("/activity");
+    sessionStorage.removeItem("Recipe")
+    sessionStorage.removeItem("RecipeDetail")
+    sessionStorage.removeItem("stepTemporary")
+    this.props.history.push("/activity");
   };
 
   render() {
@@ -142,7 +142,7 @@ class AddStep extends React.Component {
                 })}
                 <hr />
                 <div className="card-body">
-                  <Link to="/inputstep">
+                  <Link to="/recipes/create/inputstep">
                     <img className="mr-2" src={Plus} alt="alt tag" width="6%" />
                     Add Steps
                   </Link>

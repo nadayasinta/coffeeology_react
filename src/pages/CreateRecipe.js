@@ -78,7 +78,7 @@ class CreateRecipe extends React.Component {
         waterTemp: this.state.temperature
       })
     );
-    this.props.history.push("/addstep");
+    this.props.history.push("/recipes/create/addstep");
   };
 
   render() {

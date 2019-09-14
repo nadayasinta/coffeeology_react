@@ -1,6 +1,8 @@
 import React from 'react';
 import Rating from '@material-ui/lab/Rating';
 import Typography from '@material-ui/core/Typography';
+import { connect } from "unistore/react";
+import actionsDemo from "../store/actionsDemo";
 
 class Review extends React.Component {
   constructor(props) {
@@ -26,21 +28,16 @@ class Review extends React.Component {
   }
 
   submitReview = async (event) => {
-    await sessionStorage.setItem("Review", JSON.stringify(
-      {
+    event.preventDefault()
+    this.setState({
+      review: {
+        recipeID: this.props.match.params.recipeID,
+        historyID: this.props.historyID,
         content: this.state.content,
         rating: this.state.rating,
         photo: this.state.photo,
-      })
-    )
-    // this.setState({
-    //   review: {
-    //     content: this.state.content,
-    //     rating: this.state.rating,
-    //     photo: this.state.photo,
-    //   }
-    // })
-    this.props.history.push("/");
+      }
+    }, () => { this.props.postReview(this.state.review); this.props.history.push("/activity") })
   }
 
   render() {
@@ -88,4 +85,6 @@ class Review extends React.Component {
   }
 }
 
-export default Review;
+export default connect("historyID",
+  actionsDemo
+)(Review);

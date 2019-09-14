@@ -2,7 +2,7 @@ import React from "react";
 
 // import store
 import { connect } from "unistore/react";
-import actionsTimer from "../store/actionsTimer";
+import actionsDemo from "../store/actionsDemo";
 
 class Timer extends React.Component {
   constructor(props) {
@@ -78,14 +78,14 @@ class Timer extends React.Component {
             {this.state.status}
           </button>
         ) : (
-          <button
-            type="button"
-            class="btn btn-danger"
-            onClick={this.pauseTimer}
-          >
-            {this.state.status}
-          </button>
-        )}
+            <button
+              type="button"
+              class="btn btn-danger"
+              onClick={this.pauseTimer}
+            >
+              {this.state.status}
+            </button>
+          )}
         <button
           type="button"
           class="btn btn-warning"
@@ -104,5 +104,5 @@ class Timer extends React.Component {
 
 export default connect(
   "timerNow, waterNow,waterLimit,stepWater,stepTime",
-  actionsTimer
+  actionsDemo
 )(Timer);

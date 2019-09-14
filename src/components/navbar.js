@@ -31,7 +31,7 @@ function navbar(props) {
           </Link>
         </div>
         <div className="col-2 text-center px-0">
-          <Link to="/recipedemo">
+          <Link to="/">
             <img
               src={navbarSearch}
               className="navbarIcon w-50 py-1"

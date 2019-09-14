@@ -16,7 +16,7 @@ class MyBrew extends React.Component {
   render() {
     return (
       <div>
-        <Link to="/recipecreate">
+        <Link to="/recipes/create">
           <button className="btn btn-primary">Tambah Guide</button>
         </Link>
         {this.props.myBrew.map((value, key) => (

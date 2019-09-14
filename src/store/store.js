@@ -188,6 +188,8 @@ const initialState = {
     { id: 4, name: "toraja" }
   ],
 
+  //history data
+  historyID: '',
   // recipe in page activity
   history: [],
 
