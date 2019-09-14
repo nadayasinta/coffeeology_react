@@ -37,7 +37,7 @@ class Steps extends React.Component {
         }
       }
       if (this.state.steps[0] !== undefined) {
-        this.props.setTimer(this.state.steps[0].time * 10);
+        this.props.setTimer(this.state.steps[0].time);
         this.props.setStepTime(this.state.steps[0].time);
         this.props.setStepWater(this.state.steps[0].amount);
         this.props.setWaterLimit(

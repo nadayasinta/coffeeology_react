@@ -9,6 +9,13 @@ const Toast = Swal.mixin({
   timer: 2000
 });
 
+const ToastTop = Swal.mixin({
+  toast: true,
+  position: "top",
+  showConfirmButton: false,
+  timer: 2000
+});
+
 const actionsUsers = store => ({
   // user login
   login(state, data) {
@@ -47,7 +54,10 @@ const actionsUsers = store => ({
         sessionStorage.setItem("token", response.data.token);
       })
       .catch(error => {
-        console.log(error);
+        ToastTop.fire({
+          type: "error",
+          title: error.response.data.message
+        });
       });
   },
   logout(state) {

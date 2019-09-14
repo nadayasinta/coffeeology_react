@@ -31,6 +31,10 @@ class RecipeSelection extends React.Component {
     return `${minutes}:${seconds}`;
   }
 
+  handleOnClickButton(event) {
+    event.preventDefault();
+  }
+
   render() {
     console.log(this.props.recipeDetails);
     if (this.props.recipe === null) {
