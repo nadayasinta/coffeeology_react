@@ -186,7 +186,12 @@ const initialState = {
     { id: 2, name: "sumatera" },
     { id: 3, name: "flores" },
     { id: 4, name: "toraja" }
-  ]
+  ],
+
+  // recipe in page activity
+  history: [],
+
+  myBrew: []
 };
 
 const store = createStore(initialState);
