@@ -21,32 +21,32 @@ const Toast = Swal.mixin({
 const initialState = {
   // data recipe
   recipes: [
-    // {
-    //   name: "Ultimate v60",
-    //   methodID: 1,
-    //   beanName: "Beans Gayoo Bourbon",
-    //   beanProcess: "Full Wash",
-    //   beanRoasting: "Medium",
-    //   rating: 45,
-    //   favoriteCount: 20,
-    //   time: 100,
-    //   coffeeWeight: 17,
-    //   water: 200,
-    //   icon: require("../assets/images/StepIcon/stir.png")
-    // },
-    // {
-    //   name: "Ultimate v60 2",
-    //   methodID: 1,
-    //   beanName: "Beans Gayoo Bourbon",
-    //   beanProcess: "Full Wash",
-    //   beanRoasting: "Medium",
-    //   rating: 4.5,
-    //   favoriteCount: 20,
-    //   time: 100,
-    //   coffeeWeight: 17,
-    //   water: 200,
-    //   icon: require("../assets/images/StepIcon/stir.png")
-    // }
+    {
+      name: "Ultimate v60",
+      methodID: 1,
+      beanName: "Beans Gayoo Bourbon",
+      beanProcess: "Full Wash",
+      beanRoasting: "Medium",
+      rating: 45,
+      favoriteCount: 20,
+      time: 100,
+      coffeeWeight: 17,
+      water: 200,
+      icon: require("../assets/images/StepIcon/stir.png")
+    },
+    {
+      name: "Ultimate v60 2",
+      methodID: 1,
+      beanName: "Beans Gayoo Bourbon",
+      beanProcess: "Full Wash",
+      beanRoasting: "Medium",
+      rating: 4.5,
+      favoriteCount: 20,
+      time: 100,
+      coffeeWeight: 17,
+      water: 200,
+      icon: require("../assets/images/StepIcon/stir.png")
+    }
   ],
   recipe: null,
   // name: "Ultimate v60",
