@@ -103,11 +103,6 @@ const initialState = {
   ],
   // method
   methodID: 0,
-  method: {
-    id: 1,
-    name: "v60",
-    icon: require("../assets/images/methodV60.png")
-  },
 
   // data user
   name: "",
