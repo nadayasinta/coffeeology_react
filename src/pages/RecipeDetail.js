@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Modal, ButtonToolbar, Button } from "react-bootstrap";
 // import store
 import { connect } from "unistore/react";
 import actionsRecipes from "../store/actionsRecipes";
@@ -10,15 +10,36 @@ import Navbar from "../components/navbar";
 
 // import components
 import Radar from "../components/radar";
+import Disqus from "disqus-react";
 
 import loading from "../assets/images/loading.gif";
 
 class RecipeSelection extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.handleShow = this.handleShow.bind(this);
+    this.handleHide = this.handleHide.bind(this);
+
+    this.state = {
+      show: false
+    };
+  }
+
+  handleShow() {
+    this.setState({ show: true });
+  }
+
+  handleHide() {
+    this.setState({ show: false });
+  }
+
   componentDidMount() {
     console.log(this.props);
     this.props.getRecipeByID(this.props.match.params.recipeID);
-    console.log('aaaaaaaaaaaa', this.props.recipe);
+    console.log("aaaaaaaaaaaa", this.props.recipe);
   }
+
   convertSeconds(secondsInput) {
     let minutes = Math.floor(parseInt(secondsInput) / 60);
     let seconds = parseInt(secondsInput) - minutes * 60;
@@ -40,6 +61,12 @@ class RecipeSelection extends React.Component {
     if (this.props.recipe === null) {
       return <img src={loading} alt="loading..." />;
     } else {
+      const disqusShortname = "coffeology"; //found in your Disqus.com dashboard
+      const disqusConfig = {
+        url: "http://localhost:3000/recipe/" + this.props.match.params.recipeID, //this.props.pageUrl
+        identifier: this.props.match.params.recipeID, //this.props.uniqueId
+        title: "Title of Your Article" + this.props.match.params.recipeID //this.props.title
+      };
       return (
         <div>
           <div className="container">
@@ -158,6 +185,38 @@ class RecipeSelection extends React.Component {
             </div>
 
             <Radar data={this.props.recipeDetails} />
+            <ButtonToolbar>
+              <Button bsStyle="primary" onClick={this.handleShow}>
+                <Disqus.CommentCount
+                  shortname={disqusShortname}
+                  config={disqusConfig}
+                >
+                  Comments
+                </Disqus.CommentCount>
+              </Button>
+
+              <Modal
+                {...this.props}
+                show={this.state.show}
+                onHide={this.handleHide}
+                dialogClassName="custom-modal"
+              >
+                <Modal.Header closeButton>
+                  <Modal.Title id="contained-modal-title-lg">
+                    Comment
+                  </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <Disqus.DiscussionEmbed
+                    shortname={disqusShortname}
+                    config={disqusConfig}
+                  />
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button onClick={this.handleHide}>Close</Button>
+                </Modal.Footer>
+              </Modal>
+            </ButtonToolbar>
             <div className="row mt-3">
               <div className="col-12 text-left">Catatan</div>
               <div className="col-12 text-left">
@@ -176,7 +235,9 @@ class RecipeSelection extends React.Component {
                   type="button"
                   className="btn btn-danger btn-block"
                   onClick={e => {
-                    this.props.history.push("/recipe/demo/" + this.props.match.params.recipeID);
+                    this.props.history.push(
+                      "/recipe/demo/" + this.props.match.params.recipeID
+                    );
                   }}
                 >
                   Mulai
