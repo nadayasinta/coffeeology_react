@@ -1,4 +1,7 @@
 import React from "react";
+import { Link, Redirect } from "react-router-dom";
+
+// import material-ui
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -7,8 +10,6 @@ import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-
-import { Link, Redirect } from "react-router-dom";
 
 // import store
 import { connect } from "unistore/react";
@@ -21,22 +22,29 @@ import Swal from "sweetalert2";
 const SignIn = props => {
   const classes = useStyles();
 
+  // store data from email and password
   const data = {
     email: "",
     password: ""
   };
+
+  // create alert
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "center",
+    showConfirmButton: false,
+    timer: 2000
+  });
+
+  // validate email from form
   const validateEmail = email => {
     var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     return re.test(String(email).toLowerCase());
   };
-  const handleOnSubmit = event => {
+
+  // handle submit form, if data is valid, post to get token
+  const handleOnSubmit = async event => {
     event.preventDefault();
-    const Toast = Swal.mixin({
-      toast: true,
-      position: "center",
-      showConfirmButton: false,
-      timer: 2000
-    });
 
     if (!validateEmail(data.email)) {
       Toast.fire({
@@ -47,21 +55,27 @@ const SignIn = props => {
       console.log(sessionStorage.getItem("token"));
       props.login(data);
 
-      if (sessionStorage.getItem("token")) {
-        Toast.fire({
-          type: "success",
-          title: "You have been signed in!"
-        });
-        setTimeout(() => {
-          props.history.replace("/");
-        }, 1000);
-      }
+      // check login success, if true redirect to home
+      setTimeout(() => {
+        if (sessionStorage.getItem("token")) {
+          Toast.fire({
+            type: "success",
+            title: "Sukses Login!"
+          });
+          setTimeout(() => {
+            props.history.replace("/");
+          }, 1000);
+        }
+      }, 500);
     }
   };
 
+  // handle on change email form
   const onChangeEmail = event => {
     data.email = event.target.value;
   };
+
+  // handle on change password form
   const onChangePassword = event => {
     data.password = event.target.value;
   };

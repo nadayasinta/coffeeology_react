@@ -12,45 +12,89 @@ import actionsUsers from "../store/actionUsers";
 import { connect } from "unistore/react";
 import useStyles from "../store/style";
 
-// import component
+// import alert
+import Swal from "sweetalert2";
 
 const Register = props => {
   const classes = useStyles();
 
+  // store data from email and password
   const data = {
     email: "",
     password: "",
     passwordRepeat: "",
     name: ""
   };
+
+  // create alert
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top",
+    showConfirmButton: false,
+    timer: 2000
+  });
+
+  // validate email from form
   const validateEmail = email => {
     var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    console.log(re.test(String(email).toLowerCase()));
     return re.test(String(email).toLowerCase());
   };
+
+  // handle submit form, if data is valid, post to create new user
   const handleOnSubmit = event => {
     event.preventDefault();
 
     if (data.email === "") {
-      return alert("email tidak boleh kosong");
+      return Toast.fire({
+        type: "error",
+        title: "Email tidak boleh kosong!"
+      });
     }
     if (!validateEmail(data.email)) {
-      return alert("email tidak valid");
+      return Toast.fire({
+        type: "error",
+        title: "Email tidak valid!"
+      });
     }
     if (data.password === "") {
-      return alert("password tidak boleh kosong");
+      return Toast.fire({
+        type: "error",
+        title: "Password tidak boleh kosong!"
+      });
     }
     if (data.passwordRepeat === "") {
-      return alert("ulangi password anda");
+      return Toast.fire({
+        type: "error",
+        title: "Ulangi password anda!"
+      });
     }
     if (!validatePasswordRepeat(data.password, data.passwordRepeat)) {
-      return alert("password tidak sama");
+      return Toast.fire({
+        type: "error",
+        title: "Password tidak sama!"
+      });
     }
     if (data.name === "") {
-      return alert("nama tidak boleh kosong");
+      return Toast.fire({
+        type: "error",
+        title: "Nama Harus Diisi!"
+      });
     }
 
     // POST data to register endpoint
     props.registerUser(data);
+    setTimeout(() => {
+      props.login(data);
+
+      Toast.fire({
+        type: "success",
+        title: "Registrasi berhasil!"
+      });
+      setTimeout(() => {
+        props.history.replace("/");
+      }, 1000);
+    }, 500);
   };
 
   const validatePasswordRepeat = () => {

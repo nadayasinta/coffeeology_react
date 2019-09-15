@@ -1,8 +1,11 @@
 import React from "react";
+
+// import store
 import { connect } from "unistore/react";
+
+// import components
 import Navbar from "../components/navbar";
 import Radar from "../components/radar";
-import { actionsCreateRecipe } from "../store/store";
 
 class CreateRecipe extends React.Component {
   constructor(props) {
@@ -72,10 +75,10 @@ class CreateRecipe extends React.Component {
         globalTaste: this.state.global,
         body: this.state.body,
         grindSize: this.state.grind,
-        water: this.state.temperature
+        waterTemp: this.state.temperature
       })
     );
-    this.props.history.push("/addstep");
+    this.props.history.push("/recipes/create/addstep");
   };
 
   render() {
