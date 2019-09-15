@@ -2,6 +2,13 @@
 .allpage {
   font-family: "Nunito", sans-serif !important;
 }
+.allpage a {
+  text-decoration: none !important;
+  color: black;
+}
+.allpage a:hover {
+  color: black ;
+}
 .header {
   height: 100px;
   background-color: #53686b;

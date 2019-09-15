@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 // import store
 import { connect } from "unistore/react";
@@ -15,7 +16,10 @@ class Brewing extends React.Component {
           <div className="row">
             {this.props.methods.map((method, index) => (
               <div className="col-4 p-1">
+                <Link to={"/recipes/" + method.id}>
                 <MethodCard name={method.name} icon={method.icon} />
+                </Link>
+
               </div>
             ))}
           </div>
