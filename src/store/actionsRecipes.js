@@ -42,28 +42,27 @@ const actionsRecipes = store => ({
     };
     await axios(config)
       .then(response => {
-          store.setState({ recipe: response.data });
-          sessionStorage.removeItem("Recipe");
-          sessionStorage.removeItem("RecipeDetail");
-          sessionStorage.removeItem("note");
-          sessionStorage.removeItem("stepTemporary");
+        store.setState({ recipe: response.data });
+        sessionStorage.removeItem("Recipe");
+        sessionStorage.removeItem("RecipeDetail");
+        sessionStorage.removeItem("note");
+        sessionStorage.removeItem("stepTemporary");
       })
       .catch(error => {
         console.log(error.response);
         Toast.fire({
           type: "error",
-          title: error.response.data.message
+          title: `${error.response.data.message}. Data Tidak Tersave`
         });
       });
   },
   async getRecipes(state, paramsInput) {
-    console.log(paramsInput)
+    console.log(paramsInput);
     let config = {
       method: "get",
       url: store.getState().baseURL + "/recipes",
       params: paramsInput
     };
-
 
     await axios(config).then(response => {
       console.log(response);
@@ -99,9 +98,9 @@ const actionsRecipes = store => ({
 
     await axios(config)
       .then(response => {
-        console.log('response.data.data', response.data.data)
+        console.log("response.data.data", response.data.data);
         store.setState({ recipeDetails: response.data.data.recipeDetails });
-        console.log(response.data.data.recipeDetails)
+        console.log(response.data.data.recipeDetails);
         store.setState({ recipeSteps: response.data.data.recipeSteps });
         store.setState({ recipe: response.data.data.recipe });
       })
