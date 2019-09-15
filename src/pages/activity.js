@@ -13,7 +13,6 @@ import actionsActivity from "../store/actionsActivity";
 // import component
 import History from '../components/history';
 import MyBrew from '../components/myBrew';
-import Navbar from '../components/navbar';
 
 function TabPanel(props) {
   const {
@@ -102,7 +101,6 @@ export default function FullWidthTabs() {
           </div>
         </div>
       </div>
-      <Navbar />
     </div>
   );
 }

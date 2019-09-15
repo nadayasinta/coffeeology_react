@@ -4,7 +4,6 @@ import React from "react";
 import { connect } from "unistore/react";
 
 // import components
-import Navbar from "../components/navbar";
 import Radar from "../components/radar";
 
 class CreateRecipe extends React.Component {
@@ -142,7 +141,7 @@ class CreateRecipe extends React.Component {
                     <label htmlFor="beanNumber">
                       Jumlah
                       <br />
-                      Biji
+                      Biji (gr)
                     </label>
                   </div>
                   <div className=" col-12">
@@ -162,7 +161,6 @@ class CreateRecipe extends React.Component {
                       required
                     />
                   </div>
-                  <div className=" col-2 px-0 align-self-center">g</div>
                 </div>
               </div>
 
@@ -172,7 +170,7 @@ class CreateRecipe extends React.Component {
                     <label htmlFor="waterNumber">
                       Jumlah
                       <br />
-                      Air
+                      Air (ml)
                     </label>
                   </div>
                   <div className=" col-12">
@@ -192,7 +190,6 @@ class CreateRecipe extends React.Component {
                       required
                     />
                   </div>
-                  <div className=" col-2 px-0 align-self-center">ml</div>
                 </div>
               </div>
 
@@ -236,7 +233,7 @@ class CreateRecipe extends React.Component {
                     <label htmlFor="temperature">
                       Suhu
                       <br />
-                      Air
+                      Air (&deg;C)
                     </label>
                   </div>
                   <div className=" col-12">
@@ -256,7 +253,6 @@ class CreateRecipe extends React.Component {
                       required
                     />
                   </div>
-                  <div className=" col-2 px-0 align-self-center">&deg;C</div>
                 </div>
               </div>
             </div>
@@ -374,7 +370,6 @@ class CreateRecipe extends React.Component {
             </div>
           </form>
         </div>
-        <Navbar />
       </div>
     );
   }

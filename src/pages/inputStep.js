@@ -169,8 +169,6 @@ class InputStep extends React.Component {
               </button>
             </div>
           </form>
-          {/* </div>
-          </div> */}
         </div>
       </div>
     );
