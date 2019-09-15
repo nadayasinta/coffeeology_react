@@ -97,10 +97,13 @@ class AddStep extends React.Component {
     // testing
     sessionStorage.setItem("data", JSON.stringify(data));
 
-    this.props.postRecipe(data).then(()=>{
-      this.props.history.push("/activity");
+    await this.props.postRecipe(data)
 
-    })
+    if (sessionStorage.getItem("Recipe") === null){
+      this.props.history.push("/activity");
+    } else {
+      return alert("Silahkan Perbaiki Data Resep Anda")
+    }
   };
 
   render() {
