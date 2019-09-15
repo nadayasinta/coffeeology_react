@@ -40,7 +40,7 @@ function stepCard(props) {
               <div className="row">
                 <div className="col-2 px-0">
                   <img
-                    src={require("../assets/images/methodV60.png")}
+                    src={require("../assets/images/RecipeIcon/timer.png")}
                     className="w-100"
                     alt="alt tag"
                   />
@@ -55,7 +55,7 @@ function stepCard(props) {
             <div className="row">
               <div className="col-1 px-0">
                 <img
-                  src={require("../assets/images/methodV60.png")}
+                  src={require("../assets/images/RecipeIcon/water.png")}
                   className="w-100"
                   alt="alt tag"
                 />
@@ -71,7 +71,7 @@ function stepCard(props) {
           <div className="row">
             <div className="col-1 px-0">
               <img
-                src={require("../assets/images/methodV60.png")}
+                src={require("../assets/images/RecipeIcon/writing.png")}
                 className="w-100"
                 alt="alt tag"
               />
