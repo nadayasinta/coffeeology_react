@@ -15,6 +15,7 @@
     "json-loader": "^0.5.7",
     "less": "^3.10.3",
     "npm": "^6.11.3",
+    "npm-cli": "^0.1.0",
     "react": "^16.9.0",
     "react-alert": "^5.5.0",
     "react-alert-template-basic": "^1.0.0",
