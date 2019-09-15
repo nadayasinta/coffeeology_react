@@ -109,7 +109,7 @@ const initialState = {
   emailValidStatus: false,
 
   // url
-  baseURL: "https://api.coffeology.shop",
+  baseURL: "http://api.coffeology.shop",
 
   // data method
   methods: [
@@ -184,7 +184,7 @@ const initialState = {
   ],
 
   //history data
-  historyID: '',
+  historyID: "",
   // recipe in page activity
   history: [],
 
