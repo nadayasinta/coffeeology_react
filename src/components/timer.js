@@ -30,7 +30,7 @@ class Timer extends React.Component {
       this.props.setWaterNow(
         this.props.waterNow === this.props.waterLimit
           ? this.props.waterNow
-          : this.props.waterNow + this.props.stepWater / this.props.stepTime
+          : this.props.waterNow + this.props.stepWater  / this.props.stepTime
       );
       console.log(this.props.stepWater / this.props.stepTime);
     }, 100);

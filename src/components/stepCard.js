@@ -26,13 +26,13 @@ function stepCard(props) {
               <div className="row">
                 <div className="col-3 px-0 text-right align-self-center">
                   <img
-                    src={props.stepTypes[props.data.stepNumber].icon}
+                    src={props.stepTypes[props.data.stepTypeID].icon}
                     className="w-100"
                     alt="alt tag"
                   />
                 </div>
                 <div className="col-9 text-left align-self-center">
-                  {props.stepTypes[props.data.stepNumber].name}
+                  {props.stepTypes[props.data.stepTypeID].name}
                 </div>
               </div>
             </div>
