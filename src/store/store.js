@@ -116,26 +116,26 @@ const initialState = {
     {
       id: 1,
       name: "French Press",
-      icon: require("../assets/images/methodAeroPress.png")
+      icon: require("../assets/images/methodFrenchPress.png")
     },
 
     {
       id: 2,
       name: "Siphon",
-      icon: require("../assets/images/methodChemex.png")
+      icon: require("../assets/images/methodSiphon.png")
     },
     {
       id: 3,
       name: "Chemex",
-      icon: require("../assets/images/methodFrenchPress.png")
+      icon: require("../assets/images/methodChemex.png")
     },
     {
       id: 4,
       name: "Aero Press",
-      icon: require("../assets/images/methodMokaPot.png")
+      icon: require("../assets/images/methodAeroPress.png")
     },
-    { id: 5, name: "V60", icon: require("../assets/images/methodSiphon.png") },
-    { id: 6, name: "Moka Pot", icon: require("../assets/images/methodV60.png") }
+    { id: 5, name: "V60", icon: require("../assets/images/methodV60.png") },
+    { id: 6, name: "Moka Pot", icon: require("../assets/images/methodMokaPot.png") }
   ],
 
   // step Types

@@ -39,20 +39,41 @@ const actionsRecipes = store => ({
       })
       .catch(error => console.log("Error getRecipeById", error));
   },
-  async getRecipes(state, params = null) {
+  async getRecipes(state, paramsInput) {
+    console.log(paramsInput)
     let config = {
       method: "get",
-      url: store.getState().baseURL + "/recipes"
+      url: store.getState().baseURL + "/recipes",
+      params: paramsInput
     };
-    if (!params) {
-      config["params"] = params;
-    }
+
 
     await axios(config).then(response => {
       console.log(response);
       store.setState({ recipes: response.data.data });
     });
   },
+  // async getRecipes(state, paramsInput = null) {
+  //   let config = {
+  //     method: "get",
+  //     url: store.getState().baseURL + "/recipes"
+  //   };
+  //   console.log('param', paramsInput)
+
+  //   if (paramsInput !== null) {
+  //     console.log(paramsInput)
+  //     let config = {
+  //       method: "get",
+  //       url: store.getState().baseURL + "/recipes",
+  //       params: paramsInput
+  //     };
+  //   }
+
+  //   await axios(config).then(response => {
+  //     console.log(response);
+  //     store.setState({ recipes: response.data.data });
+  //   });
+  // },
   async getRecipeByID(state, id) {
     let config = {
       method: "get",
