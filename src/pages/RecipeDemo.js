@@ -33,8 +33,12 @@ class Steps extends React.Component {
       if (this.props.stepIndex > 0) {
         this.nextStep();
         if (this.state.steps.length === 0) {
-          this.props.postHistory({ recipeID: this.props.match.params.recipeID });
-          this.props.history.push("/recipe/review/" + this.props.match.params.recipeID);
+          this.props.postHistory({
+            recipeID: this.props.match.params.recipeID
+          });
+          this.props.history.push(
+            "/recipe/review/" + this.props.match.params.recipeID
+          );
         }
       }
       if (this.state.steps[0] !== undefined) {
