@@ -19,12 +19,18 @@ class AddStep extends React.Component {
   }
 
   componentDidMount = async () => {
-    console.log("did mount", sessionStorage.getItem("stepTemporary"));
+    if (sessionStorage.getItem("note") === null) {
+      sessionStorage.setItem("note", "");
+      console.log("if note");
+    } else {
+      this.note.current.value = sessionStorage.getItem("note")
+      console.log("else note");
+    }
     if (sessionStorage.getItem("stepTemporary") !== null) {
       await this.setState({
         stepTemporary: JSON.parse(sessionStorage.getItem("stepTemporary"))
       });
-      console.log("if ", this.state.stepTemporary);
+      console.log("if step temporary");
     }
   };
 
@@ -59,6 +65,14 @@ class AddStep extends React.Component {
     );
   };
 
+  addStep = e => {
+    e.preventDefault();
+    console.log("tes add step");
+    console.log("nilai ref note ", this.note.current.value);
+    sessionStorage.setItem("note", this.note.current.value);
+    this.props.history.push("/recipes/create/inputstep");
+  };
+
   postData = e => {
     e.preventDefault();
     let recipes = JSON.parse(sessionStorage.getItem("Recipe"));
@@ -67,24 +81,25 @@ class AddStep extends React.Component {
     let time = 0;
     steps.map((step, index) => (time = time + step.time));
     recipes["time"] = time;
-    recipeDetails["note"] = this.note.current.value;
+    recipeDetails["note"] = this.note.current.value
     let data = {
       recipes: recipes,
       recipeDetails: recipeDetails,
       steps: steps
     };
-    console.log(data);
     // testing
     sessionStorage.setItem("data", JSON.stringify(data));
-
+    
     this.props.postRecipe(data);
-    sessionStorage.removeItem("Recipe")
-    sessionStorage.removeItem("RecipeDetail")
-    sessionStorage.removeItem("stepTemporary")
+    sessionStorage.removeItem("Recipe");
+    sessionStorage.removeItem("RecipeDetail");
+    sessionStorage.removeItem("note");
+    sessionStorage.removeItem("stepTemporary");
     this.props.history.push("/activity");
   };
 
   render() {
+    console.log("catatan render ", this.state.note);
     return (
       <div>
         <div className="container">
@@ -102,7 +117,8 @@ class AddStep extends React.Component {
                     placeholder="catatan"
                     maxLength="250"
                     ref={this.note}
-                  ></textarea>
+                  >
+                  </textarea>
                 </div>
               </form>
               <div className="row justify-content-center bg-success mb-2">
@@ -142,7 +158,10 @@ class AddStep extends React.Component {
                 })}
                 <hr />
                 <div className="card-body">
-                  <Link to="/recipes/create/inputstep">
+                  <Link
+                    onClick={e => this.addStep(e)}
+                    to="/recipes/create/inputstep"
+                  >
                     <img className="mr-2" src={Plus} alt="alt tag" width="6%" />
                     Add Steps
                   </Link>
