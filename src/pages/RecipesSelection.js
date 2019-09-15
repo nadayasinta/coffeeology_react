@@ -24,7 +24,7 @@ class RecipesSelection extends React.Component {
   }
 
   async componentDidMount() {
-    await this.props.getRecipes();
+    await this.props.getRecipes({ methodID: this.props.match.params.methodID });
     console.log(this.props);
   }
 
@@ -47,7 +47,7 @@ class RecipesSelection extends React.Component {
                 <Link to={"/recipe/" + value.id}>
                   <RecipeCard
                     data={value}
-                    methodIcon={this.props.methods[value.methodID].icon}
+                    methodIcon={this.props.methods[this.props.match.params.methodID - 1].icon}
                     time={this.convertSeconds(value.time)}
                   />
                 </Link>

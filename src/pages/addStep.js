@@ -89,7 +89,7 @@ class AddStep extends React.Component {
     };
     // testing
     sessionStorage.setItem("data", JSON.stringify(data));
-    
+
     this.props.postRecipe(data);
     sessionStorage.removeItem("Recipe");
     sessionStorage.removeItem("RecipeDetail");
@@ -117,6 +117,7 @@ class AddStep extends React.Component {
                     placeholder="catatan"
                     maxLength="250"
                     ref={this.note}
+                    required
                   >
                   </textarea>
                 </div>

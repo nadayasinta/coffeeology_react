@@ -98,23 +98,23 @@ class InputStep extends React.Component {
           <form onSubmit={this.handleSubmit}>
             {/* form jumlah air */}
             {parseInt(this.props.stepTypeNumberSelected) === 1 ||
-            parseInt(this.props.stepTypeNumberSelected) === 2 ||
-            parseInt(this.props.stepTypeNumberSelected) === 12 ? (
-              <div className="form-group mt-3" style={{ textAlign: "left" }}>
-                <label for="Jumlah Air">Jumlah Air </label>
-                <input
-                  type="number"
-                  className="form-control"
-                  id="Jumlah Air"
-                  placeholder="200 ml"
-                  ref={this.waterAmount}
-                  min="0"
-                  required
-                />
-              </div>
-            ) : (
-              <div ref={this.waterAmount}></div>
-            )}
+              parseInt(this.props.stepTypeNumberSelected) === 2 ||
+              parseInt(this.props.stepTypeNumberSelected) === 12 ? (
+                <div className="form-group mt-3" style={{ textAlign: "left" }}>
+                  <label for="Jumlah Air">Jumlah Air </label>
+                  <input
+                    type="number"
+                    className="form-control"
+                    id="Jumlah Air"
+                    placeholder="200 ml"
+                    ref={this.waterAmount}
+                    min="0"
+                    required
+                  />
+                </div>
+              ) : (
+                <div ref={this.waterAmount}></div>
+              )}
 
             {/* form catatan */}
             <div className="form-group mb-4" style={{ textAlign: "left" }}>

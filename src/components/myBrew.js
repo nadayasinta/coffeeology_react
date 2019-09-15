@@ -21,7 +21,7 @@ class MyBrew extends React.Component {
         </Link>
         {this.props.myBrew.map((value, key) => (
           <div className="col-12">
-            <MyBrewCard icon={this.props.methods[value.methodID].icon} data={value} />
+            <MyBrewCard icon={this.props.methods[value.methodID - 1].icon} data={value} />
           </div>
         ))}
       </div>

@@ -157,6 +157,7 @@ class CreateRecipe extends React.Component {
                       type="number"
                       name="beanNumber"
                       placeholder="16"
+                      min="1"
                       onChange={this.handleChangeRecipe}
                       required
                     />
@@ -186,6 +187,7 @@ class CreateRecipe extends React.Component {
                       type="number"
                       name="waterNumber"
                       placeholder="200"
+                      min="1"
                       onChange={this.handleChangeRecipe}
                       required
                     />
@@ -249,6 +251,7 @@ class CreateRecipe extends React.Component {
                       type="number"
                       name="temperature"
                       placeholder="92"
+                      min="1"
                       onChange={this.handleChangeRecipe}
                       required
                     />
