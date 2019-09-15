@@ -13,13 +13,13 @@ function App() {
     <div className="App container-fluid px-0 ">
       <Header />
       <div className="container allpage">
-        <div className="row   justify-content-center">
+        <div className="row justify-content-center">
           <div
             className="col-12"
             style={{
               maxWidth: "480px",
-              paddingBottom: "100px",
-              paddingTop: "100px"
+              paddingBottom: "125px",
+              paddingTop: "125px"
             }}
           >
             <Routes />
