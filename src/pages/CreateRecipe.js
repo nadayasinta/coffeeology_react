@@ -1,49 +1,55 @@
-import React from 'react';
-import { connect } from 'unistore/react';
-import Header from '../components/header';
-import Navbar from '../components/navbar';
-import Radar from '../components/radar';
-import { actionsCreateRecipe } from '../store/store'
+import React from "react";
+
+// import store
+import { connect } from "unistore/react";
+
+// import components
+import Navbar from "../components/navbar";
+import Radar from "../components/radar";
 
 class CreateRecipe extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      recipeName: '',
-      brewMethod: '',
-      difficulty: '',
-      beanNumber: '',
-      waterNumber: '',
-      grind: '',
-      temperature: '',
-      beans: '',
-      origin: '',
-      process: '',
-      roasting: '',
-      fragrance: 0,
-      aroma: 0,
-      cleanliness: 0,
-      sweetness: 0,
-      taste: 0,
-      acidity: 0,
-      aftertaste: 0,
-      balance: 0,
-      global: 0,
-      body: 0,
-    }
+      recipeName: "",
+      brewMethod: "",
+      difficulty: "",
+      beanNumber: "",
+      waterNumber: "",
+      grind: "",
+      temperature: "",
+      beans: "",
+      origin: "",
+      process: "",
+      roasting: "",
+      fragrance: 0.5,
+      aroma: 0.5,
+      cleanliness: 0.5,
+      sweetness: 0.5,
+      taste: 0.5,
+      acidity: 0.5,
+      aftertaste: 0.5,
+      balance: 0.5,
+      global: 0.5,
+      body: 0.5
+    };
   }
 
-  handleChangeRecipe = (event) => {
-    this.setState({ [event.target.name]: event.target.value }, console.log(event.target.name, event.target.value));
-  }
+  handleChangeRecipe = event => {
+    this.setState(
+      { [event.target.name]: event.target.value },
+      console.log(event.target.name, event.target.value)
+    );
+  };
 
-  handleChangeRecipeDetail = (event) => {
+  handleChangeRecipeDetail = event => {
     this.setState({ [event.target.name]: parseFloat(event.target.value) });
-  }
+  };
 
-  submitRecipe = async (event) => {
-    await this.props.setTempRecipe(
-      {
+  submitRecipe = async event => {
+    await sessionStorage.setItem(
+      "Recipe",
+      JSON.stringify({
         name: this.state.recipeName,
         methodID: this.state.brewMethod,
         originID: this.state.origin,
@@ -53,11 +59,11 @@ class CreateRecipe extends React.Component {
         difficulty: this.state.difficulty,
         coffeeWeight: this.state.beanNumber,
         water: this.state.waterNumber
-      }
-    )
-    await this.props.setTempRecipeDetail(
-      {
-
+      })
+    );
+    await sessionStorage.setItem(
+      "RecipeDetail",
+      JSON.stringify({
         fragrance: this.state.fragrance,
         aroma: this.state.aroma,
         cleanliness: this.state.cleanliness,
@@ -66,21 +72,19 @@ class CreateRecipe extends React.Component {
         acidity: this.state.acidity,
         aftertaste: this.state.aftertaste,
         balance: this.state.balance,
-        global: this.state.global,
+        globalTaste: this.state.global,
         body: this.state.body,
         grindSize: this.state.grind,
-        water: this.state.temperature
-      }
-    )
-    this.props.history.push("/");
-  }
+        waterTemp: this.state.temperature
+      })
+    );
+    this.props.history.push("/recipes/create/addstep");
+  };
 
   render() {
     return (
       <div>
-        <Header />
         <div className="container">
-
           <form onSubmit={this.submitRecipe}>
             <div className=" row ">
               <label htmlFor="recipeName">Nama Resep</label>
@@ -92,24 +96,43 @@ class CreateRecipe extends React.Component {
                 type="text"
                 name="recipeName"
                 onChange={this.handleChangeRecipe}
-
+                required
               />
             </div>
             <div className="row form-group">
               <label htmlFor="brewMethod">Pilih Metode Brew</label>
 
-              <select className="form-control" id="brewMethod" name="brewMethod" onChange={this.handleChangeRecipe}>
-                {this.props.methods.map((method, index) => <option value={method.id}>{method.name}</option>)}
+              <select
+                className="form-control"
+                id="brewMethod"
+                name="brewMethod"
+                onChange={this.handleChangeRecipe}
+                required
+              >
+                <option selected disabled>
+                  -Pilih-
+                </option>
+                {this.props.methods.map((method, index) => (
+                  <option value={method.id}>{method.name}</option>
+                ))}
               </select>
             </div>
             <div className="row form-group">
               <label htmlFor="difficulty">Tingkat Kesulitan</label>
 
-              <select className="form-control" id="difficulty" name="difficulty" onChange={this.handleChangeRecipe}>
-                <option>Mudah</option>
-                <option>Sedang</option>)
-                <option>Sulit</option>)
-
+              <select
+                className="form-control"
+                id="difficulty"
+                name="difficulty"
+                onChange={this.handleChangeRecipe}
+                required
+              >
+                <option selected disabled>
+                  -Pilih-
+                </option>
+                <option value="1">Mudah</option>
+                <option value="2">Sedang</option>)
+                <option value="3">Sulit</option>)
               </select>
             </div>
             <div className=" row ">
@@ -124,7 +147,7 @@ class CreateRecipe extends React.Component {
                   </div>
                   <div className=" col-12">
                     <img
-                      src={require('../assets/images/RecipeIcon/coffee.png')}
+                      src={require("../assets/images/RecipeIcon/coffee.png")}
                       className="w-50 py-2"
                     />
                   </div>
@@ -135,13 +158,10 @@ class CreateRecipe extends React.Component {
                       name="beanNumber"
                       placeholder="16"
                       onChange={this.handleChangeRecipe}
+                      required
                     />
-
-
                   </div>
-                  <div className=" col-2 px-0 align-self-center">
-                    g
-                  </div>
+                  <div className=" col-2 px-0 align-self-center">g</div>
                 </div>
               </div>
 
@@ -153,11 +173,10 @@ class CreateRecipe extends React.Component {
                       <br />
                       Air
                     </label>
-
                   </div>
                   <div className=" col-12">
                     <img
-                      src={require('../assets/images/RecipeIcon/water.png')}
+                      src={require("../assets/images/RecipeIcon/water.png")}
                       className="w-50 py-2"
                     />
                   </div>
@@ -168,12 +187,10 @@ class CreateRecipe extends React.Component {
                       name="waterNumber"
                       placeholder="200"
                       onChange={this.handleChangeRecipe}
-
+                      required
                     />
                   </div>
-                  <div className=" col-2 px-0 align-self-center">
-                    ml
-                  </div>
+                  <div className=" col-2 px-0 align-self-center">ml</div>
                 </div>
               </div>
 
@@ -188,16 +205,25 @@ class CreateRecipe extends React.Component {
                   </div>
                   <div className=" col-12">
                     <img
-                      src={require('../assets/images/RecipeIcon/coffee-grinder.png')}
+                      src={require("../assets/images/RecipeIcon/coffee-grinder.png")}
                       className="w-50 py-2"
                     />
                   </div>
                   <div className=" col-9 px-0">
-
-                    <select className="form-control" id="grind" name="grind" onChange={this.handleChangeRecipe}>
-                      {this.props.grinds.map((grind, index) => <option>{grind.name}</option>)}
+                    <select
+                      className="form-control"
+                      id="grind"
+                      name="grind"
+                      onChange={this.handleChangeRecipe}
+                      required
+                    >
+                      <option selected disabled>
+                        -Pilih-
+                      </option>
+                      {this.props.grinds.map((grind, index) => (
+                        <option value={grind.id}>{grind.name}</option>
+                      ))}
                     </select>
-
                   </div>
                 </div>
               </div>
@@ -213,7 +239,7 @@ class CreateRecipe extends React.Component {
                   </div>
                   <div className=" col-12">
                     <img
-                      src={require('../assets/images/RecipeIcon/thermometer.png')}
+                      src={require("../assets/images/RecipeIcon/thermometer.png")}
                       className="w-50 py-2"
                     />
                   </div>
@@ -224,12 +250,10 @@ class CreateRecipe extends React.Component {
                       name="temperature"
                       placeholder="92"
                       onChange={this.handleChangeRecipe}
-
+                      required
                     />
                   </div>
-                  <div className=" col-2 px-0 align-self-center">
-                    &deg;C
-                  </div>
+                  <div className=" col-2 px-0 align-self-center">&deg;C</div>
                 </div>
               </div>
             </div>
@@ -249,14 +273,26 @@ class CreateRecipe extends React.Component {
                 name="beans"
                 placeholder="biji"
                 onChange={this.handleChangeRecipe}
+                required
               />
             </div>
 
             <div className="row form-group">
               <label htmlFor="origin">Origin : </label>
 
-              <select className="form-control" id="origin" name="origin" onChange={this.handleChangeRecipe}>
-                {this.props.origins.map((origin, index) => <option value={origin.id}>{origin.name}</option>)}
+              <select
+                className="form-control"
+                id="origin"
+                name="origin"
+                onChange={this.handleChangeRecipe}
+                required
+              >
+                <option selected disabled>
+                  -Pilih-
+                </option>
+                {this.props.origins.map((origin, index) => (
+                  <option value={origin.id}>{origin.name}</option>
+                ))}
                 <option>lainnya</option>)
               </select>
             </div>
@@ -272,7 +308,7 @@ class CreateRecipe extends React.Component {
                 name="process"
                 placeholder="proses"
                 onChange={this.handleChangeRecipe}
-
+                required
               />
             </div>
 
@@ -287,20 +323,23 @@ class CreateRecipe extends React.Component {
                 name="roasting"
                 placeholder="roasting"
                 onChange={this.handleChangeRecipe}
+                required
               />
             </div>
-            <Radar data={{
-              fragrance: this.state.fragrance,
-              aroma: this.state.aroma,
-              cleanliness: this.state.cleanliness,
-              sweetness: this.state.sweetness,
-              taste: this.state.taste,
-              acidity: this.state.acidity,
-              aftertaste: this.state.aftertaste,
-              balance: this.state.balance,
-              globalTaste: this.state.global,
-              body: this.state.body
-            }} />
+            <Radar
+              data={{
+                fragrance: this.state.fragrance,
+                aroma: this.state.aroma,
+                cleanliness: this.state.cleanliness,
+                sweetness: this.state.sweetness,
+                taste: this.state.taste,
+                acidity: this.state.acidity,
+                aftertaste: this.state.aftertaste,
+                balance: this.state.balance,
+                globalTaste: this.state.global,
+                body: this.state.body
+              }}
+            />
 
             {this.props.flavors.map((flavor, index) => (
               <div className="row">
@@ -308,7 +347,17 @@ class CreateRecipe extends React.Component {
                   <label htmlFor="customRange1">{flavor}</label>
                 </div>
                 <div className="col-9">
-                  <input type="range" className="custom-range" min="0" max="1" step="0.01" value={this.state[flavor]} id={flavor} name={flavor} onChange={this.handleChangeRecipeDetail} />
+                  <input
+                    type="range"
+                    className="custom-range"
+                    min="0"
+                    max="1"
+                    step="0.01"
+                    value={this.state[flavor]}
+                    id={flavor}
+                    name={flavor}
+                    onChange={this.handleChangeRecipeDetail}
+                  />
                 </div>
               </div>
             ))}
@@ -322,11 +371,13 @@ class CreateRecipe extends React.Component {
             </div>
           </form>
         </div>
-
+        <Navbar />
       </div>
     );
   }
 }
 
 // export default Steps;
-export default connect('methods, grinds, flavors, origins, recipeDetails, tempRecipe', actionsCreateRecipe)(CreateRecipe);
+export default connect("methods, grinds, flavors, origins, recipeDetails")(
+  CreateRecipe
+);

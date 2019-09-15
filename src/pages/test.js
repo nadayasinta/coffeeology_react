@@ -1,40 +1,29 @@
-import React from 'react';
-import { CSSTransitionGroup } from 'react-transition-group';
-
+import React from "react";
+import ReactDOM from "react-dom";
+import Disqus from "disqus-react";
+/* eslint-disable max-len */
 class Test extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = { items: ['hello', 'world', 'click', 'me'] };
-		this.handleAdd = this.handleAdd.bind(this);
-	}
+  render() {
+    const disqusShortname = "coffeology"; //found in your Disqus.com dashboard
+    const disqusConfig = {
+      url: "http://localhost:3000", //this.props.pageUrl
+      identifier: "article-id", //this.props.uniqueId
+      title: "Title of Your Article" //this.props.title
+    };
 
-	handleAdd() {
-		const newItems = this.state.items.concat([prompt('Enter some text')]);
-		this.setState({ items: newItems });
-	}
+    return (
+      <div className="article-container">
+        <h1>Article Title</h1>
 
-	handleRemove(i) {
-		let newItems = this.state.items.slice();
-		newItems.splice(i, 1);
-		this.setState({ items: newItems });
-	}
+        <p>Article content.</p>
 
-	render() {
-		const items = this.state.items.map((item, i) => (
-			<div key={item} onClick={() => this.handleRemove(i)}>
-				{item}
-			</div>
-		));
-
-		return (
-			<div>
-				<button onClick={this.handleAdd}>Add Item</button>
-				<CSSTransitionGroup transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
-					{items}
-				</CSSTransitionGroup>
-			</div>
-		);
-	}
+        <Disqus.DiscussionEmbed
+          shortname={disqusShortname}
+          config={disqusConfig}
+        />
+      </div>
+    );
+  }
 }
 
-export { Test };
+export default Test;

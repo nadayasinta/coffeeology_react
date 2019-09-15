@@ -1,6 +1,20 @@
-import { store } from "./store";
+import store from "./store";
 import axios from "axios";
-import { makeStyles } from "@material-ui/core/styles";
+import Swal from "sweetalert2";
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: "center",
+  showConfirmButton: false,
+  timer: 2000
+});
+
+const ToastTop = Swal.mixin({
+  toast: true,
+  position: "top",
+  showConfirmButton: false,
+  timer: 2000
+});
 
 const actionsUsers = store => ({
   // user login
@@ -13,13 +27,18 @@ const actionsUsers = store => ({
     axios(config)
       .then(response => {
         console.log(response);
+        sessionStorage.setItem("token", response.data.token);
       })
       .catch(error => {
-        console.log(error);
+        console.log(error.response);
+        Toast.fire({
+          type: "error",
+          title: error.response.data.message
+        });
       });
   },
   validateEmail(state, email) {
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     return re.test(String(email).toLowerCase());
   },
   registerUser(state, data) {
@@ -32,10 +51,17 @@ const actionsUsers = store => ({
     axios(config)
       .then(response => {
         console.log(response);
+        sessionStorage.setItem("token", response.data.token);
       })
       .catch(error => {
-        console.log(error);
+        ToastTop.fire({
+          type: "error",
+          title: error.response.data.message
+        });
       });
+  },
+  logout(state) {
+    sessionStorage.removeItem("token");
   }
 });
 
