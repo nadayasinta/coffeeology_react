@@ -61,9 +61,12 @@ class RecipeSelection extends React.Component {
     return `${minutes}:${seconds}`;
   }
 
-  handleOnClickButton(event) {
+  handleOnClickButton = event => {
     event.preventDefault();
-  }
+    console.log(this.state.recipeSteps);
+    this.props.setRecipeSteps(this.state.recipeSteps);
+    this.props.history.push("/recipe/demo/" + this.props.match.params.recipeID);
+  };
 
   handleOnChangeCoffee = async event => {
     event.preventDefault();
@@ -263,11 +266,7 @@ class RecipeSelection extends React.Component {
                 <button
                   type="button"
                   className="btn btn-danger btn-block"
-                  onClick={e => {
-                    this.props.history.push(
-                      "/recipe/demo/" + this.props.match.params.recipeID
-                    );
-                  }}
+                  onClick={this.handleOnClickButton}
                 >
                   Mulai
                 </button>
