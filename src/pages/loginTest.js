@@ -10,6 +10,15 @@ import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
+import IconButton from "@material-ui/core/IconButton";
+import Input from "@material-ui/core/Input";
+import InputLabel from "@material-ui/core/InputLabel";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import FormControl from "@material-ui/core/FormControl";
+import MenuItem from "@material-ui/core/MenuItem";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
 
 // import store
 import { connect } from "unistore/react";
@@ -26,6 +35,18 @@ const SignIn = props => {
   const data = {
     email: "",
     password: ""
+  };
+
+  const [values, setValues] = React.useState({
+    showPassword: false
+  });
+
+  const handleClickShowPassword = () => {
+    setValues({ ...values, showPassword: !values.showPassword });
+  };
+
+  const handleMouseDownPassword = event => {
+    event.preventDefault();
   };
 
   // create alert
@@ -104,7 +125,7 @@ const SignIn = props => {
               autoComplete="email"
               onChange={onChangeEmail}
               autoFocus
-            />
+            />{" "}
             <TextField
               variant="outlined"
               margin="normal"
@@ -112,12 +133,24 @@ const SignIn = props => {
               fullWidth
               name="password"
               label="Password"
-              type="password"
               id="password"
+              type={values.showPassword ? "text" : "password"}
               onChange={onChangePassword}
               autoComplete="current-password"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                    >
+                      {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                )
+              }}
             />
-
             <Button
               fullWidth
               variant="contained"
