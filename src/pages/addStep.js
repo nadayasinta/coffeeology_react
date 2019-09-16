@@ -21,16 +21,13 @@ class AddStep extends React.Component {
   componentDidMount = async () => {
     if (sessionStorage.getItem("note") === null) {
       sessionStorage.setItem("note", "");
-      console.log("if note");
     } else {
-      this.note.current.value = sessionStorage.getItem("note")
-      console.log("else note");
+      this.note.current.value = sessionStorage.getItem("note");
     }
     if (sessionStorage.getItem("stepTemporary") !== null) {
       await this.setState({
         stepTemporary: JSON.parse(sessionStorage.getItem("stepTemporary"))
       });
-      console.log("if step temporary");
     }
   };
 
@@ -67,21 +64,31 @@ class AddStep extends React.Component {
 
   addStep = e => {
     e.preventDefault();
-    console.log("tes add step");
-    console.log("nilai ref note ", this.note.current.value);
     sessionStorage.setItem("note", this.note.current.value);
     this.props.history.push("/recipes/create/inputstep");
   };
 
-  postData = e => {
+  handleSubmit = async e => {
     e.preventDefault();
     let recipes = JSON.parse(sessionStorage.getItem("Recipe"));
-    let recipeDetails = JSON.parse(sessionStorage.getItem("RecipeDetail"));
     let steps = JSON.parse(sessionStorage.getItem("stepTemporary"));
+    let recipeDetails = JSON.parse(sessionStorage.getItem("RecipeDetail"));
+    recipeDetails["note"] = this.note.current.value;
+
+    // validation waterAmount every Step = waterAmount Recipe
+    let totalWaterStep = 0
+    this.state.stepTemporary.map((step, index) => (totalWaterStep = totalWaterStep + step.amount))
+    if (parseInt(totalWaterStep) > parseInt(recipes.water)){
+      return alert(`Total Air Pada Step Melebihi ${recipes.water} ml`)
+    }
+    else if (parseInt(totalWaterStep) < parseInt(recipes.water)){
+      return alert(`Total Air Pada Step Masih Kurang ${parseInt(recipes.water) - parseInt(totalWaterStep)} ml`)
+    }
+
     let time = 0;
     steps.map((step, index) => (time = time + step.time));
     recipes["time"] = time;
-    recipeDetails["note"] = this.note.current.value
+    
     let data = {
       recipes: recipes,
       recipeDetails: recipeDetails,
@@ -90,22 +97,22 @@ class AddStep extends React.Component {
     // testing
     sessionStorage.setItem("data", JSON.stringify(data));
 
-    this.props.postRecipe(data);
-    sessionStorage.removeItem("Recipe");
-    sessionStorage.removeItem("RecipeDetail");
-    sessionStorage.removeItem("note");
-    sessionStorage.removeItem("stepTemporary");
-    this.props.history.push("/activity");
+    await this.props.postRecipe(data)
+
+    if (sessionStorage.getItem("Recipe") === null){
+      this.props.history.push("/activity");
+    } else {
+      return alert("Silahkan Perbaiki Data Resep Anda")
+    }
   };
 
   render() {
-    console.log("catatan render ", this.state.note);
     return (
       <div>
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-12">
-              <form>
+              <form onSubmit={this.handleSubmit} >
                 <div className="form-group">
                   <div className="row justify-content-center bg-success mb-2">
                     <label for="note">Catatan</label>
@@ -118,63 +125,68 @@ class AddStep extends React.Component {
                     maxLength="250"
                     ref={this.note}
                     required
-                  >
-                  </textarea>
+                  ></textarea>
                 </div>
+
+                <div className="row justify-content-center bg-success mb-2">
+                  Tahapan
+                </div>
+                <div className="card">
+                  {this.state.stepTemporary.map((step, index) => {
+                    return (
+                      <div className="card-body" key={index}>
+                        <div className="row justify-content-end">
+                          <button
+                            type="button"
+                            onClick={e => this.deteleStep(e, index)}
+                            className="btn btn-primary"
+                          >
+                            X
+                          </button>
+                        </div>
+                        <div className="row justify-content-between">
+                          <div className="col-4">
+                            <img
+                              src={this.props.stepTypes[step.stepTypeID].icon}
+                              width="100%"
+                            />
+                          </div>
+                          <div className="col-4">
+                            {this.props.stepTypes[step.stepTypeID].name}
+                          </div>
+                          <div className="col-4">
+                            <img className="mr-2" src={timer} width="20%" />
+                            {this.convertSeconds(step.time)}
+                          </div>
+                        </div>
+                        <hr></hr>
+                      </div>
+                    );
+                  })}
+                  <hr />
+                  <div className="card-body">
+                    <Link
+                      onClick={e => this.addStep(e)}
+                      to="/recipes/create/inputstep"
+                    >
+                      <img
+                        className="mr-2"
+                        src={Plus}
+                        alt="alt tag"
+                        width="6%"
+                      />
+                      Add Steps
+                    </Link>
+                  </div>
+                </div>
+                <button
+                  type="submit"
+                  className="btn btn-primary btn-block mt-4"
+                  value="Submit"
+                >
+                  Simpan
+                </button>
               </form>
-              <div className="row justify-content-center bg-success mb-2">
-                Tahapan
-              </div>
-              <div className="card">
-                {this.state.stepTemporary.map((step, index) => {
-                  return (
-                    <div className="card-body" key={index}>
-                      <div className="row justify-content-end">
-                        <button
-                          type="button"
-                          onClick={e => this.deteleStep(e, index)}
-                          className="btn btn-primary"
-                        >
-                          X
-                        </button>
-                      </div>
-                      <div className="row justify-content-between">
-                        <div className="col-4">
-                          <img
-                            src={this.props.stepTypes[step.stepTypeID].icon}
-                            width="100%"
-                          />
-                        </div>
-                        <div className="col-4">
-                          {this.props.stepTypes[step.stepTypeID].name}
-                        </div>
-                        <div className="col-4">
-                          <img className="mr-2" src={timer} width="20%" />
-                          {this.convertSeconds(step.time)}
-                        </div>
-                      </div>
-                      <hr></hr>
-                    </div>
-                  );
-                })}
-                <hr />
-                <div className="card-body">
-                  <Link
-                    onClick={e => this.addStep(e)}
-                    to="/recipes/create/inputstep"
-                  >
-                    <img className="mr-2" src={Plus} alt="alt tag" width="6%" />
-                    Add Steps
-                  </Link>
-                </div>
-              </div>
-              <button
-                type="button"
-                className="btn btn-primary mt-4"
-                onClick={e => this.postData(e)}
-              >
-                Simpan
-              </button>
             </div>
           </div>
         </div>
