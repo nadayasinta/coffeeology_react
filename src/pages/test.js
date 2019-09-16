@@ -1,29 +1,34 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import Disqus from "disqus-react";
-/* eslint-disable max-len */
-class Test extends React.Component {
-  render() {
-    const disqusShortname = "coffeology"; //found in your Disqus.com dashboard
-    const disqusConfig = {
-      url: "http://localhost:3000", //this.props.pageUrl
-      identifier: "article-id", //this.props.uniqueId
-      title: "Title of Your Article" //this.props.title
-    };
+import PropTypes from "prop-types";
+import { withStyles } from "material-ui/styles";
+import Button from "material-ui/Button";
+import { CircularProgress } from "material-ui/Progress";
+import Check from "material-ui-icons/Check";
 
-    return (
-      <div className="article-container">
-        <h1>Article Title</h1>
-
-        <p>Article content.</p>
-
-        <Disqus.DiscussionEmbed
-          shortname={disqusShortname}
-          config={disqusConfig}
-        />
-      </div>
-    );
+const styles = theme => ({
+  button: {
+    margin: theme.spacing.unit
   }
-}
+});
 
-export default Test;
+const LoadingButton = props => {
+  const { classes, loading, done, ...other } = props;
+
+  if (done) {
+    return (
+      <Button className={classes.button} {...other} disabled>
+        <Check />
+      </Button>
+    );
+  } else if (loading) {
+    return (
+      <Button className={classes.button} {...other}>
+        <CircularProgress />
+      </Button>
+    );
+  } else {
+    return <Button className={classes.button} {...other} />;
+  }
+};
+
+export default LoadingButton;

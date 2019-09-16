@@ -6,6 +6,10 @@ import TextField from "@material-ui/core/TextField";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import IconButton from "@material-ui/core/IconButton";
 
 // import store
 import actionsUsers from "../store/actionUsers";
@@ -18,11 +22,15 @@ import Swal from "sweetalert2";
 const Register = props => {
   const classes = useStyles();
 
+  // create state
+  const [values, setValues] = React.useState({
+    showPassword: false
+  });
+
   // store data from email and password
   const data = {
     email: "",
     password: "",
-    passwordRepeat: "",
     name: ""
   };
 
@@ -63,18 +71,6 @@ const Register = props => {
         title: "Password tidak boleh kosong!"
       });
     }
-    if (data.passwordRepeat === "") {
-      return Toast.fire({
-        type: "error",
-        title: "Ulangi password anda!"
-      });
-    }
-    if (!validatePasswordRepeat(data.password, data.passwordRepeat)) {
-      return Toast.fire({
-        type: "error",
-        title: "Password tidak sama!"
-      });
-    }
     if (data.name === "") {
       return Toast.fire({
         type: "error",
@@ -97,10 +93,6 @@ const Register = props => {
     }, 500);
   };
 
-  const validatePasswordRepeat = () => {
-    return data.password === data.passwordRepeat;
-  };
-
   const onChangeEmail = event => {
     data.email = event.target.value;
   };
@@ -112,6 +104,14 @@ const Register = props => {
   };
   const onChangeName = event => {
     data.name = event.target.value;
+  };
+
+  const handleClickShowPassword = () => {
+    setValues({ ...values, showPassword: !values.showPassword });
+  };
+
+  const handleMouseDownPassword = event => {
+    event.preventDefault();
   };
 
   return (
@@ -159,18 +159,20 @@ const Register = props => {
               id="password1"
               onChange={onChangePassword}
               autoComplete="current-password"
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password2"
-              label="Repeat Password"
-              type="password"
-              id="password2"
-              onChange={onChangePasswordRepeat}
-              autoComplete="current-password"
+              type={values.showPassword ? "text" : "password"}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                    >
+                      {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                )
+              }}
             />
 
             <Button
