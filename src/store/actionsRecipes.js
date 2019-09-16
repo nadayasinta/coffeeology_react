@@ -2,6 +2,13 @@ import store from "./store";
 import axios from "axios";
 import Swal from "sweetalert2";
 
+const Toast = Swal.mixin({
+  toast: true,
+  position: "center",
+  showConfirmButton: false,
+  timer: 2000
+});
+
 const actionsRecipes = store => ({
   // setter data
   setListCategory(state, value) {
@@ -40,8 +47,18 @@ const actionsRecipes = store => ({
     await axios(config)
       .then(response => {
         store.setState({ recipe: response.data });
+        sessionStorage.removeItem("Recipe");
+        sessionStorage.removeItem("RecipeDetail");
+        sessionStorage.removeItem("note");
+        sessionStorage.removeItem("stepTemporary");
       })
-      .catch(error => console.log("Error getRecipeById", error));
+      .catch(error => {
+        console.log(error.response);
+        Toast.fire({
+          type: "error",
+          title: `${error.response.data.message}. Data Tidak Tersave`
+        });
+      });
   },
   async getRecipes(state, paramsInput) {
     console.log(paramsInput);

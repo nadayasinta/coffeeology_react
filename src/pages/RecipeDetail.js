@@ -6,7 +6,6 @@ import actionsRecipes from "../store/actionsRecipes";
 
 // import component
 import StepCard from "../components/stepCard";
-import Navbar from "../components/navbar";
 
 // import components
 import Radar from "../components/radar";
@@ -272,7 +271,6 @@ class RecipeSelection extends React.Component {
                 </button>
               </div>
             </div>
-            <Navbar />
           </div>
         </div>
       );

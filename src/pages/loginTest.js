@@ -63,7 +63,7 @@ const SignIn = props => {
             title: "Sukses Login!"
           });
           setTimeout(() => {
-            props.history.replace("/");
+            props.history.goBack();
           }, 1000);
         }
       }, 500);
