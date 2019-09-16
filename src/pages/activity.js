@@ -16,9 +16,10 @@ import { connect } from "unistore/react";
 import actionsActivity from "../store/actionsActivity";
 
 // import component
-import History from "../components/history";
-import MyBrew from "../components/myBrew";
-import Navbar from "../components/navbar";
+
+import History from '../components/history';
+import MyBrew from '../components/myBrew';
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -105,7 +106,6 @@ export default function FullWidthTabs() {
           </div>
         </div>
       </div>
-      <Navbar />
     </div>
   );
 }

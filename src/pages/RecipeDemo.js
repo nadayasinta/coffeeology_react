@@ -9,7 +9,6 @@ import actionsDemo from "../store/actionsDemo";
 // import component
 import Timer from "../components/timer";
 import StepCard from "../components/stepCard";
-import Navbar from "../components/navbar";
 
 class Steps extends React.Component {
   constructor(props) {
@@ -99,7 +98,6 @@ class Steps extends React.Component {
               </div>
             </div>
           </div>
-          <Navbar />
         </div>
       );
     }

@@ -18,7 +18,7 @@ import CreateRecipe from "../pages/CreateRecipe";
 import AddStep from "../pages/addStep";
 import InputStep from "../pages/inputStep";
 import Review from "../pages/Review";
-
+import Navbar from "../components/navbar"
 function Routes() {
   return (
     <Provider store={store} className="allpage container">
@@ -37,6 +37,7 @@ function Routes() {
           <Route exact path="/recipes/create/inputstep" component={InputStep} />
           <Route exact path="/recipes/:methodID" component={RecipesSelection} />
         </Switch>
+          <Navbar />
       </BrowserRouter>
     </Provider>
   );
