@@ -30,6 +30,7 @@ class InputStep extends React.Component {
   // to handle change in "pilih tahapan"
   handleChange = event => {
     this.props.setStepTypeNumberSelected(event.target.value);
+    this.waterAmount.current.value = 0
   };
 
   // to handle when data will submit
@@ -37,10 +38,33 @@ class InputStep extends React.Component {
     event.preventDefault();
     // to handle if user input water amount
     if (parseInt(this.waterAmount.current.value) > 0) {
-      this.setState({
+      await this.setState({
         waterAmount: parseInt(this.waterAmount.current.value)
       });
     }
+
+    // to handle not valid Duration Time
+    if (parseInt(this.second.current.value) === 0 && parseInt(this.minute.current.value) === 0){
+      return alert("Waktu Tidak Boleh Kosong")
+    }
+
+    // validation waterAmount every Step = waterAmount Recipe
+    let recipes = JSON.parse(sessionStorage.getItem("Recipe"));
+
+    console.log("data recipe water ", recipes.water)
+    console.log("this state temporary", this.state.stepTemporary)
+    
+    let totalWaterStep = parseInt(this.waterAmount.current.value)
+    this.state.stepTemporary.map((step, index) => (totalWaterStep = totalWaterStep + parseInt(step.amount)))
+    console.log("data total water step", totalWaterStep)
+    console.log("data curent water amount", this.waterAmount.current.value)
+
+
+    if (parseInt(totalWaterStep) > parseInt(recipes.water)){
+      totalWaterStep -= this.waterAmount.current.value
+      return alert(`Jumlah Air Tidak Valid, Anda Hanya bisa menambahkan maksimal ${parseInt(recipes.water) - parseInt(totalWaterStep)} ml`)
+    }
+
     // set total time
     let timeData =
       parseInt(this.minute.current.value) * 60 +
@@ -126,6 +150,7 @@ class InputStep extends React.Component {
                 placeholder="catatan"
                 maxLength="250"
                 ref={this.note}
+                required
               ></textarea>
             </div>
             {/* form durasi */}
@@ -169,8 +194,6 @@ class InputStep extends React.Component {
               </button>
             </div>
           </form>
-          {/* </div>
-          </div> */}
         </div>
       </div>
     );

@@ -17,7 +17,7 @@ function stepCard(props) {
   return (
     <div className="container-fluid stepCard border">
       <div className="row pt-2">
-        <div className="col-2 px-0 text-center align-self-center">
+        <div className="col-2 px-0 text-center align-self-center bg-light">
           {props.data.stepNumber}
         </div>
         <div className="col-10">
@@ -26,13 +26,13 @@ function stepCard(props) {
               <div className="row">
                 <div className="col-3 px-0 text-right align-self-center">
                   <img
-                    src={props.stepTypes[props.data.stepNumber].icon}
+                    src={props.stepTypes[props.data.stepTypeID].icon}
                     className="w-100"
                     alt="alt tag"
                   />
                 </div>
                 <div className="col-9 text-left align-self-center">
-                  {props.stepTypes[props.data.stepNumber].name}
+                  {props.stepTypes[props.data.stepTypeID].name}
                 </div>
               </div>
             </div>
@@ -40,8 +40,10 @@ function stepCard(props) {
               <div className="row">
                 <div className="col-2 px-0">
                   <img
-                    src={require("../assets/images/methodV60.png")}
-                    className="w-100"
+
+                    src={require("../assets/images/RecipeIcon/time.png")}
+                    className="w-75"
+
                     alt="alt tag"
                   />
                 </div>
@@ -55,24 +57,27 @@ function stepCard(props) {
             <div className="row">
               <div className="col-1 px-0">
                 <img
-                  src={require("../assets/images/methodV60.png")}
-                  className="w-100"
+
+                  src={require("../assets/images/RecipeIcon/amount.png")}
+
                   alt="alt tag"
                 />
               </div>
               <div className="col-11 px-0 text-left align-self-center">
-                {props.beanRatio * props.data.amount}
+                {props.beanRatio * props.data.amount} ml
               </div>
             </div>
           ) : (
-            <div />
-          )}
+              <div />
+            )}
 
           <div className="row">
             <div className="col-1 px-0">
               <img
-                src={require("../assets/images/methodV60.png")}
-                className="w-100"
+
+                src={require("../assets/images/RecipeIcon/note.png")}
+                className="w-75"
+
                 alt="alt tag"
               />
             </div>

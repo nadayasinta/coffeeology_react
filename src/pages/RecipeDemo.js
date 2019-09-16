@@ -1,5 +1,6 @@
 import React from "react";
 import { CSSTransitionGroup } from "react-transition-group";
+import { Redirect } from "react-router-dom";
 
 // import store
 import { connect } from "unistore/react";
@@ -8,7 +9,6 @@ import actionsDemo from "../store/actionsDemo";
 // import component
 import Timer from "../components/timer";
 import StepCard from "../components/stepCard";
-import Navbar from "../components/navbar";
 
 class Steps extends React.Component {
   constructor(props) {
@@ -33,8 +33,12 @@ class Steps extends React.Component {
       if (this.props.stepIndex > 0) {
         this.nextStep();
         if (this.state.steps.length === 0) {
-          this.props.postHistory({ recipeID: this.props.match.params.recipeID });
-          this.props.history.push("/recipe/review/" + this.props.match.params.recipeID);
+          this.props.postHistory({
+            recipeID: this.props.match.params.recipeID
+          });
+          this.props.history.push(
+            "/recipe/review/" + this.props.match.params.recipeID
+          );
         }
       }
       if (this.state.steps[0] !== undefined) {
@@ -50,11 +54,26 @@ class Steps extends React.Component {
 
   render() {
     if (this.state.steps === []) {
-      return <div>Loading</div>;
+      return (
+        <div>
+          {sessionStorage.getItem("token") ? (
+            <div></div>
+          ) : (
+            <Redirect to="/login" />
+          )}
+
+          <div>Loading</div>
+        </div>
+      );
     } else {
       console.log("stepindex", this.props.stepIndex);
       return (
         <div>
+          {sessionStorage.getItem("token") ? (
+            <div></div>
+          ) : (
+            <Redirect to="/login" />
+          )}
           <div className="container">
             <div className="row">
               <div className="col-12">
@@ -79,7 +98,6 @@ class Steps extends React.Component {
               </div>
             </div>
           </div>
-          <Navbar />
         </div>
       );
     }

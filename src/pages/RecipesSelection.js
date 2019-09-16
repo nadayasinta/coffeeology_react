@@ -6,7 +6,6 @@ import actionsRecipes from "../store/actionsRecipes";
 
 // import component
 import RecipeCard from "../components/recipeCard";
-import Navbar from "../components/navbar";
 
 import loading from "../assets/images/loading.gif";
 
@@ -54,7 +53,6 @@ class RecipesSelection extends React.Component {
               </div>
             );
           })}
-          <Navbar />
         </div>
       );
     }
