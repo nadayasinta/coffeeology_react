@@ -31,6 +31,9 @@ const actionsRecipes = store => ({
   setRecipeSteps(state, value) {
     return { recipeSteps: value };
   },
+  setSearchParams(state, value) {
+    return { searchParams: value };
+  },
 
   // axios
 
