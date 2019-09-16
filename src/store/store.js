@@ -102,6 +102,10 @@ const initialState = {
     // }
   ],
   difficulties: ["Mudah", "Sedang", "Sulit"],
+
+  // search
+  searchParams: {},
+
   // method
   methodID: 0,
 
