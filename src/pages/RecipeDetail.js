@@ -21,7 +21,11 @@ class RecipeSelection extends React.Component {
     this.handleHide = this.handleHide.bind(this);
 
     this.state = {
-      show: false
+      show: false,
+      coffeeweight: 0,
+      water: 0,
+      ratio: 0,
+      recipeSteps: []
     };
   }
 
@@ -33,10 +37,15 @@ class RecipeSelection extends React.Component {
     this.setState({ show: false });
   }
 
-  componentDidMount() {
-    console.log(this.props);
-    this.props.getRecipeByID(this.props.match.params.recipeID);
-    console.log("aaaaaaaaaaaa", this.props.recipe);
+  async componentDidMount() {
+    await this.props.getRecipeByID(this.props.match.params.recipeID);
+    await this.setState({
+      coffeeweight: this.props.recipe.coffeeWeight,
+      water: this.props.recipe.water,
+      ratio: this.props.recipe.water / this.props.recipe.coffeeWeight,
+      recipeSteps: this.props.recipeSteps
+    });
+    console.log(this.state);
   }
 
   convertSeconds(secondsInput) {
@@ -51,12 +60,35 @@ class RecipeSelection extends React.Component {
     return `${minutes}:${seconds}`;
   }
 
-  handleOnClickButton(event) {
+  handleOnClickButton = event => {
     event.preventDefault();
-  }
+    console.log(this.state.recipeSteps);
+    this.props.setRecipeSteps(this.state.recipeSteps);
+    this.props.history.push("/recipe/demo/" + this.props.match.params.recipeID);
+  };
+
+  handleOnChangeCoffee = async event => {
+    event.preventDefault();
+
+    const waterTotal = this.state.ratio * event.target.value;
+
+    const recipeSteps = [];
+
+    this.state.recipeSteps.forEach(recipeStep => {
+      recipeStep["amount"] =
+        (recipeStep["amount"] / this.state.water) * waterTotal;
+      recipeSteps.push(recipeStep);
+    });
+
+    this.setState({
+      coffeeWeight: event.target.value,
+      water: event.target.value * this.state.ratio,
+      recipeSteps: recipeSteps
+    });
+  };
 
   render() {
-    console.log(this.props.recipe);
+    console.log(this.state.recipeSteps);
     if (this.props.recipe === null) {
       return <img src={loading} alt="loading..." />;
     } else {
@@ -146,8 +178,8 @@ class RecipeSelection extends React.Component {
                     <input
                       className="form-control"
                       type="number"
-                      value={this.props.recipe.coffeeWeight}
                       id="coffeeBrewInput"
+                      onChange={this.handleOnChangeCoffee}
                     />
                   </div>
                 </div>
@@ -163,7 +195,7 @@ class RecipeSelection extends React.Component {
                   </div>
                   <div className="col-10">
                     <div className="form-control text-left">
-                      {this.props.waterLimit}
+                      {this.state.water}
                     </div>
                   </div>
                 </div>
@@ -224,7 +256,7 @@ class RecipeSelection extends React.Component {
             </div>
             <div className="row mt-3 justify-content-center">
               <div className="col-12">Tahapan</div>
-              {this.props.recipeSteps.map(recipeStep => (
+              {this.state.recipeSteps.map(recipeStep => (
                 <div className="col-12">
                   <StepCard data={recipeStep} />
                 </div>
@@ -233,11 +265,7 @@ class RecipeSelection extends React.Component {
                 <button
                   type="button"
                   className="btn btn-danger btn-block"
-                  onClick={e => {
-                    this.props.history.push(
-                      "/recipe/demo/" + this.props.match.params.recipeID
-                    );
-                  }}
+                  onClick={this.handleOnClickButton}
                 >
                   Mulai
                 </button>

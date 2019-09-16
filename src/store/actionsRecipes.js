@@ -25,9 +25,13 @@ const actionsRecipes = store => ({
   setRecipes(state, value) {
     return { recipes: value };
   },
-  setStepTypeNumberSelected: (state, value) => {
+  setStepTypeNumberSelected(state, value) {
     return { stepTypeNumberSelected: value };
   },
+  setRecipeSteps(state, value) {
+    return { recipeSteps: value };
+  },
+
   // axios
 
   async postRecipe(state, data) {
