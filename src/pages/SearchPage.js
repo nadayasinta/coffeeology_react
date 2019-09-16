@@ -1,25 +1,22 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
+//
 import Filter from "../components/filter";
+import RecipeCard from "../components/recipeCard";
+
+// import store
+import actionsRecipes from "../store/actionsRecipes";
+import { connect } from "unistore/react";
 
 // import material-ui
 import { makeStyles } from "@material-ui/core/styles";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
-import Button from "@material-ui/core/Button";
-import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
 import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
-import DirectionsIcon from "@material-ui/icons/Directions";
-import { maxWidth } from "@material-ui/system";
 
 const useStyles = makeStyles({
   list: {
@@ -54,6 +51,7 @@ const useStylesSearch = makeStyles(theme => ({
 const Search = props => {
   const classes = useStyles();
   const classesSearch = useStylesSearch();
+
   const [state, setState] = React.useState({
     bottom: false
   });
@@ -81,30 +79,56 @@ const Search = props => {
     </div>
   );
 
-  const onClickSearch = event => {
+  const onSubmitSearch = event => {
     event.preventDefault();
-    console.log(event);
-    toggleDrawer("right", true);
-    console.log("lol");
+    props.searchRecipes(props.searchParams, props.searchKeyword);
   };
+  const onChangeSearch = event => {
+    event.preventDefault();
+    props.setSearchKeyword(event.target.value);
+  };
+
+  React.useEffect(() => {
+    props.searchRecipes(props.searchParams, props.searchKeyword);
+  }, [props.searchParams]);
 
   return (
     <div>
-      <Paper className={classesSearch.root}>
-        <IconButton className={classesSearch.iconButton} aria-label="menu">
-          <MenuIcon onClick={toggleDrawer("bottom", true)} />
-        </IconButton>
-        <Divider className={classesSearch.divider} orientation="vertical" />
-        <InputBase
-          className={classesSearch.input}
-          placeholder="Cari Guides"
-          inputProps={{ "aria-label": "search google maps" }}
-        />
-        <IconButton className={classesSearch.iconButton} aria-label="search">
-          <SearchIcon />
-        </IconButton>
-      </Paper>
-
+      <form onSubmit={onSubmitSearch}>
+        <Paper className={classesSearch.root}>
+          <IconButton className={classesSearch.iconButton} aria-label="menu">
+            <MenuIcon onClick={toggleDrawer("bottom", true)} />
+          </IconButton>
+          <Divider className={classesSearch.divider} orientation="vertical" />
+          <InputBase
+            className={classesSearch.input}
+            placeholder="Cari Guides"
+            inputProps={{ "aria-label": "search google maps" }}
+            onChange={onChangeSearch}
+          />
+          <IconButton className={classesSearch.iconButton} aria-label="search">
+            <SearchIcon />
+          </IconButton>
+        </Paper>
+      </form>
+      {props.recipesSearch.length === 0
+        ? 0
+        : props.recipesSearch.map(value => {
+            return (
+              <div className="col-12">
+                <Link to={"/recipe/" + value.id}>
+                  <RecipeCard
+                    data={value}
+                    // methodIcon={
+                    //   this.props.methods[this.props.match.params.methodID - 1]
+                    //     .icon
+                    // }
+                    // time={this.convertSeconds(value.time)}
+                  />
+                </Link>
+              </div>
+            );
+          })}
       <SwipeableDrawer
         anchor="bottom"
         open={state.bottom}
@@ -117,4 +141,7 @@ const Search = props => {
   );
 };
 
-export default Search;
+export default connect(
+  "searchParams,searchKeyword,recipesSearch",
+  actionsRecipes
+)(Search);
