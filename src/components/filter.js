@@ -133,6 +133,7 @@ const ContainedButtons = props => {
     }
   };
 
+  // handle when user clickFilter, setSearchParams based on user input
   const handleClickFilter = event => {
     event.preventDefault();
     const searchParams = {};
