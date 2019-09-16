@@ -23,7 +23,11 @@ class Steps extends React.Component {
   };
 
   componentDidMount() {
-    this.setState({ steps: this.props.recipeSteps });
+    this.setState({ steps: this.props.recipeSteps }, () => {
+      console.log(this.state.steps);
+    });
+
+    console.log(this.props.recipeSteps);
   }
 
   componentWillUpdate = (prevProps, prevState) => {
