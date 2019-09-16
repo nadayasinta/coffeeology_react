@@ -79,30 +79,23 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import MeetingRoomRoundedIcon from '@material-ui/icons/MeetingRoomRounded';
-import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
-import AccessibilityNewRoundedIcon from '@material-ui/icons/AccessibilityNewRounded';
-import SportsRugbyIcon from '@material-ui/icons/SportsRugby';
-import TimelapseIcon from '@material-ui/icons/Timelapse';
-import LocalCafeOutlinedIcon from '@material-ui/icons/LocalCafeOutlined';
-
-
-import PersonOutlineRoundedIcon from '@material-ui/icons/PersonOutlineRounded';
-
-
-import PersonIcon from '@material-ui/icons/Person';
-
-
-
-
-import RestoreIcon from '@material-ui/icons/Restore';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
+import { CoffeeMaker, Seed, SeedOutline, Magnify, StarCircle, Flag, FlagVariant, FontAwesome, HumanGreeting, Face, HumanHandsup, Login } from 'mdi-material-ui'
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
   root: {
     // maxwidth: 480,
+    // color: "green",
+    // "&$selected": {
+    //   color: "red"
+    // },
+    // activeColor: '#f0edf6',
+    // inactiveColor: '#3e2465',
+    // stickToBottom: {
+    //   width: '100%',
+    //   position: 'fixed',
+    //   bottom: 0,
+    // },
   },
 });
 
@@ -111,39 +104,64 @@ export default function SimpleBottomNavigation() {
   const [value, setValue] = React.useState(0);
 
   return (
-    <BottomNavigation className="fixed-bottom d-flex justify-content-around" style={{ maxWidth: "480px" }}
+    <BottomNavigation style={{
+      width: "100%", maxWidth: "480px", position: "fixed",
+      bottom: "0", textSlign: "center", marginLeft: "-13.5px", backgroundColor: "#E1E3DE", zIndex: "999"
+    }}
       value={value}
       onChange={(event, newValue) => {
         setValue(newValue);
       }}
       showLabels
-    // className={classes.root}
+      className={classes.root}
     >
       <BottomNavigationAction
+        style={{
+          paddingTop: "15px"
+        }}
         component={Link}
         to="/"
-        // className={classes.content}
+        className={classes.content}
         label="Seduh"
-        icon={<LocalCafeOutlinedIcon />} />
+        icon={<CoffeeMaker />} />
       <BottomNavigationAction
+        style={{
+          paddingTop: "15px"
+        }}
         component={Link}
         to="/login"
         label="Biji"
-        icon={<SportsRugbyIcon />} />
+        icon={<Seed />} />
       <BottomNavigationAction
+        style={{
+          paddingTop: "15px"
+        }}
         component={Link}
         to="/recipes/1"
         label="Cari"
-        icon={<SearchRoundedIcon />} />
+        icon={<Magnify />} />
       <BottomNavigationAction
+        style={{
+          paddingTop: "15px"
+        }}
         component={Link}
         to="/activity"
         label="Aktifitas"
-        icon={<TimelapseIcon />} />
-      <BottomNavigationAction component={Link}
+        icon={<StarCircle />} />
+      {sessionStorage.getItem('token') !== null ? <BottomNavigationAction style={{
+        paddingTop: "15px"
+      }} component={Link}
         to="/activity"
         label="Profile"
-        icon={<PersonOutlineRoundedIcon />} />
+        icon={<HumanGreeting />} /> :
+        <BottomNavigationAction style={{
+          paddingTop: "15px"
+        }} component={Link}
+          to="/login"
+          label="Masuk"
+          icon={<Login />} />
+      }
+
 
     </BottomNavigation >
   );
