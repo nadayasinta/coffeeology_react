@@ -48,6 +48,7 @@ const initialState = {
     //   icon: require("../assets/images/StepIcon/stir.png")
     // }
   ],
+  recipesSearch: [],
   recipe: null,
   // name: "Ultimate v60",
   // methodID: 1,
@@ -105,6 +106,7 @@ const initialState = {
 
   // search
   searchParams: {},
+  searchKeyword: "",
 
   // method
   methodID: 0,
