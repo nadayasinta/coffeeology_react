@@ -34,6 +34,9 @@ const actionsRecipes = store => ({
   setSearchParams(state, value) {
     return { searchParams: value };
   },
+  setSearchKeyword(state, value) {
+    return { searchKeyword: value };
+  },
 
   // axios
 
@@ -76,6 +79,23 @@ const actionsRecipes = store => ({
       store.setState({ recipes: response.data.data });
     });
   },
+  async searchRecipes(state, filterParams, searchParams) {
+    console.log(filterParams);
+    console.log(searchParams);
+    const paramsInput = filterParams;
+    paramsInput["search"] = searchParams;
+    let config = {
+      method: "get",
+      url: store.getState().baseURL + "/recipes",
+      params: paramsInput
+    };
+
+    await axios(config).then(response => {
+      console.log(response);
+      store.setState({ recipesSearch: response.data.data });
+    });
+  },
+
   // async getRecipes(state, paramsInput = null) {
   //   let config = {
   //     method: "get",
