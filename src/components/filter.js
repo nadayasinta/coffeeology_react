@@ -133,6 +133,50 @@ const ContainedButtons = props => {
     }
   };
 
+  const handleClickFilter = event => {
+    event.preventDefault();
+    const searchParams = {};
+    // insert selected method
+    let methodsParams = "";
+    Object.keys(methods).forEach(key => {
+      console.log(key);
+      if (methods[key]) {
+        methodsParams += parseInt(key) + 1 + ",";
+        console.log(methodsParams.slice(0, -1));
+      }
+    });
+    if (methodsParams) {
+      searchParams["methods"] = methodsParams.slice(0, -1);
+    }
+
+    // insert selected difficulty
+    let difficultyParams = "";
+    Object.keys(difficulties).forEach(key => {
+      console.log(key);
+      if (difficulties[key]) {
+        difficultyParams += parseInt(key) + 1 + ",";
+        console.log(difficultyParams.slice(0, -1));
+      }
+    });
+    if (difficultyParams) {
+      searchParams["difficulties"] = difficultyParams.slice(0, -1);
+    }
+
+    // insert selected origin
+    let originParams = "";
+    Object.keys(origins).forEach(key => {
+      console.log(key);
+      if (origins[key]) {
+        originParams += parseInt(key) + 1 + ",";
+        console.log(originParams.slice(0, -1));
+      }
+    });
+    if (originParams) {
+      searchParams["origins"] = originParams.slice(0, -1);
+    }
+    console.log(searchParams);
+  };
+
   return (
     <div className="container filter">
       <div className="row">
@@ -219,6 +263,7 @@ const ContainedButtons = props => {
             variant="contained"
             color="primary"
             className={classes.button}
+            onClick={handleClickFilter}
           >
             Filter
           </Button>
