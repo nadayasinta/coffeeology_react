@@ -7,7 +7,7 @@
   color: black;
 }
 .allpage a:hover {
-  color: black ;
+  color: black;
 }
 .header {
   height: 100px;
@@ -63,7 +63,7 @@
   margin-bottom: 0;
 }
 .navbar a:hover {
-  color: #663f30 ;
+  color: #663f30;
 }
 .navbar img:hover {
   transform: scale(1.1);
@@ -78,4 +78,17 @@
 }
 .brewing .homeimage {
   width: 100%;
+}
+.scrolls {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  height: 80px;
+  white-space: nowrap;
+}
+.MuiPaper-root {
+  max-width: 480px;
+  justify-items: center;
+}
+.MuiDrawer-paperAnchorBottom {
+  margin: auto;
 }

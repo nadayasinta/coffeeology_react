@@ -48,6 +48,7 @@ const initialState = {
     //   icon: require("../assets/images/StepIcon/stir.png")
     // }
   ],
+  recipesSearch: [],
   recipe: null,
   // name: "Ultimate v60",
   // methodID: 1,
@@ -101,6 +102,12 @@ const initialState = {
     //   amount: 80
     // }
   ],
+  difficulties: ["Mudah", "Sedang", "Sulit"],
+
+  // search
+  searchParams: {},
+  searchKeyword: "",
+
   // method
   methodID: 0,
 
@@ -135,7 +142,11 @@ const initialState = {
       icon: require("../assets/images/methodAeroPress.png")
     },
     { id: 5, name: "V60", icon: require("../assets/images/methodV60.png") },
-    { id: 6, name: "Moka Pot", icon: require("../assets/images/methodMokaPot.png") }
+    {
+      id: 6,
+      name: "Moka Pot",
+      icon: require("../assets/images/methodMokaPot.png")
+    }
   ],
 
   // step Types
@@ -180,7 +191,8 @@ const initialState = {
     { id: 1, name: "jawa" },
     { id: 2, name: "sumatera" },
     { id: 3, name: "flores" },
-    { id: 4, name: "toraja" }
+    { id: 4, name: "toraja" },
+    { id: 5, name: "lainnya" }
   ],
 
   //history data
