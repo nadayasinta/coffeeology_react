@@ -100,6 +100,7 @@ class RecipeSelection extends React.Component {
       };
       return (
         <div>
+          <img className="backbutton" src={this.props.backButton} onClick={event => this.props.history.goBack()} />
           <div className="container">
             <div className="row mx-0 mt-3">
               <div className="col-4 text-left">
@@ -280,6 +281,6 @@ class RecipeSelection extends React.Component {
 }
 
 export default connect(
-  "recipe, stepTypes, recipeDetails, recipeSteps, waterLimit",
+  "recipe, stepTypes, recipeDetails, recipeSteps, waterLimit, backButton",
   actionsRecipes
 )(RecipeSelection);

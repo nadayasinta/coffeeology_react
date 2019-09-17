@@ -1,17 +1,27 @@
 @import url("https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,900|Nunito:300,400,400i,600,700,800,900|Oswald:300,400,500,600,700|Roboto:300,400,400i,500,700,900&display=swap");
+.bgcolor1 {
+  background-color: #3b383e;
+}
+.bgcolor2 {
+  border-color: #53686B;
+  border-style: solid;
+}
 .allpage {
+  min-height: 100%;
   font-family: "Nunito", sans-serif !important;
 }
 .allpage a {
   text-decoration: none !important;
-  color: black;
+  color: #3b383e;
 }
 .allpage a:hover {
-  color: black;
+
+  color: #3b383e;
+
 }
 .header {
-  height: 100px;
-  background-color: #53686b;
+  height: 75px;
+  background-color: #53686B;
   padding-top: 10px;
   padding-bottom: 10px;
 }
@@ -20,6 +30,12 @@
 }
 .recipeCard h6 {
   font-size: 0.8em;
+}
+.recipeCard .starrating {
+  width: 20%;
+}
+.recipeCard a:hover img {
+  background-color: blue;
 }
 .toggle-base {
   height: 20px;
@@ -57,7 +73,7 @@
 }
 .navbar a {
   text-decoration: none !important;
-  color: #451503;
+  color: #3b383e;
 }
 .navbar a h6 {
   margin-bottom: 0;
@@ -76,8 +92,62 @@
 .activity h6 {
   font-family: "Nunito", sans-serif !important;
 }
-.brewing .homeimage {
+.activity .activityBar {
+  margin-right: -30px;
+  margin-left: -30px;
+  margin-top: -50px;
+}
+.brewing .rowhomeimage {
+  margin-right: -30px;
+  margin-left: -30px;
+  margin-top: -50px;
+}
+.brewing .rowhomeimage .homeimage {
   width: 100%;
+}
+.overlaycontainer {
+  position: relative;
+}
+.overlay {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+.overlaycontainer:hover .overlay {
+  opacity: 0.3;
+}
+.overlaycontainer:hover .middle {
+  opacity: 1;
+}
+.text {
+  background-color: #53686B;
+  color: #FFDED5;
+  font-size: 16px;
+  padding: 16px 32px;
+}
+.backbutton {
+  position: absolute;
+  top: 85px;
+  left: 20px;
+  width: 10%;
+  padding: 10px;
+}
+.backbutton:hover {
+  background-color: #bcbcbc;
+  border-radius: 50%;
 }
 .scrolls {
   overflow-x: scroll;

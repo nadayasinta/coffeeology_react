@@ -39,7 +39,7 @@ const useStylesSort = makeStyles(theme => ({
   }
 }));
 
-const ContainedButtons = props => {
+const Filter = props => {
   const classes = useStyles();
   const classesSort = useStylesSort();
 
@@ -48,19 +48,20 @@ const ContainedButtons = props => {
 
   React.useEffect(() => {
     setLabelWidth(inputLabel.current.offsetWidth);
-  }, []);
 
-  const handleChangeSort = name => event => {
-    setState({
-      ...state,
-      [name]: event.target.value
-    });
+    setMethods(props.methodsParams);
+    setDifficulties(props.difficultiesParams);
+    setOrigins(props.originsParams);
+  }, [props.searchParams]);
+
+  const handleChangeSort = event => {
+    event.preventDefault();
+    // setSort(event.target.value);
+    setSort(event.target.value);
   };
-  const [state, setState] = React.useState({
-    age: "",
-    name: "hai"
-  });
   // create state
+  const [sort, setSort] = React.useState("");
+
   const [methods, setMethods] = React.useState({
     0: false,
     1: false,
@@ -175,12 +176,16 @@ const ContainedButtons = props => {
     if (originParams) {
       searchParams["origins"] = originParams.slice(0, -1);
     }
-    console.log(searchParams);
 
+    // insert sort
+    if (sort !== "") {
+      searchParams["orderby"] = sort;
+    }
     // set searchParams
     props.setSearchParams(searchParams);
-    console.log(props);
-
+    props.setOriginsParams(origins);
+    props.setDifficultiesParams(difficulties);
+    props.setMethodsParams(methods);
     setTimeout(() => {
       props.onClick();
     }, 200);
@@ -252,22 +257,24 @@ const ContainedButtons = props => {
             </InputLabel>
             <Select
               native
-              value={state.age}
-              onChange={handleChangeSort("age")}
               labelWidth={labelWidth}
               inputProps={{
                 name: "age",
                 id: "outlined-age-native-simple"
               }}
+              onChange={handleChangeSort}
             >
               <option value="" />
-              <option value={1}>Rating Paling Tinggi</option>
-              <option value={2}>Terpopuler</option>
-              <option value={3}>Tingkat Kesulitan (Mudah-Sulit)</option>
+              <option value={"rating"}>Rating Paling Tinggi</option>
+              <option value={"brewCount"}>Terpopuler</option>
+              <option value={"difficulty"}>
+                Tingkat Kesulitan (Mudah-Sulit)
+              </option>
               <option value={4}>Tingkat Kesulitan (Sulit-Mudah)</option>
             </Select>
           </FormControl>
           <br />
+
           <Button
             variant="contained"
             color="primary"
@@ -283,6 +290,6 @@ const ContainedButtons = props => {
 };
 
 export default connect(
-  "methods,difficulties,origins",
+  "methods,difficulties,origins,searchParams,originsParams,difficultiesParams,methodsParams",
   actionsRecipes
-)(ContainedButtons);
+)(Filter);

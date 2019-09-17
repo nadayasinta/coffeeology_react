@@ -78,17 +78,17 @@ class AddStep extends React.Component {
     // validation waterAmount every Step = waterAmount Recipe
     let totalWaterStep = 0
     this.state.stepTemporary.map((step, index) => (totalWaterStep = totalWaterStep + step.amount))
-    if (parseInt(totalWaterStep) > parseInt(recipes.water)){
+    if (parseInt(totalWaterStep) > parseInt(recipes.water)) {
       return alert(`Total Air Pada Step Melebihi ${recipes.water} ml`)
     }
-    else if (parseInt(totalWaterStep) < parseInt(recipes.water)){
+    else if (parseInt(totalWaterStep) < parseInt(recipes.water)) {
       return alert(`Total Air Pada Step Masih Kurang ${parseInt(recipes.water) - parseInt(totalWaterStep)} ml`)
     }
 
     let time = 0;
     steps.map((step, index) => (time = time + step.time));
     recipes["time"] = time;
-    
+
     let data = {
       recipes: recipes,
       recipeDetails: recipeDetails,
@@ -99,7 +99,7 @@ class AddStep extends React.Component {
 
     await this.props.postRecipe(data)
 
-    if (sessionStorage.getItem("Recipe") === null){
+    if (sessionStorage.getItem("Recipe") === null) {
       this.props.history.push("/activity");
     } else {
       return alert("Silahkan Perbaiki Data Resep Anda")
@@ -109,6 +109,7 @@ class AddStep extends React.Component {
   render() {
     return (
       <div>
+        <img className="backbutton" src={this.props.backButton} onClick={event => this.props.history.goBack()} />
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-12">
@@ -196,6 +197,6 @@ class AddStep extends React.Component {
 }
 
 export default connect(
-  "stepTypes, stepTemporary",
+  "stepTypes, stepTemporary, backButton",
   actionsRecipes
 )(AddStep);
