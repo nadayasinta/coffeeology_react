@@ -5,21 +5,34 @@
 @fontnunito: "Nunito", sans-serif;
 @fontroboto: "Roboto", sans-serif;
 
-@blue :#53686b;
+@color1 :#3b383e;
+@color2 :#53686B;
+@color3 :#6C757D;
+@color4 :#FFDED5;
+
+.bgcolor1{
+  background-color: @color1;
+}
+.bgcolor2{
+  border-color: @color2;
+  border-style: solid;
+  // background-color: @color3;
+}
 
 .allpage{
+  min-height: 100%;
   font-family: @fontnunito !important;
   a {
     text-decoration: none !important;
-    color: black;
+    color: @color1;
   };
   a:hover {
-    color:  black ;
+    color:  @color1;
 }
 }
 .header {
-  height: 100px;
-  background-color: @blue;
+  height: 75px;
+  background-color: @color2;
   padding-top: 10px;
   padding-bottom: 10px;
 }
@@ -34,6 +47,14 @@
   h6 {
     font-size: 0.8em;
   }
+  .starrating{
+    width: 20%
+  }
+  a:hover{
+    img{
+    background-color: blue;
+  }
+}
 }
 
 // steps
@@ -84,7 +105,7 @@
 
   a {
     text-decoration: none !important;
-    color: #451503;
+    color: @color1;
     h6{
       margin-bottom: 0;
     };
@@ -104,20 +125,77 @@ img:hover{
     padding-left: 0;
     padding-right: 0;
     font-family: @fontnunito !important;
-
   }
   h6{
     font-family: @fontnunito !important;
-
+  }
+  .activityBar{
+    margin-right: -30px;
+    margin-left: -30px;
+    margin-top: -50px;
   }
 }
 
 
 .brewing{
-  .homeimage{
-    // margin-left: -15px;
-    // max-width: 510px;
-        // margin-right: -15px;
-        width: 100%
+  .rowhomeimage{
+    margin-right: -30px;
+    margin-left: -30px;
+    margin-top: -50px;
+    .homeimage{
+      width: 100%
+      }
+  }
+}
+
+// overlay
+.overlaycontainer {
+  position: relative;
+}
+
+.overlay {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.overlaycontainer:hover .overlay {
+  opacity: 0.3;
+}
+
+.overlaycontainer:hover .middle {
+  opacity: 1;
+}
+
+.text {
+  background-color: @color2;
+  color: @color4;
+  font-size: 16px;
+  padding: 16px 32px;
+}
+
+.backbutton{
+  position: absolute;
+  top: 85px;
+  left:20px;
+  width:10%;
+  padding: 10px;
+  &:hover{
+    background-color: #bcbcbc;
+    border-radius:50%
   }
 }
