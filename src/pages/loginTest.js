@@ -7,7 +7,7 @@ import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
-import { HumanHandsup } from 'mdi-material-ui'
+import { HumanHandsup } from "mdi-material-ui";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import IconButton from "@material-ui/core/IconButton";
@@ -73,8 +73,7 @@ const SignIn = props => {
         title: "Email tidak valid!"
       });
     } else {
-      console.log(sessionStorage.getItem("token"));
-      props.login(data);
+      await props.login(data);
 
       // check login success, if true redirect to home
       setTimeout(() => {
@@ -85,10 +84,15 @@ const SignIn = props => {
           });
           setTimeout(() => {
             props.history.goBack();
-          }, 1000);
+          }, 200);
         }
       }, 500);
     }
+  };
+
+  const handleRedirect = event => {
+    event.preventDefault();
+    props.history.goBack();
   };
 
   // handle on change email form
@@ -103,8 +107,13 @@ const SignIn = props => {
 
   return (
     <div>
+      {console.log(props.history.action)}
       {sessionStorage.getItem("token") ? <Redirect to="/" /> : <div></div>}
-      <img className="backbutton" src={props.backButton} onClick={event => props.history.goBack()} />
+      <img
+        className="backbutton"
+        src={props.backButton}
+        onClick={handleRedirect}
+      />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
@@ -114,8 +123,13 @@ const SignIn = props => {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className={classes.form}>
+          <form
+            className={classes.form}
+            method="POST"
+            onSubmit={handleOnSubmit}
+          >
             <TextField
+              required
               variant="outlined"
               margin="normal"
               required
@@ -128,6 +142,7 @@ const SignIn = props => {
               autoFocus
             />{" "}
             <TextField
+              required
               variant="outlined"
               margin="normal"
               required
@@ -158,19 +173,19 @@ const SignIn = props => {
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick={handleOnSubmit}
+              type="submit"
             >
               Sign In
             </Button>
-
             <Grid container className="justify-content-center">
               <Grid item>
-                ------------ ATAU ------------<br />
+                ------------ ATAU ------------
+                <br />
                 {/* <Link to="/register">Don't have an account? Sign Up</Link> */}
               </Grid>
             </Grid>
           </form>
-          <Link to="/register" >
+          <Link to="/register">
             <Button
               fullWidth
               variant="contained"
@@ -182,7 +197,7 @@ const SignIn = props => {
           </Link>
         </div>
       </Container>
-    </div >
+    </div>
   );
 };
 
