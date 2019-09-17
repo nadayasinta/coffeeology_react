@@ -121,6 +121,7 @@ const initialState = {
   // data user
   name: "",
   emailValidStatus: false,
+  login: 0,
 
   // url
   baseURL: "http://0.0.0.0:5000",
@@ -210,7 +211,7 @@ const initialState = {
   myBrew: [],
 
   //import back image
-  backButton: require('../assets/images/back.png')
+  backButton: require("../assets/images/back.png")
 };
 
 const store = createStore(initialState);
