@@ -27,27 +27,27 @@ class Profile extends React.Component {
               />
             </div>
             <h3>
-              {this.props.userMe.name}
+              {this.props.userMe.name} &nbsp;
               Ade Suprapto &nbsp;
-              <span className="btn btn-orange">
+              <span className="btn btn-orange" onClick={(e)=>this.changePassword(e)}>
                 <img src={editProfile} alt="altTag" width="20px"></img>
               </span>
             </h3>
             <hr></hr>
-            <span>
-              {this.props.userMe.bio}
+            <span className="text-justify">
+              {this.props.userMe.bio} &nbsp;
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas quae
               aliquid porro quis, voluptatum nulla itaque optio pariatur dolores
               ipsa obcaecati temporibus voluptatibus tenetur sint nostrum
               molestias doloribus eius quia!
             </span>
           </div>
-            <div className="col-md-6 col-xs-6 border" align="center">
+            <div className="col-md-6 col-xs-6 border btn btn-orange" align="center" onClick={(e)=>this.props.history.push("/activity")} >
               <h5>
                 {this.props.userMe.brewCount} <br /> <span>Brew</span>
               </h5>
             </div>
-            <div className="col-md-6 col-xs-6 border" align="center">
+            <div className="col-md-6 col-xs-6 border btn btn-orange" align="center" onClick={(e)=>this.props.history.push("/activity")}>
               <h5>
                 {this.props.userMe.recipeCount} <br /> <span>Resep</span>
               </h5>
@@ -55,15 +55,11 @@ class Profile extends React.Component {
 
           <div className="col-12 col-md-12 col-xs-12 mt-2">
             <div align="left">
-              <span className="btn btn-orange">Resep Saya</span>
+            <button type="button" className="btn btn-primary">Ubah Password</button>
               <hr></hr>
             </div>
             <div align="left">
-              <span className="btn btn-orange">Ubah Password</span>
-              <hr></hr>
-            </div>
-            <div align="left">
-              <span className="btn btn-orange">Keluar</span>
+              <button type="button" className="btn btn-primary mb-3">Keluar</button>
             </div>
           </div>
         </div>
