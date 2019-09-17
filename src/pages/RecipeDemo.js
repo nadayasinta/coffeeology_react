@@ -26,6 +26,7 @@ class Steps extends React.Component {
     this.setState({ steps: this.props.recipeSteps }, () => {
       console.log(this.state.steps);
     });
+    this.props.setStepIndex(0);
 
     console.log(this.props.recipeSteps);
   }

@@ -29,6 +29,7 @@
   a:hover {
     color:  @color1;
 }
+
 }
 .header {
   height: 75px;
@@ -36,8 +37,6 @@
   padding-top: 10px;
   padding-bottom: 10px;
 }
-
-
 
 .recipeCard {
   h4 {
@@ -101,22 +100,22 @@
 .navbar {
   background-color: #e1e3de;
 
-
-
   a {
     text-decoration: none !important;
+
     color: @color1;
     h6{
-      margin-bottom: 0;
-    };
-};
 
-a:hover {
-  color:  #663f30 ;
-}
-img:hover{
-  transform: scale(1.1)
-};
+      margin-bottom: 0;
+    }
+  }
+
+  a:hover {
+    color: #663f30;
+  }
+  img:hover {
+    transform: scale(1.1);
+  }
 }
 
 // activity
@@ -126,8 +125,9 @@ img:hover{
     padding-right: 0;
     font-family: @fontnunito !important;
   }
-  h6{
+  h6 {
     font-family: @fontnunito !important;
+
   }
   .activityBar{
     margin-right: -30px;
@@ -198,4 +198,23 @@ img:hover{
     background-color: #bcbcbc;
     border-radius:50%
   }
+
+  
+}
+
+
+// filter
+.scrolls {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  height: 80px;
+  white-space: nowrap;
+}
+
+.MuiPaper-root {
+  max-width: 480px;
+  justify-items: center;
+}
+.MuiDrawer-paperAnchorBottom {
+  margin: auto;
 }
