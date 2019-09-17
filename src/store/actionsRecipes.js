@@ -138,6 +138,7 @@ const actionsRecipes = store => ({
         console.log(response.data.data.recipeDetails);
         store.setState({ recipeSteps: response.data.data.recipeSteps });
         store.setState({ recipe: response.data.data.recipe });
+        store.setState({ recipeCreator: response.data.data.user });
       })
       .catch(error => console.log("Error getRecipeById", error));
   }

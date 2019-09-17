@@ -105,6 +105,7 @@ const initialState = {
     //   amount: 80
     // }
   ],
+  recipeCreator: [],
   difficulties: ["Mudah", "Sedang", "Sulit"],
 
   // search
