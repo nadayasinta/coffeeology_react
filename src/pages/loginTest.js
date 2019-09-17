@@ -7,7 +7,7 @@ import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
-import { HumanHandsup } from 'mdi-material-ui'
+import { HumanHandsup } from "mdi-material-ui";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import IconButton from "@material-ui/core/IconButton";
@@ -59,7 +59,7 @@ const SignIn = props => {
 
   // validate email from form
   const validateEmail = email => {
-    var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
   };
 
@@ -104,7 +104,11 @@ const SignIn = props => {
   return (
     <div>
       {sessionStorage.getItem("token") ? <Redirect to="/" /> : <div></div>}
-      <img className="backbutton" src={props.backButton} onClick={event => props.history.goBack()} />
+      <img
+        className="backbutton"
+        src={props.backButton}
+        onClick={event => props.history.goBack()}
+      />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
@@ -162,15 +166,15 @@ const SignIn = props => {
             >
               Sign In
             </Button>
-
             <Grid container className="justify-content-center">
               <Grid item>
-                ------------ ATAU ------------<br />
+                ------------ ATAU ------------
+                <br />
                 {/* <Link to="/register">Don't have an account? Sign Up</Link> */}
               </Grid>
             </Grid>
           </form>
-          <Link to="/register" >
+          <Link to="/register">
             <Button
               fullWidth
               variant="contained"
@@ -182,7 +186,7 @@ const SignIn = props => {
           </Link>
         </div>
       </Container>
-    </div >
+    </div>
   );
 };
 
