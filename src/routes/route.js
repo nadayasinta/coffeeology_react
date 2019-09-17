@@ -37,7 +37,7 @@ function Routes() {
           <Route exact path="/recipes/create/inputstep" component={InputStep} />
           <Route exact path="/recipes/:methodID" component={RecipesSelection} />
         </Switch>
-          <Navbar />
+        <Navbar />
       </BrowserRouter>
     </Provider>
   );
