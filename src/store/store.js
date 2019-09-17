@@ -1,9 +1,9 @@
-import React from "react";
+// import React from "react";
 import createStore from "unistore";
-import axios from "axios";
-import { Redirect } from "react-router-dom";
+// import axios from "axios";
+// import { Redirect } from "react-router-dom";
 // import method image
-import { makeStyles } from "@material-ui/core/styles";
+// import { makeStyles } from "@material-ui/core/styles";
 
 // import json
 import stepTypes from "./stepTypes";
@@ -188,7 +188,10 @@ const initialState = {
   // recipe in page activity
   history: [],
 
-  myBrew: []
+  myBrew: [],
+
+  // users
+  userMe: []
 };
 
 const store = createStore(initialState);

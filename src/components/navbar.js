@@ -151,7 +151,7 @@ export default function SimpleBottomNavigation() {
       {sessionStorage.getItem('token') !== null ? <BottomNavigationAction style={{
         paddingTop: "15px"
       }} component={Link}
-        to="/activity"
+        to="/profile/me"
         label="Profile"
         icon={<HumanGreeting />} /> :
         <BottomNavigationAction style={{

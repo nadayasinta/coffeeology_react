@@ -1,25 +1,22 @@
 import store from "./store";
 import axios from "axios";
-// import Swal from "sweetalert2";
-// import { getThemeProps } from "@material-ui/styles";
 
-const actionsActivity = store => ({
-  async getHistory(state) {
-    console.log("test get history");
+const actionsProfile = store => ({
+  async getProfile(state) {
+    console.log("test get profile");
     let config = {
       method: "get",
-      url: store.getState().baseURL + "/history",
+      url: store.getState().baseURL + "/users/me",
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token")
       }
     };
     await axios(config)
       .then(response => {
-        console.log("data history ", response.data.data)
-        console.log("type data history ", typeof(response.data.data))
-        store.setState({ history: response.data.data });
+        console.log("data users ", response.data.data)
+        store.setState({ userMe: response.data.data });
       })
-      .catch(error => console.log("Error getHistory", error));
+      .catch(error => console.log("Error getUserMe", error));
   },
   async getMyBrew(state) {
     console.log("test get myBrew");
@@ -40,4 +37,4 @@ const actionsActivity = store => ({
   },
 });
 
-export default actionsActivity;
+export default actionsProfile;
