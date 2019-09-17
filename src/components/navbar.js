@@ -185,7 +185,7 @@ export default function SimpleBottomNavigation() {
           label="Masuk"
           icon={<Login />}
         />
-      )}
+      }
     </BottomNavigation>
   );
 }

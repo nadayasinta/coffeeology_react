@@ -9,10 +9,10 @@ class history extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div className="w-100">
         {this.props.history.map((value, key) => (
           <div className="col-12">
-            <HistoryCard data={value} icon={this.props.methods[value.methodID-1].icon} />
+            <HistoryCard data={value} icon={this.props.methods[value.methodID - 1].icon} />
           </div>
         ))}
       </div>

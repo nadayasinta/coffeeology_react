@@ -35,7 +35,7 @@ class MyBrew extends React.Component {
         {this.props.myBrew.map((value, key) => (
           <div className="col-12">
             <Link to={`/recipe/${value.id}`}>
-              <RecipeCard pageType="pageMyBrew" methodIcon={this.props.methods[value.methodID - 1].icon} data={value} time={this.convertSeconds(value.time)} />
+              <RecipeCard className="w-100" pageType="pageMyBrew" methodIcon={this.props.methods[value.methodID - 1].icon} data={value} time={this.convertSeconds(value.time)} />
             </Link>
           </div>
         ))}

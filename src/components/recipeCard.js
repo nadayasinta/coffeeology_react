@@ -6,7 +6,7 @@ function recipeCard(props) {
       <div className="overlay">
         <div className="row h-100 content-image">
           <div className="col-3 align-top text-right">
-            <img src={props.methodIcon} className="w-100 bgcolor2 rounded-circle p-2" alt="alt tag" />
+            <img src={props.methodIcon} className="w-100 bgcolor2" alt="alt tag" />
           </div>
           <div className="col-9 align-self-center text-left">
             <div className="row">

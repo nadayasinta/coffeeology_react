@@ -5,6 +5,8 @@
 .bgcolor2 {
   border-color: #53686B;
   border-style: solid;
+  border-radius: 50%;
+  padding: 10px;
 }
 .allpage {
   min-height: 100%;
@@ -15,15 +17,16 @@
   color: #3b383e;
 }
 .allpage a:hover {
-
   color: #3b383e;
-
 }
 .header {
   height: 75px;
   background-color: #53686B;
   padding-top: 10px;
   padding-bottom: 10px;
+}
+.recipeCard {
+  max-width: 420px;
 }
 .recipeCard h4 {
   font-size: 20px;
