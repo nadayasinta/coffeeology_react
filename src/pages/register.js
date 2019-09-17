@@ -3,7 +3,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import {HumanHandsup} from 'mdi-material-ui'
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Visibility from "@material-ui/icons/Visibility";
@@ -120,7 +120,7 @@ const Register = props => {
         <CssBaseline />
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
+            <HumanHandsup />
           </Avatar>
           <Typography component="h1" variant="h5">
             Register
@@ -160,6 +160,7 @@ const Register = props => {
               onChange={onChangePassword}
               autoComplete="current-password"
               type={values.showPassword ? "text" : "password"}
+              helperText="Gunakan huruf besar, huruf kecil dan angka. Minimal 6 karakter. "
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">

@@ -53,7 +53,10 @@ function a11yProps(index) {
 
 const useStyles = makeStyles(theme => ({
   root: {
-    backgroundColor: theme.palette.background.paper
+    backgroundColor: theme.palette.background.paper,
+    marginRight: "-15px",
+    marginLeft: "-15px",
+    marginTop: "-50px",
   }
 }));
 
@@ -71,13 +74,13 @@ export default function FullWidthTabs() {
   }
 
   return (
-    <div className="">
+    <div>
       {sessionStorage.getItem("token") ? <div></div> : <Redirect to="/login" />}
-      <div className="container-fluid activity">
+      <div className="container-fluid activity px-0">
         <div className="row">
           <div className="col-12">
             <div className={classes.root}>
-              <AppBar position="static" color="default">
+              <AppBar className="acitivityBar" position="static" color="default">
                 <Tabs
                   value={value}
                   onChange={handleChange}
@@ -95,7 +98,7 @@ export default function FullWidthTabs() {
                 index={value}
                 onChangeIndex={handleChangeIndex}
               >
-                <TabPanel value={value} index={0} dir={theme.direction}>
+                <TabPanel className="px-3" value={value} index={0} dir={theme.direction}>
                   <MyBrew />
                 </TabPanel>
                 <TabPanel value={value} index={1} dir={theme.direction}>
