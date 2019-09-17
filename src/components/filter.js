@@ -176,6 +176,14 @@ const ContainedButtons = props => {
       searchParams["origins"] = originParams.slice(0, -1);
     }
     console.log(searchParams);
+
+    // set searchParams
+    props.setSearchParams(searchParams);
+    console.log(props);
+
+    setTimeout(() => {
+      props.onClick();
+    }, 200);
   };
 
   return (
