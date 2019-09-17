@@ -1,5 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Modal, Button, Form } from "react-bootstrap";
+import { Redirect } from "react-router-dom";
 
 // import image
 import profileIcon from "../assets/images/profile.png";
@@ -10,65 +11,248 @@ import { connect } from "unistore/react";
 import actionsProfile from "../store/actionsProfile";
 
 class Profile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      editProfileView: false,
+      editPasswordView: false
+    };
+    this.name = React.createRef();
+    this.bio = React.createRef();
+    this.passwordOld = React.createRef();
+    this.passwordNew = React.createRef();
+    this.retypePasswordNew = React.createRef();
+  }
+
   componentDidMount = () => {
-    this.props.getProfile();
+    if (sessionStorage.getItem("token") === null) {
+      return <Redirect to={{ pathname: "/login" }} />;
+    } else {
+      this.props.getProfile();
+    }
+  };
+
+  // handle show hide modal
+  handleChangeView = async (e, state, value) => {
+    e.preventDefault();
+    await this.setState({ state: value });
+  };
+
+
+  // handle edit name and bio
+  handleSubmitProfile = async e => {
+    e.preventDefault();
+    let data = {
+      name: this.name.current.value,
+      bio: this.bio.current.value
+    };
+    await this.props.editProfile(data);
+    await this.props.getProfile();
+    // if data is not valid
+    if (this.name.current.value !== this.props.userMe.name) {
+      return console.log("ulang");
+    } else {
+      await this.setState({ editProfileView: false });
+    }
+  };
+
+  // handle edit password user
+  handleSubmitPassword = async e => {
+    e.preventDefault();
+    if (this.passwordNew.current.value !== this.retypePasswordNew.current.value){
+      return this.props.Toast.fire({
+        type: "error",
+        title: "Password Not Match"
+      });
+    }
+
+    let data = {
+      passwordOld: this.passwordOld.current.value,
+      passwordNew: this.passwordNew.current.value
+    };
+    await this.props.editPassword(data);
+    
+    // if data is not valid
+    if (this.props.changePasswordStatus) {
+      await this.props.resetChangePasswordStatus()
+      data = {
+        email : this.props.userMe.email,
+        password : this.state.passwordNew
+      }
+      await this.props.login(data)
+      await this.props.getProfile()
+      await this.setState({ editPasswordView: false });
+    } else {
+      return console.log("salah")
+    }
+  };
+
+  // handle logout
+  handleLogot = async e => {
+    e.preventDefault();
+    sessionStorage.removeItem("token");
+    this.props.history.push("/");
   };
 
   render() {
-    return (
-      <div className="container border">
-        <div className="row login_box">
-          <div className="col-md-12 col-xs-12 mb-2" align="center">
-            <div className="mt-2">
-              <img
-                src={profileIcon}
-                style={{ borderRadius: "50%", backgroundColor: "#000000" }}
-                width="100px"
-              />
-            </div>
-            <h3>
-              {this.props.userMe.name} &nbsp;
-              Ade Suprapto &nbsp;
-              <span className="btn btn-orange" onClick={(e)=>this.changePassword(e)}>
-                <img src={editProfile} alt="altTag" width="20px"></img>
+    if (sessionStorage.getItem("token") === null) {
+      return <Redirect to={{ pathname: "/login" }} />;
+    } else {
+      return (
+        <div className="container border">
+          <div className="row login_box">
+            <div className="col-md-12 col-xs-12 mb-2" align="center">
+              <div className="mt-2">
+                <img
+                  src={profileIcon}
+                  style={{ borderRadius: "50%", backgroundColor: "#000000" }}
+                  width="100px"
+                />
+              </div>
+              <h3>
+                {this.props.userMe.name}
+                <span
+                  className="btn btn-orange"
+                  onClick={e => {e.preventDefault(); this.setState({editProfileView:true})}}
+                >
+                  <img src={editProfile} alt="altTag" width="20px"></img>
+                </span>
+              </h3>
+              <hr></hr>
+              <span className="text-justify">
+                {this.props.userMe.bio}
               </span>
-            </h3>
-            <hr></hr>
-            <span className="text-justify">
-              {this.props.userMe.bio} &nbsp;
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas quae
-              aliquid porro quis, voluptatum nulla itaque optio pariatur dolores
-              ipsa obcaecati temporibus voluptatibus tenetur sint nostrum
-              molestias doloribus eius quia!
-            </span>
-          </div>
-            <div className="col-md-6 col-xs-6 border btn btn-orange" align="center" onClick={(e)=>this.props.history.push("/activity")} >
+            </div>
+            <div
+              className="col-md-6 col-xs-6 border btn btn-orange"
+              align="center"
+              onClick={e => this.props.history.push("/activity")}
+            >
               <h5>
                 {this.props.userMe.brewCount} <br /> <span>Brew</span>
               </h5>
             </div>
-            <div className="col-md-6 col-xs-6 border btn btn-orange" align="center" onClick={(e)=>this.props.history.push("/activity")}>
+            <div
+              className="col-md-6 col-xs-6 border btn btn-orange"
+              align="center"
+              onClick={e => this.props.history.push("/activity")}
+            >
               <h5>
                 {this.props.userMe.recipeCount} <br /> <span>Resep</span>
               </h5>
             </div>
 
-          <div className="col-12 col-md-12 col-xs-12 mt-2">
-            <div align="left">
-            <button type="button" className="btn btn-primary">Ubah Password</button>
-              <hr></hr>
-            </div>
-            <div align="left">
-              <button type="button" className="btn btn-primary mb-3">Keluar</button>
+            <div className="col-12 col-md-12 col-xs-12 mt-2">
+              <div align="left">
+                <button type="button" className="btn btn-primary" onClick={e =>{e.preventDefault(); this.setState({editPasswordView : true}) } }>
+                  Ubah Password
+                </button>
+                <hr></hr>
+              </div>
+              <div align="left">
+                <button
+                  onClick={e => this.handleLogot(e)}
+                  type="button"
+                  className="btn btn-primary mb-3"
+                >
+                  Keluar
+                </button>
+              </div>
             </div>
           </div>
+
+          <Modal show={this.state.editProfileView}>
+            <Modal.Header>
+              <Modal.Title>Edit Profile</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Form onSubmit={this.handleSubmitProfile}>
+                <Form.Group role="form" controlId="formBasicEmail">
+                  <Form.Label>Nama</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder={this.props.userMe.name}
+                    ref={this.name}
+                    required
+                  />
+                </Form.Group>
+                <Form.Group
+                  role="form"
+                  controlId="exampleForm.ControlTextarea1"
+                >
+                  <Form.Label>Bio</Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    placeholder={this.props.userMe.bio}
+                    ref={this.bio}
+                    rows="3"
+                    maxLength="250"
+                    required
+                  />
+                </Form.Group>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={e => {e.preventDefault(); this.setState({editProfileView : false}) } }>
+                    Batal
+                  </Button>
+                  <Button value="Submit" type="submit" variant="primary">
+                    Simpan
+                  </Button>
+                </Modal.Footer>
+              </Form>
+            </Modal.Body>
+          </Modal>
+
+          <Modal show={this.state.editPasswordView}>
+            <Modal.Header>
+              <Modal.Title>Edit Password</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Form onSubmit={this.handleSubmitPassword}>
+                <Form.Group role="form" controlId="formBasicEmail">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control
+                    type="password"
+                    placeholder="Masukkan Password Anda Sekarang"
+                    ref={this.passwordOld}
+                    required
+                  />
+                </Form.Group>
+                <Form.Group role="form" controlId="formBasicEmail">
+                  <Form.Label>Password Baru</Form.Label>
+                  <Form.Control
+                    type="password"
+                    placeholder="Masukkan Password Baru Anda"
+                    ref={this.passwordNew}
+                    required
+                  />
+                </Form.Group>
+                <Form.Group role="form" controlId="formBasicEmail">
+                  <Form.Label>Ulangi Password Baru</Form.Label>
+                  <Form.Control
+                    type="password"
+                    placeholder="Ulangi Password Baru Anda"
+                    ref={this.retypePasswordNew}
+                    required
+                  />
+                </Form.Group>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={e => {e.preventDefault(); this.setState({editPasswordView : false}) } }>
+                    Batal
+                  </Button>
+                  <Button value="Submit" type="submit" variant="primary">
+                    Simpan
+                  </Button>
+                </Modal.Footer>
+              </Form>
+            </Modal.Body>
+          </Modal>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
 
 export default connect(
-  "userMe",
+  "userMe, changePasswordStatus, Toast",
   actionsProfile
 )(Profile);

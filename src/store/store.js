@@ -202,8 +202,16 @@ const initialState = {
 
   myBrew: [],
 
-  // users
-  userMe: []
+  // users Profile
+  userMe: [],
+  changePasswordStatus: false,
+
+  Toast : Swal.mixin({
+    toast: true,
+    position: "center",
+    showConfirmButton: false,
+    timer: 2000
+  }),
 };
 
 const store = createStore(initialState);

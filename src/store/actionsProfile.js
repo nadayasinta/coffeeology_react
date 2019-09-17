@@ -1,5 +1,13 @@
 import store from "./store";
 import axios from "axios";
+import Swal from "sweetalert2";
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: "center",
+  showConfirmButton: false,
+  timer: 2000
+});
 
 const actionsProfile = store => ({
   async getProfile(state) {
@@ -16,24 +24,91 @@ const actionsProfile = store => ({
         console.log("data users ", response.data.data)
         store.setState({ userMe: response.data.data });
       })
-      .catch(error => console.log("Error getUserMe", error));
+      .catch(error => {
+        console.log(error.response);
+        Toast.fire({
+          type: "error",
+          title: `${error.response.data.message}`
+        });
+      });
   },
-  async getMyBrew(state) {
+  async editProfile(state, data) {
     console.log("test get myBrew");
     let config = {
-      method: "get",
-      url: store.getState().baseURL + "/recipes/user",
+      method: "put",
+      url: store.getState().baseURL + "/users",
+      data : data,
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token")
       }
     };
     await axios(config)
       .then(response => {
-        console.log("data myBrew ", response.data.data)
-        console.log("type data myBrew ", typeof(response.data.data))
-        store.setState({ myBrew: response.data.data });
+        console.log("data users ", response.data.data)
+        store.setState({ userMe: response.data.data });
+        Toast.fire({
+          type: "success",
+          title: "Profil Berhasil Diperbarui"
+        });
       })
-      .catch(error => console.log("Error getMyBrew", error));
+      .catch(error => {
+        console.log(error.response);
+        Toast.fire({
+          type: "error",
+          title: `${error.response.data.message}`
+        });
+      });
+  },
+  async editPassword(state, data) {
+    console.log("test get myBrew");
+    let config = {
+      method: "put",
+      url: store.getState().baseURL + "/users",
+      data : data,
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token")
+      }
+    };
+    await axios(config)
+      .then(response => {
+        store.setState({ changePasswordStatus: true });
+        Toast.fire({
+          type: "success",
+          title: "Password Telah Diperbarui"
+        });
+      })
+      .catch(error => {
+        console.log(error.response);
+        Toast.fire({
+          type: "error",
+          title: `${error.response.data.message}`
+        });
+      });
+  },
+  async login(state, data) {
+    let config = {
+      method: "post",
+      url: store.getState().baseURL + "/token",
+      data: data
+    };
+    await axios(config)
+      .then(response => {
+        console.log(response);
+        sessionStorage.setItem("token", response.data.token);
+      })
+      .catch(error => {
+        console.log(error.response);
+        Toast.fire({
+          type: "error",
+          title: error.response.data.message
+        });
+      });
+  },
+  setProfileView(state, value) {
+    return { profileView: value };
+  },
+  resetChangePasswordStatus(state) {
+    return { changePasswordStatus: false };
   },
 });
 
