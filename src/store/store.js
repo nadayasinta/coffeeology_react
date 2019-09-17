@@ -108,6 +108,10 @@ const initialState = {
   searchParams: {},
   searchKeyword: "",
 
+  originsParams: {},
+  difficultiesParams: {},
+  methodsParams: {},
+
   // method
   methodID: 0,
 
