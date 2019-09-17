@@ -65,8 +65,8 @@ function stepCard(props) {
               </div>
             </div>
           ) : (
-            <div />
-          )}
+              <div />
+            )}
 
           <div className="row">
             <div className="col-1 px-0">

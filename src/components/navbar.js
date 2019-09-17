@@ -84,18 +84,22 @@ import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
   root: {
-    // maxwidth: 480,
-    // color: "green",
-    // "&$selected": {
-    //   color: "red"
-    // },
-    // activeColor: '#f0edf6',
-    // inactiveColor: '#3e2465',
-    // stickToBottom: {
-    //   width: '100%',
-    //   position: 'fixed',
-    //   bottom: 0,
-    // },
+    color: "green",
+    "&$selected": {
+      color: "red"
+    },
+    activeColor: 'blue',
+    inactiveColor: 'white',
+    width: "100%",
+    maxWidth: "480px",
+    position: "fixed",
+    bottom: "0",
+    textSlign: "center",
+    marginLeft: "-15px",
+    backgroundColor: "#f2f2f2",
+    zIndex: "999",
+    height: "60px",
+    boxShadow: "0 -.2rem .4rem rgba(0,0,0,.15)",
   },
 });
 
@@ -104,10 +108,7 @@ export default function SimpleBottomNavigation() {
   const [value, setValue] = React.useState(0);
 
   return (
-    <BottomNavigation style={{
-      width: "100%", maxWidth: "480px", position: "fixed",
-      bottom: "0", textSlign: "center", marginLeft: "-13.5px", backgroundColor: "#E1E3DE", zIndex: "999"
-    }}
+    <BottomNavigation
       value={value}
       onChange={(event, newValue) => {
         setValue(newValue);
@@ -117,7 +118,8 @@ export default function SimpleBottomNavigation() {
     >
       <BottomNavigationAction
         style={{
-          paddingTop: "15px"
+          paddingBottom: "10px",
+          paddingTop: "10px"
         }}
         component={Link}
         to="/"
@@ -126,7 +128,8 @@ export default function SimpleBottomNavigation() {
         icon={<CoffeeMaker />} />
       <BottomNavigationAction
         style={{
-          paddingTop: "15px"
+          paddingBottom: "10px",
+          paddingTop: "10px"
         }}
         component={Link}
         to="/login"
@@ -134,7 +137,8 @@ export default function SimpleBottomNavigation() {
         icon={<Seed />} />
       <BottomNavigationAction
         style={{
-          paddingTop: "15px"
+          paddingTop: "10px",
+          paddingBottom: "10px"
         }}
         component={Link}
         to="/recipes/1"
@@ -142,20 +146,23 @@ export default function SimpleBottomNavigation() {
         icon={<Magnify />} />
       <BottomNavigationAction
         style={{
-          paddingTop: "15px"
+          paddingBottom: "10px",
+          paddingTop: "10px"
         }}
         component={Link}
         to="/activity"
         label="Aktifitas"
         icon={<StarCircle />} />
       {sessionStorage.getItem('token') !== null ? <BottomNavigationAction style={{
-        paddingTop: "15px"
+        paddingBottom: "10px",
+        paddingTop: "10px"
       }} component={Link}
         to="/activity"
         label="Profile"
         icon={<HumanGreeting />} /> :
         <BottomNavigationAction style={{
-          paddingTop: "15px"
+          paddingBottom: "10px",
+          paddingTop: "10px"
         }} component={Link}
           to="/login"
           label="Masuk"
