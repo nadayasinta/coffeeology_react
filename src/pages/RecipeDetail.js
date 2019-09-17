@@ -179,6 +179,7 @@ class RecipeSelection extends React.Component {
                       className="form-control"
                       type="number"
                       id="coffeeBrewInput"
+                      defaultValue={this.props.recipe.coffeeWeight}
                       onChange={this.handleOnChangeCoffee}
                     />
                   </div>
