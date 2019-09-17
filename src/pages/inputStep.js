@@ -44,7 +44,7 @@ class InputStep extends React.Component {
     }
 
     // to handle not valid Duration Time
-    if (parseInt(this.second.current.value) === 0 && parseInt(this.minute.current.value) === 0){
+    if (parseInt(this.second.current.value) === 0 && parseInt(this.minute.current.value) === 0) {
       return alert("Waktu Tidak Boleh Kosong")
     }
 
@@ -53,14 +53,14 @@ class InputStep extends React.Component {
 
     console.log("data recipe water ", recipes.water)
     console.log("this state temporary", this.state.stepTemporary)
-    
+
     let totalWaterStep = parseInt(this.waterAmount.current.value)
     this.state.stepTemporary.map((step, index) => (totalWaterStep = totalWaterStep + parseInt(step.amount)))
     console.log("data total water step", totalWaterStep)
     console.log("data curent water amount", this.waterAmount.current.value)
 
 
-    if (parseInt(totalWaterStep) > parseInt(recipes.water)){
+    if (parseInt(totalWaterStep) > parseInt(recipes.water)) {
       totalWaterStep -= this.waterAmount.current.value
       return alert(`Jumlah Air Tidak Valid, Anda Hanya bisa menambahkan maksimal ${parseInt(recipes.water) - parseInt(totalWaterStep)} ml`)
     }
@@ -86,6 +86,7 @@ class InputStep extends React.Component {
   render() {
     return (
       <div>
+        <img className="backbutton" src={this.props.backButton} onClick={event => this.props.history.goBack()} />
         <div className="container px-0">
           <div className="row justify-content-center">
             {/* pilih tahapan */}
@@ -201,6 +202,6 @@ class InputStep extends React.Component {
 }
 
 export default connect(
-  "stepTypeNumberSelected, stepTypes, stepTypeNumber, stepNumber, stepTemporary",
+  "stepTypeNumberSelected, stepTypes, stepTypeNumber, stepNumber, stepTemporary, backButton",
   actionsRecipes
 )(InputStep);

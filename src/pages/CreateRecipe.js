@@ -83,6 +83,7 @@ class CreateRecipe extends React.Component {
   render() {
     return (
       <div>
+        <img className="backbutton" src={this.props.backButton} onClick={event => this.props.history.goBack()} />
         <div className="container">
           <form onSubmit={this.submitRecipe}>
             <div className=" row ">
@@ -360,7 +361,6 @@ class CreateRecipe extends React.Component {
                 </div>
               </div>
             ))}
-
             <div className=" row justify-content-center text-center">
               <input
                 className=" btn btn-dark btn-block my-3"
@@ -376,6 +376,6 @@ class CreateRecipe extends React.Component {
 }
 
 // export default Steps;
-export default connect("methods, grinds, flavors, origins, recipeDetails")(
+export default connect("methods, grinds, flavors, origins, recipeDetails, backButton")(
   CreateRecipe
 );
