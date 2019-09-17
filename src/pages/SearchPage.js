@@ -75,7 +75,7 @@ const Search = props => {
       // onClick={toggleDrawer(side, false)}
       // onKeyDown={toggleDrawer(side, false)}
     >
-      <Filter />
+      <Filter onClick={toggleDrawer("bottom", false)} />
     </div>
   );
 
@@ -91,6 +91,18 @@ const Search = props => {
   React.useEffect(() => {
     props.searchRecipes(props.searchParams, props.searchKeyword);
   }, [props.searchParams]);
+
+  const convertSeconds = secondsInput => {
+    let minutes = Math.floor(parseInt(secondsInput) / 60);
+    let seconds = parseInt(secondsInput) - minutes * 60;
+    if (minutes < 10) {
+      minutes = `0${minutes}`;
+    }
+    if (seconds < 10) {
+      seconds = `0${seconds}`;
+    }
+    return `${minutes}:${seconds}`;
+  };
 
   return (
     <div>
@@ -119,11 +131,8 @@ const Search = props => {
                 <Link to={"/recipe/" + value.id}>
                   <RecipeCard
                     data={value}
-                    // methodIcon={
-                    //   this.props.methods[this.props.match.params.methodID - 1]
-                    //     .icon
-                    // }
-                    // time={this.convertSeconds(value.time)}
+                    methodIcon={props.methods[value.methodID - 1].icon}
+                    time={convertSeconds(value.time)}
                   />
                 </Link>
               </div>
@@ -142,6 +151,6 @@ const Search = props => {
 };
 
 export default connect(
-  "searchParams,searchKeyword,recipesSearch",
+  "searchParams,searchKeyword,recipesSearch,methods",
   actionsRecipes
 )(Search);
