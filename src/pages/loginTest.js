@@ -7,7 +7,7 @@ import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import { HumanHandsup } from 'mdi-material-ui'
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import IconButton from "@material-ui/core/IconButton";
@@ -104,11 +104,12 @@ const SignIn = props => {
   return (
     <div>
       {sessionStorage.getItem("token") ? <Redirect to="/" /> : <div></div>}
+      <img className="backbutton" src={props.backButton} onClick={event => props.history.goBack()} />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
+            <HumanHandsup />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign in
@@ -137,6 +138,7 @@ const SignIn = props => {
               type={values.showPassword ? "text" : "password"}
               onChange={onChangePassword}
               autoComplete="current-password"
+              helperText="Gunakan huruf besar, huruf kecil dan angka. Minimal 6 karakter. "
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
@@ -160,19 +162,31 @@ const SignIn = props => {
             >
               Sign In
             </Button>
-            <Grid container>
+
+            <Grid container className="justify-content-center">
               <Grid item>
-                <Link to="/register">Don't have an account? Sign Up</Link>
+                ------------ ATAU ------------<br />
+                {/* <Link to="/register">Don't have an account? Sign Up</Link> */}
               </Grid>
             </Grid>
           </form>
+          <Link to="/register" >
+            <Button
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Sign Up
+            </Button>
+          </Link>
         </div>
       </Container>
-    </div>
+    </div >
   );
 };
 
 export default connect(
-  "",
+  "backButton",
   actionsUsers
 )(SignIn);

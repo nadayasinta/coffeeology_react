@@ -64,8 +64,8 @@ class Steps extends React.Component {
           {sessionStorage.getItem("token") ? (
             <div></div>
           ) : (
-            <Redirect to="/login" />
-          )}
+              <Redirect to="/login" />
+            )}
 
           <div>Loading</div>
         </div>
@@ -77,8 +77,10 @@ class Steps extends React.Component {
           {sessionStorage.getItem("token") ? (
             <div></div>
           ) : (
-            <Redirect to="/login" />
-          )}
+              <Redirect to="/login" />
+            )}
+          <img className="backbutton" src={this.props.backButton} onClick={event => this.props.history.goBack()} />
+
           <div className="container">
             <div className="row">
               <div className="col-12">
@@ -111,6 +113,6 @@ class Steps extends React.Component {
 
 // export default Steps;
 export default connect(
-  "recipeSteps, stepIndex, waterLimit",
+  "recipeSteps, stepIndex, waterLimit, backButton",
   actionsDemo
 )(Steps);

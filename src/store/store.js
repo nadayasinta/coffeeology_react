@@ -24,10 +24,12 @@ const initialState = {
     // {
     //   name: "Ultimate v60",
     //   methodID: 1,
+    //   originID: 1,
     //   beanName: "Beans Gayoo Bourbon",
     //   beanProcess: "Full Wash",
     //   beanRoasting: "Medium",
-    //   rating: 45,
+    //   rating: 4.7,
+    //   brewCount: 120,
     //   favoriteCount: 20,
     //   time: 100,
     //   coffeeWeight: 17,
@@ -40,7 +42,8 @@ const initialState = {
     //   beanName: "Beans Gayoo Bourbon",
     //   beanProcess: "Full Wash",
     //   beanRoasting: "Medium",
-    //   rating: 4.5,
+    //   brewCount: 12,
+    //   rating: 4.4,
     //   favoriteCount: 20,
     //   time: 100,
     //   coffeeWeight: 17,
@@ -204,7 +207,10 @@ const initialState = {
   // recipe in page activity
   history: [],
 
-  myBrew: []
+  myBrew: [],
+
+  //import back image
+  backButton: require('../assets/images/back.png')
 };
 
 const store = createStore(initialState);
