@@ -71,16 +71,25 @@
 
 // export default navbar;
 
-
-
-
-
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import { CoffeeMaker, Seed, SeedOutline, Magnify, StarCircle, Flag, FlagVariant, FontAwesome, HumanGreeting, Face, HumanHandsup, Login } from 'mdi-material-ui'
-import { Link } from 'react-router-dom';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import BottomNavigation from "@material-ui/core/BottomNavigation";
+import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
+import {
+  CoffeeMaker,
+  Seed,
+  SeedOutline,
+  Magnify,
+  StarCircle,
+  Flag,
+  FlagVariant,
+  FontAwesome,
+  HumanGreeting,
+  Face,
+  HumanHandsup,
+  Login
+} from "mdi-material-ui";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -96,7 +105,7 @@ const useStyles = makeStyles({
     //   position: 'fixed',
     //   bottom: 0,
     // },
-  },
+  }
 });
 
 export default function SimpleBottomNavigation() {
@@ -104,10 +113,17 @@ export default function SimpleBottomNavigation() {
   const [value, setValue] = React.useState(0);
 
   return (
-    <BottomNavigation style={{
-      width: "100%", maxWidth: "480px", position: "fixed",
-      bottom: "0", textSlign: "center", marginLeft: "-13.5px", backgroundColor: "#E1E3DE", zIndex: "999"
-    }}
+    <BottomNavigation
+      style={{
+        width: "100%",
+        maxWidth: "480px",
+        position: "fixed",
+        bottom: "0",
+        textSlign: "center",
+        marginLeft: "-13.5px",
+        backgroundColor: "#E1E3DE",
+        zIndex: "999"
+      }}
       value={value}
       onChange={(event, newValue) => {
         setValue(newValue);
@@ -123,7 +139,8 @@ export default function SimpleBottomNavigation() {
         to="/"
         className={classes.content}
         label="Seduh"
-        icon={<CoffeeMaker />} />
+        icon={<CoffeeMaker />}
+      />
       <BottomNavigationAction
         style={{
           paddingTop: "15px"
@@ -131,15 +148,17 @@ export default function SimpleBottomNavigation() {
         component={Link}
         to="/login"
         label="Biji"
-        icon={<Seed />} />
+        icon={<Seed />}
+      />
       <BottomNavigationAction
         style={{
           paddingTop: "15px"
         }}
         component={Link}
-        to="/recipes/1"
+        to="/search"
         label="Cari"
-        icon={<Magnify />} />
+        icon={<Magnify />}
+      />
       <BottomNavigationAction
         style={{
           paddingTop: "15px"
@@ -147,22 +166,29 @@ export default function SimpleBottomNavigation() {
         component={Link}
         to="/activity"
         label="Aktifitas"
-        icon={<StarCircle />} />
-      {sessionStorage.getItem('token') !== null ? <BottomNavigationAction style={{
-        paddingTop: "15px"
-      }} component={Link}
-        to="/activity"
-        label="Profile"
-        icon={<HumanGreeting />} /> :
-        <BottomNavigationAction style={{
-          paddingTop: "15px"
-        }} component={Link}
+        icon={<StarCircle />}
+      />
+      {sessionStorage.getItem("token") !== null ? (
+        <BottomNavigationAction
+          style={{
+            paddingTop: "15px"
+          }}
+          component={Link}
+          to="/activity"
+          label="Profile"
+          icon={<HumanGreeting />}
+        />
+      ) : (
+        <BottomNavigationAction
+          style={{
+            paddingTop: "15px"
+          }}
+          component={Link}
           to="/login"
           label="Masuk"
-          icon={<Login />} />
-      }
-
-
-    </BottomNavigation >
+          icon={<Login />}
+        />
+      )}
+    </BottomNavigation>
   );
 }
