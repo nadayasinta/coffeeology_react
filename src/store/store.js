@@ -205,6 +205,7 @@ const initialState = {
   // users Profile
   userMe: [],
   changePasswordStatus: false,
+  editProfileStatus: false,
 
   Toast : Swal.mixin({
     toast: true,

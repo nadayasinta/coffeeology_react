@@ -46,6 +46,7 @@ const actionsProfile = store => ({
       .then(response => {
         console.log("data users ", response.data.data)
         store.setState({ userMe: response.data.data });
+        store.setState({ editProfileStatus: true });
         Toast.fire({
           type: "success",
           title: "Profil Berhasil Diperbarui"
@@ -109,6 +110,9 @@ const actionsProfile = store => ({
   },
   resetChangePasswordStatus(state) {
     return { changePasswordStatus: false };
+  },
+  resetEditProfileStatus(state) {
+    return { editProfileStatus: false };
   },
 });
 

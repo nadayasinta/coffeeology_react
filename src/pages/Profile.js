@@ -1,6 +1,15 @@
 import React from "react";
 import { Modal, Button, Form } from "react-bootstrap";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
+
+// import material ui
+import TextField from "@material-ui/core/TextField";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import IconButton from "@material-ui/core/IconButton";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import ButtonUI from "@material-ui/core/Button";
+
 
 // import image
 import profileIcon from "../assets/images/profile.png";
@@ -9,13 +18,19 @@ import editProfile from "../assets/images/edit-profile.png";
 // import store
 import { connect } from "unistore/react";
 import actionsProfile from "../store/actionsProfile";
+import useStyles from "../store/style";
+
 
 class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       editProfileView: false,
-      editPasswordView: false
+      editPasswordView: false,
+      showPasswordOld: false,
+      showPasswordNew: false,
+      passwordOld : "",
+      passwordNew : ""
     };
     this.name = React.createRef();
     this.bio = React.createRef();
@@ -47,29 +62,27 @@ class Profile extends React.Component {
       bio: this.bio.current.value
     };
     await this.props.editProfile(data);
-    await this.props.getProfile();
     // if data is not valid
-    if (this.name.current.value !== this.props.userMe.name) {
-      return console.log("ulang");
-    } else {
+    if (this.props.editProfileStatus) {
+      await this.props.getProfile();
       await this.setState({ editProfileView: false });
+      await this.props.resetEditProfileStatus()
+    } else {
+      return console.log("ulang");
     }
   };
 
   // handle edit password user
   handleSubmitPassword = async e => {
     e.preventDefault();
-    if (this.passwordNew.current.value !== this.retypePasswordNew.current.value){
-      return this.props.Toast.fire({
-        type: "error",
-        title: "Password Not Match"
-      });
-    }
 
     let data = {
-      passwordOld: this.passwordOld.current.value,
-      passwordNew: this.passwordNew.current.value
+      passwordOld: this.state.passwordOld,
+      passwordNew: this.state.passwordNew
     };
+
+    console.log("data password tes")
+    console.log("data password", data)
     await this.props.editPassword(data);
     
     // if data is not valid
@@ -81,7 +94,7 @@ class Profile extends React.Component {
       }
       await this.props.login(data)
       await this.props.getProfile()
-      await this.setState({ editPasswordView: false });
+      await this.setState({ editPasswordView: false, showPasswordOld: false, showPasswordNew: false});
     } else {
       return console.log("salah")
     }
@@ -202,7 +215,7 @@ class Profile extends React.Component {
             </Modal.Body>
           </Modal>
 
-          <Modal show={this.state.editPasswordView}>
+          <Modal show={false}>
             <Modal.Header>
               <Modal.Title>Edit Password</Modal.Title>
             </Modal.Header>
@@ -212,7 +225,7 @@ class Profile extends React.Component {
                   <Form.Label>Password</Form.Label>
                   <Form.Control
                     type="password"
-                    placeholder="Masukkan Password Anda Sekarang"
+                    placeholder="Your Current Password"
                     ref={this.passwordOld}
                     required
                   />
@@ -221,7 +234,7 @@ class Profile extends React.Component {
                   <Form.Label>Password Baru</Form.Label>
                   <Form.Control
                     type="password"
-                    placeholder="Masukkan Password Baru Anda"
+                    placeholder="Your New Password"
                     ref={this.passwordNew}
                     required
                   />
@@ -230,7 +243,7 @@ class Profile extends React.Component {
                   <Form.Label>Ulangi Password Baru</Form.Label>
                   <Form.Control
                     type="password"
-                    placeholder="Ulangi Password Baru Anda"
+                    placeholder="Retype Your New Password"
                     ref={this.retypePasswordNew}
                     required
                   />
@@ -246,6 +259,79 @@ class Profile extends React.Component {
               </Form>
             </Modal.Body>
           </Modal>
+
+
+          {/* COba */}
+
+          <Modal show={this.state.editPasswordView}>
+            <Modal.Header>
+              <Modal.Title>Current Password</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+          <form onSubmit={this.handleSubmitPassword}>
+          <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="passwordold"
+              label="Current Password"
+              id="passwordold"
+              type={this.state.showPasswordOld ? "text" : "password"}
+              onChange={(e)=>{e.preventDefault(); this.setState({passwordOld: e.target.value})}}
+              autoComplete="current-password"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={(e)=>{e.preventDefault(); this.setState({showPasswordOld:!this.state.showPasswordOld})}}
+                      onMouseDown={(e)=>e.preventDefault()}
+                    >
+                      {this.state.showPasswordOld ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                )
+              }}
+            />{" "}
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="passwordnew"
+              label="New Password"
+              id="passwordnew"
+              type={this.state.showPasswordNew ? "text" : "password"}
+              onChange={(e)=>{e.preventDefault(); this.setState({passwordNew: e.target.value})}}
+              autoComplete="current-password"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={(e)=>{e.preventDefault(); this.setState({showPasswordNew:!this.state.showPasswordNew})}}
+                      onMouseDown={(e)=>e.preventDefault()}
+                    >
+                      {this.state.showPasswordNew ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                )
+              }}
+            />
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={e => {e.preventDefault(); this.setState({editPasswordView : false}) } }>
+                    Batal
+                  </Button>
+                  <Button value="Submit" type="submit" variant="primary">
+                    Simpan
+                  </Button>
+                </Modal.Footer>
+           
+          </form>
+          </Modal.Body>
+          </Modal>
+
         </div>
       );
     }
@@ -253,6 +339,6 @@ class Profile extends React.Component {
 }
 
 export default connect(
-  "userMe, changePasswordStatus, Toast",
-  actionsProfile
+  "userMe, changePasswordStatus, Toast, editProfileStatus",
+  actionsProfile, useStyles
 )(Profile);
