@@ -29,7 +29,7 @@ function recipeCard(props) {
                 <div className="col-6 align-self-center text-left pt-1">
                     <img
                         src={require("../assets/images/dif3.png")}
-                        className="starrating  mr-1"
+                        className="starrating mr-1"
                         alt="alt tag"
                     />
                     <span>SULIT</span>
