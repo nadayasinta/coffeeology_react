@@ -1,43 +1,6 @@
 import React from "react";
 
 function recipeCard(props) {
-  let showDifficulty = level => {
-    if (level === 1) {
-      return (
-        <div className="col-6 align-self-center text-left pt-1">
-          <img
-            src={require("../assets/images/dif1.png")}
-            className="starrating mr-1"
-            alt="alt tag"
-          />
-          <span>MUDAH</span>
-        </div>
-      );
-    } else if (level === 2) {
-      return (
-        <div className="col-6 align-self-center text-left pt-1">
-          <img
-            src={require("../assets/images/dif2.png")}
-            className="starrating mr-1"
-            alt="alt tag"
-          />
-          <span>SEDANG</span>
-        </div>
-      );
-    } else if (level === 3) {
-      return (
-        <div className="col-6 align-self-center text-left pt-1">
-          <img
-            src={require("../assets/images/dif3.png")}
-            className="starrating  mr-1"
-            alt="alt tag"
-          />
-          <span>SULIT</span>
-        </div>
-      );
-    }
-  };
-
   return (
     <div className="container-fluid recipeCard overlaycontainer border shadow-sm rounded my-3 pt-3 overlay">
       <div className="overlay">

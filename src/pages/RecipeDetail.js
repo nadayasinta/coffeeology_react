@@ -6,7 +6,6 @@ import actionsRecipes from "../store/actionsRecipes";
 
 // import component
 import StepCard from "../components/stepCard";
-import ReviewCard from "../components/ReviewCard";
 
 // import components
 import Radar from "../components/radar";
@@ -18,9 +17,11 @@ class RecipeSelection extends React.Component {
   constructor(props, context) {
     super(props, context);
 
+    this.handleShow = this.handleShow.bind(this);
+    this.handleHide = this.handleHide.bind(this);
+
     this.state = {
-      showComment: false,
-      showReview: false,
+      show: false,
       coffeeweight: 0,
       water: 0,
       ratio: 0,
@@ -28,23 +29,13 @@ class RecipeSelection extends React.Component {
     };
   }
 
-  handleShowComment = () => {
-    this.setState({ showComment: true });
-  };
+  handleShow() {
+    this.setState({ show: true });
+  }
 
-  handleHideComment = () => {
-    this.setState({ showComment: false });
-  };
-
-  handleShowReview = async () => {
-    this.props.getReview({ recipeID: this.props.match.params.recipeID });
-    console.log("inininini", this.props.reviews);
-    this.setState({ showReview: true });
-  };
-
-  handleHideReview = () => {
-    this.setState({ showReview: false });
-  };
+  handleHide() {
+    this.setState({ show: false });
+  }
 
   async componentDidMount() {
     await this.props.getRecipeByID(this.props.match.params.recipeID);
@@ -107,209 +98,165 @@ class RecipeSelection extends React.Component {
         identifier: this.props.match.params.recipeID, //this.props.uniqueId
         title: "Title of Your Article" + this.props.match.params.recipeID //this.props.title
       };
-
       return (
         <div>
-          <img
-            className="backbutton"
-            src={this.props.backButton}
-            onClick={event => this.props.history.goBack()}
-          />
+          <img className="backbutton" src={this.props.backButton} onClick={event => this.props.history.goBack()} />
           <div className="container">
-            <div className="row justify-content-center">
-              <h2>{this.props.recipe.name.toUpperCase()}</h2>
-              <br />
-              <h5>{this.props.recipeCreator.name}</h5>
-            </div>
-
-            <div className="row mr-0">
-              <div className="col-4 text-right">
+            <div className="row mx-0 mt-3">
+              <div className="col-4 text-left">
                 <img
-                  className="w-75 bgcolor2"
-                  src={this.props.methods[this.props.recipe.methodID - 1].icon}
+                  height="100px"
+                  src={require("../assets/images/methodV60.png")}
                   alt="altTag"
                 />
               </div>
-              <div className="col-8 align-self-center">
+              <div className="col-6 text-left">
                 <div className="row">
-                  <div className="col-4 text-left">Beans</div>
-                  <div className="col-1 text-center">:</div>
-                  <div className="col-6 text-left">
-                    {this.props.recipe.beanName}
-                  </div>
-                  <div className="col-4 text-left">Process</div>
-                  <div className="col-1 text-center">:</div>
-                  <div className="col-6 text-left">
-                    {this.props.recipe.beanProcess}
-                  </div>
-                  <div className="col-4 text-left">Roasting</div>
-                  <div className="col-1 text-center">:</div>
-                  <div className="col-6 text-left">
-                    {this.props.recipe.beanRoasting}
+                  <div className="col-12">{this.props.recipe.name}</div>
+                  <div className="col-12">
+                    <img
+                      width="20px"
+                      src={require("../assets/images/RecipeIcon/timer.png")}
+                      alt="timer"
+                    />
+                    <span>{this.convertSeconds(this.props.recipe.time)}</span>
                   </div>
                 </div>
               </div>
+              <div className="col-2">...</div>
             </div>
-
-            <div className="row justify-content-center pt-3">
-              <div className="col-4  text-center">
-                <div className="row justify-content-center">Waktu</div>
-                <div className="row justify-content-center">
-                  <img
-                    className="w-25 mr-1"
-                    src={require("../assets/images/RecipeIcon/timer.png")}
-                    alt="alt tag"
-                  />
-                  <span>{this.convertSeconds(this.props.recipe.time)}</span>
-                </div>
-              </div>
-              <div className="col-4 text-center">
-                <div className="row justify-content-center">Suhu Air</div>
-                <div className="row justify-content-center">
-                  <img
-                    className="w-25 mr-1"
-                    src={require("../assets/images/RecipeIcon/thermometer.png")}
-                    alt="alt tag"
-                  />
-                  <span>{this.props.recipeDetails.waterTemp}</span>
-                </div>
-              </div>
-              <div className="col-4 text-center">
-                <div className="row justify-content-center">Grind</div>
-                <div className="row justify-content-center">
-                  <img
-                    className="w-25 mr-1"
-                    src={require("../assets/images/RecipeIcon/coffee-grinder.png")}
-                    alt="alt tag"
-                  />
-                  <span>{this.props.recipeDetails.grindSize}</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="row">
-              <div className="col-1">
+            <div className="row mx-0 mt-3">
+              <div className="col-2 px-0">
                 <img
                   width="20px"
                   src={require("../assets/images/RecipeIcon/coffee-grain.png")}
                   alt="coffee-grain"
                 />
-              </div>
-              <div className="col-5">
-                <div className="row">kopi</div>
-                <div className="row">{this.props.recipe.coffeeWeight}</div>
-              </div>
-              <div className="col-5">
-                <div className="row">air</div>
-                <div className="row">{this.props.recipe.water}</div>
-              </div>
-              <div className="col-1">
+                <span> : </span>
                 <img
                   width="20px"
                   src={require("../assets/images/RecipeIcon/raindrop.png")}
                   alt="raindrop"
                 />
               </div>
-            </div>
-
-            <div className="row">
-              <div className="col-6">
-                <input
-                  className="form-control"
-                  type="number"
-                  id="coffeeBrewInput"
-                  defaultValue={this.props.recipe.coffeeWeight}
-                  onChange={this.handleOnChangeCoffee}
+              <div className="col-2 px-0">
+                {this.props.recipe.coffeeWeight} : {this.props.recipe.water}
+              </div>
+              <div className="col-2 px-0">
+                <img
+                  width="20px"
+                  src={require("../assets/images/RecipeIcon/coffee-grinder.png")}
+                  alt="coffee-grinder"
                 />
               </div>
+              <div className="col-2 px-0">
+                {this.props.recipeDetails.grindSize}
+              </div>
+              <div className="col-2 px-0">
+                <img
+                  width="20px"
+                  src={require("../assets/images/RecipeIcon/thermometer.png")}
+                  alt="thermometer"
+                />
+              </div>
+              <div className="col-2 px-0">
+                {this.props.recipeDetails.waterTemp}
+              </div>
+            </div>
+            <div className="row mt-3">
               <div className="col-6">
-                <div className="form-control text-left">{this.state.water}</div>
+                <div className="form-group row">
+                  <label
+                    htmlFor="coffeeBrewInput"
+                    className="col-2 col-form-label"
+                  >
+                    <img
+                      width="20px"
+                      src={require("../assets/images/RecipeIcon/coffee.png")}
+                      alt="coffee"
+                    />
+                  </label>
+                  <div className="col-10">
+                    <input
+                      className="form-control"
+                      type="number"
+                      id="coffeeBrewInput"
+                      defaultValue={this.props.recipe.coffeeWeight}
+                      onChange={this.handleOnChangeCoffee}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="col-6">
+                <div className="row">
+                  <div className="col-2 form-label">
+                    <img
+                      width="20px"
+                      src={require("../assets/images/RecipeIcon/water.png")}
+                      alt="water"
+                    />
+                  </div>
+                  <div className="col-10">
+                    <div className="form-control text-left">
+                      {this.state.water}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-4 text-left pt-2 pr-0">Beans : </div>
+              <div className="col-8 text-left pt-2 pl-0">
+                {this.props.recipe.beanName}
+              </div>
+              <div className="col-4 text-left pt-2 pr-0">Process : </div>
+              <div className="col-8 text-left pt-2 pl-0">
+                {this.props.recipe.beanProcess}
+              </div>
+              <div className="col-4 text-left pt-2 pr-0">Roasting : </div>
+              <div className="col-8 text-left pt-2 pl-0">
+                {this.props.recipe.beanRoasting}
               </div>
             </div>
 
-            <div className="row">
+            <Radar data={this.props.recipeDetails} />
+            <ButtonToolbar>
+              <Button bsStyle="primary" onClick={this.handleShow}>
+                <Disqus.CommentCount
+                  shortname={disqusShortname}
+                  config={disqusConfig}
+                >
+                  Comments
+                </Disqus.CommentCount>
+              </Button>
+
+              <Modal
+                {...this.props}
+                show={this.state.show}
+                onHide={this.handleHide}
+                dialogClassName="custom-modal"
+              >
+                <Modal.Header closeButton>
+                  <Modal.Title id="contained-modal-title-lg">
+                    Comment
+                  </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <Disqus.DiscussionEmbed
+                    shortname={disqusShortname}
+                    config={disqusConfig}
+                  />
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button onClick={this.handleHide}>Close</Button>
+                </Modal.Footer>
+              </Modal>
+            </ButtonToolbar>
+            <div className="row mt-3">
               <div className="col-12 text-left">Catatan</div>
               <div className="col-12 text-left">
                 {this.props.recipeDetails.note}
               </div>
             </div>
-
-            <div className="row">
-              <Radar data={this.props.recipeDetails} />
-            </div>
-
-            <div className="row">
-              <div className="col-6">
-                <ButtonToolbar>
-                  <Button bsStyle="primary" onClick={this.handleShowComment}>
-                    <Disqus.CommentCount
-                      shortname={disqusShortname}
-                      config={disqusConfig}
-                    >
-                      Comments
-                    </Disqus.CommentCount>
-                  </Button>
-
-                  <Modal
-                    {...this.props}
-                    show={this.state.showComment}
-                    onHide={this.handleHideComment}
-                    dialogClassName="custom-modal"
-                  >
-                    <Modal.Header closeButton>
-                      <Modal.Title id="contained-modal-title-lg">
-                        Comment
-                      </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                      <Disqus.DiscussionEmbed
-                        shortname={disqusShortname}
-                        config={disqusConfig}
-                      />
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <Button onClick={this.handleHideComment}>Close</Button>
-                    </Modal.Footer>
-                  </Modal>
-                </ButtonToolbar>
-              </div>
-
-              <div className="col-6">
-                <ButtonToolbar>
-                  <Button bsStyle="primary" onClick={this.handleShowReview}>
-                    Lihat Review
-                  </Button>
-
-                  <Modal
-                    {...this.props}
-                    show={this.state.showReview}
-                    onHide={this.handleHideReview}
-                    dialogClassName="custom-modal"
-                  >
-                    <Modal.Header closeButton>
-                      <Modal.Title id="contained-modal-title-lg">
-                        Review
-                      </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                      <div className="container ">
-                        <div className="row ">
-                          {this.props.reviews.map((review, index) => (
-                            <div className="col-12 ">
-                              <ReviewCard data={review} />
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <Button onClick={this.handleHideReview}>Close</Button>
-                    </Modal.Footer>
-                  </Modal>
-                </ButtonToolbar>
-              </div>
-            </div>
-
             <div className="row mt-3 justify-content-center">
               <div className="col-12">Tahapan</div>
               {this.state.recipeSteps.map(recipeStep => (
@@ -335,6 +282,6 @@ class RecipeSelection extends React.Component {
 }
 
 export default connect(
-  "recipe, stepTypes, recipeDetails, recipeSteps, waterLimit, backButton, recipeCreator, methods, reviews",
+  "recipe, stepTypes, recipeDetails, recipeSteps, waterLimit, backButton",
   actionsRecipes
 )(RecipeSelection);

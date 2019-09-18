@@ -6,9 +6,7 @@ function header(props) {
     <div className="container-fluid header px-0 fixed-top">
       <div className="row h-100 mx-0">
         <div className="col-12 text-center h-100">
-          <a href="/">
-            <img src={logo} className="logoIcon h-100" />
-          </a>
+          <img src={logo} className="logoIcon h-100"alt="altTag" />
         </div>
       </div>
     </div>
