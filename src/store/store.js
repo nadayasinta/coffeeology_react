@@ -52,7 +52,7 @@ const initialState = {
     // }
   ],
   recipesSelection: {},
-  recipesSearch: [],
+  recipesSearch: {},
   recipe: null,
   // name: "Ultimate v60",
   // methodID: 1,

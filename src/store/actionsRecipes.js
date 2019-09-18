@@ -100,7 +100,6 @@ const actionsRecipes = store => ({
     });
   },
   async getRecipesSelection(state, paramsInput) {
-    console.log(paramsInput);
     let config = {
       method: "get",
       url: store.getState().baseURL + "/recipes",
@@ -108,16 +107,16 @@ const actionsRecipes = store => ({
     };
 
     await axios(config).then(response => {
-      console.log(response);
       store.setState({ recipesSelection: response.data });
     });
   },
 
-  async searchRecipes(state, filterParams, searchParams) {
+  async searchRecipes(state, filterParams, searchParams, pagination) {
     console.log(filterParams);
     console.log(searchParams);
     const paramsInput = filterParams;
     paramsInput["search"] = searchParams;
+    paramsInput["p"] = pagination;
     let config = {
       method: "get",
       url: store.getState().baseURL + "/recipes",
@@ -126,7 +125,7 @@ const actionsRecipes = store => ({
 
     await axios(config).then(response => {
       console.log(response);
-      store.setState({ recipesSearch: response.data.data });
+      store.setState({ recipesSearch: response.data });
     });
   },
 
