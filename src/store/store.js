@@ -81,30 +81,30 @@ const initialState = {
     //   waterTemp: 92
   },
   recipeSteps: [
-    // {
-    //   recipeID: 1,
-    //   stepNumber: 1,
-    //   stepType: 1,
-    //   note: "wow",
-    //   time: 100,
-    //   amount: 20
-    // },
-    // {
-    //   recipeID: 1,
-    //   stepNumber: 2,
-    //   stepType: 4,
-    //   note: "wow",
-    //   time: 150,
-    //   amount: 0
-    // },
-    // {
-    //   recipeID: 1,
-    //   stepNumber: 3,
-    //   stepType: 6,
-    //   note: "wow",
-    //   time: 50,
-    //   amount: 80
-    // }
+    {
+      recipeID: 1,
+      stepNumber: 1,
+      stepTypeID: 1,
+      note: "wow",
+      time: 5,
+      amount: 20
+    },
+    {
+      recipeID: 1,
+      stepNumber: 2,
+      stepTypeID: 4,
+      note: "wow",
+      time: 3,
+      amount: 0
+    },
+    {
+      recipeID: 1,
+      stepNumber: 3,
+      stepTypeID: 6,
+      note: "wow",
+      time: 10,
+      amount: 80
+    }
   ],
   recipeCreator: [],
   difficulties: ["Mudah", "Sedang", "Sulit"],
@@ -165,7 +165,7 @@ const initialState = {
 
   stepTypeNumberSelected: 1,
   // recipe demo data
-  timerNow: 0,
+  timerNow: 30,
   stepIndex: 0,
   beanRatio: 1,
   waterNow: 0,
