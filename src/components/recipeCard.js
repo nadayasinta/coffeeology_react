@@ -147,7 +147,7 @@ function recipeCard(props) {
                         />
                         <span className="text-muted">
                             {" "}
-                            {props.data.coffeeWeight}{" "}
+                            {props.data.coffeeWeight} gram
                         </span>
                     </div>
                     <div className="col-4 text-center px-0">
@@ -156,7 +156,10 @@ function recipeCard(props) {
                             className="w-25 mr-1"
                             alt="alt tag"
                         />
-                        <span className="text-muted"> {props.data.water} </span>
+                        <span className="text-muted">
+                            {" "}
+                            {props.data.water} ml
+                        </span>
                     </div>
                 </div>
             </div>
