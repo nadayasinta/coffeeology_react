@@ -173,7 +173,7 @@ export default function SimpleBottomNavigation() {
         paddingBottom: "10px",
         paddingTop: "10px"
       }} component={Link}
-        to="/activity"
+        to="/profile/me"
         label="Profile"
         icon={<HumanGreeting />} /> :
         <BottomNavigationAction style={{
@@ -185,7 +185,7 @@ export default function SimpleBottomNavigation() {
           label="Masuk"
           icon={<Login />}
         />
-      )}
+      }
     </BottomNavigation>
   );
 }

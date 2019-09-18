@@ -1,7 +1,7 @@
 import store from "./store";
 import axios from "axios";
-import Swal from "sweetalert2";
-import { getThemeProps } from "@material-ui/styles";
+// import Swal from "sweetalert2";
+// import { getThemeProps } from "@material-ui/styles";
 
 const actionsActivity = store => ({
   async getHistory(state) {

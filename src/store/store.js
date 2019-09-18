@@ -1,9 +1,9 @@
-import React from "react";
+// import React from "react";
 import createStore from "unistore";
-import axios from "axios";
-import { Redirect } from "react-router-dom";
+// import axios from "axios";
+// import { Redirect } from "react-router-dom";
 // import method image
-import { makeStyles } from "@material-ui/core/styles";
+// import { makeStyles } from "@material-ui/core/styles";
 
 // import json
 import stepTypes from "./stepTypes";
@@ -209,6 +209,17 @@ const initialState = {
 
   myBrew: [],
 
+  // users Profile
+  userMe: [],
+  changePasswordStatus: false,
+  editProfileStatus: false,
+
+  Toast : Swal.mixin({
+    toast: true,
+    position: "center",
+    showConfirmButton: false,
+    timer: 2000
+  }),
   //import back image
   backButton: require('../assets/images/back.png')
 };

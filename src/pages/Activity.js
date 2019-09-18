@@ -11,10 +11,6 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 
-// import store
-import { connect } from "unistore/react";
-import actionsActivity from "../store/actionsActivity";
-
 // import component
 
 import History from '../components/history';
