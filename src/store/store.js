@@ -51,6 +51,7 @@ const initialState = {
     //   icon: require("../assets/images/StepIcon/stir.png")
     // }
   ],
+  recipesSelection: {},
   recipesSearch: [],
   recipe: null,
   // name: "Ultimate v60",
@@ -210,7 +211,7 @@ const initialState = {
   myBrew: [],
 
   //import back image
-  backButton: require('../assets/images/back.png')
+  backButton: require("../assets/images/back.png")
 };
 
 const store = createStore(initialState);
