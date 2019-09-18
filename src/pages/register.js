@@ -3,14 +3,17 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import {HumanHandsup} from 'mdi-material-ui'
+import { HumanHandsup } from "mdi-material-ui";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import IconButton from "@material-ui/core/IconButton";
-
+import FormControl from "@material-ui/core/FormControl";
+import Input from "@material-ui/core/Input";
+import InputLabel from "@material-ui/core/InputLabel";
+import FormHelperText from "@material-ui/core/FormHelperText";
 // import store
 import actionsUsers from "../store/actionUsers";
 import { connect } from "unistore/react";
@@ -50,7 +53,7 @@ const Register = props => {
   };
 
   // handle submit form, if data is valid, post to create new user
-  const handleOnSubmit = event => {
+  const handleOnSubmit = async event => {
     event.preventDefault();
 
     if (data.email === "") {
@@ -58,20 +61,17 @@ const Register = props => {
         type: "error",
         title: "Email tidak boleh kosong!"
       });
-    }
-    if (!validateEmail(data.email)) {
+    } else if (!validateEmail(data.email)) {
       return Toast.fire({
         type: "error",
         title: "Email tidak valid!"
       });
-    }
-    if (data.password === "") {
+    } else if (data.password === "") {
       return Toast.fire({
         type: "error",
         title: "Password tidak boleh kosong!"
       });
-    }
-    if (data.name === "") {
+    } else if (data.name === "") {
       return Toast.fire({
         type: "error",
         title: "Nama Harus Diisi!"
@@ -79,18 +79,19 @@ const Register = props => {
     }
 
     // POST data to register endpoint
-    props.registerUser(data);
+    await props.registerUser(data);
     setTimeout(() => {
-      props.login(data);
-
-      Toast.fire({
-        type: "success",
-        title: "Registrasi berhasil!"
-      });
-      setTimeout(() => {
-        props.history.replace("/");
-      }, 1000);
-    }, 500);
+      if (sessionStorage.getItem("token")) {
+        Toast.fire({
+          type: "success",
+          title: "Sukses Registrasis!"
+        });
+        setTimeout(() => {
+          props.history.goBack();
+        }, 500);
+      }
+    }, 100);
+    // await props.login(data);
   };
 
   const onChangeEmail = event => {
@@ -125,8 +126,9 @@ const Register = props => {
           <Typography component="h1" variant="h5">
             Register
           </Typography>
-          <form className={classes.form}>
+          <form className={classes.form} onSubmit={handleOnSubmit}>
             <TextField
+              required
               variant="outlined"
               margin="normal"
               required
@@ -139,6 +141,7 @@ const Register = props => {
               autoFocus
             />
             <TextField
+              required
               variant="outlined"
               margin="normal"
               required
@@ -149,6 +152,7 @@ const Register = props => {
               onChange={onChangeName}
             />
             <TextField
+              required
               variant="outlined"
               margin="normal"
               required
@@ -182,7 +186,7 @@ const Register = props => {
               color="primary"
               className={classes.submit}
               onChange={onChangePasswordRepeat}
-              onClick={handleOnSubmit}
+              type="submit"
             >
               Register
             </Button>

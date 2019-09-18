@@ -11,15 +11,10 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 
-// import store
-import { connect } from "unistore/react";
-import actionsActivity from "../store/actionsActivity";
-
 // import component
 
-import History from '../components/history';
-import MyBrew from '../components/myBrew';
-
+import History from "../components/history";
+import MyBrew from "../components/myBrew";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -56,7 +51,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.background.paper,
     marginRight: "-15px",
     marginLeft: "-15px",
-    marginTop: "-50px",
+    marginTop: "-50px"
   }
 }));
 
@@ -80,7 +75,11 @@ export default function FullWidthTabs() {
         <div className="row">
           <div className="col-12">
             <div className={classes.root}>
-              <AppBar className="acitivityBar" position="static" color="default">
+              <AppBar
+                className="acitivityBar"
+                position="static"
+                color="default"
+              >
                 <Tabs
                   value={value}
                   onChange={handleChange}

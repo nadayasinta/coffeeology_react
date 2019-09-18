@@ -165,3 +165,6 @@
 .MuiDrawer-paperAnchorBottom {
   margin: auto;
 }
+.SocialMediaShareButton {
+  display: inline-block;
+}

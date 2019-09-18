@@ -118,7 +118,11 @@ const Search = props => {
             inputProps={{ "aria-label": "search google maps" }}
             onChange={onChangeSearch}
           />
-          <IconButton className={classesSearch.iconButton} aria-label="search">
+          <IconButton
+            className={classesSearch.iconButton}
+            aria-label="search"
+            type="submit"
+          >
             <SearchIcon />
           </IconButton>
         </Paper>
