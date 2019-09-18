@@ -51,6 +51,7 @@ const initialState = {
     //   icon: require("../assets/images/StepIcon/stir.png")
     // }
   ],
+  recipesSelection: {},
   recipesSearch: [],
   recipe: null,
   // name: "Ultimate v60",

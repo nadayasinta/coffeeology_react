@@ -99,6 +99,20 @@ const actionsRecipes = store => ({
       store.setState({ recipes: response.data.data });
     });
   },
+  async getRecipesSelection(state, paramsInput) {
+    console.log(paramsInput);
+    let config = {
+      method: "get",
+      url: store.getState().baseURL + "/recipes",
+      params: paramsInput
+    };
+
+    await axios(config).then(response => {
+      console.log(response);
+      store.setState({ recipesSelection: response.data });
+    });
+  },
+
   async searchRecipes(state, filterParams, searchParams) {
     console.log(filterParams);
     console.log(searchParams);
