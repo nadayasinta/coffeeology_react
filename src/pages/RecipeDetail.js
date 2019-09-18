@@ -6,7 +6,7 @@ import actionsRecipes from "../store/actionsRecipes";
 
 // import component
 import StepCard from "../components/stepCard";
-import ReviewCard from "../components/ReviewCard"
+import ReviewCard from "../components/ReviewCard";
 
 // import components
 import Radar from "../components/radar";
@@ -24,27 +24,27 @@ class RecipeSelection extends React.Component {
       coffeeweight: 0,
       water: 0,
       ratio: 0,
-      recipeSteps: [],
+      recipeSteps: []
     };
   }
 
   handleShowComment = () => {
     this.setState({ showComment: true });
-  }
+  };
 
   handleHideComment = () => {
     this.setState({ showComment: false });
-  }
+  };
 
   handleShowReview = async () => {
-    this.props.getReview({recipeID:this.props.match.params.recipeID})
-    console.log('inininini',this.props.reviews)
+    this.props.getReview({ recipeID: this.props.match.params.recipeID });
+    console.log("inininini", this.props.reviews);
     this.setState({ showReview: true });
-  }
+  };
 
   handleHideReview = () => {
     this.setState({ showReview: false });
-  }
+  };
 
   async componentDidMount() {
     await this.props.getRecipeByID(this.props.match.params.recipeID);
@@ -110,7 +110,11 @@ class RecipeSelection extends React.Component {
 
       return (
         <div>
-          <img className="backbutton" src={this.props.backButton} onClick={event => this.props.history.goBack()} />
+          <img
+            className="backbutton"
+            src={this.props.backButton}
+            onClick={event => this.props.history.goBack()}
+          />
           <div className="container">
             <div className="row justify-content-center">
               <h2>{this.props.recipe.name.toUpperCase()}</h2>
@@ -148,9 +152,7 @@ class RecipeSelection extends React.Component {
 
             <div className="row justify-content-center pt-3">
               <div className="col-4  text-center">
-                <div className="row justify-content-center">
-                  Waktu
-                </div>
+                <div className="row justify-content-center">Waktu</div>
                 <div className="row justify-content-center">
                   <img
                     className="w-25 mr-1"
@@ -161,9 +163,7 @@ class RecipeSelection extends React.Component {
                 </div>
               </div>
               <div className="col-4 text-center">
-                <div className="row justify-content-center">
-                  Suhu Air
-                </div>
+                <div className="row justify-content-center">Suhu Air</div>
                 <div className="row justify-content-center">
                   <img
                     className="w-25 mr-1"
@@ -174,9 +174,7 @@ class RecipeSelection extends React.Component {
                 </div>
               </div>
               <div className="col-4 text-center">
-                <div className="row justify-content-center">
-                  Grind
-                </div>
+                <div className="row justify-content-center">Grind</div>
                 <div className="row justify-content-center">
                   <img
                     className="w-25 mr-1"
@@ -197,22 +195,12 @@ class RecipeSelection extends React.Component {
                 />
               </div>
               <div className="col-5">
-                <div className="row">
-                  kopi
-                </div>
-                <div className="row">
-                  {this.props.recipe.coffeeWeight}
-                </div>
-
+                <div className="row">kopi</div>
+                <div className="row">{this.props.recipe.coffeeWeight}</div>
               </div>
               <div className="col-5">
-                <div className="row">
-                  air
-                </div>
-                <div className="row">
-                  {this.props.recipe.water}
-                </div>
-
+                <div className="row">air</div>
+                <div className="row">{this.props.recipe.water}</div>
               </div>
               <div className="col-1">
                 <img
@@ -234,12 +222,9 @@ class RecipeSelection extends React.Component {
                 />
               </div>
               <div className="col-6">
-                <div className="form-control text-left">
-                  {this.state.water}
-                </div>
+                <div className="form-control text-left">{this.state.water}</div>
               </div>
             </div>
-
 
             <div className="row">
               <div className="col-12 text-left">Catatan</div>
@@ -252,7 +237,6 @@ class RecipeSelection extends React.Component {
               <Radar data={this.props.recipeDetails} />
             </div>
 
-
             <div className="row">
               <div className="col-6">
                 <ButtonToolbar>
@@ -262,7 +246,7 @@ class RecipeSelection extends React.Component {
                       config={disqusConfig}
                     >
                       Comments
-                </Disqus.CommentCount>
+                    </Disqus.CommentCount>
                   </Button>
 
                   <Modal
@@ -274,7 +258,7 @@ class RecipeSelection extends React.Component {
                     <Modal.Header closeButton>
                       <Modal.Title id="contained-modal-title-lg">
                         Comment
-                  </Modal.Title>
+                      </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                       <Disqus.DiscussionEmbed
@@ -304,29 +288,26 @@ class RecipeSelection extends React.Component {
                     <Modal.Header closeButton>
                       <Modal.Title id="contained-modal-title-lg">
                         Review
-                  </Modal.Title>
+                      </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                    <div className="container ">
-              <div className="row ">
-
-                    {this.props.reviews.map((review, index) => (
-                      <div className="col-12 ">
-                      <ReviewCard data={review} />
-
+                      <div className="container ">
+                        <div className="row ">
+                          {this.props.reviews.map((review, index) => (
+                            <div className="col-12 ">
+                              <ReviewCard data={review} />
+                            </div>
+                          ))}
+                        </div>
                       </div>
-            ))}
-              </div>
-              </div>
                     </Modal.Body>
                     <Modal.Footer>
                       <Button onClick={this.handleHideReview}>Close</Button>
                     </Modal.Footer>
                   </Modal>
                 </ButtonToolbar>
-           </div>
+              </div>
             </div>
-
 
             <div className="row mt-3 justify-content-center">
               <div className="col-12">Tahapan</div>
@@ -345,7 +326,6 @@ class RecipeSelection extends React.Component {
                 </button>
               </div>
             </div>
-
           </div>
         </div>
       );
