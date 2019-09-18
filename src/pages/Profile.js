@@ -10,7 +10,6 @@ import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import ButtonUI from "@material-ui/core/Button";
 
-
 // import image
 import profileIcon from "../assets/images/profile.png";
 import editProfile from "../assets/images/edit-profile.png";
@@ -20,7 +19,6 @@ import { connect } from "unistore/react";
 import actionsProfile from "../store/actionsProfile";
 import useStyles from "../store/style";
 
-
 class Profile extends React.Component {
   constructor(props) {
     super(props);
@@ -29,8 +27,8 @@ class Profile extends React.Component {
       editPasswordView: false,
       showPasswordOld: false,
       showPasswordNew: false,
-      passwordOld : "",
-      passwordNew : ""
+      passwordOld: "",
+      passwordNew: ""
     };
     this.name = React.createRef();
     this.bio = React.createRef();
@@ -53,7 +51,6 @@ class Profile extends React.Component {
     await this.setState({ state: value });
   };
 
-
   // handle edit name and bio
   handleSubmitProfile = async e => {
     e.preventDefault();
@@ -66,7 +63,7 @@ class Profile extends React.Component {
     if (this.props.editProfileStatus) {
       await this.props.getProfile();
       await this.setState({ editProfileView: false });
-      await this.props.resetEditProfileStatus()
+      await this.props.resetEditProfileStatus();
     } else {
       return console.log("ulang");
     }
@@ -81,22 +78,26 @@ class Profile extends React.Component {
       passwordNew: this.state.passwordNew
     };
 
-    console.log("data password tes")
-    console.log("data password", data)
+    console.log("data password tes");
+    console.log("data password", data);
     await this.props.editPassword(data);
-    
+
     // if data is not valid
     if (this.props.changePasswordStatus) {
-      await this.props.resetChangePasswordStatus()
+      await this.props.resetChangePasswordStatus();
       data = {
-        email : this.props.userMe.email,
-        password : this.state.passwordNew
-      }
-      await this.props.login(data)
-      await this.props.getProfile()
-      await this.setState({ editPasswordView: false, showPasswordOld: false, showPasswordNew: false});
+        email: this.props.userMe.email,
+        password: this.state.passwordNew
+      };
+      await this.props.login(data);
+      await this.props.getProfile();
+      await this.setState({
+        editPasswordView: false,
+        showPasswordOld: false,
+        showPasswordNew: false
+      });
     } else {
-      return console.log("salah")
+      return console.log("salah");
     }
   };
 
@@ -126,15 +127,16 @@ class Profile extends React.Component {
                 {this.props.userMe.name}
                 <span
                   className="btn btn-orange"
-                  onClick={e => {e.preventDefault(); this.setState({editProfileView:true})}}
+                  onClick={e => {
+                    e.preventDefault();
+                    this.setState({ editProfileView: true });
+                  }}
                 >
                   <img src={editProfile} alt="altTag" width="20px"></img>
                 </span>
               </h3>
               <hr></hr>
-              <span className="text-justify">
-                {this.props.userMe.bio}
-              </span>
+              <span className="text-justify">{this.props.userMe.bio}</span>
             </div>
             <div
               className="col-md-6 col-xs-6 border btn btn-orange"
@@ -157,7 +159,14 @@ class Profile extends React.Component {
 
             <div className="col-12 col-md-12 col-xs-12 mt-2">
               <div align="left">
-                <button type="button" className="btn btn-primary" onClick={e =>{e.preventDefault(); this.setState({editPasswordView : true}) } }>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={e => {
+                    e.preventDefault();
+                    this.setState({ editPasswordView: true });
+                  }}
+                >
                   Ubah Password
                 </button>
                 <hr></hr>
@@ -204,7 +213,13 @@ class Profile extends React.Component {
                   />
                 </Form.Group>
                 <Modal.Footer>
-                  <Button variant="secondary" onClick={e => {e.preventDefault(); this.setState({editProfileView : false}) } }>
+                  <Button
+                    variant="secondary"
+                    onClick={e => {
+                      e.preventDefault();
+                      this.setState({ editProfileView: false });
+                    }}
+                  >
                     Batal
                   </Button>
                   <Button value="Submit" type="submit" variant="primary">
@@ -249,7 +264,13 @@ class Profile extends React.Component {
                   />
                 </Form.Group>
                 <Modal.Footer>
-                  <Button variant="secondary" onClick={e => {e.preventDefault(); this.setState({editPasswordView : false}) } }>
+                  <Button
+                    variant="secondary"
+                    onClick={e => {
+                      e.preventDefault();
+                      this.setState({ editPasswordView: false });
+                    }}
+                  >
                     Batal
                   </Button>
                   <Button value="Submit" type="submit" variant="primary">
@@ -260,7 +281,6 @@ class Profile extends React.Component {
             </Modal.Body>
           </Modal>
 
-
           {/* COba */}
 
           <Modal show={this.state.editPasswordView}>
@@ -268,70 +288,98 @@ class Profile extends React.Component {
               <Modal.Title>Current Password</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-          <form onSubmit={this.handleSubmitPassword}>
-          <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="passwordold"
-              label="Current Password"
-              id="passwordold"
-              type={this.state.showPasswordOld ? "text" : "password"}
-              onChange={(e)=>{e.preventDefault(); this.setState({passwordOld: e.target.value})}}
-              autoComplete="current-password"
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={(e)=>{e.preventDefault(); this.setState({showPasswordOld:!this.state.showPasswordOld})}}
-                      onMouseDown={(e)=>e.preventDefault()}
-                    >
-                      {this.state.showPasswordOld ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>
-                )
-              }}
-            />{" "}
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="passwordnew"
-              label="New Password"
-              id="passwordnew"
-              type={this.state.showPasswordNew ? "text" : "password"}
-              onChange={(e)=>{e.preventDefault(); this.setState({passwordNew: e.target.value})}}
-              autoComplete="current-password"
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={(e)=>{e.preventDefault(); this.setState({showPasswordNew:!this.state.showPasswordNew})}}
-                      onMouseDown={(e)=>e.preventDefault()}
-                    >
-                      {this.state.showPasswordNew ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>
-                )
-              }}
-            />
+              <form onSubmit={this.handleSubmitPassword}>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="passwordold"
+                  label="Current Password"
+                  id="passwordold"
+                  type={this.state.showPasswordOld ? "text" : "password"}
+                  onChange={e => {
+                    e.preventDefault();
+                    this.setState({ passwordOld: e.target.value });
+                  }}
+                  autoComplete="current-password"
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={e => {
+                            e.preventDefault();
+                            this.setState({
+                              showPasswordOld: !this.state.showPasswordOld
+                            });
+                          }}
+                          onMouseDown={e => e.preventDefault()}
+                        >
+                          {this.state.showPasswordOld ? (
+                            <Visibility />
+                          ) : (
+                            <VisibilityOff />
+                          )}
+                        </IconButton>
+                      </InputAdornment>
+                    )
+                  }}
+                />{" "}
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="passwordnew"
+                  label="New Password"
+                  id="passwordnew"
+                  type={this.state.showPasswordNew ? "text" : "password"}
+                  onChange={e => {
+                    e.preventDefault();
+                    this.setState({ passwordNew: e.target.value });
+                  }}
+                  autoComplete="current-password"
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={e => {
+                            e.preventDefault();
+                            this.setState({
+                              showPasswordNew: !this.state.showPasswordNew
+                            });
+                          }}
+                          onMouseDown={e => e.preventDefault()}
+                        >
+                          {this.state.showPasswordNew ? (
+                            <Visibility />
+                          ) : (
+                            <VisibilityOff />
+                          )}
+                        </IconButton>
+                      </InputAdornment>
+                    )
+                  }}
+                />
                 <Modal.Footer>
-                  <Button variant="secondary" onClick={e => {e.preventDefault(); this.setState({editPasswordView : false}) } }>
+                  <Button
+                    variant="secondary"
+                    onClick={e => {
+                      e.preventDefault();
+                      this.setState({ editPasswordView: false });
+                    }}
+                  >
                     Batal
                   </Button>
                   <Button value="Submit" type="submit" variant="primary">
                     Simpan
                   </Button>
                 </Modal.Footer>
-           
-          </form>
-          </Modal.Body>
+              </form>
+            </Modal.Body>
           </Modal>
-
         </div>
       );
     }
@@ -340,5 +388,6 @@ class Profile extends React.Component {
 
 export default connect(
   "userMe, changePasswordStatus, Toast, editProfileStatus",
-  actionsProfile, useStyles
+  actionsProfile,
+  useStyles
 )(Profile);
