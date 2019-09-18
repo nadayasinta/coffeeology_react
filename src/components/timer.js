@@ -7,123 +7,122 @@ import actionsDemo from "../store/actionsDemo";
 // import component
 
 class Timer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      status: "Start"
+    constructor(props) {
+        super(props);
+        this.state = {
+            status: "Start"
+        };
+    }
+
+    changeTimerInterval = () => {
+        console.log(this.props.timerNow);
+        this.timerInterval = setInterval(() => {
+            this.props.setTimer(
+                this.props.timerNow === 0 ? 0 : this.props.timerNow - 1
+            );
+        }, 100);
     };
-  }
 
-  changeTimerInterval = () => {
-    console.log(this.props.timerNow);
-    this.timerInterval = setInterval(() => {
-      this.props.setTimer(
-        this.props.timerNow === 0 ? 0 : this.props.timerNow - 1
-      );
-    }, 100);
-  };
+    stopTimerInterval = () => {
+        clearInterval(this.timerInterval);
+    };
 
-  stopTimerInterval = () => {
-    clearInterval(this.timerInterval);
-  };
+    changeAmountInterval = () => {
+        this.amountInterval = setInterval(() => {
+            this.props.setWaterNow(
+                this.props.waterNow === this.props.waterLimit
+                    ? this.props.waterNow
+                    : this.props.waterNow +
+                          (this.props.stepWater * 10) / this.props.stepTime
+            );
+        }, 100);
+    };
 
-  changeAmountInterval = () => {
-    this.amountInterval = setInterval(() => {
-      this.props.setWaterNow(
-        this.props.waterNow === this.props.waterLimit
-          ? this.props.waterNow
-          : this.props.waterNow +
-              (this.props.stepWater * 10) / this.props.stepTime
-      );
-    }, 100);
-  };
+    stopAmountInterval = () => {
+        clearInterval(this.amountInterval);
+    };
 
-  stopAmountInterval = () => {
-    clearInterval(this.amountInterval);
-  };
+    startTimer = () => {
+        this.setState({ status: "Pause" }, () => {
+            this.changeTimerInterval();
+            this.changeAmountInterval();
+        });
+    };
 
-  startTimer = () => {
-    this.setState({ status: "Pause" }, () => {
-      this.changeTimerInterval();
-      this.changeAmountInterval();
-    });
-  };
+    componentDidMount() {
+        console.log("timerDidlMount", this.props);
+    }
 
-  componentDidMount() {
-    console.log("timerDidlMount", this.props);
-  }
+    pauseTimer = () => {
+        this.setState({ status: "Resume" }, () => {
+            this.stopTimerInterval();
+            this.stopAmountInterval();
+        });
+    };
 
-  pauseTimer = () => {
-    this.setState({ status: "Resume" }, () => {
-      this.stopTimerInterval();
-      this.stopAmountInterval();
-    });
-  };
+    skipStep = () => {
+        this.setState({ status: "Resume" }, () => {
+            this.stopTimerInterval();
+            this.stopAmountInterval();
+        });
+    };
 
-  skipStep = () => {
-    this.setState({ status: "Resume" }, () => {
-      this.stopTimerInterval();
-      this.stopAmountInterval();
-    });
-  };
+    render() {
+        return (
+            <div>
+                <h1>
+                    Time :{" "}
+                    {Math.floor(Math.floor(this.props.timerNow / 10) / 60)}.{" "}
+                    {Math.floor(this.props.timerNow / 10) % 60}.{" "}
+                    {this.props.timerNow % 10}{" "}
+                </h1>
+                {this.state.status !== "Pause" ? (
+                    <button
+                        type="button"
+                        className="btn btn-danger"
+                        onClick={this.startTimer}
+                    >
+                        {this.state.status}
+                    </button>
+                ) : (
+                    <button
+                        type="button"
+                        class="btn btn-danger"
+                        onClick={this.pauseTimer}
+                    >
+                        {this.state.status}
+                    </button>
+                )}
 
-  render() {
-    return (
-      <div>
-        <h1>
-          Time : {Math.floor(Math.floor(this.props.timerNow / 10) / 60)}.{" "}
-          {Math.floor(this.props.timerNow / 10) % 60}.{" "}
-          {this.props.timerNow % 10}{" "}
-        </h1>
-        {this.state.status !== "Pause" ? (
-          <button
-            type="button"
-            className="btn btn-danger"
-            onClick={this.startTimer}
-          >
-            {this.state.status}
-          </button>
-        ) : (
-
-          <button
-            type="button"
-            class="btn btn-danger"
-
-            onClick={this.pauseTimer}
-          >
-            {this.state.status}
-          </button>
-        )}
-
-        <button
-          type="button"
-          className="btn btn-warning"
-          onClick={() => {
-            this.props.setTimer(0);
-            this.props.setWaterNow(this.props.waterLimit);
-          }}
-        >
-          Skip
-        </button>
-        <h1>Water : {Math.ceil(this.props.waterNow)} </h1>
-        <ProgressBar
-          animated
-          min={this.props.waterLimit - this.props.stepWater}
-          now={this.props.waterNow}
-          max={this.props.waterLimit}
-        />
-        <ProgressBar
-          animated
-          variant="info"
-          now={this.props.waterNow}
-          max={this.props.recipe.water}
-        />
-      </div>
-    );
-  }
+                <button
+                    type="button"
+                    className="btn btn-warning"
+                    onClick={() => {
+                        this.props.setTimer(0);
+                        this.props.setWaterNow(this.props.waterLimit);
+                    }}
+                >
+                    Skip
+                </button>
+                <h1>Water : {Math.ceil(this.props.waterNow)} </h1>
+                <ProgressBar
+                    animated
+                    min={this.props.waterLimit - this.props.stepWater}
+                    now={this.props.waterNow}
+                    max={this.props.waterLimit}
+                />
+                <ProgressBar
+                    animated
+                    variant="info"
+                    now={this.props.waterNow}
+                    max={this.props.recipe.water}
+                />
+            </div>
+        );
+    }
 }
 
 export default connect(
-  "timerNow, waterNow,waterLimit,stepWater,stepTime,recipe",
-  actionsDemo
+    "timerNow, waterNow,waterLimit,stepWater,stepTime,recipe",
+    actionsDemo
 )(Timer);
