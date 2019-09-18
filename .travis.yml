@@ -1,10 +1,7 @@
 sudo: required
 language: node_js
 node_js:
-- stable
-cache:
-  directories:
-  - node_modules
+  - "stable"
 services:
 - docker
 - npm
@@ -15,7 +12,7 @@ env:
   - DOCKER_IMAGE_NAME="coffeology_react"
   - DOCKER_HUB_ORG="farizap"
 before_script:
-- openssl aes-256-cbc -K $encrypted_a8e39c5ffbac_key -iv $encrypted_a8e39c5ffbac_iv
+- openssl aes-256-cbc -K $encrypted_a9e056accb19_key -iv $encrypted_a9e056accb19_iv
   -in deploy_rsa.enc -out deploy_rsa -d
 - eval "$(ssh-agent -s)"
 - chmod 600 deploy_rsa
@@ -36,5 +33,3 @@ after_script:
 - ssh-keyscan -H $SSH_IP >> ~/.ssh/known_hosts
 - ssh -v -i deploy_rsa $SSH_USER@$SSH_IP DIR=$ROOT_DIR 'bash -s' < deploy.sh
 before_install:
-- openssl aes-256-cbc -K $encrypted_29b27db0e0e4_key -iv $encrypted_29b27db0e0e4_iv
-  -in deploy_rsa.enc -out deploy_rsa -d
