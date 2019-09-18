@@ -38,10 +38,6 @@ const actionsUsers = store => ({
         });
       });
   },
-  validateEmail(state, email) {
-    var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    return re.test(String(email).toLowerCase());
-  },
   registerUser(state, data) {
     data["photo"] = "";
     let config = {
@@ -57,7 +53,7 @@ const actionsUsers = store => ({
           url: store.getState().baseURL + "/token",
           data: data
         };
-        axios(config)
+        await axios(config)
           .then(response => {
             console.log(response);
             sessionStorage.setItem("token", response.data.token);

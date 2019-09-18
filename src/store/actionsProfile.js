@@ -10,6 +10,11 @@ const Toast = Swal.mixin({
 });
 
 const actionsProfile = store => ({
+  setLogin(state) {
+    return { login: store.getState().login + 1 };
+  },
+
+  // axios
   async getProfile(state) {
     console.log("test get profile");
     let config = {
@@ -21,7 +26,7 @@ const actionsProfile = store => ({
     };
     await axios(config)
       .then(response => {
-        console.log("data users ", response.data.data)
+        console.log("data users ", response.data.data);
         store.setState({ userMe: response.data.data });
       })
       .catch(error => {
@@ -37,14 +42,14 @@ const actionsProfile = store => ({
     let config = {
       method: "put",
       url: store.getState().baseURL + "/users",
-      data : data,
+      data: data,
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token")
       }
     };
     await axios(config)
       .then(response => {
-        console.log("data users ", response.data.data)
+        console.log("data users ", response.data.data);
         store.setState({ userMe: response.data.data });
         store.setState({ editProfileStatus: true });
         Toast.fire({
@@ -65,7 +70,7 @@ const actionsProfile = store => ({
     let config = {
       method: "put",
       url: store.getState().baseURL + "/users",
-      data : data,
+      data: data,
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token")
       }
@@ -113,7 +118,7 @@ const actionsProfile = store => ({
   },
   resetEditProfileStatus(state) {
     return { editProfileStatus: false };
-  },
+  }
 });
 
 export default actionsProfile;

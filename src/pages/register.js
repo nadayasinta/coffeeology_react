@@ -80,18 +80,18 @@ const Register = props => {
 
     // POST data to register endpoint
     await props.registerUser(data);
-
+    setTimeout(() => {
+      if (sessionStorage.getItem("token")) {
+        Toast.fire({
+          type: "success",
+          title: "Sukses Registrasis!"
+        });
+        setTimeout(() => {
+          props.history.goBack();
+        }, 500);
+      }
+    }, 100);
     // await props.login(data);
-
-    if (sessionStorage.getItem("token")) {
-      Toast.fire({
-        type: "success",
-        title: "Sukses Registrasis!"
-      });
-      setTimeout(() => {
-        props.history.goBack();
-      }, 500);
-    }
   };
 
   const onChangeEmail = event => {
