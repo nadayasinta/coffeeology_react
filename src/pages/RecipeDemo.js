@@ -17,31 +17,42 @@ class Steps extends React.Component {
   }
 
   nextStep = () => {
-    let newSteps = this.props.recipeSteps;
+    let newSteps = this.state.steps;
     newSteps.shift();
     this.setState({ steps: newSteps });
   };
 
-  componentDidMount() {
+  componentWillMount() {
+    console.log("willMount", this.props);
+    this.props.setStepIndex(0);
+  }
+
+  componentDidMount = async () => {
+    console.log("didMount", this.props);
+
     this.setState({ steps: this.props.recipeSteps }, () => {
       console.log(this.state.steps);
     });
-    this.props.setStepIndex(0);
+    await this.props.setStepIndex(0);
 
     console.log(this.props.recipeSteps);
+  };
+
+  componentWillUnmount() {
+    window.location.reload();
   }
 
-  componentWillUpdate = (prevProps, prevState) => {
+  componentWillUpdate = async (prevProps, prevState) => {
     if (prevProps.stepIndex !== this.props.stepIndex) {
-      console.log("didUpdate", this.props.stepIndex);
-
       if (this.props.stepIndex > 0) {
-        this.nextStep();
+        await this.nextStep();
         if (this.state.steps.length === 0) {
-          this.props.postHistory({
+          await this.props.setResetTimer();
+          await this.props.postHistory({
             recipeID: this.props.match.params.recipeID
           });
-          this.props.history.push(
+
+          await this.props.history.push(
             "/recipe/review/" + this.props.match.params.recipeID
           );
         }
@@ -64,8 +75,8 @@ class Steps extends React.Component {
           {sessionStorage.getItem("token") ? (
             <div></div>
           ) : (
-              <Redirect to="/login" />
-            )}
+            <Redirect to="/login" />
+          )}
 
           <div>Loading</div>
         </div>
@@ -77,9 +88,13 @@ class Steps extends React.Component {
           {sessionStorage.getItem("token") ? (
             <div></div>
           ) : (
-              <Redirect to="/login" />
-            )}
-          <img className="backbutton" src={this.props.backButton} onClick={event => this.props.history.goBack()} />
+            <Redirect to="/login" />
+          )}
+          <img
+            className="backbutton"
+            src={this.props.backButton}
+            onClick={event => this.props.history.goBack()}
+          />
 
           <div className="container">
             <div className="row">
@@ -87,7 +102,7 @@ class Steps extends React.Component {
                 <Timer />
               </div>
               <div className="col-12">
-                {this.props.recipeSteps.map((recipeStep, index) => {
+                {this.state.steps.map((recipeStep, index) => {
                   return (
                     <div>
                       <CSSTransitionGroup
