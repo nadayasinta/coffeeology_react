@@ -1,9 +1,9 @@
-import React from "react";
+// import React from "react";
 import createStore from "unistore";
-import axios from "axios";
-import { Redirect } from "react-router-dom";
+// import axios from "axios";
+// import { Redirect } from "react-router-dom";
 // import method image
-import { makeStyles } from "@material-ui/core/styles";
+// import { makeStyles } from "@material-ui/core/styles";
 
 // import json
 import stepTypes from "./stepTypes";
@@ -51,6 +51,7 @@ const initialState = {
     //   icon: require("../assets/images/StepIcon/stir.png")
     // }
   ],
+  recipesSelection: {},
   recipesSearch: [],
   recipe: null,
   // name: "Ultimate v60",
@@ -105,8 +106,9 @@ const initialState = {
     //   amount: 80
     // }
   ],
+  recipeCreator: [],
   difficulties: ["Mudah", "Sedang", "Sulit"],
-
+  reviews: [],
   // search
   searchParams: {},
   searchKeyword: "",
@@ -121,6 +123,7 @@ const initialState = {
   // data user
   name: "",
   emailValidStatus: false,
+  login: 0,
 
   // url
   baseURL: "http://api.coffeology.shop",
@@ -208,9 +211,30 @@ const initialState = {
   history: [],
 
   myBrew: [],
+  // users Profile
+  userMe: [],
+  changePasswordStatus: false,
+  editProfileStatus: false,
+
+  Toast: Swal.mixin({
+    toast: true,
+    position: "center",
+    showConfirmButton: false,
+    timer: 2000
+  }),
+
+
+  // another user
+  user: [],
+  userBrew: [],
 
   //import back image
-  backButton: require('../assets/images/back.png')
+
+  //import button image
+  homeButton: require("../assets/images/home.png"),
+  menuButton: require("../assets/images/menu.png"),
+
+  backButton: require("../assets/images/back.png")
 };
 
 const store = createStore(initialState);

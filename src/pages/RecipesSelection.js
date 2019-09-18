@@ -6,10 +6,20 @@ import actionsRecipes from "../store/actionsRecipes";
 
 // import component
 import RecipeCard from "../components/recipeCard";
-
+import Pagination from "react-bootstrap/Pagination";
 import loading from "../assets/images/loading.gif";
 
+const _ = require("lodash");
+
 class RecipesSelection extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      pagination: 1
+    };
+  }
+
   convertSeconds(secondsInput) {
     let minutes = Math.floor(parseInt(secondsInput) / 60);
     let seconds = parseInt(secondsInput) - minutes * 60;
@@ -23,43 +33,80 @@ class RecipesSelection extends React.Component {
   }
 
   async componentDidMount() {
-    await this.props.getRecipes({ methodID: this.props.match.params.methodID });
-    console.log(this.props);
+    await this.props.getRecipesSelection({
+      methodID: this.props.match.params.methodID,
+      p: this.state.pagination
+    });
   }
 
   componentWillUnmount() {
     this.props.setRecipes([]);
   }
 
+  handlePreviousPageButton = event => {
+    event.preventDefault();
+    this.setState({ pagination: this.state.pagination - 1 }, () => {
+      this.props.getRecipesSelection({
+        methodID: this.props.match.params.methodID,
+        p: this.state.pagination
+      });
+    });
+  };
+  handleNextPageButton = event => {
+    event.preventDefault();
+    this.setState({ pagination: this.state.pagination + 1 }, () => {
+      this.props.getRecipesSelection({
+        methodID: this.props.match.params.methodID,
+        p: this.state.pagination
+      });
+    });
+  };
+
   render() {
-    console.log(this.props.methods);
-    console.log(this.props.recipes.length);
-    if (this.props.recipes.length === 0) {
+    console.log(this.props);
+    if (_.isEmpty(this.props.recipesSelection)) {
       return <img src={loading} alt="loading..." />;
     } else {
       return (
         <div>
           <h2>Recipes Selection</h2>
-          {this.props.recipes.map(value => {
+          {this.props.recipesSelection.recipes.map(value => {
             return (
               <div className="col-12">
                 <Link to={"/recipe/" + value.id}>
                   <RecipeCard
                     data={value}
-                    methodIcon={this.props.methods[this.props.match.params.methodID - 1].icon}
+                    methodIcon={
+                      this.props.methods[this.props.match.params.methodID - 1]
+                        .icon
+                    }
                     time={this.convertSeconds(value.time)}
                   />
                 </Link>
               </div>
             );
           })}
+          <br />
+          <Pagination size="lg">
+            {this.props.recipesSelection.pageNow === 1 ? (
+              <span></span>
+            ) : (
+              <Pagination.First onClick={this.handlePreviousPageButton} />
+            )}
+            {this.props.recipesSelection.pageNow ===
+            this.props.recipesSelection.pageTotal ? (
+              <span></span>
+            ) : (
+              <Pagination.Last onClick={this.handleNextPageButton} />
+            )}
+          </Pagination>
         </div>
       );
     }
   }
 }
-
+//
 export default connect(
-  "recipes, methods",
+  "recipesSelection, methods",
   actionsRecipes
 )(RecipesSelection);
