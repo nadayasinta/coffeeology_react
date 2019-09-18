@@ -84,14 +84,17 @@ class Timer extends React.Component {
             {this.state.status}
           </button>
         ) : (
+
           <button
             type="button"
             class="btn btn-danger"
+
             onClick={this.pauseTimer}
           >
             {this.state.status}
           </button>
         )}
+
         <button
           type="button"
           className="btn btn-warning"

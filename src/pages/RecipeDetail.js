@@ -32,6 +32,10 @@ class RecipeSelection extends React.Component {
     this.setState({ showComment: true });
   };
 
+
+
+  //
+
   handleHideComment = () => {
     this.setState({ showComment: false });
   };
@@ -45,6 +49,7 @@ class RecipeSelection extends React.Component {
   handleHideReview = () => {
     this.setState({ showReview: false });
   };
+
 
   async componentDidMount() {
     await this.props.getRecipeByID(this.props.match.params.recipeID);
