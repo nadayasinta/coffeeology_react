@@ -28,6 +28,7 @@ const actionsUsers = store => ({
       .then(response => {
         console.log(response);
         sessionStorage.setItem("token", response.data.token);
+        store.setState({ login: store.getState().login + 1 });
       })
       .catch(error => {
         console.log(error.response);

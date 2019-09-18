@@ -59,7 +59,7 @@ const SignIn = props => {
 
   // validate email from form
   const validateEmail = email => {
-    var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
   };
 
@@ -112,7 +112,9 @@ const SignIn = props => {
       <img
         className="backbutton"
         src={props.backButton}
-        onClick={handleRedirect}
+
+        onClick={event => props.history.goBack()}
+
       />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
