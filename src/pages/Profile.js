@@ -105,6 +105,7 @@ class Profile extends React.Component {
   handleLogot = async e => {
     e.preventDefault();
     sessionStorage.removeItem("token");
+    this.props.setLogin();
     this.props.history.push("/");
   };
 
