@@ -18,36 +18,66 @@ import CreateRecipe from "../pages/CreateRecipe";
 import AddStep from "../pages/AddStep";
 import InputStep from "../pages/InputStep";
 import Review from "../pages/Review";
-import Profile from "../pages/Profile"
+import Profile from "../pages/Profile";
 import Search from "../pages/SearchPage";
+import ErrorPage from "../pages/ErrorPage";
 
 // import component
 import Navbar from "../components/navbar";
 
 function Routes() {
-  return (
-    <Provider store={store} className="allpage container">
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={Brewing} />
-          {/* <Route exact path="/test" component={Test} /> */}
-          <Route exact path="/recipe/:recipeID" component={RecipeDetail} />
-          <Route exact path="/recipe/demo/:recipeID" component={RecipeDemo} />
-          <Route exact path="/recipe/review/:recipeID" component={Review} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/activity" component={Activity} />
-          <Route exact path="/recipes/create" component={CreateRecipe} />
-          <Route exact path="/recipes/create/addstep" component={AddStep} />
-          <Route exact path="/recipes/create/inputstep" component={InputStep} />
-          <Route exact path="/recipes/:methodID" component={RecipesSelection} />
-          <Route exact path="/profile/me" component={Profile} />
-          <Route exact path="/search" component={Search} />
-        </Switch>
-        <Navbar />
-      </BrowserRouter>
-    </Provider>
-  );
+    return (
+        <Provider store={store} className="allpage container">
+            <BrowserRouter>
+                <Switch>
+                    <Route exact path="/" component={Brewing} />
+                    {/* <Route exact path="/test" component={Test} /> */}
+                    <Route
+                        exact
+                        path="/recipe/:recipeID"
+                        component={RecipeDetail}
+                    />
+                    <Route
+                        exact
+                        path="/recipe/demo/:recipeID"
+                        component={RecipeDemo}
+                    />
+                    <Route
+                        exact
+                        path="/recipe/review/:recipeID"
+                        component={Review}
+                    />
+                    <Route exact path="/login" component={Login} />
+                    <Route exact path="/register" component={Register} />
+                    <Route exact path="/activity" component={Activity} />
+                    <Route
+                        exact
+                        path="/recipes/create"
+                        component={CreateRecipe}
+                    />
+                    <Route
+                        exact
+                        path="/recipes/create/addstep"
+                        component={AddStep}
+                    />
+                    <Route
+                        exact
+                        path="/recipes/create/inputstep"
+                        component={InputStep}
+                    />
+                    <Route
+                        exact
+                        path="/recipes/:methodID"
+                        component={RecipesSelection}
+                    />
+                    <Route exact path="/profile/me" component={Profile} />
+                    <Route exact path="/search" component={Search} />
+                    <Route component={ErrorPage} />
+                </Switch>
+                <Navbar />
+            </BrowserRouter>
+        </Provider>
+    );
 }
 
 export default Routes;
