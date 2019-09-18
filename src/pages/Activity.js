@@ -13,9 +13,8 @@ import Box from "@material-ui/core/Box";
 
 // import component
 
-import History from '../components/history';
-import MyBrew from '../components/myBrew';
-
+import History from "../components/history";
+import MyBrew from "../components/myBrew";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -52,7 +51,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.background.paper,
     marginRight: "-15px",
     marginLeft: "-15px",
-    marginTop: "-50px",
+    marginTop: "-50px"
   }
 }));
 
@@ -76,7 +75,11 @@ export default function FullWidthTabs() {
         <div className="row">
           <div className="col-12">
             <div className={classes.root}>
-              <AppBar className="acitivityBar" position="static" color="default">
+              <AppBar
+                className="acitivityBar"
+                position="static"
+                color="default"
+              >
                 <Tabs
                   value={value}
                   onChange={handleChange}
@@ -94,7 +97,7 @@ export default function FullWidthTabs() {
                 index={value}
                 onChangeIndex={handleChangeIndex}
               >
-                <TabPanel className="px-3" value={value} index={0} dir={theme.direction}>
+                <TabPanel value={value} index={0} dir={theme.direction}>
                   <MyBrew />
                 </TabPanel>
                 <TabPanel value={value} index={1} dir={theme.direction}>
