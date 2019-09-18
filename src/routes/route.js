@@ -9,15 +9,16 @@ import store from "../store/store";
 import RecipesSelection from "../pages/RecipesSelection";
 import Brewing from "../pages/Brewing";
 import RecipeDetail from "../pages/RecipeDetail";
-import Test from "../pages/test";
+// import Test from "../pages/test";
 import RecipeDemo from "../pages/RecipeDemo";
 import Login from "../pages/loginTest";
 import Register from "../pages/register";
-import Activity from "../pages/activity";
+import Activity from "../pages/Activity";
 import CreateRecipe from "../pages/CreateRecipe";
-import AddStep from "../pages/addStep";
-import InputStep from "../pages/inputStep";
+import AddStep from "../pages/AddStep";
+import InputStep from "../pages/InputStep";
 import Review from "../pages/Review";
+import Profile from "../pages/Profile"
 import Search from "../pages/SearchPage";
 
 // import component
@@ -29,7 +30,7 @@ function Routes() {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={Brewing} />
-          <Route exact path="/test" component={Test} />
+          {/* <Route exact path="/test" component={Test} /> */}
           <Route exact path="/recipe/:recipeID" component={RecipeDetail} />
           <Route exact path="/recipe/demo/:recipeID" component={RecipeDemo} />
           <Route exact path="/recipe/review/:recipeID" component={Review} />
@@ -40,6 +41,7 @@ function Routes() {
           <Route exact path="/recipes/create/addstep" component={AddStep} />
           <Route exact path="/recipes/create/inputstep" component={InputStep} />
           <Route exact path="/recipes/:methodID" component={RecipesSelection} />
+          <Route exact path="/profile/me" component={Profile} />
           <Route exact path="/search" component={Search} />
         </Switch>
         <Navbar />

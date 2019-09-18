@@ -1,9 +1,9 @@
-import React from "react";
+// import React from "react";
 import createStore from "unistore";
-import axios from "axios";
-import { Redirect } from "react-router-dom";
+// import axios from "axios";
+// import { Redirect } from "react-router-dom";
 // import method image
-import { makeStyles } from "@material-ui/core/styles";
+// import { makeStyles } from "@material-ui/core/styles";
 
 // import json
 import stepTypes from "./stepTypes";
@@ -105,8 +105,9 @@ const initialState = {
     //   amount: 80
     // }
   ],
+  recipeCreator: [],
   difficulties: ["Mudah", "Sedang", "Sulit"],
-
+  reviews: [],
   // search
   searchParams: {},
   searchKeyword: "",
@@ -121,6 +122,7 @@ const initialState = {
   // data user
   name: "",
   emailValidStatus: false,
+  login: 0,
 
   // url
   baseURL: "http://0.0.0.0:5000",
@@ -208,9 +210,20 @@ const initialState = {
   history: [],
 
   myBrew: [],
+  // users Profile
+  userMe: [],
+  changePasswordStatus: false,
+  editProfileStatus: false,
+
+  Toast: Swal.mixin({
+    toast: true,
+    position: "center",
+    showConfirmButton: false,
+    timer: 2000
+  }),
 
   //import back image
-  backButton: require('../assets/images/back.png')
+  backButton: require("../assets/images/back.png")
 };
 
 const store = createStore(initialState);

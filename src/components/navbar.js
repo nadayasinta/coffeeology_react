@@ -72,6 +72,8 @@
 // export default navbar;
 
 import React from "react";
+import { connect } from "unistore/react";
+import actionsUsers from "../store/actionUsers";
 import { makeStyles } from "@material-ui/core/styles";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
@@ -112,9 +114,11 @@ const useStyles = makeStyles({
   }
 });
 
-export default function SimpleBottomNavigation() {
+const SimpleBottomNavigation = props => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+
+  React.useEffect(() => {}, [props.login]);
 
   return (
     <BottomNavigation
@@ -173,7 +177,7 @@ export default function SimpleBottomNavigation() {
             paddingTop: "10px"
           }}
           component={Link}
-          to="/activity"
+          to="/profile/me"
           label="Profile"
           icon={<HumanGreeting />}
         />
@@ -188,7 +192,12 @@ export default function SimpleBottomNavigation() {
           label="Masuk"
           icon={<Login />}
         />
-      )}
+      }
     </BottomNavigation>
   );
-}
+};
+
+export default connect(
+  "login",
+  actionsUsers
+)(SimpleBottomNavigation);
