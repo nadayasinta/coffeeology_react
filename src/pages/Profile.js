@@ -231,59 +231,7 @@ class Profile extends React.Component {
             </Modal.Body>
           </Modal>
 
-          <Modal show={false}>
-            <Modal.Header>
-              <Modal.Title>Edit Password</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <Form onSubmit={this.handleSubmitPassword}>
-                <Form.Group role="form" controlId="formBasicEmail">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    placeholder="Your Current Password"
-                    ref={this.passwordOld}
-                    required
-                  />
-                </Form.Group>
-                <Form.Group role="form" controlId="formBasicEmail">
-                  <Form.Label>Password Baru</Form.Label>
-                  <Form.Control
-                    type="password"
-                    placeholder="Your New Password"
-                    ref={this.passwordNew}
-                    required
-                  />
-                </Form.Group>
-                <Form.Group role="form" controlId="formBasicEmail">
-                  <Form.Label>Ulangi Password Baru</Form.Label>
-                  <Form.Control
-                    type="password"
-                    placeholder="Retype Your New Password"
-                    ref={this.retypePasswordNew}
-                    required
-                  />
-                </Form.Group>
-                <Modal.Footer>
-                  <Button
-                    variant="secondary"
-                    onClick={e => {
-                      e.preventDefault();
-                      this.setState({ editPasswordView: false });
-                    }}
-                  >
-                    Batal
-                  </Button>
-                  <Button value="Submit" type="submit" variant="primary">
-                    Simpan
-                  </Button>
-                </Modal.Footer>
-              </Form>
-            </Modal.Body>
-          </Modal>
-
-          {/* COba */}
-
+      
           <Modal show={this.state.editPasswordView}>
             <Modal.Header>
               <Modal.Title>Current Password</Modal.Title>
