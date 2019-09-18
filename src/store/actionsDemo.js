@@ -46,6 +46,11 @@ const actionsDemo = store => ({
     store.setState({ stepWater: 0 });
     console.log(store.getState().waterNow);
   },
+  shiftRecipeSteps(state) {
+    const recipeStepsShifted = store.getState().recipeSteps.shift();
+    console.log(recipeStepsShifted);
+    return { recipeSteps: recipeStepsShifted };
+  },
 
   async postHistory(state, data) {
     console.log("test");

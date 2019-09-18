@@ -57,7 +57,6 @@ class RecipeSelection extends React.Component {
       recipeSteps: this.props.recipeSteps
     });
     // this.props.setRecipeSteps(this.state.recipeSteps);
-    this.props.setResetTimer();
   }
 
   convertSeconds(secondsInput) {
@@ -72,10 +71,13 @@ class RecipeSelection extends React.Component {
     return `${minutes}:${seconds}`;
   }
 
-  handleOnClickButton = event => {
+  handleOnClickButton = async event => {
     event.preventDefault();
-    this.props.setRecipeSteps(this.state.recipeSteps);
-
+    await this.props.setRecipeSteps(this.state.recipeSteps);
+    sessionStorage.setItem(
+      "recipeSteps",
+      JSON.stringify(this.state.recipeSteps)
+    );
     this.props.history.push("/recipe/demo/" + this.props.match.params.recipeID);
   };
 
