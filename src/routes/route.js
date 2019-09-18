@@ -9,8 +9,8 @@ import store from "../store/store";
 import RecipesSelection from "../pages/RecipesSelection";
 import Brewing from "../pages/Brewing";
 import RecipeDetail from "../pages/RecipeDetail";
-// import Test from "../pages/test";
-import RecipeDemo from "../pages/RecipeDemo";
+import Test from "../pages/TimerTest/timerPage";
+import RecipeDemo from "../pages/TimerTest/timerPage";
 import Login from "../pages/loginTest";
 import Register from "../pages/register";
 import Activity from "../pages/Activity";
@@ -18,7 +18,7 @@ import CreateRecipe from "../pages/CreateRecipe";
 import AddStep from "../pages/AddStep";
 import InputStep from "../pages/InputStep";
 import Review from "../pages/Review";
-import Profile from "../pages/Profile"
+import Profile from "../pages/Profile";
 import Search from "../pages/SearchPage";
 import User from "../pages/User";
 
@@ -31,7 +31,7 @@ function Routes() {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={Brewing} />
-          {/* <Route exact path="/test" component={Test} /> */}
+          <Route exact path="/test" component={Test} />
           <Route exact path="/recipe/:recipeID" component={RecipeDetail} />
           <Route exact path="/recipe/demo/:recipeID" component={RecipeDemo} />
           <Route exact path="/recipe/review/:recipeID" component={Review} />
