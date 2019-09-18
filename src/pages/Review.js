@@ -1,6 +1,24 @@
 import React from "react";
 import Rating from "@material-ui/lab/Rating";
 import Typography from "@material-ui/core/Typography";
+
+import {
+  FacebookShareButton,
+  TelegramShareButton,
+  TwitterShareButton,
+  WhatsappShareButton,
+  LinkedinShareButton,
+  LineShareButton
+} from "react-share";
+import {
+  FacebookIcon,
+  TelegramIcon,
+  TwitterIcon,
+  WhatsappIcon,
+  LinkedinIcon,
+  LineIcon
+} from "react-share";
+
 import { connect } from "unistore/react";
 import actionsDemo from "../store/actionsDemo";
 
@@ -86,6 +104,52 @@ class Review extends React.Component {
               />
             </form>
           </div>
+
+          <br />
+          <br />
+          <FacebookShareButton
+            children={<FacebookIcon size={32} round={true} />}
+            url={
+              "http://coffeology.shop/recipe/" +
+              this.props.match.params.recipeID
+            }
+          />
+          <TelegramShareButton
+            children={<TelegramIcon size={32} round={true} />}
+            url={
+              "http://coffeology.shop/recipe/" +
+              this.props.match.params.recipeID
+            }
+          />
+          <TwitterShareButton
+            children={<TwitterIcon size={32} round={true} />}
+            url={
+              "http://coffeology.shop/recipe/" +
+              this.props.match.params.recipeID
+            }
+          />
+          <WhatsappShareButton
+            children={<WhatsappIcon size={32} round={true} />}
+            url={
+              "http://coffeology.shop/recipe/" +
+              this.props.match.params.recipeID
+            }
+          />
+          <LinkedinShareButton
+            children={<LinkedinIcon size={32} round={true} />}
+            url={
+              "http://coffeology.shop/recipe/" +
+              this.props.match.params.recipeID
+            }
+          />
+          <LineShareButton
+            children={<LineIcon size={32} round={true} />}
+            url={
+              "http://coffeology.shop/recipe/" +
+              this.props.match.params.recipeID
+            }
+          />
+
         </div>
       </div>
     );

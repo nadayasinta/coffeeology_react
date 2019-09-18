@@ -21,10 +21,9 @@ class MyBrew extends React.Component {
     return `${minutes}:${seconds}`;
   }
 
-
   componentDidMount = async () => {
-    this.props.getMyBrew()
-  }
+    this.props.getMyBrew();
+  };
 
   render() {
     return (
@@ -35,7 +34,12 @@ class MyBrew extends React.Component {
         {this.props.myBrew.map((value, key) => (
           <div className="col-12">
             <Link to={`/recipe/${value.id}`}>
-              <RecipeCard pageType="pageMyBrew" methodIcon={this.props.methods[value.methodID - 1].icon} data={value} time={this.convertSeconds(value.time)} />
+              <RecipeCard
+                pageType="pageMyBrew"
+                methodIcon={this.props.methods[value.methodID - 1].icon}
+                data={value}
+                time={this.convertSeconds(value.time)}
+              />
             </Link>
           </div>
         ))}

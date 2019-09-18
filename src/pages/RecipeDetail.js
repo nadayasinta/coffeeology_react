@@ -111,6 +111,7 @@ class RecipeSelection extends React.Component {
                 <img
                   height="100px"
                   src={require("../assets/images/methodV60.png")}
+                  alt="altTag"
                 />
               </div>
               <div className="col-6 text-left">
