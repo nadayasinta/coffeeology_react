@@ -113,9 +113,12 @@ class RecipeSelection extends React.Component {
           <img className="backbutton" src={this.props.backButton} onClick={event => this.props.history.goBack()} />
           <div className="container">
             <div className="row justify-content-center">
-              <h2>{this.props.recipe.name.toUpperCase()}</h2>
-              <br />
-              <h5>{this.props.recipeCreator.name}</h5>
+              <h2 className="font-weight-bold mb-0">{this.props.recipe.name.toUpperCase()}</h2>
+              </div>
+           
+           <div className="row justify-content-center">
+              
+              <h6 className="text-secondary">{this.props.recipeCreator.name}</h6>
             </div>
 
             <div className="row mr-0">
@@ -125,7 +128,7 @@ class RecipeSelection extends React.Component {
                   src={this.props.methods[this.props.recipe.methodID - 1].icon}
                 />
               </div>
-              <div className="col-8 align-self-center">
+              <div className="col-8 align-self-center bg-light">
                 <div className="row">
                   <div className="col-4 text-left">Beans</div>
                   <div className="col-1 text-center">:</div>
