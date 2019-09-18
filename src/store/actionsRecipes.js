@@ -84,7 +84,7 @@ const actionsRecipes = store => ({
 
     await axios(config).then(response => {
       console.log(response);
-      store.setState({ recipes: response.data.data });
+      store.setState({ recipes: response.data.recipes });
     });
   },
   async searchRecipes(state, filterParams, searchParams) {

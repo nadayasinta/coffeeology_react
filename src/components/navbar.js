@@ -177,9 +177,7 @@ const SimpleBottomNavigation = props => {
             paddingTop: "10px"
           }}
           component={Link}
-
           to="/profile/me"
-
           label="Profile"
           icon={<HumanGreeting />}
         />
@@ -194,7 +192,7 @@ const SimpleBottomNavigation = props => {
           label="Masuk"
           icon={<Login />}
         />
-      }
+      )}
     </BottomNavigation>
   );
 };
