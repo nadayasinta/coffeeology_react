@@ -46,6 +46,18 @@ const actionsRecipes = store => ({
   setMethodsParams(state, value) {
     return { methodsParams: value };
   },
+  setResetTimer(state) {
+    store.setState({ timerNow: 0 });
+    store.setState({ stepIndex: 0 });
+    store.setState({ waterNow: 0 });
+    store.setState({ waterLimit: 0 });
+    store.setState({ stepTime: 0 });
+    store.setState({ stepWater: 0 });
+    console.log(store.getState().waterNow);
+  },
+  setTimerNow(state, value) {
+    return { timerNow: value };
+  },
   // axios
 
   async postRecipe(state, data) {

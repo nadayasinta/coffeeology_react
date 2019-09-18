@@ -54,7 +54,8 @@ class RecipeSelection extends React.Component {
       ratio: this.props.recipe.water / this.props.recipe.coffeeWeight,
       recipeSteps: this.props.recipeSteps
     });
-    console.log(this.state);
+    // this.props.setRecipeSteps(this.state.recipeSteps);
+    this.props.setResetTimer();
   }
 
   convertSeconds(secondsInput) {
@@ -71,12 +72,12 @@ class RecipeSelection extends React.Component {
 
   handleOnClickButton = event => {
     event.preventDefault();
-    console.log(this.state.recipeSteps);
     this.props.setRecipeSteps(this.state.recipeSteps);
+
     this.props.history.push("/recipe/demo/" + this.props.match.params.recipeID);
   };
 
-  handleOnChangeCoffee = async event => {
+  handleOnChangeCoffee = event => {
     event.preventDefault();
 
     const waterTotal = this.state.ratio * event.target.value;
@@ -97,7 +98,6 @@ class RecipeSelection extends React.Component {
   };
 
   render() {
-    console.log(this.state.recipeSteps);
     if (this.props.recipe === null) {
       return <img src={loading} alt="loading..." />;
     } else {
@@ -311,7 +311,7 @@ class RecipeSelection extends React.Component {
 
             <div className="row mt-3 justify-content-center">
               <div className="col-12">Tahapan</div>
-              {this.state.recipeSteps.map(recipeStep => (
+              {this.props.recipeSteps.map(recipeStep => (
                 <div className="col-12">
                   <StepCard data={recipeStep} />
                 </div>
