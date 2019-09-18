@@ -194,7 +194,7 @@ const SimpleBottomNavigation = props => {
           label="Masuk"
           icon={<Login />}
         />
-      )}
+      }
     </BottomNavigation>
   );
 };

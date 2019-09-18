@@ -105,7 +105,9 @@ const initialState = {
     //   amount: 80
     // }
   ],
+  recipeCreator: [],
   difficulties: ["Mudah", "Sedang", "Sulit"],
+  reviews: [],
 
   // search
   searchParams: {},
@@ -215,7 +217,7 @@ const initialState = {
   changePasswordStatus: false,
   editProfileStatus: false,
 
-  Toast : Swal.mixin({
+  Toast: Swal.mixin({
     toast: true,
     position: "center",
     showConfirmButton: false,

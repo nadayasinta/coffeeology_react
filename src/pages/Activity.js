@@ -97,12 +97,7 @@ export default function FullWidthTabs() {
                 index={value}
                 onChangeIndex={handleChangeIndex}
               >
-                <TabPanel
-                  className="px-3"
-                  value={value}
-                  index={0}
-                  dir={theme.direction}
-                >
+                <TabPanel value={value} index={0} dir={theme.direction}>
                   <MyBrew />
                 </TabPanel>
                 <TabPanel value={value} index={1} dir={theme.direction}>
