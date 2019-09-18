@@ -223,6 +223,10 @@ const initialState = {
     timer: 2000
   }),
 
+  // another user
+  user: [],
+  userBrew: [],
+
   //import back image
   backButton: require("../assets/images/back.png")
 };
