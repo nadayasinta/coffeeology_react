@@ -148,7 +148,6 @@ class InputStep extends React.Component {
                 className="form-control"
                 id="Catatan"
                 rows="3"
-                placeholder="catatan"
                 maxLength="250"
                 ref={this.note}
                 required
