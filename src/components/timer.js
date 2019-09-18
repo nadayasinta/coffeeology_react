@@ -15,6 +15,7 @@ class Timer extends React.Component {
   }
 
   changeTimerInterval = () => {
+    console.log(this.props.timerNow);
     this.timerInterval = setInterval(() => {
       this.props.setTimer(
         this.props.timerNow === 0 ? 0 : this.props.timerNow - 1
@@ -27,13 +28,12 @@ class Timer extends React.Component {
   };
 
   changeAmountInterval = () => {
-    clearInterval(this.amountInterval);
     this.amountInterval = setInterval(() => {
       this.props.setWaterNow(
         this.props.waterNow === this.props.waterLimit
           ? this.props.waterNow
           : this.props.waterNow +
-              this.props.stepWater / 10 / this.props.stepTime
+              (this.props.stepWater * 10) / this.props.stepTime
       );
     }, 100);
   };
@@ -49,25 +49,26 @@ class Timer extends React.Component {
     });
   };
 
-  pauseTimer = () => {
-    this.setState({ status: "Resume" }, () => {
-      this.stopTimerInterval();
-      this.stopAmountInterval();
-    });
-  };
-
   skipStep = () => {
     this.setState({ status: "Resume" }, () => {
       this.stopTimerInterval();
       this.stopAmountInterval();
     });
   };
+  componentWillUpdate = (prevProps, prevState) => {
+    if (prevProps.stepWater !== this.props.stepWater) {
+      this.stopAmountInterval();
+    }
+  };
 
-  renderProgressBarStep = () => {};
+  componentWillUnmount() {
+    clearInterval(this.amountInterval);
+  }
 
   render() {
     return (
       <div>
+        {console.log(this.props.waterNow)}
         <h1>
           Time : {Math.floor(Math.floor(this.props.timerNow / 10) / 60)}.{" "}
           {Math.floor(this.props.timerNow / 10) % 60}.{" "}
@@ -76,7 +77,7 @@ class Timer extends React.Component {
         {this.state.status !== "Pause" ? (
           <button
             type="button"
-            class="btn btn-danger"
+            className="btn btn-danger"
             onClick={this.startTimer}
           >
             {this.state.status}
@@ -90,9 +91,10 @@ class Timer extends React.Component {
             {this.state.status}
           </button>
         )}
+
         <button
           type="button"
-          class="btn btn-warning"
+          className="btn btn-warning"
           onClick={() => {
             this.props.setTimer(0);
             this.props.setWaterNow(this.props.waterLimit);
@@ -101,10 +103,6 @@ class Timer extends React.Component {
           Skip
         </button>
         <h1>Water : {Math.ceil(this.props.waterNow)} </h1>
-        {console.log(
-          Math.ceil((this.props.waterNow / this.props.stepWater) * 100)
-        )}
-        {console.log(this.props.stepWater)}
         <ProgressBar
           animated
           min={this.props.waterLimit - this.props.stepWater}
