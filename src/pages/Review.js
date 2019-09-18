@@ -62,6 +62,7 @@ class Review extends React.Component {
       },
       () => {
         this.props.postReview(this.state.review);
+        sessionStorage.removeItem("recipeSteps");
         this.props.history.push("/activity");
       }
     );
@@ -149,7 +150,6 @@ class Review extends React.Component {
               this.props.match.params.recipeID
             }
           />
-
         </div>
       </div>
     );
