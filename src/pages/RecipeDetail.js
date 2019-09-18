@@ -6,6 +6,7 @@ import actionsRecipes from "../store/actionsRecipes";
 
 // import component
 import StepCard from "../components/stepCard";
+import ReviewCard from "../components/ReviewCard"
 
 // import components
 import Radar from "../components/radar";
@@ -17,24 +18,32 @@ class RecipeSelection extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    this.handleShow = this.handleShow.bind(this);
-    this.handleHide = this.handleHide.bind(this);
-
     this.state = {
-      show: false,
+      showComment: false,
+      showReview: false,
       coffeeweight: 0,
       water: 0,
       ratio: 0,
-      recipeSteps: []
+      recipeSteps: [],
     };
   }
 
-  handleShow() {
-    this.setState({ show: true });
+  handleShowComment = () => {
+    this.setState({ showComment: true });
   }
 
-  handleHide() {
-    this.setState({ show: false });
+  handleHideComment = () => {
+    this.setState({ showComment: false });
+  }
+
+  handleShowReview = async () => {
+    this.props.getReview({recipeID:this.props.match.params.recipeID})
+    console.log('inininini',this.props.reviews)
+    this.setState({ showReview: true });
+  }
+
+  handleHideReview = () => {
+    this.setState({ showReview: false });
   }
 
   async componentDidMount() {
@@ -247,7 +256,7 @@ class RecipeSelection extends React.Component {
             <div className="row">
               <div className="col-6">
                 <ButtonToolbar>
-                  <Button bsStyle="primary" onClick={this.handleShow}>
+                  <Button bsStyle="primary" onClick={this.handleShowComment}>
                     <Disqus.CommentCount
                       shortname={disqusShortname}
                       config={disqusConfig}
@@ -258,8 +267,8 @@ class RecipeSelection extends React.Component {
 
                   <Modal
                     {...this.props}
-                    show={this.state.show}
-                    onHide={this.handleHide}
+                    show={this.state.showComment}
+                    onHide={this.handleHideComment}
                     dialogClassName="custom-modal"
                   >
                     <Modal.Header closeButton>
@@ -274,13 +283,47 @@ class RecipeSelection extends React.Component {
                       />
                     </Modal.Body>
                     <Modal.Footer>
-                      <Button onClick={this.handleHide}>Close</Button>
+                      <Button onClick={this.handleHideComment}>Close</Button>
                     </Modal.Footer>
                   </Modal>
                 </ButtonToolbar>
               </div>
+
               <div className="col-6">
-                buton
+                <ButtonToolbar>
+                  <Button bsStyle="primary" onClick={this.handleShowReview}>
+                    Lihat Review
+                  </Button>
+
+                  <Modal
+                    {...this.props}
+                    show={this.state.showReview}
+                    onHide={this.handleHideReview}
+                    dialogClassName="custom-modal"
+                  >
+                    <Modal.Header closeButton>
+                      <Modal.Title id="contained-modal-title-lg">
+                        Review
+                  </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                    <div className="container ">
+              <div className="row ">
+
+                    {this.props.reviews.map((review, index) => (
+                      <div className="col-12 ">
+                      <ReviewCard data={review} />
+
+                      </div>
+            ))}
+              </div>
+              </div>
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button onClick={this.handleHideReview}>Close</Button>
+                    </Modal.Footer>
+                  </Modal>
+                </ButtonToolbar>
            </div>
             </div>
 
@@ -311,6 +354,6 @@ class RecipeSelection extends React.Component {
 }
 
 export default connect(
-  "recipe, stepTypes, recipeDetails, recipeSteps, waterLimit, backButton, recipeCreator, methods",
+  "recipe, stepTypes, recipeDetails, recipeSteps, waterLimit, backButton, recipeCreator, methods, reviews",
   actionsRecipes
 )(RecipeSelection);
