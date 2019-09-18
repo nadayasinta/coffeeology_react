@@ -5,22 +5,23 @@ import { connect } from "unistore/react";
 
 // import components
 import Radar from "../components/radar";
+import { JsxEmit } from "typescript";
 
 class CreateRecipe extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      recipeName: "",
-      brewMethod: "",
+      name: "",
+      methodID: "",
       difficulty: "",
-      beanNumber: "",
-      waterNumber: "",
-      grind: "",
-      temperature: "",
-      beans: "",
-      origin: "",
-      process: "",
-      roasting: "",
+      coffeeWeight: "",
+      water: "",
+      grindSize: "",
+      waterTemp: "",
+      beanName: "",
+      originID: "",
+      beanProcess: "",
+      beanRoasting: "",
       fragrance: 0.5,
       aroma: 0.5,
       cleanliness: 0.5,
@@ -29,16 +30,44 @@ class CreateRecipe extends React.Component {
       acidity: 0.5,
       aftertaste: 0.5,
       balance: 0.5,
-      global: 0.5,
-      body: 0.5
+      globalTaste: 0.5,
+      body: 0.5,
+      recipeDataTeporary: []
     };
   }
 
+  componentDidMount = async () => {
+    if (sessionStorage.getItem("Recipe") !== null && sessionStorage.getItem("RecipeDetail") !== null) {
+      await this.setState({
+        recipeDataTeporary: {...JSON.parse(sessionStorage.getItem("Recipe")), ...JSON.parse(sessionStorage.getItem("RecipeDetail"))}
+      })
+      await this.setState({name : this.state.recipeDataTeporary.name})
+      await this.setState({methodID : this.state.recipeDataTeporary.methodID})
+      await this.setState({difficulty : this.state.recipeDataTeporary.difficulty})
+      await this.setState({coffeeWeight : this.state.recipeDataTeporary.coffeeWeight})
+      await this.setState({water : this.state.recipeDataTeporary.water})
+      await this.setState({grindSize : this.state.recipeDataTeporary.grindSize})
+      await this.setState({waterTemp : this.state.recipeDataTeporary.waterTemp})
+      await this.setState({beanName : this.state.recipeDataTeporary.beanName})
+      await this.setState({originID : this.state.recipeDataTeporary.originID})
+      await this.setState({beanProcess : this.state.recipeDataTeporary.beanProcess})
+      await this.setState({beanRoasting : this.state.recipeDataTeporary.beanRoasting})
+      await this.setState({fragrance : this.state.recipeDataTeporary.fragrance})
+      await this.setState({aroma : this.state.recipeDataTeporary.aroma})
+      await this.setState({cleanliness : this.state.recipeDataTeporary.cleanliness})
+      await this.setState({sweetness : this.state.recipeDataTeporary.sweetness})
+      await this.setState({taste : this.state.recipeDataTeporary.taste})
+      await this.setState({acidity : this.state.recipeDataTeporary.acidity})
+      await this.setState({aftertaste : this.state.recipeDataTeporary.aftertaste})
+      await this.setState({balance : this.state.recipeDataTeporary.balance})
+      await this.setState({globalTaste : this.state.recipeDataTeporary.globalTaste})
+      await this.setState({body : this.state.recipeDataTeporary.body})
+        }
+    }
+
+
   handleChangeRecipe = event => {
-    this.setState(
-      { [event.target.name]: event.target.value },
-      console.log(event.target.name, event.target.value)
-    );
+    this.setState({ [event.target.name]: event.target.value });
   };
 
   handleChangeRecipeDetail = event => {
@@ -49,15 +78,15 @@ class CreateRecipe extends React.Component {
     await sessionStorage.setItem(
       "Recipe",
       JSON.stringify({
-        name: this.state.recipeName,
-        methodID: this.state.brewMethod,
-        originID: this.state.origin,
-        beanName: this.state.beans,
-        beanProcess: this.state.process,
-        beanRoasting: this.state.roasting,
+        name: this.state.name,
+        methodID: this.state.methodID,
+        originID: this.state.originID,
+        beanName: this.state.beanName,
+        beanProcess: this.state.beanProcess,
+        beanRoasting: this.state.beanRoasting,
         difficulty: this.state.difficulty,
-        coffeeWeight: this.state.beanNumber,
-        water: this.state.waterNumber
+        coffeeWeight: this.state.coffeeWeight,
+        water: this.state.water
       })
     );
     await sessionStorage.setItem(
@@ -71,41 +100,48 @@ class CreateRecipe extends React.Component {
         acidity: this.state.acidity,
         aftertaste: this.state.aftertaste,
         balance: this.state.balance,
-        globalTaste: this.state.global,
+        globalTaste: this.state.globalTaste,
         body: this.state.body,
-        grindSize: this.state.grind,
-        waterTemp: this.state.temperature
+        grindSize: this.state.grindSize,
+        waterTemp: this.state.waterTemp
       })
     );
     this.props.history.push("/recipes/create/addstep");
   };
 
   render() {
+
     return (
       <div>
-        <img className="backbutton" src={this.props.backButton} onClick={event => this.props.history.goBack()} />
+        <img
+          className="backbutton"
+          src={this.props.backButton}
+          onClick={event => this.props.history.goBack()}
+        />
         <div className="container">
           <form onSubmit={this.submitRecipe}>
             <div className=" row ">
-              <label htmlFor="recipeName">Nama Resep</label>
+              <label htmlFor="name">Nama Resep</label>
             </div>
 
             <div className=" row justify-content-center text-center">
               <input
                 className="form-control"
                 type="text"
-                name="recipeName"
+                name="name"
+                value={this.state.name}
                 onChange={this.handleChangeRecipe}
                 required
               />
             </div>
             <div className="row form-group">
-              <label htmlFor="brewMethod">Pilih Metode Brew</label>
+              <label htmlFor="methodID">Pilih Metode Brew</label>
 
               <select
                 className="form-control"
-                id="brewMethod"
-                name="brewMethod"
+                id="methodID"
+                name="methodID"
+                value={this.state.methodID}
                 onChange={this.handleChangeRecipe}
                 required
               >
@@ -124,6 +160,7 @@ class CreateRecipe extends React.Component {
                 className="form-control"
                 id="difficulty"
                 name="difficulty"
+                value={this.state.difficulty}
                 onChange={this.handleChangeRecipe}
                 required
               >
@@ -139,7 +176,7 @@ class CreateRecipe extends React.Component {
               <div className=" col-3  ">
                 <div className=" row justify-content-center border">
                   <div className=" col-12">
-                    <label htmlFor="beanNumber">
+                    <label htmlFor="coffeeWeight">
                       Jumlah
                       <br />
                       Biji (gr)
@@ -156,7 +193,8 @@ class CreateRecipe extends React.Component {
                     <input
                       className="form-control"
                       type="number"
-                      name="beanNumber"
+                      name="coffeeWeight"
+                      value={this.state.coffeeWeight}
                       placeholder="16"
                       min="1"
                       onChange={this.handleChangeRecipe}
@@ -169,7 +207,7 @@ class CreateRecipe extends React.Component {
               <div className=" col-3  ">
                 <div className=" row justify-content-center border">
                   <div className=" col-12">
-                    <label htmlFor="waterNumber">
+                    <label htmlFor="water">
                       Jumlah
                       <br />
                       Air (ml)
@@ -186,7 +224,8 @@ class CreateRecipe extends React.Component {
                     <input
                       className="form-control"
                       type="number"
-                      name="waterNumber"
+                      name="water"
+                      value={this.state.water}
                       placeholder="200"
                       min="1"
                       onChange={this.handleChangeRecipe}
@@ -199,7 +238,7 @@ class CreateRecipe extends React.Component {
               <div className=" col-3 ">
                 <div className=" row justify-content-center border">
                   <div className=" col-12">
-                    <label htmlFor="grind">
+                    <label htmlFor="grindSize">
                       Ukuran
                       <br />
                       Butir
@@ -215,16 +254,17 @@ class CreateRecipe extends React.Component {
                   <div className=" col-9 px-0">
                     <select
                       className="form-control"
-                      id="grind"
-                      name="grind"
+                      id="grindSize"
+                      name="grindSize"
+                      value={this.state.grindSize}
                       onChange={this.handleChangeRecipe}
                       required
                     >
                       <option selected disabled>
                         -Pilih-
                       </option>
-                      {this.props.grinds.map((grind, index) => (
-                        <option value={grind.id}>{grind.name}</option>
+                      {this.props.grinds.map((grindSize, index) => (
+                        <option value={grindSize.id}>{grindSize.name}</option>
                       ))}
                     </select>
                   </div>
@@ -234,7 +274,7 @@ class CreateRecipe extends React.Component {
               <div className=" col-3">
                 <div className=" row justify-content-center border">
                   <div className=" col-12">
-                    <label htmlFor="temperature">
+                    <label htmlFor="waterTemp">
                       Suhu
                       <br />
                       Air (&deg;C)
@@ -251,7 +291,8 @@ class CreateRecipe extends React.Component {
                     <input
                       className="form-control"
                       type="number"
-                      name="temperature"
+                      name="waterTemp"
+                      value={this.state.waterTemp}
                       placeholder="92"
                       min="1"
                       onChange={this.handleChangeRecipe}
@@ -267,14 +308,15 @@ class CreateRecipe extends React.Component {
             </div>
 
             <div className=" row ">
-              <label htmlFor="beans">Biji :</label>
+              <label htmlFor="beanName">Biji :</label>
             </div>
 
             <div className=" row justify-content-center text-center">
               <input
                 className="form-control"
                 type="text"
-                name="beans"
+                name="beanName"
+                value={this.state.beanName}
                 placeholder="biji"
                 onChange={this.handleChangeRecipe}
                 required
@@ -282,12 +324,13 @@ class CreateRecipe extends React.Component {
             </div>
 
             <div className="row form-group">
-              <label htmlFor="origin">Origin : </label>
+              <label htmlFor="originID">Origin : </label>
 
               <select
                 className="form-control"
-                id="origin"
-                name="origin"
+                id="originID"
+                name="originID"
+                value={this.state.originID}
                 onChange={this.handleChangeRecipe}
                 required
               >
@@ -302,14 +345,15 @@ class CreateRecipe extends React.Component {
             </div>
 
             <div className=" row ">
-              <label htmlFor="process">Proses :</label>
+              <label htmlFor="beanProcess">Proses :</label>
             </div>
 
             <div className=" row justify-content-center text-center">
               <input
                 className="form-control"
                 type="text"
-                name="process"
+                name="beanProcess"
+                value={this.state.beanProcess}
                 placeholder="proses"
                 onChange={this.handleChangeRecipe}
                 required
@@ -317,15 +361,16 @@ class CreateRecipe extends React.Component {
             </div>
 
             <div className=" row ">
-              <label htmlFor="roasting">Roasting :</label>
+              <label htmlFor="beanRoasting">Roasting :</label>
             </div>
 
             <div className=" row justify-content-center text-center">
               <input
                 className="form-control"
                 type="text"
-                name="roasting"
-                placeholder="roasting"
+                name="beanRoasting"
+                value={this.state.beanRoasting}
+                placeholder="beanRoasting"
                 onChange={this.handleChangeRecipe}
                 required
               />
@@ -340,7 +385,7 @@ class CreateRecipe extends React.Component {
                 acidity: this.state.acidity,
                 aftertaste: this.state.aftertaste,
                 balance: this.state.balance,
-                globalTaste: this.state.global,
+                globalTaste: this.state.globalTaste,
                 body: this.state.body
               }}
             />
@@ -357,7 +402,7 @@ class CreateRecipe extends React.Component {
                     min="0"
                     max="1"
                     step="0.01"
-                    value={this.state[flavor]}
+                    value={this.state[flavor]}                    
                     id={flavor}
                     name={flavor}
                     onChange={this.handleChangeRecipeDetail}
@@ -380,6 +425,6 @@ class CreateRecipe extends React.Component {
 }
 
 // export default Steps;
-export default connect("methods, grinds, flavors, origins, recipeDetails, backButton")(
-  CreateRecipe
-);
+export default connect(
+  "methods, grinds, flavors, origins, recipeDetails, backButton"
+)(CreateRecipe);
