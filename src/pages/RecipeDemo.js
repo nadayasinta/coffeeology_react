@@ -31,17 +31,18 @@ class Steps extends React.Component {
     console.log(this.props.recipeSteps);
   }
 
-  componentWillUpdate = (prevProps, prevState) => {
+  componentWillUpdate = async (prevProps, prevState) => {
     if (prevProps.stepIndex !== this.props.stepIndex) {
       console.log("didUpdate", this.props.stepIndex);
 
       if (this.props.stepIndex > 0) {
-        this.nextStep();
+        await this.nextStep();
         if (this.state.steps.length === 0) {
-          this.props.postHistory({
+          await this.props.postHistory({
             recipeID: this.props.match.params.recipeID
           });
-          this.props.history.push(
+          window.location.reload();
+          await this.props.history.push(
             "/recipe/review/" + this.props.match.params.recipeID
           );
         }
@@ -64,8 +65,8 @@ class Steps extends React.Component {
           {sessionStorage.getItem("token") ? (
             <div></div>
           ) : (
-              <Redirect to="/login" />
-            )}
+            <Redirect to="/login" />
+          )}
 
           <div>Loading</div>
         </div>
@@ -77,9 +78,13 @@ class Steps extends React.Component {
           {sessionStorage.getItem("token") ? (
             <div></div>
           ) : (
-              <Redirect to="/login" />
-            )}
-          <img className="backbutton" src={this.props.backButton} onClick={event => this.props.history.goBack()} />
+            <Redirect to="/login" />
+          )}
+          <img
+            className="backbutton"
+            src={this.props.backButton}
+            onClick={event => this.props.history.goBack()}
+          />
 
           <div className="container">
             <div className="row">

@@ -16,7 +16,7 @@ class Brewing extends React.Component {
       <div>
         <div className="container brewing">
           <div className="row rowhomeimage">
-            <img src={HomeImage} className="homeimage" />
+            <img src={HomeImage} className="homeimage" alt="altTag" />
           </div>
           <div className="row justify-content-center pt-3">
             <div className="col-12">

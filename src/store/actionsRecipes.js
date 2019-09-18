@@ -46,6 +46,18 @@ const actionsRecipes = store => ({
   setMethodsParams(state, value) {
     return { methodsParams: value };
   },
+  setResetTimer(state) {
+    store.setState({ timerNow: 0 });
+    store.setState({ stepIndex: 0 });
+    store.setState({ waterNow: 0 });
+    store.setState({ waterLimit: 0 });
+    store.setState({ stepTime: 0 });
+    store.setState({ stepWater: 0 });
+    console.log(store.getState().waterNow);
+  },
+  setTimerNow(state, value) {
+    return { timerNow: value };
+  },
   // axios
 
   async postRecipe(state, data) {
@@ -148,12 +160,28 @@ const actionsRecipes = store => ({
     await axios(config)
       .then(response => {
         console.log("response.data.data", response.data.data);
-        store.setState({ recipeDetails: response.data.data.recipeDetails });
+        store.setState({
+          recipeDetails: response.data.data.recipeDetails
+        });
         console.log(response.data.data.recipeDetails);
         store.setState({ recipeSteps: response.data.data.recipeSteps });
         store.setState({ recipe: response.data.data.recipe });
+        store.setState({ recipeCreator: response.data.data.user });
       })
       .catch(error => console.log("Error getRecipeById", error));
+  },
+  async getReview(state, paramsInput) {
+    console.log(paramsInput);
+    let config = {
+      method: "get",
+      url: store.getState().baseURL + "/reviews",
+      params: paramsInput
+    };
+
+    await axios(config).then(response => {
+      console.log(response);
+      store.setState({ reviews: response.data.data });
+    });
   }
 });
 
