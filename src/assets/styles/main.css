@@ -152,6 +152,13 @@
   background-color: #bcbcbc;
   border-radius: 50%;
 }
+.homebutton {
+  padding: 10px;
+}
+.homebutton:hover {
+  background-color: #bcbcbc;
+  border-radius: 50%;
+}
 .scrolls {
   overflow-x: scroll;
   overflow-y: hidden;

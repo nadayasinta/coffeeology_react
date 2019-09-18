@@ -160,8 +160,15 @@ class Review extends React.Component {
                         }
                     />
                 </div>
-                <div className="row justify-content-center pt-3 pb-2">
-                    <img src={this.props.menuButton} alt="" />
+                <div className="row justify-content-center pt-5">
+                    <div className="col-3">
+                        <img
+                            src={this.props.homeButton}
+                            alt=""
+                            className="homebutton w-75"
+                            onClick={event => this.props.history.push("/")}
+                        />
+                    </div>
                 </div>
             </div>
         );
@@ -169,6 +176,6 @@ class Review extends React.Component {
 }
 
 export default connect(
-    "historyID menuButton, backButton",
+    "historyID menuButton, homeButton",
     actionsDemo
 )(Review);
