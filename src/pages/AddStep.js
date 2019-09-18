@@ -150,13 +150,14 @@ class AddStep extends React.Component {
                             <img
                               src={this.props.stepTypes[step.stepTypeID].icon}
                               width="100%"
+                              alt="altTag"
                             />
                           </div>
                           <div className="col-4">
                             {this.props.stepTypes[step.stepTypeID].name}
                           </div>
                           <div className="col-4">
-                            <img className="mr-2" src={timer} width="20%" />
+                            <img className="mr-2" src={timer} width="20%" alt="altTag" />
                             {this.convertSeconds(step.time)}
                           </div>
                         </div>

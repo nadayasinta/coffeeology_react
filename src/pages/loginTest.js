@@ -11,12 +11,12 @@ import { HumanHandsup } from "mdi-material-ui";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import IconButton from "@material-ui/core/IconButton";
-import Input from "@material-ui/core/Input";
-import InputLabel from "@material-ui/core/InputLabel";
+// import Input from "@material-ui/core/Input";
+// import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import FormControl from "@material-ui/core/FormControl";
-import MenuItem from "@material-ui/core/MenuItem";
+// import FormHelperText from "@material-ui/core/FormHelperText";
+// import FormControl from "@material-ui/core/FormControl";
+// import MenuItem from "@material-ui/core/MenuItem";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 
@@ -73,8 +73,7 @@ const SignIn = props => {
         title: "Email tidak valid!"
       });
     } else {
-      console.log(sessionStorage.getItem("token"));
-      props.login(data);
+      await props.login(data);
 
       // check login success, if true redirect to home
       setTimeout(() => {
@@ -85,10 +84,15 @@ const SignIn = props => {
           });
           setTimeout(() => {
             props.history.goBack();
-          }, 1000);
+          }, 200);
         }
       }, 500);
     }
+  };
+
+  const handleRedirect = event => {
+    event.preventDefault();
+    props.history.goBack();
   };
 
   // handle on change email form
@@ -103,11 +107,14 @@ const SignIn = props => {
 
   return (
     <div>
+      {console.log(props.history.action)}
       {sessionStorage.getItem("token") ? <Redirect to="/" /> : <div></div>}
       <img
         className="backbutton"
         src={props.backButton}
+
         onClick={event => props.history.goBack()}
+
       />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -118,8 +125,13 @@ const SignIn = props => {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className={classes.form}>
+          <form
+            className={classes.form}
+            method="POST"
+            onSubmit={handleOnSubmit}
+          >
             <TextField
+              required
               variant="outlined"
               margin="normal"
               required
@@ -132,6 +144,7 @@ const SignIn = props => {
               autoFocus
             />{" "}
             <TextField
+              required
               variant="outlined"
               margin="normal"
               required
@@ -162,7 +175,7 @@ const SignIn = props => {
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick={handleOnSubmit}
+              type="submit"
             >
               Sign In
             </Button>

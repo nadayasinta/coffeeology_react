@@ -70,7 +70,7 @@ const actionsRecipes = store => ({
         console.log(error.response);
         Toast.fire({
           type: "error",
-          title: `${error.response.data.message}. Data Tidak Tersave`
+          title: `${error.response.data.message}. Data Tidak Tersimpan`
         });
       });
   },

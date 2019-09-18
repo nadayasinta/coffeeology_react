@@ -149,6 +149,7 @@ class CreateRecipe extends React.Component {
                     <img
                       src={require("../assets/images/RecipeIcon/coffee.png")}
                       className="w-50 py-2"
+                      alt="altTag"
                     />
                   </div>
                   <div className=" col-9 px-0">
@@ -178,6 +179,7 @@ class CreateRecipe extends React.Component {
                     <img
                       src={require("../assets/images/RecipeIcon/water.png")}
                       className="w-50 py-2"
+                      alt="altTag"
                     />
                   </div>
                   <div className=" col-9 px-0">
@@ -207,6 +209,7 @@ class CreateRecipe extends React.Component {
                     <img
                       src={require("../assets/images/RecipeIcon/coffee-grinder.png")}
                       className="w-50 py-2"
+                      alt="altTag"
                     />
                   </div>
                   <div className=" col-9 px-0">
@@ -241,6 +244,7 @@ class CreateRecipe extends React.Component {
                     <img
                       src={require("../assets/images/RecipeIcon/thermometer.png")}
                       className="w-50 py-2"
+                      alt="altTag"
                     />
                   </div>
                   <div className=" col-9 px-0">
