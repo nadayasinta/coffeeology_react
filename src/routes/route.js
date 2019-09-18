@@ -21,6 +21,7 @@ import Review from "../pages/Review";
 import Profile from "../pages/Profile";
 import Search from "../pages/SearchPage";
 import ErrorPage from "../pages/ErrorPage";
+import BeanPage from "../pages/BeanPage";
 
 // import component
 import Navbar from "../components/navbar";
@@ -72,6 +73,7 @@ function Routes() {
                     />
                     <Route exact path="/profile/me" component={Profile} />
                     <Route exact path="/search" component={Search} />
+                    <Route exact path="/beans" component={BeanPage} />
                     <Route component={ErrorPage} />
                 </Switch>
                 <Navbar />

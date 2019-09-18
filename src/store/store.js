@@ -205,6 +205,29 @@ const initialState = {
         { id: 5, name: "lainnya" }
     ],
 
+    // beans data
+    beans: {
+        1: [
+            { id: 1, originID: 1, name: "bean1" },
+            { id: 2, originID: 1, name: "bean2" }
+        ],
+
+        2: [
+            { id: 3, originID: 2, name: "bean3" },
+            { id: 4, originID: 2, name: "bean4" }
+        ],
+
+        3: [
+            { id: 5, originID: 3, name: "bean5" },
+            { id: 6, originID: 3, name: "bean6" }
+        ],
+
+        4: [
+            { id: 7, originID: 4, name: "bean7" },
+            { id: 8, originID: 4, name: "bean8" }
+        ]
+    },
+
     //history data
     historyID: "",
     // recipe in page activity

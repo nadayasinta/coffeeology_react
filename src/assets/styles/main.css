@@ -95,10 +95,10 @@
 .activity h6 {
   font-family: "Nunito", sans-serif !important;
 }
-.activity .activityBar {
+.activity .acitivityBar {
   margin-right: -30px;
   margin-left: -30px;
-  margin-top: -50px;
+  margin-top: -25px !important;
 }
 .brewing .rowhomeimage {
   margin-right: -30px;
