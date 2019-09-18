@@ -37,7 +37,15 @@ const actionsRecipes = store => ({
   setSearchKeyword(state, value) {
     return { searchKeyword: value };
   },
-
+  setOriginsParams(state, value) {
+    return { originsParams: value };
+  },
+  setDifficultiesParams(state, value) {
+    return { difficultiesParams: value };
+  },
+  setMethodsParams(state, value) {
+    return { methodsParams: value };
+  },
   // axios
 
   async postRecipe(state, data) {

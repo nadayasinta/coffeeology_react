@@ -15,12 +15,15 @@ class Brewing extends React.Component {
     return (
       <div>
         <div className="container brewing">
-          <div className="row">
+          <div className="row rowhomeimage">
             <img src={HomeImage} className="homeimage" alt="altTag" />
           </div>
-          <div className="row">
+          <div className="row justify-content-center pt-3">
+            <div className="col-12">
+              <h2>ini judulnya apa</h2>
+            </div>
             {this.props.methods.map((method, index) => (
-              <div className="col-4 p-1">
+              <div className="col-4 py-1 px-2">
                 <Link to={"/recipes/" + method.id}>
                   <MethodCard name={method.name} icon={method.icon} />
                 </Link>

@@ -14,11 +14,12 @@ function App() {
       <div className="container allpage">
         <div className="row justify-content-center">
           <div
-            className="col-12"
+            className="col-12 shadow mh-100"
             style={{
               maxWidth: "480px",
               paddingBottom: "125px",
-              paddingTop: "125px"
+              paddingTop: "125px",
+              minHeight: "100vh"
             }}
           >
             <Routes />

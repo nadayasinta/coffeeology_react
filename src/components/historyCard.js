@@ -6,7 +6,7 @@ function historyCard(props) {
       <div className="row h-100 pt-2">
         <div className="col-4">
           <div>
-            <img className="w-100" src={props.icon} alt="alt tag" />
+            <img className="w-75" src={props.icon} alt="alt tag" />
           </div>
         </div>
         <div className="col-8" style={{ textAlign: "left" }}>

@@ -1,8 +1,10 @@
 import React from "react";
-
+import ProgressBar from "react-bootstrap/ProgressBar";
 // import store
 import { connect } from "unistore/react";
 import actionsDemo from "../store/actionsDemo";
+
+// import component
 
 class Timer extends React.Component {
   constructor(props) {
@@ -32,7 +34,6 @@ class Timer extends React.Component {
           ? this.props.waterNow
           : this.props.waterNow + this.props.stepWater * 10 / this.props.stepTime
       );
-      console.log(this.props.stepWater / this.props.stepTime);
     }, 100);
   };
 
@@ -60,6 +61,8 @@ class Timer extends React.Component {
       this.stopAmountInterval();
     });
   };
+
+  renderProgressBarStep = () => {};
 
   render() {
     return (
@@ -96,13 +99,29 @@ class Timer extends React.Component {
         >
           Skip
         </button>
-        <h1>Water : {Math.ceil(this.props.waterNow) } </h1>
+        <h1>Water : {Math.ceil(this.props.waterNow)} </h1>
+        {console.log(
+          Math.ceil((this.props.waterNow / this.props.stepWater) * 100)
+        )}
+        {console.log(this.props.stepWater)}
+        <ProgressBar
+          animated
+          min={this.props.waterLimit - this.props.stepWater}
+          now={this.props.waterNow}
+          max={this.props.waterLimit}
+        />
+        <ProgressBar
+          animated
+          variant="info"
+          now={this.props.waterNow}
+          max={this.props.recipe.water}
+        />
       </div>
     );
   }
 }
 
 export default connect(
-  "timerNow, waterNow,waterLimit,stepWater,stepTime",
+  "timerNow, waterNow,waterLimit,stepWater,stepTime,recipe",
   actionsDemo
 )(Timer);

@@ -6,9 +6,22 @@ import { connect } from "unistore/react";
 import actionsActivity from "../store/actionsActivity";
 
 // import component
-import MyBrewCard from "./myBrewCard";
+import RecipeCard from "./recipeCard";
 
 class MyBrew extends React.Component {
+  convertSeconds(secondsInput) {
+    let minutes = Math.floor(parseInt(secondsInput) / 60);
+    let seconds = parseInt(secondsInput) - minutes * 60;
+    if (minutes < 10) {
+      minutes = `0${minutes}`;
+    }
+    if (seconds < 10) {
+      seconds = `0${seconds}`;
+    }
+    return `${minutes}:${seconds}`;
+  }
+
+
   componentDidMount = async () => {
     this.props.getMyBrew()
   }
@@ -22,7 +35,7 @@ class MyBrew extends React.Component {
         {this.props.myBrew.map((value, key) => (
           <div className="col-12">
             <Link to={`/recipe/${value.id}`}>
-            <MyBrewCard icon={this.props.methods[value.methodID - 1].icon} data={value} />
+              <RecipeCard pageType="pageMyBrew" methodIcon={this.props.methods[value.methodID - 1].icon} data={value} time={this.convertSeconds(value.time)} />
             </Link>
           </div>
         ))}
