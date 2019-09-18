@@ -1,6 +1,43 @@
 import React from "react";
 
 function recipeCard(props) {
+  let showDifficulty = level => {
+    if (level === 1) {
+      return (
+        <div className="col-6 align-self-center text-left pt-1">
+          <img
+            src={require("../assets/images/dif1.png")}
+            className="starrating mr-1"
+            alt="alt tag"
+          />
+          <span>MUDAH</span>
+        </div>
+      );
+    } else if (level === 2) {
+      return (
+        <div className="col-6 align-self-center text-left pt-1">
+          <img
+            src={require("../assets/images/dif2.png")}
+            className="starrating mr-1"
+            alt="alt tag"
+          />
+          <span>SEDANG</span>
+        </div>
+      );
+    } else if (level === 3) {
+      return (
+        <div className="col-6 align-self-center text-left pt-1">
+          <img
+            src={require("../assets/images/dif3.png")}
+            className="starrating  mr-1"
+            alt="alt tag"
+          />
+          <span>SULIT</span>
+        </div>
+      );
+    }
+  };
+
   return (
     <div className="container-fluid recipeCard overlaycontainer border shadow-sm rounded my-3 pt-3 overlay">
       <div className="overlay">
@@ -8,7 +45,7 @@ function recipeCard(props) {
           <div className="col-3 align-top text-right">
             <img
               src={props.methodIcon}
-              className="w-100 bgcolor2 rounded-circle p-2"
+              className="w-100 bgcolor2"
               alt="alt tag"
             />
           </div>
@@ -18,7 +55,7 @@ function recipeCard(props) {
             </div>
             {props.pageType === "pageMyBrew" ? (
               <div className="row pb-1">
-                <h6 className="mb-0">
+                <h6 className="mb-0 pl-2">
                   Dibuat : {props.data.createdAt.slice(0, -14)}
                 </h6>
               </div>
@@ -26,7 +63,13 @@ function recipeCard(props) {
               <div />
             )}
             <div className="row">
-              <div className="col-3 align-text-top px-0 py-0">
+              <div className="col-12 align-self-center text-center pl-2 pt-1">
+                <h6 className="bgcolor1 text-light rounded py-1 mb-0">
+                  Diseduh : {props.data.brewCount} x
+                </h6>
+              </div>
+              {showDifficulty(props.data.difficulty)}
+              <div className="col-3 align-self-center px-0 py-0">
                 {[1, 2, 3, 4, 5].map(number =>
                   number <= Math.round(props.data.rating) ? (
                     <img
@@ -43,13 +86,8 @@ function recipeCard(props) {
                   )
                 )}
               </div>
-              <div className="col-3 align-self-center text-left pl-1">
+              <div className="col-3 align-self-center text-center pt-1">
                 [{props.data.rating}]
-              </div>
-              <div className="col-6 align-self-center text-center pl-2 pt-1">
-                <h6 className="bgcolor1 text-light rounded py-1 mb-0">
-                  Diseduh : {props.data.brewCount} x
-                </h6>
               </div>
             </div>
           </div>

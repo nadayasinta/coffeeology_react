@@ -35,6 +35,7 @@ class MyBrew extends React.Component {
           <div className="col-12">
             <Link to={`/recipe/${value.id}`}>
               <RecipeCard
+                className="w-100"
                 pageType="pageMyBrew"
                 methodIcon={this.props.methods[value.methodID - 1].icon}
                 data={value}

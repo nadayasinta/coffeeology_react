@@ -82,7 +82,7 @@ const actionsRecipes = store => ({
         console.log(error.response);
         Toast.fire({
           type: "error",
-          title: `${error.response.data.message}. Data Tidak Tersimpan`
+          title: `${error.response.data.message}. Data Tidak Tersave`
         });
       });
   },
@@ -99,6 +99,20 @@ const actionsRecipes = store => ({
       store.setState({ recipes: response.data.data });
     });
   },
+  async getRecipesSelection(state, paramsInput) {
+    console.log(paramsInput);
+    let config = {
+      method: "get",
+      url: store.getState().baseURL + "/recipes",
+      params: paramsInput
+    };
+
+    await axios(config).then(response => {
+      console.log(response);
+      store.setState({ recipesSelection: response.data });
+    });
+  },
+
   async searchRecipes(state, filterParams, searchParams) {
     console.log(filterParams);
     console.log(searchParams);
@@ -146,12 +160,28 @@ const actionsRecipes = store => ({
     await axios(config)
       .then(response => {
         console.log("response.data.data", response.data.data);
-        store.setState({ recipeDetails: response.data.data.recipeDetails });
+        store.setState({
+          recipeDetails: response.data.data.recipeDetails
+        });
         console.log(response.data.data.recipeDetails);
         store.setState({ recipeSteps: response.data.data.recipeSteps });
         store.setState({ recipe: response.data.data.recipe });
+        store.setState({ recipeCreator: response.data.data.user });
       })
       .catch(error => console.log("Error getRecipeById", error));
+  },
+  async getReview(state, paramsInput) {
+    console.log(paramsInput);
+    let config = {
+      method: "get",
+      url: store.getState().baseURL + "/reviews",
+      params: paramsInput
+    };
+
+    await axios(config).then(response => {
+      console.log(response);
+      store.setState({ reviews: response.data.data });
+    });
   }
 });
 

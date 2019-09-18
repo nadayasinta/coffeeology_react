@@ -32,7 +32,8 @@ class Timer extends React.Component {
       this.props.setWaterNow(
         this.props.waterNow === this.props.waterLimit
           ? this.props.waterNow
-          : this.props.waterNow + this.props.stepWater * 10 / this.props.stepTime
+          : this.props.waterNow +
+              (this.props.stepWater * 10) / this.props.stepTime
       );
     }, 100);
   };
@@ -86,7 +87,8 @@ class Timer extends React.Component {
 
           <button
             type="button"
-            className="btn btn-danger"
+            class="btn btn-danger"
+
             onClick={this.pauseTimer}
           >
             {this.state.status}

@@ -51,6 +51,7 @@ const initialState = {
     //   icon: require("../assets/images/StepIcon/stir.png")
     // }
   ],
+  recipesSelection: {},
   recipesSearch: [],
   recipe: null,
   // name: "Ultimate v60",
@@ -105,8 +106,9 @@ const initialState = {
     //   amount: 80
     // }
   ],
+  recipeCreator: [],
   difficulties: ["Mudah", "Sedang", "Sulit"],
-
+  reviews: [],
   // search
   searchParams: {},
   searchKeyword: "",
@@ -209,18 +211,18 @@ const initialState = {
   history: [],
 
   myBrew: [],
-
   // users Profile
   userMe: [],
   changePasswordStatus: false,
   editProfileStatus: false,
 
-  Toast : Swal.mixin({
+  Toast: Swal.mixin({
     toast: true,
     position: "center",
     showConfirmButton: false,
     timer: 2000
   }),
+
   //import back image
   backButton: require("../assets/images/back.png")
 };

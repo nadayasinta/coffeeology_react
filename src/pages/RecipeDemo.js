@@ -47,10 +47,12 @@ class Steps extends React.Component {
       if (this.props.stepIndex > 0) {
         await this.nextStep();
         if (this.state.steps.length === 0) {
+
           await this.props.setResetTimer();
           await this.props.postHistory({
             recipeID: this.props.match.params.recipeID
           });
+
 
           await this.props.history.push(
             "/recipe/review/" + this.props.match.params.recipeID
