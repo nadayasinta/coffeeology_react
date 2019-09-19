@@ -49,27 +49,26 @@ class Timer extends React.Component {
     });
   };
 
-  componentDidMount() {
-    console.log("timerDidlMount", this.props);
-  }
-
-  pauseTimer = () => {
-    this.setState({ status: "Resume" }, () => {
-      this.stopTimerInterval();
-      this.stopAmountInterval();
-    });
-  };
-
   skipStep = () => {
     this.setState({ status: "Resume" }, () => {
       this.stopTimerInterval();
       this.stopAmountInterval();
     });
   };
+  componentWillUpdate = (prevProps, prevState) => {
+    if (prevProps.stepWater !== this.props.stepWater) {
+      this.stopAmountInterval();
+    }
+  };
+
+  componentWillUnmount() {
+    clearInterval(this.amountInterval);
+  }
 
   render() {
     return (
       <div>
+        {console.log(this.props.waterNow)}
         <h1>
           Time : {Math.floor(Math.floor(this.props.timerNow / 10) / 60)}.{" "}
           {Math.floor(this.props.timerNow / 10) % 60}.{" "}
@@ -84,11 +83,9 @@ class Timer extends React.Component {
             {this.state.status}
           </button>
         ) : (
-
           <button
             type="button"
             class="btn btn-danger"
-
             onClick={this.pauseTimer}
           >
             {this.state.status}

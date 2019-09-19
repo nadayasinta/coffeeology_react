@@ -8,6 +8,7 @@ import actionsRecipes from "../store/actionsRecipes";
 // import img
 import Plus from "../assets/images/plus.png";
 import timer from "../assets/images/RecipeIcon/timer.png";
+import water from "../assets/images/RecipeIcon/water.png"
 
 class AddStep extends React.Component {
   constructor(props) {
@@ -99,7 +100,6 @@ class AddStep extends React.Component {
       recipeDetails: recipeDetails,
       steps: steps
     };
-
     await this.props.postRecipe(data)
 
     if (sessionStorage.getItem("Recipe") === null) {
@@ -112,7 +112,7 @@ class AddStep extends React.Component {
   render() {
     return (
       <div>
-        <img className="backbutton" src={this.props.backButton} onClick={event => this.props.history.goBack()} />
+        <img className="backbutton " src={this.props.backButton} onClick={event => this.props.history.goBack()} />
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-12">
@@ -125,7 +125,6 @@ class AddStep extends React.Component {
                     className="form-control"
                     id="note"
                     rows="3"
-                    placeholder="catatan"
                     maxLength="250"
                     ref={this.note}
                     required
@@ -138,16 +137,7 @@ class AddStep extends React.Component {
                 <div className="card">
                   {this.state.stepTemporary.map((step, index) => {
                     return (
-                      <div className="card-body" key={index}>
-                        <div className="row justify-content-end">
-                          <button
-                            type="button"
-                            onClick={e => this.deteleStep(e, index)}
-                            className="btn btn-primary"
-                          >
-                            X
-                          </button>
-                        </div>
+                      <div className="card-body border" key={index}>
                         <div className="row justify-content-between">
                           <div className="col-4">
                             <img
@@ -160,11 +150,33 @@ class AddStep extends React.Component {
                             {this.props.stepTypes[step.stepTypeID].name}
                           </div>
                           <div className="col-4">
-                            <img className="mr-2" src={timer} width="20%" alt="altTag" />
-                            {this.convertSeconds(step.time)}
+                            <div className="row justify-content-center mb-3">
+                            <img className="mr-2" src={timer} width="20%" alt="altTag"  />
+                            {this.convertSeconds(step.time)}s
+                            </div>
+                            {
+                              parseInt(step.stepTypeID) === 1 ||
+                              parseInt(step.stepTypeID) === 2 ||
+                              parseInt(step.stepTypeID) === 12 ?
+                            <div className="row justify-content-center">
+                            <img src={water} width="20%" alt="AltTag" />
+                            {step.amount} ml
+                            </div>
+                              :
+                              <div></div>
+                              }
                           </div>
                         </div>
-                        <hr></hr>
+                        <div className="row justify-content-end">
+                          <button
+                            type="button"
+                            onClick={e => this.deteleStep(e, index)}
+                            className="btn btn-primary"
+                            width="50%"
+                          >
+                            X
+                          </button>
+                            </div>
                       </div>
                     );
                   })}

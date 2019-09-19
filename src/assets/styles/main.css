@@ -95,15 +95,10 @@
 .activity h6 {
   font-family: "Nunito", sans-serif !important;
 }
-.activity .activityBar {
-  margin-right: -30px;
-  margin-left: -30px;
-  margin-top: -50px;
-}
 .brewing .rowhomeimage {
   margin-right: -30px;
   margin-left: -30px;
-  margin-top: -50px;
+  margin-top: -25px;
 }
 .brewing .rowhomeimage .homeimage {
   width: 100%;
@@ -143,20 +138,46 @@
 }
 .backbutton {
   position: absolute;
-  top: 85px;
-  left: 20px;
-  width: 10%;
+  top: 75px;
+  left: 10px;
+  width: 15%;
   padding: 10px;
 }
 .backbutton:hover {
   background-color: #bcbcbc;
   border-radius: 50%;
 }
+.homebutton {
+  padding: 10px;
+  height: 100%;
+}
+.homebutton:hover {
+  background-color: #bcbcbc;
+  border-radius: 50%;
+}
+.errorpage {
+  background-color: #e5e5e5;
+  height: 100%;
+  margin: -15px;
+  margin-top: -25px;
+}
+.errorpage .errorimage {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  padding-bottom: 60px;
+}
 .scrolls {
   overflow-x: scroll;
   overflow-y: hidden;
   height: 80px;
   white-space: nowrap;
+}
+.filterHeader {
+  width: 100%;
+  background-color: #53686B;
+  height: 20px;
 }
 .MuiPaper-root {
   max-width: 480px;

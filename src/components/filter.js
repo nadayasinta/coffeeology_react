@@ -193,9 +193,10 @@ const Filter = props => {
 
   return (
     <div className="container filter">
+      <div className="filterHeader"></div>
       <div className="row">
-        <div className="col-12 text-left">
-          {/* {console.log(methods)} */}
+        <div className="col-12 text-left pb-4">
+          <br />
           <h6>Pilih Metode Brewing</h6>
           <div className="scrolls mb-2">
             {props.methods.map((value, index) => {

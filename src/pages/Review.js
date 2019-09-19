@@ -30,11 +30,11 @@ class Review extends React.Component {
       rating: "",
       photo: "",
       ratingLabels: {
-        1: "Useless",
-        2: "Poor",
-        3: "Ok",
-        4: "Good",
-        5: "Excellent"
+        1: "USELESS",
+        2: "POOR",
+        3: "OK",
+        4: "GOOD",
+        5: "EXCELENT"
       },
       rating: 3,
       review: {}
@@ -72,10 +72,16 @@ class Review extends React.Component {
       <div>
         <div className="container">
           <div className="row justify-content-center">
-            <Typography component="legend">Rating</Typography>
+            <Typography component="legend">
+              APA PENDAPATMU TENTANG RESEP INI?
+            </Typography>
           </div>
-
-          <div className="row justify-content-center">
+          <div className="row justify-content-center pt-3 p">
+            <h3 className="mb-0">
+              {this.state.ratingLabels[this.state.rating].toUpperCase()}
+            </h3>
+          </div>
+          <div className="row justify-content-center pb-3">
             <Rating
               name="rating"
               value={this.state.rating}
@@ -85,11 +91,11 @@ class Review extends React.Component {
           </div>
 
           <div className="row justify-content-center">
-            <h3>{this.state.ratingLabels[this.state.rating]}</h3>
-          </div>
-          <div className="row justify-content-center">
-            <form onSubmit={this.submitReview} className="row">
-              <label htmlFor="content">Review</label>
+            <form
+              onSubmit={this.submitReview}
+              className="row justify-content-center"
+            >
+              <label htmlFor="content">REVIEW</label>
               <textarea
                 className="form-control"
                 id="content"
@@ -104,52 +110,61 @@ class Review extends React.Component {
               />
             </form>
           </div>
-
-          <br />
-          <br />
+        </div>
+        <div className="row justify-content-center pt-3 pb-2">BAGIKAN</div>
+        <div className="row justify-content-center">
           <FacebookShareButton
-            children={<FacebookIcon size={32} round={true} />}
+            children={<FacebookIcon size={50} round={true} />}
             url={
               "http://coffeology.shop/recipe/" +
               this.props.match.params.recipeID
             }
           />
           <TelegramShareButton
-            children={<TelegramIcon size={32} round={true} />}
+            children={<TelegramIcon size={50} round={true} />}
             url={
               "http://coffeology.shop/recipe/" +
               this.props.match.params.recipeID
             }
           />
           <TwitterShareButton
-            children={<TwitterIcon size={32} round={true} />}
+            children={<TwitterIcon size={50} round={true} />}
             url={
               "http://coffeology.shop/recipe/" +
               this.props.match.params.recipeID
             }
           />
           <WhatsappShareButton
-            children={<WhatsappIcon size={32} round={true} />}
+            children={<WhatsappIcon size={50} round={true} />}
             url={
               "http://coffeology.shop/recipe/" +
               this.props.match.params.recipeID
             }
           />
           <LinkedinShareButton
-            children={<LinkedinIcon size={32} round={true} />}
+            children={<LinkedinIcon size={50} round={true} />}
             url={
               "http://coffeology.shop/recipe/" +
               this.props.match.params.recipeID
             }
           />
           <LineShareButton
-            children={<LineIcon size={32} round={true} />}
+            children={<LineIcon size={50} round={true} />}
             url={
               "http://coffeology.shop/recipe/" +
               this.props.match.params.recipeID
             }
           />
-
+        </div>
+        <div className="row justify-content-center pt-5">
+          <div className="col-3">
+            <img
+              src={this.props.homeButton}
+              alt=""
+              className="homebutton w-75"
+              onClick={event => this.props.history.push("/")}
+            />
+          </div>
         </div>
       </div>
     );
@@ -157,6 +172,6 @@ class Review extends React.Component {
 }
 
 export default connect(
-  "historyID",
+  "historyID menuButton, homeButton",
   actionsDemo
 )(Review);
