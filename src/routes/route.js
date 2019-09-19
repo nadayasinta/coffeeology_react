@@ -29,13 +29,11 @@ import EditRecipeAddStep from "../pages/EditRecipeAddStep";
 import BeanPage from "../pages/BeanPage";
 import BeanDetail from "../pages/BeanDetail";
 
-
 // import component
 import Navbar from "../components/navbar";
 import Header from "../components/header";
 
 function Routes() {
-
   return (
     <div className="App container-fluid px-0 ">
       <div className="container allpage">
@@ -97,31 +95,24 @@ function Routes() {
                   <Route exact path="/profile/:userID" component={User} />
                   <Route exact path="/search" component={Search} />
                   <Route exact path="/beans" component={BeanPage} />
-     <Route
-                                        exact
-                                        path="/beans/:beanID"
-                                        component={BeanDetail}
-                                    />
+                  <Route exact path="/beans/:beanID" component={BeanDetail} />
 
-                                    <Route 
-                                        exact 
-                                        path="/recipe/edit/:recipeID" 
-                                        component={EditRecipe} 
-                                    />
-                                    <Route 
-                                        exact 
-                                        path="/recipe/edit/addstep/:recipeID"
-                                        component={EditRecipeAddStep} 
-                                    />
-                                    <Route component={ErrorPage} />
-                                </Switch>
-                                <Navbar />
-                            </BrowserRouter>
-                        </Provider>
-                    </div>
-                </div>
-            </div>
-
+                  <Route
+                    exact
+                    path="/recipe/edit/:recipeID"
+                    component={EditRecipe}
+                  />
+                  <Route
+                    exact
+                    path="/recipe/edit/addstep/:recipeID"
+                    component={EditRecipeAddStep}
+                  />
+                  <Route component={ErrorPage} />
+                </Switch>
+                <Navbar />
+              </BrowserRouter>
+            </Provider>
+          </div>
         </div>
       </div>
     </div>
