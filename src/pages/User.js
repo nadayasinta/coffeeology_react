@@ -7,6 +7,8 @@ import RecipeCard from "../components/recipeCard";
 // import image
 import profileIcon from "../assets/images/profile.png";
 import editProfile from "../assets/images/edit-profile.png";
+import loading from "../assets/images/loading.gif";
+
 
 // import store
 import { connect } from "unistore/react";
@@ -47,10 +49,11 @@ class Profile extends React.Component {
   }
 
   render() {
+    if (this.props.user.length === 0) {
+      return <img src={loading} alt="loading..." />;
+    }
     return (
       <div className="container-fluid border">
-        {this.props.user.length === 0 ? <h3>Data User Tidak Ditemukan</h3> 
-        :
         <div className="row login_box">
           <div className="col-md-12 col-xs-12 mb-2" align="center">
             <div className="mt-2">
@@ -107,7 +110,6 @@ class Profile extends React.Component {
 
           </div>
         </div>
-        }
       </div>
     );
   }

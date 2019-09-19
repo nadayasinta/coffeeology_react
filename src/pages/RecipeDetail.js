@@ -56,8 +56,15 @@ class RecipeSelection extends React.Component {
       ratio: this.props.recipe.water / this.props.recipe.coffeeWeight,
       recipeSteps: this.props.recipeSteps
     });
+
     // this.props.setRecipeSteps(this.state.recipeSteps);
     this.props.setResetTimer();
+
+    if (sessionStorage.getItem("token") !== null) {
+      this.props.getProfile();
+    }
+    console.log("id user", this.props.userMe.id);
+    console.log("id user resep", this.props.recipe.userID);
   }
 
   convertSeconds(secondsInput) {
@@ -117,6 +124,25 @@ class RecipeSelection extends React.Component {
             src={this.props.backButton}
             onClick={event => this.props.history.goBack()}
           />
+          {this.props.userMe.id === this.props.recipe.userID ? (
+            <div align="right">
+            <button
+              onClick={e => {
+                e.preventDefault();
+                this.props.history.push(
+                  `/recipe/edit/${this.props.recipe.userID}`
+                );
+              }}
+              type="button"
+              className="btn btn-secondary btn-sm"
+            >
+              Edit
+            </button>
+
+            </div>
+          ) : (
+            <div></div>
+          )}
           <div className="container">
             <div className="row justify-content-center">
               <h2>{this.props.recipe.name.toUpperCase()}</h2>
@@ -278,7 +304,7 @@ class RecipeSelection extends React.Component {
               <div className="col-6">
                 <ButtonToolbar>
                   <Button bsStyle="primary" onClick={this.handleShowReview}>
-                    Lihat Review
+                    {this.props.reviews.length} &nbsp; Review
                   </Button>
 
                   <Modal
@@ -336,6 +362,6 @@ class RecipeSelection extends React.Component {
 }
 
 export default connect(
-  "recipe, stepTypes, recipeDetails, recipeSteps, waterLimit, backButton, recipeCreator, methods, reviews",
+  "recipe, stepTypes, recipeDetails, recipeSteps, waterLimit, backButton, recipeCreator, methods, reviews, userMe",
   actionsRecipes
 )(RecipeSelection);

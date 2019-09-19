@@ -21,6 +21,8 @@ import Review from "../pages/Review";
 import Profile from "../pages/Profile"
 import Search from "../pages/SearchPage";
 import User from "../pages/User";
+import EditRecipe from "../pages/EditRecipe";
+import EditRecipeAddStep from "../pages/EditRecipeAddStep";
 
 // import component
 import Navbar from "../components/navbar";
@@ -35,6 +37,8 @@ function Routes() {
           <Route exact path="/recipe/:recipeID" component={RecipeDetail} />
           <Route exact path="/recipe/demo/:recipeID" component={RecipeDemo} />
           <Route exact path="/recipe/review/:recipeID" component={Review} />
+          <Route exact path="/recipe/edit/:recipeID" component={EditRecipe} />
+          <Route exact path="/recipe/edit/addstep/:recipeID" component={EditRecipeAddStep} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/activity" component={Activity} />
