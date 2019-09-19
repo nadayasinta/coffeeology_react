@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "unistore/react";
 import RadarBean from "../components/radarBean";
+import actionsBeans from "../store/actionsBeans";
 
 class BeanDetail extends React.Component {
     constructor(props) {
@@ -20,6 +21,10 @@ class BeanDetail extends React.Component {
             }
         };
     }
+
+    componentDidMount = () => {
+        this.props.getBeanById(this.props.match.params.beanID);
+    };
 
     render() {
         return (
@@ -86,4 +91,7 @@ class BeanDetail extends React.Component {
     }
 }
 
-export default connect("bean, origins, backbutton")(BeanDetail);
+export default connect(
+    "bean, origins, backbutton",
+    actionsBeans
+)(BeanDetail);

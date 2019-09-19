@@ -3,8 +3,13 @@ import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
 import { connect } from "unistore/react";
 import { Link } from "react-router-dom";
+import actionsBeans from "../store/actionsBeans";
 
 class BeanPage extends React.Component {
+    componentDidMount = () => {
+        this.props.getBeans();
+    };
+
     render() {
         return (
             <div>
@@ -48,4 +53,7 @@ class BeanPage extends React.Component {
     }
 }
 
-export default connect("origins,beans")(BeanPage);
+export default connect(
+    "origins,beans",
+    actionsBeans
+)(BeanPage);

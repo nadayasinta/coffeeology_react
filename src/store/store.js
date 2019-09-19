@@ -126,7 +126,8 @@ const initialState = {
     login: 0,
 
     // url
-    baseURL: "https://api.coffeology.shop",
+    baseURL: "http://0.0.0.0:5000",
+    // baseURL: "https://api.coffeology.shop",
 
     // data method
     methods: [
