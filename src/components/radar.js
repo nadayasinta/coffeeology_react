@@ -14,7 +14,7 @@ function radar(props) {
         acidity: props.data.acidity,
         aftertaste: props.data.aftertaste,
         balance: props.data.balance,
-        global: props.data.globalTaste,
+        globalTaste: props.data.globalTaste,
         body: props.data.body,
 
       },
@@ -32,7 +32,7 @@ function radar(props) {
     acidity: 'acidity',
     aftertaste: 'aftertaste',
     balance: 'balance',
-    global: 'global',
+    globalTaste: 'global',
     body: 'body',
   };
 
