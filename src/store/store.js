@@ -51,8 +51,10 @@ const initialState = {
     //   icon: require("../assets/images/StepIcon/stir.png")
     // }
   ],
+
   recipesSelection: null,
   recipesSearch: null,
+
   recipe: null,
   // name: "Ultimate v60",
   // methodID: 1,
@@ -127,7 +129,12 @@ const initialState = {
 
   // url
   baseURL: "http://0.0.0.0:5000",
-  // baseURL: "https://api.coffeology.shop",
+    
+   // baseURL: "https://api.coffeology.shop",
+
+
+  //
+  statusRegister: null,
 
   // data method
   methods: [
@@ -136,6 +143,7 @@ const initialState = {
       name: "French Press",
       icon: require("../assets/images/methodFrenchPress.png")
     },
+
 
     {
       id: 2,
@@ -197,6 +205,7 @@ const initialState = {
     "body"
   ],
 
+
   // origin data
   origins: [
     { id: 1, name: "jawa" },
@@ -251,6 +260,7 @@ const initialState = {
     advantage: ["advantage1", "advantage1"],
     disadvantage: ["disadvantage1", "disadvantage2", "disadvantage3"],
     location: "location"
+
   },
 
   //history data
@@ -258,7 +268,9 @@ const initialState = {
   // recipe in page activity
   history: [],
 
+
   myBrew: null,
+
   // users Profile
   userMe: [],
   changePasswordStatus: false,
@@ -271,6 +283,7 @@ const initialState = {
     timer: 2000
   }),
 
+
   // another user
   user: [],
   userBrew: [],
@@ -281,6 +294,7 @@ const initialState = {
   homeButton: require("../assets/images/home.png"),
   menuButton: require("../assets/images/menu.png"),
   backbutton: require("../assets/images/back.png")
+
 };
 
 const store = createStore(initialState);
