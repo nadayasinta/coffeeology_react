@@ -49,6 +49,12 @@ function Counter(props) {
     isRunning ? delay : null
   );
 
+  useEffect(() => {
+    return () => {
+      console.log("willUnmount");
+    };
+  }, []);
+
   function handleIsRunningChange(e) {
     setIsRunning(!isRunning);
   }
