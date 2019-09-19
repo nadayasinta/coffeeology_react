@@ -24,31 +24,77 @@ import User from "../pages/User";
 
 // import component
 import Navbar from "../components/navbar";
+import Header from "../components/header";
 
 function Routes() {
   return (
-    <Provider store={store} className="allpage container">
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={Brewing} />
-          <Route exact path="/test" component={Test} />
-          <Route exact path="/recipe/:recipeID" component={RecipeDetail} />
-          <Route exact path="/recipe/demo/:recipeID" component={RecipeDemo} />
-          <Route exact path="/recipe/review/:recipeID" component={Review} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/activity" component={Activity} />
-          <Route exact path="/recipes/create" component={CreateRecipe} />
-          <Route exact path="/recipes/create/addstep" component={AddStep} />
-          <Route exact path="/recipes/create/inputstep" component={InputStep} />
-          <Route exact path="/recipes/:methodID" component={RecipesSelection} />
-          <Route exact path="/profile/me" component={Profile} />
-          <Route exact path="/profile/:userID" component={User} />
-          <Route exact path="/search" component={Search} />
-        </Switch>
-        <Navbar />
-      </BrowserRouter>
-    </Provider>
+    <div className="App container-fluid px-0 ">
+      <div className="container allpage">
+        <div className="row justify-content-center">
+          <div
+            className="col-12 shadow mh-100"
+            style={{
+              maxWidth: "480px",
+              paddingBottom: "125px",
+              paddingTop: "100px",
+              minHeight: "100vh"
+            }}
+          >
+            <Provider store={store} className="allpage container">
+              <BrowserRouter>
+                <Header />
+                <Switch>
+                  <Route exact path="/" component={Brewing} />
+                  <Route exact path="/test" component={Test} />
+                  <Route
+                    exact
+                    path="/recipe/:recipeID"
+                    component={RecipeDetail}
+                  />
+                  <Route
+                    exact
+                    path="/recipe/demo/:recipeID"
+                    component={RecipeDemo}
+                  />
+                  <Route
+                    exact
+                    path="/recipe/review/:recipeID"
+                    component={Review}
+                  />
+                  <Route exact path="/login" component={Login} />
+                  <Route exact path="/register" component={Register} />
+                  <Route exact path="/activity" component={Activity} />
+                  <Route
+                    exact
+                    path="/recipes/create"
+                    component={CreateRecipe}
+                  />
+                  <Route
+                    exact
+                    path="/recipes/create/addstep"
+                    component={AddStep}
+                  />
+                  <Route
+                    exact
+                    path="/recipes/create/inputstep"
+                    component={InputStep}
+                  />
+                  <Route
+                    exact
+                    path="/recipes/:methodID"
+                    component={RecipesSelection}
+                  />
+                  <Route exact path="/profile/me" component={Profile} />
+                  <Route exact path="/profile/:userID" component={User} />
+                  <Route exact path="/search" component={Search} />
+                </Switch>
+                <Navbar />
+              </BrowserRouter>
+            </Provider>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
