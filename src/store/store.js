@@ -126,7 +126,7 @@ const initialState = {
   login: 0,
 
   // url
-  baseURL: "http://api.coffeology.shop",
+  baseURL: "https://api.coffeology.shop",
 
   // data method
   methods: [
@@ -222,7 +222,6 @@ const initialState = {
     showConfirmButton: false,
     timer: 2000
   }),
-
 
   // another user
   user: [],
