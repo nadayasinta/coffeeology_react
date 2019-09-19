@@ -11,7 +11,7 @@ import Brewing from "../pages/Brewing";
 import RecipeDetail from "../pages/RecipeDetail";
 import Test from "../pages/test";
 import RecipeDemo from "../pages/TimerTest/timerPage";
-import Login from "../pages/loginTest";
+import SignIn from "../pages/SignIn";
 import Register from "../pages/register";
 import Activity from "../pages/Activity";
 import CreateRecipe from "../pages/CreateRecipe";
@@ -63,7 +63,7 @@ function Routes() {
                     path="/recipe/review/:recipeID"
                     component={Review}
                   />
-                  <Route exact path="/login" component={Login} />
+                  <Route exact path="/login" component={SignIn} />
                   <Route exact path="/register" component={Register} />
                   <Route exact path="/activity" component={Activity} />
                   <Route
