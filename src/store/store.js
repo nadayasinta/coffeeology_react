@@ -127,6 +127,7 @@ const initialState = {
 
     // url
     baseURL: "http://0.0.0.0:5000",
+    // baseURL: "https://api.coffeology.shop",
 
     // data method
     methods: [
@@ -228,6 +229,30 @@ const initialState = {
         ]
     },
 
+    bean: {
+        id: 1,
+        originID: 1,
+        name: "bean1",
+        photo:
+            "http://3.bp.blogspot.com/-NlbLDQ72yfg/VgLQFnMkCSI/AAAAAAAADaY/eiX1XdNv0uI/s1600/kopiaceh.jpg",
+        fragrance: 0.4,
+        flavor: 0.4,
+        aftertaste: 0.5,
+        acidity: 0.5,
+        body: 0.5,
+        balance: 0.5,
+        uniformity: 0.3,
+        cleanCups: 0.5,
+        sweetness: 0.3,
+        overall: 0.4,
+        description:
+            "Coffee trees are planted in Jernih Jaya Village locate Arabica Simalungun Location: North Sumatera cupping: September 2017 by Gayo Cuppers Team in Gunung Tujuh, Kerinci District, Jambi Province. Coffee plantation are grown in the altitute od 1,200 - 1,400 meter above sea level in the Mount Kerinci areas. Beside of coffee, the location is well known for agro tourism.",
+        cupping: "cupping",
+        advantage: ["advantage1", "advantage1"],
+        disadvantage: ["disadvantage1", "disadvantage2", "disadvantage3"],
+        location: "location"
+    },
+
     //history data
     historyID: "",
     // recipe in page activity
@@ -255,8 +280,7 @@ const initialState = {
     //import button image
     homeButton: require("../assets/images/home.png"),
     menuButton: require("../assets/images/menu.png"),
-
-    backButton: require("../assets/images/back.png")
+    backbutton: require("../assets/images/back.png")
 };
 
 const store = createStore(initialState);

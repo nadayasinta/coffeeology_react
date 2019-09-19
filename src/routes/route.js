@@ -21,8 +21,9 @@ import Review from "../pages/Review";
 import Profile from "../pages/Profile";
 import Search from "../pages/SearchPage";
 import ErrorPage from "../pages/ErrorPage";
-import BeanPage from "../pages/BeanPage";
 import User from "../pages/User";
+import BeanPage from "../pages/BeanPage";
+import BeanDetail from "../pages/BeanDetail";
 
 // import component
 import Navbar from "../components/navbar";
@@ -42,7 +43,7 @@ function Routes() {
                             minHeight: "100vh"
                         }}
                     >
-                        <Provider store={store} className="allpage container">
+                        <Provider store={store} className="container">
                             <BrowserRouter>
                                 <Header />
                                 <Switch>
@@ -121,6 +122,11 @@ function Routes() {
                                         exact
                                         path="/beans"
                                         component={BeanPage}
+                                    />
+                                    <Route
+                                        exact
+                                        path="/beans/:beanID"
+                                        component={BeanDetail}
                                     />
                                     <Route component={ErrorPage} />
                                 </Switch>

@@ -4,7 +4,7 @@ import React from "react";
 import { connect } from "unistore/react";
 
 // import components
-import Radar from "../components/radar";
+import RadarRecipe from "../components/radarRecipe";
 import { JsxEmit } from "typescript";
 
 class CreateRecipe extends React.Component {
@@ -374,7 +374,7 @@ class CreateRecipe extends React.Component {
                 required
               />
             </div>
-            <Radar
+            <RadarRecipe
               data={{
                 fragrance: this.state.fragrance,
                 aroma: this.state.aroma,
