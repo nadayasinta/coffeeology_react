@@ -10,6 +10,11 @@
 @color3 :#6C757D;
 @color4 :#FFDED5;
 
+.text-justify {
+    text-align: justify;
+    text-justify: inter-word;
+}
+
 .bgcolor1 {
     background-color: @color1;
 }
@@ -30,12 +35,31 @@
     a:hover {
         color: @color1;
     }
+    // navbar
+    .navbar {
+        a {
+            text-decoration: none !important;
+
+            color: @color1;
+            h6 {
+                margin-bottom: 0;
+            }
+        }
+
+        a:hover {
+            color: #663f30;
+        }
+        img:hover {
+            transform: scale(1.1);
+        }
+    }
 }
 .header {
     height: 75px;
     background-color: @color2;
     padding-top: 10px;
     padding-bottom: 10px;
+    border-bottom: 1px solid #919ea0;
 }
 
 .recipeCard {
@@ -94,27 +118,6 @@
     to {
         opacity: 0;
         height: 0px;
-    }
-}
-
-// navbar
-.navbar {
-    background-color: #e1e3de;
-
-    a {
-        text-decoration: none !important;
-
-        color: @color1;
-        h6 {
-            margin-bottom: 0;
-        }
-    }
-
-    a:hover {
-        color: #663f30;
-    }
-    img:hover {
-        transform: scale(1.1);
     }
 }
 

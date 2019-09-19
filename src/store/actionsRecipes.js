@@ -22,8 +22,15 @@ const actionsRecipes = store => ({
   setWater(state, value) {
     return { water: value };
   },
+
+  setRecipe(state, value) {
+    return { recipe: value };
+  },
   setRecipes(state, value) {
     return { recipes: value };
+  },
+  setRecipesSelection(state, value) {
+    return { recipesSelection: value };
   },
   setStepTypeNumberSelected(state, value) {
     return { stepTypeNumberSelected: value };
@@ -57,6 +64,9 @@ const actionsRecipes = store => ({
   },
   setTimerNow(state, value) {
     return { timerNow: value };
+  },
+  setRecipesSearch(state, value) {
+    return { recipesSearch: value };
   },
   // axios
 

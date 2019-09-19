@@ -10,7 +10,7 @@ import StepCard from "../components/stepCard";
 import ReviewCard from "../components/ReviewCard";
 
 // import components
-import Radar from "../components/radar";
+import RadarRecipe from "../components/radarRecipe";
 import Disqus from "disqus-react";
 
 import loading from "../assets/images/loading.gif";
@@ -48,6 +48,10 @@ class RecipeSelection extends React.Component {
   handleHideReview = () => {
     this.setState({ showReview: false });
   };
+
+  componentWillUnmount() {
+    this.props.setRecipe(null);
+  }
 
   async componentDidMount() {
     await this.props.getRecipeByID(this.props.match.params.recipeID);
@@ -263,7 +267,7 @@ class RecipeSelection extends React.Component {
                   className="form-control text-left"
                   aria-describedby="waterHelp"
                 >
-                  {this.state.water}
+                  {Math.floor(this.state.water)}
                 </div>
                 <small id="waterHelp" class="form-text text-muted mt-0">
                   Jumlah air yang harus digunakan
@@ -285,7 +289,7 @@ class RecipeSelection extends React.Component {
               </h5>
             </div>
             <div className="row justify-content-center px-2">
-              <Radar data={this.props.recipeDetails} />
+              <RadarRecipe data={this.props.recipeDetails} />
             </div>
 
             <div className="row justify-content-center my-3">

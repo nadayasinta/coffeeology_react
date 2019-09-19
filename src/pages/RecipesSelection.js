@@ -40,7 +40,7 @@ class RecipesSelection extends React.Component {
   }
 
   componentWillUnmount() {
-    this.props.setRecipes([]);
+    this.props.setRecipesSelection(null);
   }
 
   handlePreviousPageButton = event => {
@@ -64,8 +64,10 @@ class RecipesSelection extends React.Component {
 
   render() {
     console.log(this.props);
-    if (_.isEmpty(this.props.recipesSelection)) {
+    if (this.props.recipesSelection === null) {
       return <img src={loading} alt="loading..." />;
+    } else if (_.isEmpty(this.props.recipesSelection.recipes)) {
+      return <h5>Maaf, Resep yang ada cari belum ada</h5>;
     } else {
       return (
         <div>

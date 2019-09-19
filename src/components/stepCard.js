@@ -67,8 +67,10 @@ function stepCard(props) {
                                                 />
                                             </div>
                                             <div className="col-9 px-0 text-left align-self-center text-secondary">
-                                                {props.beanRatio *
-                                                    props.data.amount}{" "}
+                                                {Math.floor(
+                                                    props.beanRatio *
+                                                        props.data.amount
+                                                )}{" "}
                                                 ml
                                             </div>
                                         </div>
