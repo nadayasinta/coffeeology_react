@@ -7,11 +7,7 @@ function Water(props) {
     <div>
       {/* <h1>Water : {Math.floor(props.waterTotal)} </h1> */}
       <CircularProgressbar
-        value={
-          Math.round(props.waterNow) === props.stepNow.amount
-            ? 0
-            : props.waterNow
-        }
+        value={props.waterNow === props.stepNow.amount ? 0 : props.waterNow}
         maxValue={props.stepNow.amount}
         text={`${Math.round(props.waterTotal)} mL`}
         styles={buildStyles({
@@ -30,8 +26,24 @@ function Water(props) {
           // Can specify path transition in more detail, or remove it entirely
           // pathTransition: 'none',
 
+          // Colors
+          // pathColor: `rgba(62, 152, 199, ${
+          //   props.waterNow === props.stepNow.amount
+          //     ? 0
+          //     : props.waterNow / props.stepNow.amount
+          // })`,
+          // trail: {
+          //   // Trail color
+          //   stroke: "#d6d6d6",
+          //   // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
+          //   strokeLinecap: "butt",
+          //   // Rotate the trail
+          //   transform: "rotate(0.25turn)",
+          //   transformOrigin: "center center"
+          // },
+
           textColor: "#",
-          trailColor: "#d6d6d6",
+          // trailColor: "#d6d6d6",
           backgroundColor: "#3e98c7"
         })}
       />

@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { connect } from "unistore/react";
 import actionsDemo from "../../store/actionsDemo";
+import SkipNextIcon from "@material-ui/icons/SkipNext";
+// import { makeStyles } from "@material-ui/core/styles";
+import Fab from "@material-ui/core/Fab";
+
 import Timer from "./timer";
 import TimerButton from "./timerButton";
 import RecipeSteps from "./RecipeSteps";
@@ -100,13 +104,25 @@ function Counter(props) {
 
       <br />
       <TimerButton isRunning={isRunning} onClick={handleIsRunningChange} />
-      <button onClick={handleSkipButton}> Skip</button>
+      <Fab
+        color="primary"
+        aria-label="add"
+        // className={classes.fab}
+        onClick={handleSkipButton}
+      >
+        <SkipNextIcon />
+      </Fab>
+      {/* <button onClick={handleSkipButton}> Skip</button> */}
       <Water
         waterTotal={timer.waterTotal}
         stepNow={timer.stepNow}
         waterNow={timer.waterNow}
       />
-      <WaterBar index={timer.stepIndex} waterNow={timer.waterNow} />
+      <WaterBar
+        waterTotal={timer.waterTotal}
+        stepNow={timer.stepNow}
+        waterNow={timer.waterNow}
+      />
       <RecipeSteps startIndex={timer.stepIndex} />
     </div>
   );
