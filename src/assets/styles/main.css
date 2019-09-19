@@ -158,7 +158,6 @@
   border-radius: 50%;
 }
 .errorpage {
-  background-color: #e5e5e5;
   height: 100%;
   margin: -15px;
   margin-top: -25px;
@@ -190,4 +189,25 @@
 }
 .SocialMediaShareButton {
   display: inline-block;
+}
+.demopage {
+  margin-right: -15px !important;
+  margin-left: -15px !important;
+  margin-top: -25px;
+  background-color: #3b383e;
+}
+.demopage .timersection {
+  background-color: #3b383e;
+}
+.demopage .timerminute {
+  font-size: 70px;
+  font-weight: bold;
+  font-family: "Oswald", sans-serif;
+  color: white;
+}
+.demopage .timersecond {
+  font-size: 50px;
+  font-weight: bold;
+  font-family: "Oswald", sans-serif;
+  color: white;
 }

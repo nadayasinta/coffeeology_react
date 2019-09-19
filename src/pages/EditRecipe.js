@@ -5,7 +5,7 @@ import { connect } from "unistore/react";
 import actionsRecipes from "../store/actionsRecipes";
 
 // import components
-import Radar from "../components/radar";
+import Radar from "../components/radarRecipe";
 import { JsxEmit } from "typescript";
 
 class CreateRecipe extends React.Component {
