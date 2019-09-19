@@ -52,6 +52,7 @@ function Counter(props) {
   useEffect(() => {
     return () => {
       console.log("willUnmount");
+      setDelay(null);
     };
   }, []);
 
@@ -81,8 +82,6 @@ function Counter(props) {
         waterTotal: timer.recipeSteps
           .slice(0, timer.stepIndex + 1)
           .reduce((sum, num, index) => {
-            console.log(sum);
-            console.log(num);
             if (index === 1) {
               sum = sum.amount + num.amount;
             } else {
@@ -102,7 +101,11 @@ function Counter(props) {
       <br />
       <TimerButton isRunning={isRunning} onClick={handleIsRunningChange} />
       <button onClick={handleSkipButton}> Skip</button>
-      <Water waterTotal={timer.waterTotal} />
+      <Water
+        waterTotal={timer.waterTotal}
+        stepNow={timer.stepNow}
+        waterNow={timer.waterNow}
+      />
       <WaterBar index={timer.stepIndex} waterNow={timer.waterNow} />
       <RecipeSteps startIndex={timer.stepIndex} />
     </div>
