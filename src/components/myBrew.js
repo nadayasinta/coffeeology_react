@@ -8,6 +8,9 @@ import actionsActivity from "../store/actionsActivity";
 // import component
 import RecipeCard from "./recipeCard";
 
+// import img
+import loading from "../assets/images/loading.gif";
+
 class MyBrew extends React.Component {
   convertSeconds(secondsInput) {
     let minutes = Math.floor(parseInt(secondsInput) / 60);
@@ -25,27 +28,35 @@ class MyBrew extends React.Component {
     this.props.getMyBrew();
   };
 
+  componentWillUnmount = () => {
+    this.props.setMyBrew(null);
+  };
+
   render() {
-    return (
-      <div>
-        <Link to="/recipes/create">
-          <button className="btn btn-primary">Tambah Guide</button>
-        </Link>
-        {this.props.myBrew.map((value, key) => (
-          <div className="col-12">
-            <Link to={`/recipe/${value.id}`}>
-              <RecipeCard
-                className="w-100"
-                pageType="pageMyBrew"
-                methodIcon={this.props.methods[value.methodID - 1].icon}
-                data={value}
-                time={this.convertSeconds(value.time)}
-              />
-            </Link>
-          </div>
-        ))}
-      </div>
-    );
+    if (this.props.myBrew === null) {
+      return <img src={loading} alt="loading..." />;
+    } else {
+      return (
+        <div>
+          <Link to="/recipes/create">
+            <button className="btn btn-primary">Tambah Guide</button>
+          </Link>
+          {this.props.myBrew.map((value, key) => (
+            <div className="col-12">
+              <Link to={`/recipe/${value.id}`}>
+                <RecipeCard
+                  className="w-100"
+                  pageType="pageMyBrew"
+                  methodIcon={this.props.methods[value.methodID - 1].icon}
+                  data={value}
+                  time={this.convertSeconds(value.time)}
+                />
+              </Link>
+            </div>
+          ))}
+        </div>
+      );
+    }
   }
 }
 

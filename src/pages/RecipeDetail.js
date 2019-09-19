@@ -49,6 +49,10 @@ class RecipeSelection extends React.Component {
     this.setState({ showReview: false });
   };
 
+  componentWillUnmount() {
+    this.props.setRecipe(null);
+  }
+
   async componentDidMount() {
     await this.props.getRecipeByID(this.props.match.params.recipeID);
     await this.setState({
