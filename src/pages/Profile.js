@@ -196,6 +196,7 @@ class Profile extends React.Component {
                     type="text"
                     placeholder={this.props.userMe.name}
                     ref={this.name}
+                    defaultValue={this.props.userMe.name}
                     required
                   />
                 </Form.Group>

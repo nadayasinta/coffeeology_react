@@ -92,7 +92,7 @@ class RecipeSelection extends React.Component {
 
   handleOnChangeCoffee = event => {
     event.preventDefault();
-
+    if (event.target.value > 0){
     const waterTotal = this.state.ratio * event.target.value;
 
     const recipeSteps = [];
@@ -107,7 +107,7 @@ class RecipeSelection extends React.Component {
       coffeeWeight: event.target.value,
       water: event.target.value * this.state.ratio,
       recipeSteps: recipeSteps
-    });
+    })}
   };
 
   render() {
@@ -280,6 +280,7 @@ class RecipeSelection extends React.Component {
                   aria-describedby="beanHelp"
                   defaultValue={this.props.recipe.coffeeWeight}
                   onChange={this.handleOnChangeCoffee}
+                  min="1"
                 />
                 <small id="beanHelp" class="form-text text-muted mt-0">
                   Masukan jumlah kopi
