@@ -18,6 +18,9 @@ const ToastTop = Swal.mixin({
 
 const actionsUsers = store => ({
   // user login
+  setStatusRegister(state, value) {
+    return { statusRegister: value };
+  },
   login(state, data) {
     let config = {
       method: "post",
@@ -57,6 +60,8 @@ const actionsUsers = store => ({
           .then(response => {
             console.log(response);
             sessionStorage.setItem("token", response.data.token);
+            store.setState({ login: store.getState().login + 1 });
+            store.setState({ statusRegister: true });
           })
           .catch(error => {
             console.log(error);
