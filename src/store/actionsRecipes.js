@@ -43,8 +43,8 @@ const actionsRecipes = store => ({
   setDifficultiesParams(state, value) {
     return { difficultiesParams: value };
   },
-  setStatusRegister(state, value) {
-    return { statusRegister: value };
+  setMethodsParams(state, value) {
+    return { methodsParams: value };
   },
   setResetTimer(state) {
     store.setState({ timerNow: 0 });
