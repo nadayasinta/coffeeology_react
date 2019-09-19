@@ -235,11 +235,6 @@ class InputStep extends React.Component {
 }
 
 export default connect(
-<<<<<<< HEAD
   "Toast, stepTypeNumberSelected, stepTypes, stepTypeNumber, stepNumber, stepTemporary, backButton",
   actionsRecipes
-=======
-    "stepTypeNumberSelected, stepTypes, stepTypeNumber, stepNumber, stepTemporary, backButton",
-    actionsRecipes
->>>>>>> afd05186c51f15fb390bac1565c6cc1bb802e2ac
 )(InputStep);

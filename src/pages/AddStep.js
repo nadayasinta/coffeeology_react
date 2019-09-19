@@ -112,7 +112,7 @@ class AddStep extends React.Component {
   render() {
     return (
       <div>
-        <img className="backbutton " src={this.props.backButton} onClick={event => this.props.history.goBack()} />
+        <img className="backbutton " src={this.props.backButton} onClick={event => this.props.history.push("/recipes/create")} />
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-12">
