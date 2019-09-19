@@ -24,6 +24,11 @@ class BeanDetail extends React.Component {
     render() {
         return (
             <div>
+                <img
+                    className="backbutton"
+                    src={this.props.backButton}
+                    onClick=""
+                />
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
@@ -81,4 +86,4 @@ class BeanDetail extends React.Component {
     }
 }
 
-export default connect("bean, origins")(BeanDetail);
+export default connect("bean, origins, backbutton")(BeanDetail);

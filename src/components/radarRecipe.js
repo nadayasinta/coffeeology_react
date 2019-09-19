@@ -35,7 +35,7 @@ function radarRecipe(props) {
         body: "body"
     };
 
-    return <RadarChart captions={captions} data={data} />;
+    return <RadarChart captions={captions} data={data} size={300} />;
 }
 
 export default radarRecipe;
