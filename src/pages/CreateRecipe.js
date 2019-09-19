@@ -340,7 +340,6 @@ class CreateRecipe extends React.Component {
                 {this.props.origins.map((origin, index) => (
                   <option value={origin.id}>{origin.name}</option>
                 ))}
-                <option>lainnya</option>)
               </select>
             </div>
 
@@ -393,7 +392,7 @@ class CreateRecipe extends React.Component {
             {this.props.flavors.map((flavor, index) => (
               <div className="row">
                 <div className="col-3">
-                  <label htmlFor="customRange1">{flavor}</label>
+                  <label htmlFor="customRange1">{flavor==="globalTaste"?"global":flavor}</label>
                 </div>
                 <div className="col-9">
                   <input

@@ -95,11 +95,6 @@
 .activity h6 {
   font-family: "Nunito", sans-serif !important;
 }
-.activity .activityBar {
-  margin-right: -30px;
-  margin-left: -30px;
-  margin-top: -50px;
-}
 .brewing .rowhomeimage {
   margin-right: -30px;
   margin-left: -30px;
@@ -154,10 +149,24 @@
 }
 .homebutton {
   padding: 10px;
+  height: 100%;
 }
 .homebutton:hover {
   background-color: #bcbcbc;
   border-radius: 50%;
+}
+.errorpage {
+  background-color: #e5e5e5;
+  height: 100%;
+  margin: -15px;
+  margin-top: -25px;
+}
+.errorpage .errorimage {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  padding-bottom: 60px;
 }
 .scrolls {
   overflow-x: scroll;

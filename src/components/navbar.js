@@ -146,7 +146,7 @@ const SimpleBottomNavigation = props => {
                     paddingTop: "10px"
                 }}
                 component={Link}
-                to="/login"
+                to="/beans"
                 label="Biji"
                 icon={<Seed />}
             />
