@@ -10,24 +10,6 @@ import IconButton from "@material-ui/core/IconButton";
 // import store
 
 import useStyles from "../store/style";
-import * as Yup from "yup";
-
-// validation schema with Yup module
-const validationSchema = Yup.object({
-  name: Yup.string("Masukan nama anda")
-    .matches(/^[A-Za-z\s]+$/, "Nama hanya boleh huruf")
-    .required("Nama tidak boleh kosong"),
-  email: Yup.string("Masukan Email Anda")
-    .email("Email tidak valid")
-    .required("Email tidak boleh kosong"),
-  password: Yup.string("")
-    .min(6, "Gunakan huruf besar, huruf kecil dan angka. Minimal 6 karakter.")
-    .matches(
-      /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])[\w\d]{6,30}$/,
-      "Gunakan huruf besar, huruf kecil dan angka. Minimal 6 karakter."
-    )
-    .required("Password tidak boleh kosong")
-});
 
 // Register form. will be rendered with
 const RegisterForm = props => {
