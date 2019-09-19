@@ -79,10 +79,15 @@ class AddStep extends React.Component {
     let totalWaterStep = 0
     this.state.stepTemporary.map((step, index) => (totalWaterStep = totalWaterStep + step.amount))
     if (parseInt(totalWaterStep) > parseInt(recipes.water)) {
-      return alert(`Total Air Pada Step Melebihi ${recipes.water} ml`)
-    }
-    else if (parseInt(totalWaterStep) < parseInt(recipes.water)) {
-      return alert(`Total Air Pada Step Masih Kurang ${parseInt(recipes.water) - parseInt(totalWaterStep)} ml`)
+      return this.props.Toast.fire({
+          type: "error",
+          title: `Total Air Pada Step Melebihi ${recipes.water} ml`
+        });
+    } else if (parseInt(totalWaterStep) < parseInt(recipes.water)) {
+      return this.props.Toast.fire({
+        type: "error",
+        title: `Total Air Pada Step Masih Kurang ${parseInt(recipes.water) - parseInt(totalWaterStep)} ml`
+      });
     }
 
     let time = 0;
@@ -94,15 +99,13 @@ class AddStep extends React.Component {
       recipeDetails: recipeDetails,
       steps: steps
     };
-    // testing
-    sessionStorage.setItem("data", JSON.stringify(data));
 
     await this.props.postRecipe(data)
 
     if (sessionStorage.getItem("Recipe") === null) {
       this.props.history.push("/activity");
     } else {
-      return alert("Silahkan Perbaiki Data Resep Anda")
+      return console.log("ulangi")
     }
   };
 
@@ -198,6 +201,6 @@ class AddStep extends React.Component {
 }
 
 export default connect(
-  "stepTypes, stepTemporary, backButton",
+  "stepTypes, Toast, stepTemporary, backButton",
   actionsRecipes
 )(AddStep);
