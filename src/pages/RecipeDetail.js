@@ -91,27 +91,29 @@ class RecipeSelection extends React.Component {
       "recipeSteps",
       JSON.stringify(this.state.recipeSteps)
     );
+    sessionStorage.setItem("recipe", JSON.stringify(this.props.recipe));
     this.props.history.push("/recipe/demo/" + this.props.match.params.recipeID);
   };
 
   handleOnChangeCoffee = event => {
     event.preventDefault();
-    if (event.target.value > 0){
-    const waterTotal = this.state.ratio * event.target.value;
+    if (event.target.value > 0) {
+      const waterTotal = this.state.ratio * event.target.value;
 
-    const recipeSteps = [];
+      const recipeSteps = [];
 
-    this.state.recipeSteps.forEach(recipeStep => {
-      recipeStep["amount"] =
-        (recipeStep["amount"] / this.state.water) * waterTotal;
-      recipeSteps.push(recipeStep);
-    });
+      this.state.recipeSteps.forEach(recipeStep => {
+        recipeStep["amount"] =
+          (recipeStep["amount"] / this.state.water) * waterTotal;
+        recipeSteps.push(recipeStep);
+      });
 
-    this.setState({
-      coffeeWeight: event.target.value,
-      water: event.target.value * this.state.ratio,
-      recipeSteps: recipeSteps
-    })}
+      this.setState({
+        coffeeWeight: event.target.value,
+        water: event.target.value * this.state.ratio,
+        recipeSteps: recipeSteps
+      });
+    }
   };
 
   render() {
@@ -134,19 +136,18 @@ class RecipeSelection extends React.Component {
           />
           {this.props.userMe.id === this.props.recipe.userID ? (
             <div align="right">
-            <button
-              onClick={e => {
-                e.preventDefault();
-                this.props.history.push(
-                  `/recipe/edit/${this.props.recipe.userID}`
-                );
-              }}
-              type="button"
-              className="btn btn-secondary btn-sm"
-            >
-              Edit
-            </button>
-
+              <button
+                onClick={e => {
+                  e.preventDefault();
+                  this.props.history.push(
+                    `/recipe/edit/${this.props.recipe.userID}`
+                  );
+                }}
+                type="button"
+                className="btn btn-secondary btn-sm"
+              >
+                Edit
+              </button>
             </div>
           ) : (
             <div></div>
@@ -362,7 +363,11 @@ class RecipeSelection extends React.Component {
 
               <div className="col-5 ">
                 <ButtonToolbar>
-                  <Button className="btn-block" bsStyle="primary" onClick={this.handleShowReview}>
+                  <Button
+                    className="btn-block"
+                    bsStyle="primary"
+                    onClick={this.handleShowReview}
+                  >
                     {this.props.reviews.length} &nbsp; Review
                   </Button>
 

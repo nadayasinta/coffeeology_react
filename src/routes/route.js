@@ -34,6 +34,7 @@ import Navbar from "../components/navbar";
 import Header from "../components/header";
 
 function Routes() {
+
     return (
         <div className="App container-fluid px-0 ">
             <div className="container allpage">
@@ -151,6 +152,7 @@ function Routes() {
                     </div>
                 </div>
             </div>
+
         </div>
     );
 }
