@@ -117,6 +117,12 @@ function Routes() {
                                         path="/search"
                                         component={Search}
                                     />
+                                    <Route
+                                        exact
+                                        path="/beans"
+                                        component={BeanPage}
+                                    />
+                                    <Route component={ErrorPage} />
                                 </Switch>
                                 <Navbar />
                             </BrowserRouter>

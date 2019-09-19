@@ -2,6 +2,7 @@ import React from "react";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
 import { connect } from "unistore/react";
+import { Link } from "react-router-dom";
 
 class BeanPage extends React.Component {
     render() {
@@ -22,11 +23,15 @@ class BeanPage extends React.Component {
                                         {this.props.beans[origin.id].map(
                                             (bean, index) => (
                                                 <Accordion.Collapse
-                                                    eventKey={bean.id}
+                                                    eventKey={origin.id}
                                                 >
-                                                    <Card.Body>
-                                                        {bean.name}
-                                                    </Card.Body>
+                                                    <Link
+                                                        to={"/beans/" + bean.id}
+                                                    >
+                                                        <Card.Body>
+                                                            {bean.name}
+                                                        </Card.Body>
+                                                    </Link>
                                                 </Accordion.Collapse>
                                             )
                                         )}
