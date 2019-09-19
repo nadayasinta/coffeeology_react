@@ -125,7 +125,7 @@ const SignIn = props => {
                         <HumanHandsup />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Sign in
+                        SIGN IN
                     </Typography>
                     <form
                         className={classes.form}

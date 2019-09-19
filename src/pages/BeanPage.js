@@ -15,6 +15,7 @@ class BeanPage extends React.Component {
             <div>
                 <div className="container">
                     <div className="row justify-content-center d-block">
+                        <h4 className="font-weight-bold">BEANS</h4>
                         <Accordion defaultActiveKey="0">
                             {this.props.origins.map((origin, index) =>
                                 index !== 4 ? (

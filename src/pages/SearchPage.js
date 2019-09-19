@@ -163,22 +163,19 @@ const Search = props => {
                               <Link to={"/recipe/" + value.id}>
                                   <RecipeCard
                                       data={value}
-                                      methodIcon={
-                                          props.methods[value.methodID - 1].icon
-                                      }
+                                      method={props.methods[value.methodID - 1]}
                                       time={convertSeconds(value.time)}
                                   />
                               </Link>
                           </div>
                       );
                   })}
-            <br />
 
             <Pagination size="lg" className="justify-content-between">
                 {props.recipesSearch.pageNow === 1 ? (
                     <span></span>
                 ) : (
-                    <div className="text-center">
+                    <div>
                         <Pagination.First onClick={handlePreviousPageButton} />
                     </div>
                 )}
@@ -186,7 +183,7 @@ const Search = props => {
                 props.recipesSearch.pageTotal ? (
                     <span></span>
                 ) : (
-                    <div className="text-center">
+                    <div>
                         <Pagination.Last onClick={handleNextPageButton} />
                     </div>
                 )}
