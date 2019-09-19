@@ -61,7 +61,15 @@ class RecipeSelection extends React.Component {
       ratio: this.props.recipe.water / this.props.recipe.coffeeWeight,
       recipeSteps: this.props.recipeSteps
     });
+
     // this.props.setRecipeSteps(this.state.recipeSteps);
+    this.props.setResetTimer();
+
+    if (sessionStorage.getItem("token") !== null) {
+      this.props.getProfile();
+    }
+    console.log("id user", this.props.userMe.id);
+    console.log("id user resep", this.props.recipe.userID);
   }
 
   convertSeconds(secondsInput) {
@@ -88,7 +96,7 @@ class RecipeSelection extends React.Component {
 
   handleOnChangeCoffee = event => {
     event.preventDefault();
-
+    if (event.target.value > 0){
     const waterTotal = this.state.ratio * event.target.value;
 
     const recipeSteps = [];
@@ -103,7 +111,7 @@ class RecipeSelection extends React.Component {
       coffeeWeight: event.target.value,
       water: event.target.value * this.state.ratio,
       recipeSteps: recipeSteps
-    });
+    })}
   };
 
   render() {
@@ -124,6 +132,25 @@ class RecipeSelection extends React.Component {
             src={this.props.backButton}
             onClick={event => this.props.history.goBack()}
           />
+          {this.props.userMe.id === this.props.recipe.userID ? (
+            <div align="right">
+            <button
+              onClick={e => {
+                e.preventDefault();
+                this.props.history.push(
+                  `/recipe/edit/${this.props.recipe.userID}`
+                );
+              }}
+              type="button"
+              className="btn btn-secondary btn-sm"
+            >
+              Edit
+            </button>
+
+            </div>
+          ) : (
+            <div></div>
+          )}
           <div className="container">
             <div className="row justify-content-center">
               <h2 className="font-weight-bold mb-0">
@@ -257,6 +284,7 @@ class RecipeSelection extends React.Component {
                   aria-describedby="beanHelp"
                   defaultValue={this.props.recipe.coffeeWeight}
                   onChange={this.handleOnChangeCoffee}
+                  min="1"
                 />
                 <small id="beanHelp" class="form-text text-muted mt-0">
                   Masukan jumlah kopi
@@ -334,12 +362,8 @@ class RecipeSelection extends React.Component {
 
               <div className="col-5 ">
                 <ButtonToolbar>
-                  <Button
-                    className="btn-block"
-                    bsStyle="primary"
-                    onClick={this.handleShowReview}
-                  >
-                    Lihat Review
+                  <Button className="btn-block" bsStyle="primary" onClick={this.handleShowReview}>
+                    {this.props.reviews.length} &nbsp; Review
                   </Button>
 
                   <Modal
@@ -399,6 +423,6 @@ class RecipeSelection extends React.Component {
 }
 
 export default connect(
-  "recipe, stepTypes, recipeDetails, recipeSteps, waterLimit, backButton, recipeCreator, methods, reviews, grinds",
+  "recipe, stepTypes, recipeDetails, recipeSteps, waterLimit, backButton, recipeCreator, methods, reviews, userMe, grinds",
   actionsRecipes
 )(RecipeSelection);

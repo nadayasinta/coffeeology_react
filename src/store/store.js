@@ -283,6 +283,13 @@ const initialState = {
     timer: 2000
   }),
 
+    Toast: Swal.mixin({
+        toast: true,
+        position: "top",
+        showConfirmButton: false,
+        timer: 2000
+    }),
+
 
   // another user
   user: [],

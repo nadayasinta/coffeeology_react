@@ -50,7 +50,10 @@ class InputStep extends React.Component {
             parseInt(this.second.current.value) === 0 &&
             parseInt(this.minute.current.value) === 0
         ) {
-            return alert("Waktu Tidak Boleh Kosong");
+            return this.props.Toast.fire({
+                type: "error",
+                title: "Waktu Tidak Boleh Kosong"
+              });
         }
 
         // validation waterAmount every Step = waterAmount Recipe
@@ -69,11 +72,10 @@ class InputStep extends React.Component {
 
         if (parseInt(totalWaterStep) > parseInt(recipes.water)) {
             totalWaterStep -= this.waterAmount.current.value;
-            return alert(
-                `Jumlah Air Tidak Valid, Anda Hanya bisa menambahkan maksimal ${parseInt(
-                    recipes.water
-                ) - parseInt(totalWaterStep)} ml`
-            );
+            return this.props.Toast.fire({
+                type: "error",
+                title: `Jumlah Air Tidak Valid, Anda Hanya bisa menambahkan maksimal ${parseInt(recipes.water) - parseInt(totalWaterStep)} ml`
+              });
         }
 
         // set total time
@@ -233,6 +235,6 @@ class InputStep extends React.Component {
 }
 
 export default connect(
-    "stepTypeNumberSelected, stepTypes, stepTypeNumber, stepNumber, stepTemporary, backButton",
-    actionsRecipes
+  "Toast, stepTypeNumberSelected, stepTypes, stepTypeNumber, stepNumber, stepTemporary, backButton",
+  actionsRecipes
 )(InputStep);

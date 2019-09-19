@@ -138,6 +138,32 @@ const actionsRecipes = store => ({
       store.setState({ recipesSearch: response.data });
     });
   },
+  async putRecipe(state, data) {
+    console.log("test");
+    let config = {
+      method: "post",
+      url: store.getState().baseURL + "/recipes",
+      data: data,
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token")
+      }
+    };
+    await axios(config)
+      .then(response => {
+        store.setState({ recipe: response.data });
+        sessionStorage.removeItem("Recipe");
+        sessionStorage.removeItem("RecipeDetail");
+        sessionStorage.removeItem("note");
+        sessionStorage.removeItem("stepTemporary");
+      })
+      .catch(error => {
+        console.log(error.response);
+        Toast.fire({
+          type: "error",
+          title: `${error.response.data.message}. Data Tidak Tersave`
+        });
+      });
+  },
 
   // async getRecipes(state, paramsInput = null) {
   //   let config = {
@@ -191,6 +217,28 @@ const actionsRecipes = store => ({
       console.log(response);
       store.setState({ reviews: response.data.data });
     });
+  },
+  async getProfile(state) {
+    console.log("test get profile");
+    let config = {
+      method: "get",
+      url: store.getState().baseURL + "/users/me",
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token")
+      }
+    };
+    await axios(config)
+      .then(response => {
+        console.log("data users ", response.data.data);
+        store.setState({ userMe: response.data.data });
+      })
+      .catch(error => {
+        console.log(error.response);
+        Toast.fire({
+          type: "error",
+          title: `${error.response.data.message}`
+        });
+      });
   }
 });
 
