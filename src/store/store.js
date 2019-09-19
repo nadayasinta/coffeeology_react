@@ -192,7 +192,7 @@ const initialState = {
     "acidity",
     "aftertaste",
     "balance",
-    "global",
+    "globalTaste",
     "body"
   ],
 
