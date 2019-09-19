@@ -10,7 +10,8 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-
+import Fab from "@material-ui/core/Fab";
+import AddIcon from "@material-ui/icons/Add";
 // import component
 
 import History from "../components/history";
@@ -55,10 +56,23 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
+const useStylesFab = makeStyles(theme => ({
+  fab: {
+    // margin: theme.spacing(1)
+    position: "absolute",
+    bottom: theme.spacing(1),
+    right: theme.spacing(1)
+  },
+  extendedIcon: {
+    marginRight: theme.spacing(1)
+  }
+}));
+
 export default function FullWidthTabs() {
-    const classes = useStyles();
-    const theme = useTheme();
-    const [value, setValue] = React.useState(0);
+  const classes = useStyles();
+  const classesFab = useStylesFab();
+  const theme = useTheme();
+  const [value, setValue] = React.useState(0);
 
     function handleChange(event, newValue) {
         setValue(newValue);
@@ -68,61 +82,49 @@ export default function FullWidthTabs() {
         setValue(index);
     }
 
-    return (
-        <div>
-            {sessionStorage.getItem("token") ? (
-                <div></div>
-            ) : (
-                <Redirect to="/login" />
-            )}
-            <div className="container-fluid activity px-0">
-                <div className="row">
-                    <div className="col-12">
-                        <div className={classes.root}>
-                            <AppBar
-                                className="activityBar"
-                                position="static"
-                                color="default"
-                            >
-                                <Tabs
-                                    value={value}
-                                    onChange={handleChange}
-                                    indicatorColor="primary"
-                                    textColor="primary"
-                                    variant="fullWidth"
-                                    aria-label="full width tabs example"
-                                >
-                                    <Tab label="Guide Saya" {...a11yProps(0)} />
-                                    <Tab label="Histori" {...a11yProps(1)} />
-                                </Tabs>
-                            </AppBar>
-                            <SwipeableViews
-                                axis={
-                                    theme.direction === "rtl"
-                                        ? "x-reverse"
-                                        : "x"
-                                }
-                                index={value}
-                                onChangeIndex={handleChangeIndex}
-                            >
-                                <TabPanel
-                                    value={value}
-                                    index={0}
-                                    dir={theme.direction}
-                                >
-                                    <MyBrew />
-                                </TabPanel>
-                                <TabPanel
-                                    value={value}
-                                    index={1}
-                                    dir={theme.direction}
-                                >
-                                    <History />
-                                </TabPanel>
-                            </SwipeableViews>
-                        </div>
-                    </div>
-                </div>
+  return (
+    <div>
+      {sessionStorage.getItem("token") ? <div></div> : <Redirect to="/login" />}
+      <div className="container-fluid activity px-0">
+        <div className="row">
+          <div className="col-12">
+            <div className={classes.root}>
+              <AppBar
+                className="acitivityBar"
+                position="static"
+                color="default"
+              >
+                <Tabs
+                  value={value}
+                  onChange={handleChange}
+                  indicatorColor="primary"
+                  textColor="primary"
+                  variant="fullWidth"
+                  aria-label="full width tabs example"
+                >
+                  <Tab label="Guide Saya" {...a11yProps(0)} />
+                  <Tab label="Histori" {...a11yProps(1)} />
+                </Tabs>
+              </AppBar>
+              <SwipeableViews
+                axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+                index={value}
+                onChangeIndex={handleChangeIndex}
+              >
+                <TabPanel value={value} index={0} dir={theme.direction}>
+                  <MyBrew />
+                  <Fab
+                    color="primary"
+                    aria-label="add"
+                    className={classesFab.fab}
+                  >
+                    <AddIcon />
+                  </Fab>
+                </TabPanel>
+                <TabPanel value={value} index={1} dir={theme.direction}>
+                  <History />
+                </TabPanel>
+              </SwipeableViews>
             </div>
         </div>
     );

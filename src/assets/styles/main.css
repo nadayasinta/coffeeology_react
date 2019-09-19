@@ -179,6 +179,11 @@
   height: 80px;
   white-space: nowrap;
 }
+.filterHeader {
+  width: 100%;
+  background-color: #53686B;
+  height: 20px;
+}
 .MuiPaper-root {
   max-width: 480px;
   justify-items: center;

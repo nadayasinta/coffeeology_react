@@ -14,7 +14,9 @@ const actionsProfile = store => ({
     return { login: store.getState().login + 1 };
   },
 
-  // axios
+
+
+  // axios for profile me
   async getProfile(state) {
     console.log("test get profile");
     let config = {
@@ -38,7 +40,7 @@ const actionsProfile = store => ({
       });
   },
   async editProfile(state, data) {
-    console.log("test get myBrew");
+    console.log("test edit profile");
     let config = {
       method: "put",
       url: store.getState().baseURL + "/users",
@@ -66,7 +68,7 @@ const actionsProfile = store => ({
       });
   },
   async editPassword(state, data) {
-    console.log("test get myBrew");
+    console.log("test edit password");
     let config = {
       method: "put",
       url: store.getState().baseURL + "/users",
@@ -118,7 +120,43 @@ const actionsProfile = store => ({
   },
   resetEditProfileStatus(state) {
     return { editProfileStatus: false };
-  }
+  },
+
+  // other user
+  async getProfileByID(state, data) {
+    console.log("test get profile");
+    let config = {
+      method: "get",
+      url: store.getState().baseURL + `/users/${data}`
+    };
+    await axios(config)
+      .then(response => {
+        console.log("data users ", response.data.data);
+        store.setState({ user: response.data.data });
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
+  },
+  async getUserBrew(state, data) {
+    console.log("test get userBrew");
+    let config = {
+      method: "get",
+      url: store.getState().baseURL + `/recipes?userID=${data}`,
+    };
+    await axios(config)
+      .then(response => {
+        console.log("data userBrew ", response.data.recipes)
+        store.setState({ userBrew: response.data.recipes });
+      })
+      .catch(error => console.log("Error getMyBrew", error));
+  },
+  resetDataUser(state){
+    return { user : [] }
+  },
+  resetDataUserBrew(state){
+    return { userBrew : [] }
+  },
 });
 
 export default actionsProfile;

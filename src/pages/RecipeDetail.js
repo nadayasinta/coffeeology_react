@@ -1,5 +1,6 @@
 import React from "react";
 import { Modal, ButtonToolbar, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 // import store
 import { connect } from "unistore/react";
 import actionsRecipes from "../store/actionsRecipes";
@@ -57,7 +58,6 @@ class RecipeSelection extends React.Component {
       recipeSteps: this.props.recipeSteps
     });
     // this.props.setRecipeSteps(this.state.recipeSteps);
-    this.props.setResetTimer();
   }
 
   convertSeconds(secondsInput) {
@@ -72,10 +72,13 @@ class RecipeSelection extends React.Component {
     return `${minutes}:${seconds}`;
   }
 
-  handleOnClickButton = event => {
+  handleOnClickButton = async event => {
     event.preventDefault();
-    this.props.setRecipeSteps(this.state.recipeSteps);
-
+    await this.props.setRecipeSteps(this.state.recipeSteps);
+    sessionStorage.setItem(
+      "recipeSteps",
+      JSON.stringify(this.state.recipeSteps)
+    );
     this.props.history.push("/recipe/demo/" + this.props.match.params.recipeID);
   };
 
@@ -119,12 +122,17 @@ class RecipeSelection extends React.Component {
           />
           <div className="container">
             <div className="row justify-content-center">
-              <h2 className="font-weight-bold mb-0">{this.props.recipe.name.toUpperCase()}</h2>
-              </div>
-           
-           <div className="row justify-content-center">
-              
-              <h6 className="text-secondary"><a href={"/profile/"+this.props.recipeCreator.id}>{this.props.recipeCreator.name}</a></h6>
+              <h2 className="font-weight-bold mb-0">
+                {this.props.recipe.name.toUpperCase()}
+              </h2>
+            </div>
+
+            <div className="row justify-content-center">
+              <h6 className="text-secondary">
+                <Link to={"/profile/" + this.props.recipeCreator.id}>
+                  {this.props.recipeCreator.name}
+                </Link>
+              </h6>
             </div>
 
             <div className="row mr-0">
@@ -157,7 +165,10 @@ class RecipeSelection extends React.Component {
 
             <div className="row justify-content-center py-2 my-4 border-top border-bottom  bg-light ">
               <div className="col-4  text-center">
-              <div className="row justify-content-center"> <h5 className="border-bottom">Waktu</h5></div>
+                <div className="row justify-content-center">
+                  {" "}
+                  <h5 className="border-bottom">Waktu</h5>
+                </div>
                 <div className="row justify-content-center align-items-center ">
                   <img
                     className="w-25 mr-1"
@@ -168,7 +179,10 @@ class RecipeSelection extends React.Component {
                 </div>
               </div>
               <div className="col-4 text-center">
-                <div className="row justify-content-center"> <h5 className="border-bottom">Suhu Air(&deg;C)</h5></div>
+                <div className="row justify-content-center">
+                  {" "}
+                  <h5 className="border-bottom">Suhu Air(&deg;C)</h5>
+                </div>
                 <div className="row justify-content-center align-items-center">
                   <img
                     className="w-25 mr-1"
@@ -179,22 +193,34 @@ class RecipeSelection extends React.Component {
                 </div>
               </div>
               <div className="col-4 text-center">
-              <div className="row justify-content-center"> <h5 className="border-bottom">Grind</h5></div>
+                <div className="row justify-content-center">
+                  {" "}
+                  <h5 className="border-bottom">Grind</h5>
+                </div>
                 <div className="row justify-content-center align-items-center">
                   <img
                     className="w-25 mr-1"
                     src={require("../assets/images/RecipeIcon/coffee-grinder.png")}
                     alt="alt tag"
                   />
-                  <span>{this.props.grinds[this.props.recipeDetails.grindSize-1].name}</span>
+                  <span>
+                    {
+                      this.props.grinds[this.props.recipeDetails.grindSize - 1]
+                        .name
+                    }
+                  </span>
                 </div>
               </div>
             </div>
 
             <div className="row">
               <div className="col-4 text-right">
-                <div className="row font-weight-bold justify-content-end">KOPI</div>
-                <div className="row justify-content-end">{this.props.recipe.coffeeWeight} gram</div>
+                <div className="row font-weight-bold justify-content-end">
+                  KOPI
+                </div>
+                <div className="row justify-content-end">
+                  {this.props.recipe.coffeeWeight} gram
+                </div>
               </div>
               <div className="col-2">
                 <img
@@ -211,10 +237,11 @@ class RecipeSelection extends React.Component {
                 />
               </div>
               <div className="col-4 ">
-                <div className="row font-weight-bold justify-content-start">AIR</div>
+                <div className="row font-weight-bold justify-content-start">
+                  AIR
+                </div>
                 <div className="row">{this.props.recipe.water} ml</div>
               </div>
-              
             </div>
 
             <div className="row">
@@ -227,24 +254,35 @@ class RecipeSelection extends React.Component {
                   defaultValue={this.props.recipe.coffeeWeight}
                   onChange={this.handleOnChangeCoffee}
                 />
-                <small id="beanHelp" class="form-text text-muted mt-0">Masukan jumlah kopi</small>
+                <small id="beanHelp" class="form-text text-muted mt-0">
+                  Masukan jumlah kopi
+                </small>
               </div>
               <div className="col-6">
-                <div className="form-control text-left" aria-describedby="waterHelp">{this.state.water}</div>
-                <small id="waterHelp" class="form-text text-muted mt-0">Jumlah air yang harus digunakan</small>
+                <div
+                  className="form-control text-left"
+                  aria-describedby="waterHelp"
+                >
+                  {this.state.water}
+                </div>
+                <small id="waterHelp" class="form-text text-muted mt-0">
+                  Jumlah air yang harus digunakan
+                </small>
               </div>
             </div>
 
             <div className="row mt-4 px-2">
-              <h5 className="mb-1"><u>CATATAN</u></h5>
+              <h5 className="mb-1">
+                <u>CATATAN</u>
+              </h5>
             </div>
 
-            <div className="row px-2">
-                {this.props.recipeDetails.note}
-            </div>
+            <div className="row px-2">{this.props.recipeDetails.note}</div>
 
             <div className="row mt-4 px-2">
-              <h5 className="mb-1"><u>RASA</u></h5>
+              <h5 className="mb-1">
+                <u>RASA</u>
+              </h5>
             </div>
             <div className="row justify-content-center px-2">
               <Radar data={this.props.recipeDetails} />
@@ -253,7 +291,11 @@ class RecipeSelection extends React.Component {
             <div className="row justify-content-center my-3">
               <div className="col-5">
                 <ButtonToolbar>
-                  <Button className="btn-block" bsStyle="primary" onClick={this.handleShowComment}>
+                  <Button
+                    className="btn-block"
+                    bsStyle="primary"
+                    onClick={this.handleShowComment}
+                  >
                     <Disqus.CommentCount
                       shortname={disqusShortname}
                       config={disqusConfig}
@@ -288,7 +330,11 @@ class RecipeSelection extends React.Component {
 
               <div className="col-5 ">
                 <ButtonToolbar>
-                  <Button className="btn-block" bsStyle="primary" onClick={this.handleShowReview}>
+                  <Button
+                    className="btn-block"
+                    bsStyle="primary"
+                    onClick={this.handleShowReview}
+                  >
                     Lihat Review
                   </Button>
 
@@ -323,7 +369,9 @@ class RecipeSelection extends React.Component {
             </div>
 
             <div className="row mt-4 justify-content-center">
-              <div className="col-12 bg-light border-top border-bottom my-2"><h5 className="mb-0 py-1">TAHAPAN</h5></div>
+              <div className="col-12 bg-light border-top border-bottom my-2">
+                <h5 className="mb-0 py-1">TAHAPAN</h5>
+              </div>
               {this.props.recipeSteps.map(recipeStep => (
                 <div className="col-12">
                   <StepCard data={recipeStep} />
