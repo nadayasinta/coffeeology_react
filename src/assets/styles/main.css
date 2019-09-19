@@ -1,4 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,900|Nunito:300,400,400i,600,700,800,900|Oswald:300,400,500,600,700|Roboto:300,400,400i,500,700,900&display=swap");
+.text-justify {
+  text-align: justify;
+  text-justify: inter-word;
+}
 .bgcolor1 {
   background-color: #3b383e;
 }
@@ -19,11 +23,25 @@
 .allpage a:hover {
   color: #3b383e;
 }
+.allpage .navbar a {
+  text-decoration: none !important;
+  color: #3b383e;
+}
+.allpage .navbar a h6 {
+  margin-bottom: 0;
+}
+.allpage .navbar a:hover {
+  color: #663f30;
+}
+.allpage .navbar img:hover {
+  transform: scale(1.1);
+}
 .header {
   height: 75px;
   background-color: #53686B;
   padding-top: 10px;
   padding-bottom: 10px;
+  border-bottom: 1px solid #919ea0;
 }
 .recipeCard {
   max-width: 420px;
@@ -70,22 +88,6 @@
     opacity: 0;
     height: 0px;
   }
-}
-.navbar {
-  background-color: #e1e3de;
-}
-.navbar a {
-  text-decoration: none !important;
-  color: #3b383e;
-}
-.navbar a h6 {
-  margin-bottom: 0;
-}
-.navbar a:hover {
-  color: #663f30;
-}
-.navbar img:hover {
-  transform: scale(1.1);
 }
 .activity .MuiBox-root-97 {
   padding-left: 0;

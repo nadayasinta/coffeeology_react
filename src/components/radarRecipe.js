@@ -2,7 +2,7 @@ import React from "react";
 import RadarChart from "react-svg-radar-chart";
 import "react-svg-radar-chart/build/css/index.css";
 
-function radar(props) {
+function radarRecipe(props) {
     const data = [
         {
             data: {
@@ -38,4 +38,4 @@ function radar(props) {
     return <RadarChart captions={captions} data={data} />;
 }
 
-export default radar;
+export default radarRecipe;

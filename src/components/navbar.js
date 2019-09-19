@@ -96,11 +96,11 @@ import { Link } from "react-router-dom";
 const useStyles = makeStyles({
     root: {
         color: "green",
-        "&$selected": {
-            color: "red"
-        },
-        activeColor: "blue",
-        inactiveColor: "white",
+        // "&$selected": {
+        //     color: "red"
+        // },
+        activeColor: "#f22",
+        // inactiveColor: "white",
         width: "100%",
         maxWidth: "480px",
         position: "fixed",
@@ -110,7 +110,8 @@ const useStyles = makeStyles({
         backgroundColor: "#f2f2f2",
         zIndex: "999",
         height: "60px",
-        boxShadow: "0 -.2rem .3rem rgba(0,0,0,.15)"
+        boxShadow: "0 -0.15rem 0.25rem rgba(0, 0, 0, 0.15)",
+        padding: "0"
     }
 });
 
@@ -130,10 +131,6 @@ const SimpleBottomNavigation = props => {
             className={classes.root}
         >
             <BottomNavigationAction
-                style={{
-                    paddingBottom: "10px",
-                    paddingTop: "10px"
-                }}
                 component={Link}
                 to="/"
                 className={classes.content}
@@ -141,30 +138,18 @@ const SimpleBottomNavigation = props => {
                 icon={<CoffeeMaker />}
             />
             <BottomNavigationAction
-                style={{
-                    paddingBottom: "10px",
-                    paddingTop: "10px"
-                }}
                 component={Link}
                 to="/beans"
                 label="Biji"
                 icon={<Seed />}
             />
             <BottomNavigationAction
-                style={{
-                    paddingTop: "10px",
-                    paddingBottom: "10px"
-                }}
                 component={Link}
                 to="/search"
                 label="Cari"
                 icon={<Magnify />}
             />
             <BottomNavigationAction
-                style={{
-                    paddingBottom: "10px",
-                    paddingTop: "10px"
-                }}
                 component={Link}
                 to="/activity"
                 label="Aktifitas"
@@ -172,10 +157,6 @@ const SimpleBottomNavigation = props => {
             />
             {sessionStorage.getItem("token") !== null ? (
                 <BottomNavigationAction
-                    style={{
-                        paddingBottom: "10px",
-                        paddingTop: "10px"
-                    }}
                     component={Link}
                     to="/profile/me"
                     label="Profile"
@@ -183,10 +164,6 @@ const SimpleBottomNavigation = props => {
                 />
             ) : (
                 <BottomNavigationAction
-                    style={{
-                        paddingBottom: "10px",
-                        paddingTop: "10px"
-                    }}
                     component={Link}
                     to="/login"
                     label="Masuk"
