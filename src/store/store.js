@@ -262,7 +262,7 @@ const initialState = {
   //history data
   historyID: "",
   // recipe in page activity
-  history: [],
+  history: null,
 
   myBrew: null,
 

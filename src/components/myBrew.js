@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Pagination from "react-bootstrap/Pagination";
 
 // import store
 import { connect } from "unistore/react";
@@ -35,13 +36,15 @@ class MyBrew extends React.Component {
   render() {
     if (this.props.myBrew === null) {
       return <img src={loading} alt="loading..." />;
+    } else if (this.props.myBrew.data.length === 0) {
+      return <h4>Anda belum membuat Resep</h4>;
     } else {
       return (
         <div>
           <Link to="/recipes/create">
             <button className="btn btn-primary">Tambah Guide</button>
           </Link>
-          {this.props.myBrew.map((value, key) => (
+          {this.props.myBrew.data.map((value, key) => (
             <div className="col-12">
               <Link to={`/recipe/${value.id}`}>
                 <RecipeCard
@@ -54,6 +57,18 @@ class MyBrew extends React.Component {
               </Link>
             </div>
           ))}
+          <Pagination size="lg">
+            {this.props.myBrew.pageNow === 1 ? (
+              <span></span>
+            ) : (
+              <Pagination.First onClick={this.handlePreviousPageButton} />
+            )}
+            {this.props.myBrew.pageNow === this.props.myBrew.pageTotal ? (
+              <span></span>
+            ) : (
+              <Pagination.Last onClick={this.handleNextPageButton} />
+            )}
+          </Pagination>
         </div>
       );
     }
