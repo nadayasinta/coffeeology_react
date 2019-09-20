@@ -38,10 +38,6 @@ class CreateRecipe extends React.Component {
   }
 
   componentDidMount = async () => {
-    if (
-      sessionStorage.getItem("Recipe") !== null &&
-      sessionStorage.getItem("RecipeDetail") !== null
-    ) {
       await this.setState({
         recipeDataTeporary: {
           ...JSON.parse(sessionStorage.getItem("Recipe")),
@@ -71,40 +67,7 @@ class CreateRecipe extends React.Component {
         globalTaste: this.state.recipeDataTeporary.globalTaste,
         body: this.state.recipeDataTeporary.body
       });
-    } else {
-      await this.props.getRecipeByID(this.props.match.params.recipeID);
-      await this.setState({
-        recipeDataTeporary: {
-          ...this.props.recipe,
-          ...this.props.recipeDetails
-        }
-      });
-      console.log("data else", this.state.recipeDataTeporary);
-      await this.setState({
-        name: this.state.recipeDataTeporary.name,
-        methodID: this.state.recipeDataTeporary.methodID,
-        difficulty: this.state.recipeDataTeporary.difficulty,
-        coffeeWeight: this.state.recipeDataTeporary.coffeeWeight,
-        water: this.state.recipeDataTeporary.water,
-        grindSize: this.state.recipeDataTeporary.grindSize,
-        waterTemp: this.state.recipeDataTeporary.waterTemp,
-        beanName: this.state.recipeDataTeporary.beanName,
-        originID: this.state.recipeDataTeporary.originID,
-        beanProcess: this.state.recipeDataTeporary.beanProcess,
-        beanRoasting: this.state.recipeDataTeporary.beanRoasting,
-        fragrance: this.state.recipeDataTeporary.fragrance,
-        aroma: this.state.recipeDataTeporary.aroma,
-        cleanliness: this.state.recipeDataTeporary.cleanliness,
-        sweetness: this.state.recipeDataTeporary.sweetness,
-        taste: this.state.recipeDataTeporary.taste,
-        acidity: this.state.recipeDataTeporary.acidity,
-        aftertaste: this.state.recipeDataTeporary.aftertaste,
-        balance: this.state.recipeDataTeporary.balance,
-        globalTaste: this.state.recipeDataTeporary.globalTaste,
-        body: this.state.recipeDataTeporary.body
-      });
-      console.log("data name setelah data else", this.state.name);
-    }
+    
   };
 
   handleChangeRecipe = event => {

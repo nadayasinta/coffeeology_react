@@ -144,11 +144,11 @@ const actionsRecipes = store => ({
       store.setState({ recipesSearch: response.data });
     });
   },
-  async putRecipe(state, data) {
+  async putRecipe(state, data, id) {
     console.log("test");
     let config = {
-      method: "post",
-      url: store.getState().baseURL + "/recipes",
+      method: "put",
+      url: store.getState().baseURL + `/recipes/${id}`,
       data: data,
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token")

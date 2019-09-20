@@ -138,6 +138,15 @@ class RecipeSelection extends React.Component {
     await this.setState({ showDelete: false });
   };
 
+  handleEditRecipe = async (e, id) =>{
+    e.preventDefault();
+    await sessionStorage.setItem("Recipe", JSON.stringify(this.props.recipe))
+    await sessionStorage.setItem("RecipeDetail", JSON.stringify(this.props.recipeDetails))
+    await sessionStorage.setItem("note", this.props.recipeDetails.note)
+    await sessionStorage.setItem("stepTemporary", JSON.stringify(this.props.recipeSteps))
+    this.props.history.push(`/recipe/edit/${id}`);
+  }
+
   render() {
     if (this.props.recipe === null) {
       return <img src={loading} alt="loading..." />;
@@ -175,12 +184,7 @@ class RecipeSelection extends React.Component {
           {this.state.userID === this.props.recipe.userID ? (
             <div align="right">
               <button
-                onClick={e => {
-                  e.preventDefault();
-                  this.props.history.push(
-                    `/recipe/edit/${this.props.match.params.recipeID}`
-                  );
-                }}
+                onClick={e =>this.handleEditRecipe(e, this.props.match.params.recipeID)}
                 type="button"
                 className="btn btn-secondary btn-sm mr-2"
               >

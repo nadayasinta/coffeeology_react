@@ -68,7 +68,7 @@ const useStylesFab = makeStyles(theme => ({
   }
 }));
 
-export default function FullWidthTabs() {
+export default function FullWidthTabs(props) {
   const classes = useStyles();
   const classesFab = useStylesFab();
   const theme = useTheme();
@@ -80,6 +80,14 @@ export default function FullWidthTabs() {
 
   function handleChangeIndex(index) {
     setValue(index);
+  }
+
+  function handleCreateRecipe(){
+    sessionStorage.removeItem("stepTemporary")
+    sessionStorage.removeItem("RecipeDetail")
+    sessionStorage.removeItem("Recipe")
+    sessionStorage.removeItem("note")
+    props.history.push("/recipes/create")
   }
 
   return (
@@ -112,7 +120,7 @@ export default function FullWidthTabs() {
                 onChangeIndex={handleChangeIndex}
               >
                 <TabPanel value={value} index={0} dir={theme.direction}>
-                  <MyBrew />
+                  <MyBrew createRecipe={handleCreateRecipe} />
                 </TabPanel>
                 <TabPanel value={value} index={1} dir={theme.direction}>
                   <History />
