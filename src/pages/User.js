@@ -9,14 +9,12 @@ import profileIcon from "../assets/images/profile.png";
 import editProfile from "../assets/images/edit-profile.png";
 import loading from "../assets/images/loading.gif";
 
-
 // import store
 import { connect } from "unistore/react";
 import actionsProfile from "../store/actionsProfile";
 import useStyles from "../store/style";
 
 class Profile extends React.Component {
-
   componentDidMount = async () => {
     if (sessionStorage.getItem("token") !== null) {
       await this.props.getProfile();
@@ -28,13 +26,13 @@ class Profile extends React.Component {
       }
     }
     this.props.getProfileByID(this.props.match.params.userID);
-    this.props.getUserBrew(this.props.match.params.userID)
+    this.props.getUserBrew(this.props.match.params.userID);
   };
 
-  componentWillUnmount = () =>{
-    this.props.resetDataUser()
-    this.props.resetDataUserBrew()
-  }
+  componentWillUnmount = () => {
+    this.props.resetDataUser();
+    this.props.resetDataUserBrew();
+  };
 
   convertSeconds(secondsInput) {
     let minutes = Math.floor(parseInt(secondsInput) / 60);
@@ -63,51 +61,43 @@ class Profile extends React.Component {
                 width="100px"
               />
             </div>
-            <h3>
-              {this.props.user.name}
-            </h3>
+            <h3>{this.props.user.name}</h3>
             <hr></hr>
             <span className="text-justify">{this.props.user.bio}</span>
           </div>
-          <div
-            className="col-md-6 col-xs-6 border"
-            align="center"
-          >
+          <div className="col-md-6 col-xs-6 border" align="center">
             <h5>
               {this.props.user.brewCount} <br /> <span>Brew</span>
             </h5>
           </div>
-          <div
-            className="col-md-6 col-xs-6 border"
-            align="center"
-          >
+          <div className="col-md-6 col-xs-6 border" align="center">
             <h5>
               {this.props.user.recipeCount} <br /> <span>Resep</span>
             </h5>
           </div>
 
           <div className="col-12 col-md-12 col-xs-12 mt-2">
-          <h3>Daftar Resep</h3>
-          <hr></hr>
-          { this.props.userBrew.length === 0 ? 
-          <div>
-            <h6>Tidak ada resep yang ditampilkan</h6> 
-          </div>
-          :
-            this.props.userBrew.map((value, key) => (
-          <div className="col-12">
-            <Link to={`/recipe/${value.id}`}>
-              <RecipeCard
-                className="w-100"
-                pageType="pageUserBrew"
-                methodIcon={this.props.methods[value.methodID - 1].icon}
-                data={value}
-                time={this.convertSeconds(value.time)}
-              />
-            </Link>
-          </div>
-        ))}
-
+            <h3>Daftar Resep</h3>
+            <hr></hr>
+            {this.props.userBrew.length === 0 ? (
+              <div>
+                <h6>Tidak ada resep yang ditampilkan</h6>
+              </div>
+            ) : (
+              this.props.userBrew.map((value, key) => (
+                <div className="col-12">
+                  <Link to={`/recipe/${value.id}`}>
+                    <RecipeCard
+                      className="w-100"
+                      pageType="pageUserBrew"
+                      methodIcon={this.props.methods[value.methodID - 1].icon}
+                      data={value}
+                      time={this.convertSeconds(value.time)}
+                    />
+                  </Link>
+                </div>
+              ))
+            )}
           </div>
         </div>
       </div>
