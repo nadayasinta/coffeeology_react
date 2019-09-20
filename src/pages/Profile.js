@@ -13,6 +13,7 @@ import ButtonUI from "@material-ui/core/Button";
 // import image
 import profileIcon from "../assets/images/profile.png";
 import editProfile from "../assets/images/edit-profile.png";
+import loading from "../assets/images/loading.gif";
 
 // import store
 import { connect } from "unistore/react";
@@ -44,6 +45,10 @@ class Profile extends React.Component {
       this.props.getProfile();
     }
   };
+
+  componentWillUnmount = () => {
+    this.props.setDataUserMe(null)
+  }
 
   // handle show hide modal
   handleChangeView = async (e, state, value) => {
@@ -112,31 +117,45 @@ class Profile extends React.Component {
   render() {
     if (sessionStorage.getItem("token") === null) {
       return <Redirect to={{ pathname: "/login" }} />;
-    } else {
+    } 
+    // Ade - menghandle page loading dan jika data tidak ada
+    else if (this.props.userMe === null) {
+      return <img src={loading} alt="loading..." />;
+    } else if (this.props.userMe === false){
       return (
-        <div className="container border">
-          <div className="row login_box">
-            <div className="col-md-12 col-xs-12 mb-2" align="center">
-              <div className="mt-2">
+        <div>
+          <h3>Data User Tidak Ada, Silahkan Logout Dan Login Kembali</h3>
+          <button
+                  onClick={e => this.handleLogot(e)}
+                  type="button"
+                  className="btn btn-primary mb-3"
+                >
+                  Keluar
+                </button>
+        </div>
+      )
+    } 
+    // Ade - End
+    else {
+      return (
+        <div className="container">
+          <h4 className="font-weight-bold">PROFILE</h4>
+          <div className="row border login_box">
+
+            <div className="col-12 py-3" align="center">
                 <img
                   src={profileIcon}
                   style={{ borderRadius: "50%", backgroundColor: "#000000" }}
                   width="100px"
-                />
-              </div>
-              <h3>
+                /> <br />
+                
+              <h4 className="pt-1">
                 {this.props.userMe.name}
-                <span
-                  className="btn btn-orange"
-                  onClick={e => {
+                  <img onClick={e => {
                     e.preventDefault();
                     this.setState({ editProfileView: true });
-                  }}
-                >
-                  <img src={editProfile} alt="altTag" width="20px"></img>
-                </span>
-              </h3>
-              <hr></hr>
+                  }} src={editProfile} alt="altTag" width="20px" className="ml-2"></img>
+              </h4>
               <span className="text-justify">{this.props.userMe.bio}</span>
             </div>
             <div
@@ -208,6 +227,7 @@ class Profile extends React.Component {
                   <Form.Control
                     as="textarea"
                     placeholder={this.props.userMe.bio}
+                    defaultValue={this.props.userMe.bio}
                     ref={this.bio}
                     rows="3"
                     maxLength="250"

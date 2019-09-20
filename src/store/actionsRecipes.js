@@ -68,6 +68,12 @@ const actionsRecipes = store => ({
   setRecipesSearch(state, value) {
     return { recipesSearch: value };
   },
+  setDeleteRecipeStatus(state, value) {
+    return { deleteRecipeStatus: value };
+  },
+  setDataUserMe(state, value){
+    return { userMe : value }
+  },
   // axios
 
   async postRecipe(state, data) {
@@ -194,16 +200,20 @@ const actionsRecipes = store => ({
 
     await axios(config)
       .then(response => {
-        console.log("response.data.data", response.data.data);
+        console.log("data get recipe by id", response.data.data);
         store.setState({
           recipeDetails: response.data.data.recipeDetails
         });
+        console.log(response)
         console.log(response.data.data.recipeDetails);
         store.setState({ recipeSteps: response.data.data.recipeSteps });
         store.setState({ recipe: response.data.data.recipe });
         store.setState({ recipeCreator: response.data.data.user });
       })
-      .catch(error => console.log("Error getRecipeById", error));
+      .catch(error => {
+        store.setState({ recipe: false });
+        console.log("Error getRecipeById", error)
+      });
   },
   async getReview(state, paramsInput) {
     console.log(paramsInput);
@@ -229,8 +239,30 @@ const actionsRecipes = store => ({
     };
     await axios(config)
       .then(response => {
-        console.log("data users ", response.data.data);
+        console.log("data get profile ", response.data.data);
         store.setState({ userMe: response.data.data });
+      })
+      .catch(error => {
+        store.setState({ userMe: false });        
+        console.log(error.response);
+      });
+  },
+  async deleteRecipe(state, id) {
+    console.log("test get profile");
+    let config = {
+      method: "delete",
+      url: store.getState().baseURL + `/recipes/${id}`,
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token")
+      }
+    };
+    await axios(config)
+      .then(response => {
+        store.setState({ deleteRecipeStatus: true });
+        Toast.fire({
+          type: "success",
+          title: "Resep Berhasil Dihapus"
+        });
       })
       .catch(error => {
         console.log(error.response);
@@ -239,7 +271,8 @@ const actionsRecipes = store => ({
           title: `${error.response.data.message}`
         });
       });
-  }
+  },
+
 });
 
 export default actionsRecipes;

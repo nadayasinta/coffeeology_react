@@ -13,6 +13,26 @@ const actionsProfile = store => ({
   setLogin(state) {
     return { login: store.getState().login + 1 };
   },
+  // for page other user
+  setDataUser(state, value){
+    return { user : value }
+  },
+  setDataUserBrew(state, value){
+    return { userBrew : value }
+  },
+    // user me or profile
+  setDataUserMe(state, value){
+    return { userMe : value }
+  },
+  setProfileView(state, value) {
+    return { profileView: value };
+  },
+  resetChangePasswordStatus(state) {
+    return { changePasswordStatus: false };
+  },
+  resetEditProfileStatus(state) {
+    return { editProfileStatus: false };
+  },
 
 
 
@@ -33,10 +53,7 @@ const actionsProfile = store => ({
       })
       .catch(error => {
         console.log(error.response);
-        Toast.fire({
-          type: "error",
-          title: `${error.response.data.message}`
-        });
+        store.setState({ userMe: false });
       });
   },
   async editProfile(state, data) {
@@ -112,15 +129,6 @@ const actionsProfile = store => ({
         });
       });
   },
-  setProfileView(state, value) {
-    return { profileView: value };
-  },
-  resetChangePasswordStatus(state) {
-    return { changePasswordStatus: false };
-  },
-  resetEditProfileStatus(state) {
-    return { editProfileStatus: false };
-  },
 
   // other user
   async getProfileByID(state, data) {
@@ -135,6 +143,7 @@ const actionsProfile = store => ({
         store.setState({ user: response.data.data });
       })
       .catch(error => {
+        store.setState({ user: false });
         console.log(error.response);
       });
   },
@@ -150,13 +159,7 @@ const actionsProfile = store => ({
         store.setState({ userBrew: response.data.recipes });
       })
       .catch(error => console.log("Error getMyBrew", error));
-  },
-  resetDataUser(state){
-    return { user : [] }
-  },
-  resetDataUserBrew(state){
-    return { userBrew : [] }
-  },
+  }
 });
 
 export default actionsProfile;

@@ -22,10 +22,13 @@ class RecipeSelection extends React.Component {
     this.state = {
       showComment: false,
       showReview: false,
+      showDelete: false,
+      showStartDemo: false, // add to start demo
       coffeeweight: 0,
       water: 0,
       ratio: 0,
-      recipeSteps: []
+      recipeSteps: [],
+      userID: 0  // add to show edit and delete button
     };
   }
 
@@ -51,6 +54,7 @@ class RecipeSelection extends React.Component {
 
   componentWillUnmount() {
     this.props.setRecipe(null);
+    this.props.setDataUserMe(null);
   }
 
   async componentDidMount() {
@@ -66,9 +70,10 @@ class RecipeSelection extends React.Component {
     this.props.setResetTimer();
 
     if (sessionStorage.getItem("token") !== null) {
-      this.props.getProfile();
+      await this.props.getProfile();
+      console.log("id user", this.props.userMe.id);
+      await this.setState({userID : this.props.userMe.id})
     }
-    console.log("id user", this.props.userMe.id);
     console.log("id user resep", this.props.recipe.userID);
   }
 
@@ -86,13 +91,18 @@ class RecipeSelection extends React.Component {
 
   handleOnClickButton = async event => {
     event.preventDefault();
-    await this.props.setRecipeSteps(this.state.recipeSteps);
-    sessionStorage.setItem(
-      "recipeSteps",
-      JSON.stringify(this.state.recipeSteps)
-    );
-    sessionStorage.setItem("recipe", JSON.stringify(this.props.recipe));
-    this.props.history.push("/recipe/demo/" + this.props.match.params.recipeID);
+    if (sessionStorage.getItem("token") === null){
+      return this.setState({showStartDemo : true})
+    } else {
+      await this.props.setRecipeSteps(this.state.recipeSteps);
+      sessionStorage.setItem(
+        "recipeSteps",
+        JSON.stringify(this.state.recipeSteps)
+      );
+      sessionStorage.setItem("recipe", JSON.stringify(this.props.recipe));
+      this.props.history.push("/recipe/demo/" + this.props.match.params.recipeID);
+    }
+
   };
 
   handleOnChangeCoffee = event => {
@@ -116,9 +126,37 @@ class RecipeSelection extends React.Component {
     }
   };
 
+  handleDelete = async (e, id) => {
+    e.preventDefault();
+    await this.props.deleteRecipe(id);
+
+    if (this.props.deleteRecipeStatus) {
+      await this.setState({ showDelete: false });
+      this.props.history.push("/activity");
+    }
+
+    await this.setState({ showDelete: false });
+  };
+
   render() {
     if (this.props.recipe === null) {
       return <img src={loading} alt="loading..." />;
+    } else if (
+      sessionStorage.getItem("token") !== null &&
+      this.props.userMe === null
+    ) {
+      return <img src={loading} alt="loading..." />;
+    } else if (this.props.recipe === false) {
+      return (
+        <div>
+          <img
+            className="backbutton"
+            src={this.props.backButton}
+            onClick={event => this.props.history.goBack()}
+          />
+          <h3>Data Resep Tidak Ada</h3>
+        </div>
+      );
     } else {
       const disqusShortname = "coffeology"; //found in your Disqus.com dashboard
       const disqusConfig = {
@@ -134,7 +172,7 @@ class RecipeSelection extends React.Component {
             src={this.props.backButton}
             onClick={event => this.props.history.goBack()}
           />
-          {this.props.userMe.id === this.props.recipe.userID ? (
+          {this.state.userID === this.props.recipe.userID ? (
             <div align="right">
               <button
                 onClick={e => {
@@ -144,19 +182,60 @@ class RecipeSelection extends React.Component {
                   );
                 }}
                 type="button"
-                className="btn btn-secondary btn-sm"
+                className="btn btn-secondary btn-sm mr-2"
               >
                 Edit
+              </button>
+              <button
+                onClick={e => {
+                  e.preventDefault();
+                  this.setState({ showDelete: true });
+                }}
+                type="button"
+                className="btn btn-secondary btn-sm"
+              >
+                Delete
               </button>
             </div>
           ) : (
             <div></div>
           )}
+
           <div className="container">
+
+            {/* to show delete confirmation */}
+            <Modal show={this.state.showDelete}>
+              <Modal.Header>
+                <Modal.Title>Delete Resep</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>Apakah anda yakin menghapus resep ini ?</Modal.Body>
+              <Modal.Footer>
+                <Button
+                  variant="secondary"
+                  onClick={e => {
+                    e.preventDefault();
+                    this.setState({ showDelete: false });
+                  }}
+                >
+                  Batal
+                </Button>
+                <Button
+                  value="Submit"
+                  type="submit"
+                  variant="primary"
+                  onClick={e =>
+                    this.handleDelete(e, this.props.match.params.recipeID)
+                  }
+                >
+                  Hapus
+                </Button>
+              </Modal.Footer>
+            </Modal>
+
             <div className="row justify-content-center">
-              <h2 className="font-weight-bold mb-0">
+              <h4 className="font-weight-bold mb-0">
                 {this.props.recipe.name.toUpperCase()}
-              </h2>
+              </h4>
             </div>
 
             <div className="row justify-content-center">
@@ -167,14 +246,16 @@ class RecipeSelection extends React.Component {
               </h6>
             </div>
 
-            <div className="row mr-0">
-              <div className="col-4 text-right">
+            <div className="row mr-0 py-3">
+              <div className="col-4 text-center">
                 <img
                   className="w-75 bgcolor2"
                   src={this.props.methods[this.props.recipe.methodID - 1].icon}
                 />
+                <br/>
+                <h6>{this.props.methods[this.props.recipe.methodID - 1].name}</h6>
               </div>
-              <div className="col-8 align-self-center ">
+              <div className="col-8 ">
                 <div className="row">
                   <div className="col-4 text-left">Beans</div>
                   <div className="col-1 text-center">:</div>
@@ -195,11 +276,11 @@ class RecipeSelection extends React.Component {
               </div>
             </div>
 
-            <div className="row justify-content-center py-2 my-4 border-top border-bottom  bg-light ">
+            <div className="row justify-content-center py-2 mb-4 border-top border-bottom  bg-light ">
               <div className="col-4  text-center">
                 <div className="row justify-content-center">
                   {" "}
-                  <h5 className="border-bottom">Waktu</h5>
+                  <h6 className="border-bottom font-weight-bold">WAKTU</h6>
                 </div>
                 <div className="row justify-content-center align-items-center ">
                   <img
@@ -213,7 +294,7 @@ class RecipeSelection extends React.Component {
               <div className="col-4 text-center">
                 <div className="row justify-content-center">
                   {" "}
-                  <h5 className="border-bottom">Suhu Air(&deg;C)</h5>
+                  <h6 className="border-bottom font-weight-bold">SUHU AIR</h6>
                 </div>
                 <div className="row justify-content-center align-items-center">
                   <img
@@ -227,7 +308,7 @@ class RecipeSelection extends React.Component {
               <div className="col-4 text-center">
                 <div className="row justify-content-center">
                   {" "}
-                  <h5 className="border-bottom">Grind</h5>
+                  <h6 className="border-bottom font-weight-bold">GRIND</h6>
                 </div>
                 <div className="row justify-content-center align-items-center">
                   <img
@@ -254,7 +335,7 @@ class RecipeSelection extends React.Component {
                   {this.props.recipe.coffeeWeight} gram
                 </div>
               </div>
-              <div className="col-2">
+              <div className="col-2 align-content-center ">
                 <img
                   className="w-100"
                   src={require("../assets/images/RecipeIcon/coffee-grain.png")}
@@ -299,7 +380,7 @@ class RecipeSelection extends React.Component {
                   {Math.floor(this.state.water)}
                 </div>
                 <small id="waterHelp" class="form-text text-muted mt-0">
-                  Jumlah air yang harus digunakan
+                  Air yang harus digunakan
                 </small>
               </div>
             </div>
@@ -419,6 +500,31 @@ class RecipeSelection extends React.Component {
                   Mulai
                 </button>
               </div>
+              {/* if user has not log in */}
+            <Modal show={this.state.showStartDemo}>
+              <Modal.Body>Anda Harus Login Terlebih Dahulu</Modal.Body>
+              <Modal.Footer>
+                <Button
+                  variant="secondary"
+                  onClick={e => {
+                    e.preventDefault();
+                    this.setState({ showStartDemo: false });
+                  }}
+                >
+                  Batal
+                </Button>
+                <Button
+                  value="Submit"
+                  type="submit"
+                  variant="primary"
+                  onClick={e =>
+                    this.props.history.push("/login")
+                  }
+                >
+                  Login
+                </Button>
+              </Modal.Footer>
+            </Modal>
             </div>
           </div>
         </div>
@@ -428,6 +534,6 @@ class RecipeSelection extends React.Component {
 }
 
 export default connect(
-  "recipe, stepTypes, recipeDetails, recipeSteps, waterLimit, backButton, recipeCreator, methods, reviews, userMe, grinds",
+  "recipe, stepTypes, recipeDetails, recipeSteps, waterLimit, backButton, recipeCreator, methods, reviews, userMe, grinds, deleteRecipeStatus",
   actionsRecipes
 )(RecipeSelection);

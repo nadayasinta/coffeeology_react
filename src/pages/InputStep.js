@@ -162,7 +162,7 @@ class InputStep extends React.Component {
                                     type="number"
                                     className="form-control"
                                     id="Jumlah Air"
-                                    placeholder="200 ml"
+                                    placeholder="Masukkan Jumlah air"
                                     ref={this.waterAmount}
                                     min="0"
                                     required
