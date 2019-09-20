@@ -128,9 +128,9 @@ const initialState = {
   login: 0,
 
   // url
-  baseURL: "http://0.0.0.0:5000",
+  // baseURL: "http://0.0.0.0:5000",
 
-  // baseURL: "https://api.coffeology.shop",
+  baseURL: "https://api.coffeology.shop",
 
   //
   statusRegister: null,
@@ -294,7 +294,11 @@ const initialState = {
   //import button image
   homeButton: require("../assets/images/home.png"),
   menuButton: require("../assets/images/menu.png"),
-  backbutton: require("../assets/images/back.png")
+  backbutton: require("../assets/images/back.png"),
+
+  // show when post or put recipe
+  showPostRecipe: false,
+  showPutRecipe: false,
 };
 
 const store = createStore(initialState);

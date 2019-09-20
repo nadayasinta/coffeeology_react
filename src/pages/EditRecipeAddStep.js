@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Modal } from "react-bootstrap";
 
 // import store
 import { connect } from "unistore/react";
@@ -9,6 +10,7 @@ import actionsRecipes from "../store/actionsRecipes";
 import Plus from "../assets/images/plus.png";
 import timer from "../assets/images/RecipeIcon/timer.png";
 import water from "../assets/images/RecipeIcon/water.png"
+import loading from "../assets/images/loading.gif";
 
 class AddStep extends React.Component {
   constructor(props) {
@@ -87,24 +89,27 @@ class AddStep extends React.Component {
           parseInt(totalWaterStep)} ml`
       });
     }
+    this.props.setShowPutRecipe(true)
 
-    let time = 0;
-    steps.map((step, index) => (time = time + step.time));
-    recipes["time"] = time;
-
-    let data = {
-      recipes: recipes,
-      recipeDetails: recipeDetails,
-      steps: steps
-    };
-
-    await this.props.putRecipe(data, this.props.match.params.recipeID);
-
-    if (sessionStorage.getItem("Recipe") === null) {
-      this.props.history.push(`/recipe/${this.props.match.params.recipeID}`);
-    } else {
-      return console.log("ulangi");
-    }
+    setTimeout(async () => {
+      let time = 0;
+      steps.map((step, index) => (time = time + step.time));
+      recipes["time"] = time;
+  
+      let data = {
+        recipes: recipes,
+        recipeDetails: recipeDetails,
+        steps: steps
+      };
+  
+      await this.props.putRecipe(data, this.props.match.params.recipeID);
+  
+      if (sessionStorage.getItem("Recipe") === null) {
+        this.props.history.push(`/recipe/${this.props.match.params.recipeID}`);
+      } else {
+        return console.log("ulangi");
+      }
+    }, 500);
   };
 
   render() {
@@ -215,6 +220,16 @@ class AddStep extends React.Component {
                   Simpan
                 </button>
               </form>
+                      {/* page loading when pust new recipe */}
+        <Modal show={this.props.showPutRecipe}>
+          <div className="container-fluid">
+            <div className="row justify-content-center" style={{margin: "0 auto"}} >
+              <Modal.Header>
+                <img src={loading} alt="altTag" width="300px" ></img>
+              </Modal.Header>
+            </div>
+          </div>
+        </Modal>
             </div>
           </div>
         </div>
@@ -224,6 +239,6 @@ class AddStep extends React.Component {
 }
 
 export default connect(
-  "Toast, stepTypes, stepTemporary, methods, grinds, flavors, origins, recipeDetails, backButton, recipe, recipeSteps, waterLimit, recipeCreator, reviews, userMe",
+  "Toast, stepTypes, stepTemporary, methods, grinds, flavors, origins, recipeDetails, backButton, recipe, recipeSteps, waterLimit, recipeCreator, reviews, userMe, showPutRecipe",
   actionsRecipes
 )(AddStep);
