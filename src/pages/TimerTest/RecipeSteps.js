@@ -8,9 +8,21 @@ function RecipeSteps(props) {
   //   console.log(props.recipeSteps);
   return (
     <div className="col-12">
-      {props.recipeSteps.slice(props.startIndex).map((recipeStep, index) => {
+      <div className="container-fluid recipeStepNow">
+        <div className="row">
+          <div className="col-12">
+            <h5 className="mb-0">
+              {props.stepTypes[props.stepNow.stepTypeID].name.toUpperCase()}
+            </h5>
+            <div className="col-12">
+              <h6 className="text-secondary">{props.stepNow.note}</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+      {props.recipeSteps.slice(props.Index + 1).map((recipeStep, index) => {
         return (
-          <div>
+          <div key={index}>
             <CSSTransitionGroup
               transitionName="example"
               transitionEnterTimeout={500}
@@ -27,6 +39,6 @@ function RecipeSteps(props) {
   );
 }
 export default connect(
-  "recipeSteps",
+  "stepTypes, recipeSteps",
   actionsDemo
 )(RecipeSteps);

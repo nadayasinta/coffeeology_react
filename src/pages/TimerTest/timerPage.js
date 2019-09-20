@@ -64,11 +64,14 @@ function Counter(props) {
     setIsRunning(!isRunning);
   }
 
-  function handleSkipButton(e) {
+  async function handleSkipButton(e) {
     setIsRunning(false);
     if (timer.recipeSteps[timer.stepIndex + 1] === undefined) {
-      props.history.push("/recipe/review/" + props.match.params.recipeID);
+      console.log("hehe", props.match.params.recipeID);
+      await props.postHistory({ recipeID: props.match.params.recipeID });
+      await props.history.push("/recipe/review/" + props.match.params.recipeID);
     } else if (timer.stepIndex === 0) {
+      console.log("hehe1");
       setTimer({
         ...timer,
         timeNow: timer.recipeSteps[timer.stepIndex + 1].time * 10,
@@ -78,6 +81,8 @@ function Counter(props) {
         stepIndex: timer.stepIndex + 1
       });
     } else {
+      console.log("hehe2");
+
       setTimer({
         ...timer,
         timeNow: timer.recipeSteps[timer.stepIndex + 1].time * 10,
@@ -99,20 +104,20 @@ function Counter(props) {
   }
 
   return (
-    <div className="container demopage">
+    <div className="container-fluid demopage">
       <div className="row  timersection">
-        <div className="col-12">
+        <div className="col-12 timer">
           <Timer timerNow={timer.timeNow} />
         </div>
 
-        <div className="col-4 align-items-center">
+        <div className="col-6 align-self-center pl-5">
           <Water
             waterTotal={timer.waterTotal}
             stepNow={timer.stepNow}
             waterNow={timer.waterNow}
           />
         </div>
-        <div className="col-8">
+        <div className="col-6 align-self-center  pr-5">
           <TimerButton isRunning={isRunning} onClick={handleIsRunningChange} />
           <Fab
             color="primary"
@@ -124,18 +129,14 @@ function Counter(props) {
           </Fab>
         </div>
         <div className="col-12">
-          <WaterBar
-            waterTotal={timer.waterTotal}
-            stepNow={timer.stepNow}
-            waterNow={timer.waterNow}
-          />
+          <WaterBar waterTotal={timer.waterTotal} />
         </div>
       </div>
       <div className="row">
-        <RecipeStepNow index={timer.stepIndex} />
+        {/* <RecipeStepNow index={timer.stepIndex} /> */}
       </div>
       <div className="row">
-        <RecipeSteps startIndex={timer.stepIndex + 1} />
+        <RecipeSteps Index={timer.stepIndex} stepNow={timer.stepNow} />
       </div>
     </div>
   );

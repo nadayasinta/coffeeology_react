@@ -33,6 +33,7 @@ class MyBrew extends React.Component {
     this.props.setMyBrew(null);
   };
 
+
   render() {
     if (this.props.myBrew === null) {
       return <img src={loading} alt="loading..." />;
@@ -75,6 +76,7 @@ class MyBrew extends React.Component {
           </Pagination>
         </div>
       );
+
     }
   }
 }

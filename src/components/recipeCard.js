@@ -95,7 +95,7 @@ function recipeCard(props) {
                                 )}
                             </div>
                             <div className="col-2 align-self-center text-left pl-1 pt-1">
-                                [{props.data.rating}]
+                                [{String(props.data.rating).slice(0, 3)}]
                             </div>
                         </div>
                     </div>

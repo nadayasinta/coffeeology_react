@@ -453,7 +453,7 @@ class RecipeSelection extends React.Component {
                     bsStyle="primary"
                     onClick={this.handleShowReview}
                   >
-                    {this.props.reviews.length} &nbsp; Review
+                    {this.props.recipe.reviewCount} &nbsp; Review
                   </Button>
 
                   <Modal
