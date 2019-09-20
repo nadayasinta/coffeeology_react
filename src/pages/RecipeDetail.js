@@ -233,9 +233,9 @@ class RecipeSelection extends React.Component {
             </Modal>
 
             <div className="row justify-content-center">
-              <h2 className="font-weight-bold mb-0">
+              <h4 className="font-weight-bold mb-0">
                 {this.props.recipe.name.toUpperCase()}
-              </h2>
+              </h4>
             </div>
 
             <div className="row justify-content-center">
@@ -246,14 +246,16 @@ class RecipeSelection extends React.Component {
               </h6>
             </div>
 
-            <div className="row mr-0">
-              <div className="col-4 text-right">
+            <div className="row mr-0 py-3">
+              <div className="col-4 text-center">
                 <img
                   className="w-75 bgcolor2"
                   src={this.props.methods[this.props.recipe.methodID - 1].icon}
                 />
+                <br/>
+                <h6>{this.props.methods[this.props.recipe.methodID - 1].name}</h6>
               </div>
-              <div className="col-8 align-self-center ">
+              <div className="col-8 ">
                 <div className="row">
                   <div className="col-4 text-left">Beans</div>
                   <div className="col-1 text-center">:</div>
@@ -274,11 +276,11 @@ class RecipeSelection extends React.Component {
               </div>
             </div>
 
-            <div className="row justify-content-center py-2 my-4 border-top border-bottom  bg-light ">
+            <div className="row justify-content-center py-2 mb-4 border-top border-bottom  bg-light ">
               <div className="col-4  text-center">
                 <div className="row justify-content-center">
                   {" "}
-                  <h5 className="border-bottom">Waktu</h5>
+                  <h6 className="border-bottom font-weight-bold">WAKTU</h6>
                 </div>
                 <div className="row justify-content-center align-items-center ">
                   <img
@@ -292,7 +294,7 @@ class RecipeSelection extends React.Component {
               <div className="col-4 text-center">
                 <div className="row justify-content-center">
                   {" "}
-                  <h5 className="border-bottom">Suhu Air(&deg;C)</h5>
+                  <h6 className="border-bottom font-weight-bold">SUHU AIR</h6>
                 </div>
                 <div className="row justify-content-center align-items-center">
                   <img
@@ -306,7 +308,7 @@ class RecipeSelection extends React.Component {
               <div className="col-4 text-center">
                 <div className="row justify-content-center">
                   {" "}
-                  <h5 className="border-bottom">Grind</h5>
+                  <h6 className="border-bottom font-weight-bold">GRIND</h6>
                 </div>
                 <div className="row justify-content-center align-items-center">
                   <img
@@ -333,7 +335,7 @@ class RecipeSelection extends React.Component {
                   {this.props.recipe.coffeeWeight} gram
                 </div>
               </div>
-              <div className="col-2">
+              <div className="col-2 align-content-center ">
                 <img
                   className="w-100"
                   src={require("../assets/images/RecipeIcon/coffee-grain.png")}
@@ -378,7 +380,7 @@ class RecipeSelection extends React.Component {
                   {Math.floor(this.state.water)}
                 </div>
                 <small id="waterHelp" class="form-text text-muted mt-0">
-                  Jumlah air yang harus digunakan
+                  Air yang harus digunakan
                 </small>
               </div>
             </div>
