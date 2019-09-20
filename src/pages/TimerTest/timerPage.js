@@ -109,14 +109,14 @@ function Counter(props) {
                     <Timer timerNow={timer.timeNow} />
                 </div>
 
-                <div className="col-4 align-items-center">
+                <div className="col-6 align-self-center pl-5">
                     <Water
                         waterTotal={timer.waterTotal}
                         stepNow={timer.stepNow}
                         waterNow={timer.waterNow}
                     />
                 </div>
-                <div className="col-8">
+                <div className="col-6 align-self-center  pr-5">
                     <TimerButton
                         isRunning={isRunning}
                         onClick={handleIsRunningChange}

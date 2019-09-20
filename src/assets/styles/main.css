@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,900|Nunito:300,400,400i,600,700,800,900|Oswald:300,400,500,600,700|Roboto:300,400,400i,500,700,900&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Be+Vietnam:700,800&display=swap");
-.text-justify {
+@text-justify {
   text-align: justify;
   text-justify: inter-word;
 }
@@ -192,23 +192,21 @@
   display: inline-block;
 }
 .demopage {
-  margin-right: -15px !important;
+  margin-right: -30px !important;
   margin-left: -15px !important;
   margin-top: -25px;
   background-color: #3b383e;
 }
-.demopage .timersection {
-  background-color: #3b383e;
-}
 .demopage .timerminute {
-  font-size: 70px;
-  font-weight: bold;
-  font-family: "Oswald", sans-serif;
+  font-size: 90px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
   color: white;
 }
 .demopage .timersecond {
   font-size: 50px;
-  font-weight: bold;
-  font-family: "Oswald", sans-serif;
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
   color: white;
+  padding: 0 0 15px 0;
 }
