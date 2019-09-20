@@ -133,10 +133,14 @@ const actionsRecipes = store => ({
       params: paramsInput
     };
 
-    await axios(config).then(response => {
-      console.log(response);
-      store.setState({ recipesSearch: response.data });
-    });
+    await axios(config)
+      .then(response => {
+        console.log(response);
+        store.setState({ recipesSearch: response.data });
+      })
+      .catch(error => {
+        console.log(error);
+      });
   },
   async putRecipe(state, data) {
     console.log("test");

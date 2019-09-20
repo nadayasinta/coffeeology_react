@@ -127,7 +127,7 @@ export default function FullWidthTabs() {
           <AddIcon />
         </Fab>
       ) : (
-        0
+        <span></span>
       )}
     </div>
   );

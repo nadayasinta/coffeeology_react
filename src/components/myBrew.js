@@ -13,6 +13,14 @@ import RecipeCard from "./recipeCard";
 import loading from "../assets/images/loading.gif";
 
 class MyBrew extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      pagination: 1
+    };
+  }
+
   convertSeconds(secondsInput) {
     let minutes = Math.floor(parseInt(secondsInput) / 60);
     let seconds = parseInt(secondsInput) - minutes * 60;
@@ -26,11 +34,25 @@ class MyBrew extends React.Component {
   }
 
   componentDidMount = async () => {
-    this.props.getMyBrew();
+    this.props.getMyBrew({ p: this.state.pagination });
   };
 
   componentWillUnmount = () => {
     this.props.setMyBrew(null);
+  };
+
+  handlePreviousPageButton = event => {
+    event.preventDefault();
+    this.setState({ pagination: this.state.pagination - 1 }, () => {
+      this.props.getMyBrew({ p: this.state.pagination });
+    });
+  };
+
+  handleNextPageButton = event => {
+    event.preventDefault();
+    this.setState({ pagination: this.state.pagination + 1 }, () => {
+      this.props.getMyBrew({ p: this.state.pagination });
+    });
   };
 
   render() {
