@@ -178,7 +178,7 @@ class RecipeSelection extends React.Component {
                 onClick={e => {
                   e.preventDefault();
                   this.props.history.push(
-                    `/recipe/edit/${this.props.recipe.userID}`
+                    `/recipe/edit/${this.props.match.params.recipeID}`
                   );
                 }}
                 type="button"
