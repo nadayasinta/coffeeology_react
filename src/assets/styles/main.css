@@ -7,7 +7,7 @@
   background-color: #3b383e;
 }
 .bgcolor2 {
-  border-color: #53686b;
+  border-color: #53686B;
   border-style: solid;
   border-radius: 50%;
   padding: 10px;
@@ -38,7 +38,7 @@
 }
 .header {
   height: 75px;
-  background-color: #53686b;
+  background-color: #53686B;
   padding-top: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid #919ea0;
@@ -133,8 +133,8 @@
   opacity: 1;
 }
 .text {
-  background-color: #53686b;
-  color: #ffded5;
+  background-color: #53686B;
+  color: #FFDED5;
   font-size: 16px;
   padding: 16px 32px;
 }
@@ -177,7 +177,7 @@
 }
 .filterHeader {
   width: 100%;
-  background-color: #53686b;
+  background-color: #53686B;
   height: 20px;
 }
 .MuiPaper-root {
@@ -196,7 +196,7 @@
 }
 .pagination-lg .page-link {
   padding: 0 17px !important;
-  color: #6c757d;
+  color: #6C757D;
   font-size: 35px !important;
 }
 .demopage {
