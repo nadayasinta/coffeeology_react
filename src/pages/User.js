@@ -32,8 +32,8 @@ class Profile extends React.Component {
   };
 
   componentWillUnmount = () =>{
-    this.props.resetDataUser()
-    this.props.resetDataUserBrew()
+    this.props.setDataUser(null)
+    this.props.setDataUserBrew(null)
   }
 
   convertSeconds(secondsInput) {
@@ -49,8 +49,14 @@ class Profile extends React.Component {
   }
 
   render() {
-    if (this.props.user.length === 0) {
+    if (this.props.user === null || this.props.userBrew === null) {
       return <img src={loading} alt="loading..." />;
+    } else if (this.props.user === false){
+      return (
+        <div>
+          <h3>Data User Tidak Ada</h3>
+        </div>
+      )
     }
     return (
       <div className="container-fluid border">
