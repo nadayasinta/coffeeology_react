@@ -71,7 +71,7 @@ function Counter(props) {
     async function handleSkipButton(e) {
         setIsRunning(false);
         if (timer.recipeSteps[timer.stepIndex + 1] === undefined) {
-            await console.log("hehe", props.match.params.recipeID);
+            console.log("hehe", props.match.params.recipeID);
             await props.postHistory({ recipeID: props.match.params.recipeID });
             await props.history.push(
                 "/recipe/review/" + props.match.params.recipeID
@@ -137,19 +137,15 @@ function Counter(props) {
                         <SkipNextIcon />
                     </Fab>
                 </div>
-                <div className="col-12 py-3">
-                    <WaterBar
-                        waterTotal={timer.waterTotal}
-                        stepNow={timer.stepNow}
-                        waterNow={timer.waterNow}
-                    />
+                <div className="col-12">
+                    <WaterBar waterTotal={timer.waterTotal} />
                 </div>
             </div>
             <div className="row">
-                <RecipeStepNow index={timer.stepIndex} />
+                {/* <RecipeStepNow index={timer.stepIndex} /> */}
             </div>
             <div className="row">
-                <RecipeSteps startIndex={timer.stepIndex + 1} />
+                <RecipeSteps Index={timer.stepIndex} stepNow={timer.stepNow} />
             </div>
         </div>
     );

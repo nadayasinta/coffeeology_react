@@ -9,7 +9,7 @@ function WaterBar(props) {
             animated
             variant="warning"
             now={props.waterTotal}
-            max={recipeWater.water}
+            max={recipeWater}
         />
     );
 }
