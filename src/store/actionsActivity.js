@@ -4,6 +4,9 @@ import axios from "axios";
 // import { getThemeProps } from "@material-ui/styles";
 
 const actionsActivity = store => ({
+  setMyBrew(state, value) {
+    return { MyBrew: value };
+  },
   async getHistory(state) {
     console.log("test get history");
     let config = {
@@ -15,8 +18,8 @@ const actionsActivity = store => ({
     };
     await axios(config)
       .then(response => {
-        console.log("data history ", response.data.data)
-        console.log("type data history ", typeof(response.data.data))
+        console.log("data history ", response.data.data);
+        console.log("type data history ", typeof response.data.data);
         store.setState({ history: response.data.data });
       })
       .catch(error => console.log("Error getHistory", error));
@@ -32,12 +35,12 @@ const actionsActivity = store => ({
     };
     await axios(config)
       .then(response => {
-        console.log("data myBrew ", response.data.data)
-        console.log("type data myBrew ", typeof(response.data.data))
+        console.log("data myBrew ", response.data.data);
+        console.log("type data myBrew ", typeof response.data.data);
         store.setState({ myBrew: response.data.data });
       })
       .catch(error => console.log("Error getMyBrew", error));
-  },
+  }
 });
 
 export default actionsActivity;

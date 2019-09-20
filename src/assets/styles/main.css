@@ -7,7 +7,7 @@
   background-color: #3b383e;
 }
 .bgcolor2 {
-  border-color: #53686B;
+  border-color: #53686b;
   border-style: solid;
   border-radius: 50%;
   padding: 10px;
@@ -38,7 +38,7 @@
 }
 .header {
   height: 75px;
-  background-color: #53686B;
+  background-color: #53686b;
   padding-top: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid #919ea0;
@@ -133,8 +133,8 @@
   opacity: 1;
 }
 .text {
-  background-color: #53686B;
-  color: #FFDED5;
+  background-color: #53686b;
+  color: #ffded5;
   font-size: 16px;
   padding: 16px 32px;
 }
@@ -158,7 +158,6 @@
   border-radius: 50%;
 }
 .errorpage {
-  background-color: #e5e5e5;
   height: 100%;
   margin: -15px;
   margin-top: -25px;
@@ -178,7 +177,7 @@
 }
 .filterHeader {
   width: 100%;
-  background-color: #53686B;
+  background-color: #53686b;
   height: 20px;
 }
 .MuiPaper-root {
@@ -197,6 +196,27 @@
 }
 .pagination-lg .page-link {
   padding: 0 17px !important;
-  color: #6C757D;
+  color: #6c757d;
   font-size: 35px !important;
+}
+.demopage {
+  margin-right: -15px !important;
+  margin-left: -15px !important;
+  margin-top: -25px;
+  background-color: #3b383e;
+}
+.demopage .timersection {
+  background-color: #3b383e;
+}
+.demopage .timerminute {
+  font-size: 70px;
+  font-weight: bold;
+  font-family: "Oswald", sans-serif;
+  color: white;
+}
+.demopage .timersecond {
+  font-size: 50px;
+  font-weight: bold;
+  font-family: "Oswald", sans-serif;
+  color: white;
 }
