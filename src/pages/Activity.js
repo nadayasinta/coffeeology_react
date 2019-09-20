@@ -68,11 +68,12 @@ const useStylesFab = makeStyles(theme => ({
     }
 }));
 
-export default function FullWidthTabs() {
-    const classes = useStyles();
-    const classesFab = useStylesFab();
-    const theme = useTheme();
-    const [value, setValue] = React.useState(0);
+
+export default function FullWidthTabs(props) {
+  const classes = useStyles();
+  const classesFab = useStylesFab();
+  const theme = useTheme();
+  const [value, setValue] = React.useState(0);
 
     function handleChange(event, newValue) {
         setValue(newValue);
@@ -82,61 +83,54 @@ export default function FullWidthTabs() {
         setValue(index);
     }
 
-    return (
-        <div>
-            {sessionStorage.getItem("token") ? (
-                <div></div>
-            ) : (
-                <Redirect to="/login" />
-            )}
-            <div className="container-fluid activity px-0">
-                <div className="row">
-                    <div className="col-12">
-                        <div className={classes.root}>
-                            <AppBar
-                                className="acitivityBar"
-                                position="static"
-                                color="default"
-                            >
-                                <Tabs
-                                    value={value}
-                                    onChange={handleChange}
-                                    indicatorColor="primary"
-                                    textColor="primary"
-                                    variant="fullWidth"
-                                    aria-label="full width tabs example"
-                                >
-                                    <Tab label="Guide Saya" {...a11yProps(0)} />
-                                    <Tab label="Histori" {...a11yProps(1)} />
-                                </Tabs>
-                            </AppBar>
-                            <SwipeableViews
-                                axis={
-                                    theme.direction === "rtl"
-                                        ? "x-reverse"
-                                        : "x"
-                                }
-                                index={value}
-                                onChangeIndex={handleChangeIndex}
-                            >
-                                <TabPanel
-                                    value={value}
-                                    index={0}
-                                    dir={theme.direction}
-                                >
-                                    <MyBrew />
-                                </TabPanel>
-                                <TabPanel
-                                    value={value}
-                                    index={1}
-                                    dir={theme.direction}
-                                >
-                                    <History />
-                                </TabPanel>
-                            </SwipeableViews>
+  function handleCreateRecipe(){
+    sessionStorage.removeItem("stepTemporary")
+    sessionStorage.removeItem("RecipeDetail")
+    sessionStorage.removeItem("Recipe")
+    sessionStorage.removeItem("note")
+    props.history.push("/recipes/create")
+  }
+
+  return (
+    <div>
+      {sessionStorage.getItem("token") ? <div></div> : <Redirect to="/login" />}
+      <div className="container-fluid activity px-0">
+        <div className="row">
+          <div className="col-12">
+            <div className={classes.root}>
+              <AppBar
+                className="acitivityBar"
+                position="static"
+                color="default"
+              >
+                <Tabs
+                  value={value}
+                  onChange={handleChange}
+                  indicatorColor="primary"
+                  textColor="primary"
+                  variant="fullWidth"
+                  aria-label="full width tabs example"
+                >
+                  <Tab label="Guide Saya" {...a11yProps(0)} />
+                  <Tab label="Histori" {...a11yProps(1)} />
+                </Tabs>
+              </AppBar>
+              <SwipeableViews
+                axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+                index={value}
+                onChangeIndex={handleChangeIndex}
+              >
+                <TabPanel value={value} index={0} dir={theme.direction}>
+                  <MyBrew createRecipe={handleCreateRecipe} />
+                </TabPanel>
+                <TabPanel value={value} index={1} dir={theme.direction}>
+                  <History />
+                </TabPanel>
+              </SwipeableViews>
                         </div>
                     </div>
                 </div>
+
             </div>
             {value === 0 ? (
                 <Link to="/recipes/create">

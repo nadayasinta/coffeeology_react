@@ -74,6 +74,12 @@ const actionsRecipes = store => ({
   setDataUserMe(state, value){
     return { userMe : value }
   },
+  setShowPostRecipe(state, value){
+    return { showPostRecipe : value}
+  },
+  setShowPutRecipe(state, value){
+    return { showPutRecipe : value}
+  },
   // axios
 
   async postRecipe(state, data) {
@@ -93,12 +99,14 @@ const actionsRecipes = store => ({
         sessionStorage.removeItem("RecipeDetail");
         sessionStorage.removeItem("note");
         sessionStorage.removeItem("stepTemporary");
+        store.setState({ showPostRecipe: false });        
       })
       .catch(error => {
         console.log(error.response);
+        store.setState({ showPostRecipe: false });        
         Toast.fire({
           type: "error",
-          title: `${error.response.data.message}. Data Tidak Tersave`
+          title: `${error.response.data.message}`
         });
       });
   },
@@ -144,11 +152,11 @@ const actionsRecipes = store => ({
       store.setState({ recipesSearch: response.data });
     });
   },
-  async putRecipe(state, data) {
+  async putRecipe(state, data, id) {
     console.log("test");
     let config = {
-      method: "post",
-      url: store.getState().baseURL + "/recipes",
+      method: "put",
+      url: store.getState().baseURL + `/recipes/${id}`,
       data: data,
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token")
@@ -161,12 +169,14 @@ const actionsRecipes = store => ({
         sessionStorage.removeItem("RecipeDetail");
         sessionStorage.removeItem("note");
         sessionStorage.removeItem("stepTemporary");
+        store.setState({ showPutRecipe : false })
       })
       .catch(error => {
         console.log(error.response);
+        store.setState({ showPutRecipe : false })
         Toast.fire({
           type: "error",
-          title: `${error.response.data.message}. Data Tidak Tersave`
+          title: `${error.response.data.message}`
         });
       });
   },

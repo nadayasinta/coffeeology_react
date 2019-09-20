@@ -19,215 +19,129 @@ const Toast = Swal.mixin({
 });
 
 const initialState = {
-    // data recipe
-    recipes: [
-        // {
-        //   name: "Ultimate v60",
-        //   methodID: 1,
-        //   originID: 1,
-        //   beanName: "Beans Gayoo Bourbon",
-        //   beanProcess: "Full Wash",
-        //   beanRoasting: "Medium",
-        //   rating: 4.7,
-        //   brewCount: 120,
-        //   favoriteCount: 20,
-        //   time: 100,
-        //   coffeeWeight: 17,
-        //   water: 200,
-        //   icon: require("../assets/images/StepIcon/stir.png")
-        // },
-        // {
-        //   name: "Ultimate v60 2",
-        //   methodID: 1,
-        //   beanName: "Beans Gayoo Bourbon",
-        //   beanProcess: "Full Wash",
-        //   beanRoasting: "Medium",
-        //   brewCount: 12,
-        //   rating: 4.4,
-        //   favoriteCount: 20,
-        //   time: 100,
-        //   coffeeWeight: 17,
-        //   water: 200,
-        //   icon: require("../assets/images/StepIcon/stir.png")
-        // }
-    ],
+  // data recipe
+  recipes: [
+    // {
+    //   name: "Ultimate v60",
+    //   methodID: 1,
+    //   originID: 1,
+    //   beanName: "Beans Gayoo Bourbon",
+    //   beanProcess: "Full Wash",
+    //   beanRoasting: "Medium",
+    //   rating: 4.7,
+    //   brewCount: 120,
+    //   favoriteCount: 20,
+    //   time: 100,
+    //   coffeeWeight: 17,
+    //   water: 200,
+    //   icon: require("../assets/images/StepIcon/stir.png")
+    // },
+    // {
+    //   name: "Ultimate v60 2",
+    //   methodID: 1,
+    //   beanName: "Beans Gayoo Bourbon",
+    //   beanProcess: "Full Wash",
+    //   beanRoasting: "Medium",
+    //   brewCount: 12,
+    //   rating: 4.4,
+    //   favoriteCount: 20,
+    //   time: 100,
+    //   coffeeWeight: 17,
+    //   water: 200,
+    //   icon: require("../assets/images/StepIcon/stir.png")
+    // }
+  ],
 
-    recipesSelection: null,
-    recipesSearch: null,
+  recipesSelection: null,
+  recipesSearch: null,
 
-    recipe: null,
-    // name: "Ultimate v60",
-    // methodID: 1,
-    // beanName: "Beans Gayoo Bourbon",
-    // beanProcess: "Full Wash",
-    // beanRoasting: "Medium",
-    // rating: 45,
-    // favoriteCount: 20,
-    // time: 100,
-    // coffeeWeight: 17,
-    // water: 200,
-    // icon: require("../assets/images/StepIcon/stir.png")
-    recipeDetails: {
-        //   fragrance: 0.4,
-        //   aroma: 0.4,
-        //   cleanliness: 0.4,
-        //   sweetness: 0.3,
-        //   taste: 0.3,
-        //   acidity: 0.5,
-        //   aftertaste: 0.5,
-        //   balance: 0.5,
-        //   globalTaste: 0.5,
-        //   body: 0.5,
-        //   note: "lorem isum",
-        //   grindSize: "medium",
-        //   waterTemp: 92
+  recipe: null,
+  // name: "Ultimate v60",
+  // methodID: 1,
+  // beanName: "Beans Gayoo Bourbon",
+  // beanProcess: "Full Wash",
+  // beanRoasting: "Medium",
+  // rating: 45,
+  // favoriteCount: 20,
+  // time: 100,
+  // coffeeWeight: 17,
+  // water: 200,
+  // icon: require("../assets/images/StepIcon/stir.png")
+  recipeDetails: {
+    //   fragrance: 0.4,
+    //   aroma: 0.4,
+    //   cleanliness: 0.4,
+    //   sweetness: 0.3,
+    //   taste: 0.3,
+    //   acidity: 0.5,
+    //   aftertaste: 0.5,
+    //   balance: 0.5,
+    //   globalTaste: 0.5,
+    //   body: 0.5,
+    //   note: "lorem isum",
+    //   grindSize: "medium",
+    //   waterTemp: 92
+  },
+  recipeSteps: [
+    {
+      recipeID: 1,
+      stepNumber: 1,
+      stepType: 1,
+      note: "wow",
+      time: 100,
+      amount: 20
     },
-    recipeSteps: [
-        {
-            recipeID: 1,
-            stepNumber: 1,
-            stepType: 1,
-            note: "wow",
-            time: 100,
-            amount: 20
-        },
-        {
-            recipeID: 1,
-            stepNumber: 2,
-            stepType: 4,
-            note: "wow",
-            time: 150,
-            amount: 0
-        },
-        {
-            recipeID: 1,
-            stepNumber: 3,
-            stepType: 6,
-            note: "wow",
-            time: 50,
-            amount: 80
-        }
-    ],
-    recipeCreator: [],
-    difficulties: ["Mudah", "Sedang", "Sulit"],
-    reviews: [],
-    // search
-    searchParams: {},
-    searchKeyword: "",
-
-    originsParams: {},
-    difficultiesParams: {},
-    methodsParams: {},
-
-    // method
-    methodID: 0,
-
-    // data user
-    name: "",
-    emailValidStatus: false,
-    login: 0,
-
-    // url
-    baseURL: "http://0.0.0.0:5000",
-
-    // baseURL: "https://api.coffeology.shop",
-
-    //
-    statusRegister: null,
-
-    // data method
-
-    recipesSelection: null,
-    recipesSearch: null,
-
-    recipe: null,
-    // name: "Ultimate v60",
-    // methodID: 1,
-    // beanName: "Beans Gayoo Bourbon",
-    // beanProcess: "Full Wash",
-    // beanRoasting: "Medium",
-    // rating: 45,
-    // favoriteCount: 20,
-    // time: 100,
-    // coffeeWeight: 17,
-    // water: 200,
-    // icon: require("../assets/images/StepIcon/stir.png")
-    recipeDetails: {
-        //   fragrance: 0.4,
-        //   aroma: 0.4,
-        //   cleanliness: 0.4,
-        //   sweetness: 0.3,
-        //   taste: 0.3,
-        //   acidity: 0.5,
-        //   aftertaste: 0.5,
-        //   balance: 0.5,
-        //   globalTaste: 0.5,
-        //   body: 0.5,
-        //   note: "lorem isum",
-        //   grindSize: "medium",
-        //   waterTemp: 92
+    {
+      recipeID: 1,
+      stepNumber: 2,
+      stepType: 4,
+      note: "wow",
+      time: 150,
+      amount: 0
     },
-    recipeSteps: [
-        {
-            recipeID: 1,
-            stepNumber: 1,
-            stepType: 1,
-            note: "wow",
-            time: 100,
-            amount: 20
-        },
-        {
-            recipeID: 1,
-            stepNumber: 2,
-            stepType: 4,
-            note: "wow",
-            time: 150,
-            amount: 0
-        },
-        {
-            recipeID: 1,
-            stepNumber: 3,
-            stepType: 6,
-            note: "wow",
-            time: 50,
-            amount: 80
-        }
-    ],
-    recipeCreator: [],
-    difficulties: ["Mudah", "Sedang", "Sulit"],
-    reviews: [],
-    // search
-    searchParams: {},
-    searchKeyword: "",
+    {
+      recipeID: 1,
+      stepNumber: 3,
+      stepType: 6,
+      note: "wow",
+      time: 50,
+      amount: 80
+    }
+  ],
+  recipeCreator: [],
+  difficulties: ["Mudah", "Sedang", "Sulit"],
+  reviews: [],
+  // search
+  searchParams: {},
+  searchKeyword: "",
 
-    originsParams: {},
-    difficultiesParams: {},
-    methodsParams: {},
+  originsParams: {},
+  difficultiesParams: {},
+  methodsParams: {},
 
-    // method
-    methodID: 0,
+  // method
+  methodID: 0,
 
-    // data user
-    name: "",
-    emailValidStatus: false,
-    login: 0,
+  // data user
+  name: "",
+  emailValidStatus: false,
+  login: 0,
 
-    // url
-    // baseURL: "http://0.0.0.0:5000",
+  // url
+  // baseURL: "http://0.0.0.0:5000",
 
-    baseURL: "https://api.coffeology.shop",
+  baseURL: "https://api.coffeology.shop",
 
-    //
-    statusRegister: null,
+  //
+  statusRegister: null,
 
-    // data method
-    methods: [
-        {
-            id: 1,
-            name: "French Press",
-            icon: require("../assets/images/methodFrenchPress.png")
-        },
-
+  // data method
+  methods: [
+    {
+      id: 1,
+      name: "French Press",
+      icon: require("../assets/images/methodFrenchPress.png")
+    },
         {
             id: 2,
             name: "Siphon",
@@ -401,42 +315,16 @@ const initialState = {
         location: "location"
     },
 
-    //history data
-    historyID: "",
-    // recipe in page activity
-    history: null,
 
-    myBrew: null,
+  //import button image
+  homeButton: require("../assets/images/home.png"),
+  menuButton: require("../assets/images/menu.png"),
+   backButton: require("../assets/images/back.png")
 
-    // users Profile
-    userMe: [],
-    changePasswordStatus: false,
-    editProfileStatus: false,
+  // show when post or put recipe
+  showPostRecipe: false,
+  showPutRecipe: false,
 
-    Toast: Swal.mixin({
-        toast: true,
-        position: "center",
-        showConfirmButton: false,
-        timer: 2000
-    }),
-
-    Toast: Swal.mixin({
-        toast: true,
-        position: "top",
-        showConfirmButton: false,
-        timer: 2000
-    }),
-
-    // another user
-    user: [],
-    userBrew: [],
-
-    //import back image
-
-    //import button image
-    homeButton: require("../assets/images/home.png"),
-    menuButton: require("../assets/images/menu.png"),
-    backButton: require("../assets/images/back.png")
 };
 
 const store = createStore(initialState);
