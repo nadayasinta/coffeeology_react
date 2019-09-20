@@ -29,10 +29,12 @@ class Profile extends React.Component {
     this.props.getUserBrew(this.props.match.params.userID);
   };
 
-  componentWillUnmount = () => {
-    this.props.resetDataUser();
-    this.props.resetDataUserBrew();
-  };
+
+  componentWillUnmount = () =>{
+    this.props.setDataUser(null)
+    this.props.setDataUserBrew(null)
+  }
+
 
   convertSeconds(secondsInput) {
     let minutes = Math.floor(parseInt(secondsInput) / 60);
@@ -47,8 +49,14 @@ class Profile extends React.Component {
   }
 
   render() {
-    if (this.props.user.length === 0) {
+    if (this.props.user === null || this.props.userBrew === null) {
       return <img src={loading} alt="loading..." />;
+    } else if (this.props.user === false){
+      return (
+        <div>
+          <h3>Data User Tidak Ada</h3>
+        </div>
+      )
     }
     return (
       <div className="container-fluid border">

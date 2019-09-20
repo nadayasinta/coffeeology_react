@@ -13,6 +13,7 @@ import ButtonUI from "@material-ui/core/Button";
 // import image
 import profileIcon from "../assets/images/profile.png";
 import editProfile from "../assets/images/edit-profile.png";
+import loading from "../assets/images/loading.gif";
 
 // import store
 import { connect } from "unistore/react";
@@ -44,6 +45,10 @@ class Profile extends React.Component {
       this.props.getProfile();
     }
   };
+
+  componentWillUnmount = () => {
+    this.props.setDataUserMe(null)
+  }
 
   // handle show hide modal
   handleChangeView = async (e, state, value) => {
@@ -112,7 +117,26 @@ class Profile extends React.Component {
   render() {
     if (sessionStorage.getItem("token") === null) {
       return <Redirect to={{ pathname: "/login" }} />;
-    } else {
+    } 
+    // Ade - menghandle page loading dan jika data tidak ada
+    else if (this.props.userMe === null) {
+      return <img src={loading} alt="loading..." />;
+    } else if (this.props.userMe === false){
+      return (
+        <div>
+          <h3>Data User Tidak Ada, Silahkan Logout Dan Login Kembali</h3>
+          <button
+                  onClick={e => this.handleLogot(e)}
+                  type="button"
+                  className="btn btn-primary mb-3"
+                >
+                  Keluar
+                </button>
+        </div>
+      )
+    } 
+    // Ade - End
+    else {
       return (
         <div className="container">
           <h4 className="font-weight-bold">PROFILE</h4>
@@ -203,6 +227,7 @@ class Profile extends React.Component {
                   <Form.Control
                     as="textarea"
                     placeholder={this.props.userMe.bio}
+                    defaultValue={this.props.userMe.bio}
                     ref={this.bio}
                     rows="3"
                     maxLength="250"
