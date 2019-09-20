@@ -82,7 +82,7 @@
   width: 100%;
 }
 .demopage .timersection .timer .timerminute {
-  font-size: 90px;
+  font-size: 75px;
   font-family: "Roboto", sans-serif;
   font-weight: 900;
   color: white;
@@ -93,6 +93,9 @@
   font-weight: 900;
   color: white;
   padding: 0 0 15px 0;
+}
+.demopage .timersection .progress {
+  height: 50px;
 }
 .review .SocialMediaShareButton {
   display: inline-block;

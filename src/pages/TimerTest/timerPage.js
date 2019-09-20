@@ -137,7 +137,7 @@ function Counter(props) {
                         <SkipNextIcon />
                     </Fab>
                 </div>
-                <div className="col-12">
+                <div className="col-12 py-3">
                     <WaterBar
                         waterTotal={timer.waterTotal}
                         stepNow={timer.stepNow}
