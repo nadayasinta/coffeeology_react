@@ -41,11 +41,6 @@ class MyBrew extends React.Component {
         } else {
             return (
                 <div>
-                    <Link to="/recipes/create">
-                        <button className="btn btn-primary">
-                            Tambah Guide
-                        </button>
-                    </Link>
                     {this.props.myBrew.data.map((value, key) => (
                         <div className="col-12">
                             <Link to={`/recipe/${value.id}`}>
