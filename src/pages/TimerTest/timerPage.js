@@ -110,9 +110,9 @@ function Counter(props) {
     }
 
     return (
-        <div className="container demopage">
+        <div className="container-fluid demopage">
             <div className="row  timersection">
-                <div className="col-12">
+                <div className="col-12 timer">
                     <Timer timerNow={timer.timeNow} />
                 </div>
 

@@ -72,7 +72,7 @@ class Review extends React.Component {
     render() {
         return (
             <div>
-                <div className="container">
+                <div className="container review">
                     <div className="row justify-content-center">
                         <Typography component="legend">
                             APA PENDAPATMU TENTANG RESEP INI?

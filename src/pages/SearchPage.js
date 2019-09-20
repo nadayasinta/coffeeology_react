@@ -171,9 +171,7 @@ const Search = props => {
                             <Link to={"/recipe/" + value.id}>
                                 <RecipeCard
                                     data={value}
-                                    method={
-                                        props.methods[value.methodID - 1].icon
-                                    }
+                                    method={props.methods[value.methodID - 1]}
                                     time={convertSeconds(value.time)}
                                 />
                             </Link>

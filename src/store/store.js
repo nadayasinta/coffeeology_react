@@ -436,7 +436,7 @@ const initialState = {
     //import button image
     homeButton: require("../assets/images/home.png"),
     menuButton: require("../assets/images/menu.png"),
-    backbutton: require("../assets/images/back.png")
+    backButton: require("../assets/images/back.png")
 };
 
 const store = createStore(initialState);
