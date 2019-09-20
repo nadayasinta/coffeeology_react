@@ -68,11 +68,16 @@ function Counter(props) {
         setIsRunning(!isRunning);
     }
 
-    function handleSkipButton(e) {
+    async function handleSkipButton(e) {
         setIsRunning(false);
         if (timer.recipeSteps[timer.stepIndex + 1] === undefined) {
-            props.history.push("/recipe/review/" + props.match.params.recipeID);
+            await console.log("hehe", props.match.params.recipeID);
+            await props.postHistory({ recipeID: props.match.params.recipeID });
+            await props.history.push(
+                "/recipe/review/" + props.match.params.recipeID
+            );
         } else if (timer.stepIndex === 0) {
+            console.log("hehe1");
             setTimer({
                 ...timer,
                 timeNow: timer.recipeSteps[timer.stepIndex + 1].time * 10,
@@ -82,6 +87,8 @@ function Counter(props) {
                 stepIndex: timer.stepIndex + 1
             });
         } else {
+            console.log("hehe2");
+
             setTimer({
                 ...timer,
                 timeNow: timer.recipeSteps[timer.stepIndex + 1].time * 10,
