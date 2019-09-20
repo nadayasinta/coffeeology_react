@@ -68,6 +68,9 @@ const actionsRecipes = store => ({
   setRecipesSearch(state, value) {
     return { recipesSearch: value };
   },
+  setDeleteRecipeStatus(state, value) {
+    return { deleteRecipeStatus: value };
+  },
   // axios
 
   async postRecipe(state, data) {
@@ -198,6 +201,7 @@ const actionsRecipes = store => ({
         store.setState({
           recipeDetails: response.data.data.recipeDetails
         });
+        console.log(response)
         console.log(response.data.data.recipeDetails);
         store.setState({ recipeSteps: response.data.data.recipeSteps });
         store.setState({ recipe: response.data.data.recipe });
@@ -239,7 +243,33 @@ const actionsRecipes = store => ({
           title: `${error.response.data.message}`
         });
       });
-  }
+  },
+  async deleteRecipe(state, id) {
+    console.log("test get profile");
+    let config = {
+      method: "delete",
+      url: store.getState().baseURL + `/recipes/${id}`,
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token")
+      }
+    };
+    await axios(config)
+      .then(response => {
+        store.setState({ deleteRecipeStatus: true });
+        Toast.fire({
+          type: "success",
+          title: "Resep Berhasil Dihapus"
+        });
+      })
+      .catch(error => {
+        console.log(error.response);
+        Toast.fire({
+          type: "error",
+          title: `${error.response.data.message}`
+        });
+      });
+  },
+
 });
 
 export default actionsRecipes;

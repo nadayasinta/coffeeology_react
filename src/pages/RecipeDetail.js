@@ -22,6 +22,7 @@ class RecipeSelection extends React.Component {
     this.state = {
       showComment: false,
       showReview: false,
+      showDelete: false,
       coffeeweight: 0,
       water: 0,
       ratio: 0,
@@ -116,6 +117,18 @@ class RecipeSelection extends React.Component {
     }
   };
 
+  handleDelete = async (e, id) => {
+    e.preventDefault()
+    await this.props.deleteRecipe(id);
+
+    if (this.props.deleteRecipeStatus){
+      await this.setState({showDelete: false})
+      this.props.history.push("/activity")
+    }
+
+    await this.setState({showDelete: false})
+  }
+
   render() {
     if (this.props.recipe === null) {
       return <img src={loading} alt="loading..." />;
@@ -144,15 +157,54 @@ class RecipeSelection extends React.Component {
                   );
                 }}
                 type="button"
-                className="btn btn-secondary btn-sm"
+                className="btn btn-secondary btn-sm mr-2"
               >
                 Edit
+              </button>
+              <button
+                onClick={e => {e.preventDefault(); this.setState({showDelete : true}) }}
+                type="button"
+                className="btn btn-secondary btn-sm"
+              >
+                Delete
               </button>
             </div>
           ) : (
             <div></div>
           )}
-          <div className="container">
+        
+        <div className="container">
+
+          {/* to show delete confirmation */}
+          <Modal show={this.state.showDelete}>
+            <Modal.Header>
+              <Modal.Title>Delete Resep</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              Apakah anda yakin menghapus resep ini ?
+              </Modal.Body>
+                <Modal.Footer>
+                  <Button
+                    variant="secondary"
+                    onClick={e => {
+                      e.preventDefault();
+                      this.setState({ showDelete: false });
+                    }}
+                  >
+                    Batal
+                  </Button>
+                  <Button 
+                  value="Submit" 
+                  type="submit" 
+                  variant="primary" 
+                  onClick={(e)=>this.handleDelete(e, this.props.match.params.recipeID)}
+                  >
+                    Hapus
+                  </Button>
+                </Modal.Footer>
+          </Modal>
+
+
             <div className="row justify-content-center">
               <h2 className="font-weight-bold mb-0">
                 {this.props.recipe.name.toUpperCase()}
@@ -428,6 +480,6 @@ class RecipeSelection extends React.Component {
 }
 
 export default connect(
-  "recipe, stepTypes, recipeDetails, recipeSteps, waterLimit, backButton, recipeCreator, methods, reviews, userMe, grinds",
+  "recipe, stepTypes, recipeDetails, recipeSteps, waterLimit, backButton, recipeCreator, methods, reviews, userMe, grinds, deleteRecipeStatus",
   actionsRecipes
 )(RecipeSelection);

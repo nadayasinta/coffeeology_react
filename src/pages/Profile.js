@@ -208,6 +208,7 @@ class Profile extends React.Component {
                   <Form.Control
                     as="textarea"
                     placeholder={this.props.userMe.bio}
+                    defaultValue={this.props.userMe.bio}
                     ref={this.bio}
                     rows="3"
                     maxLength="250"
