@@ -58,51 +58,48 @@ function Counter(props) {
         isRunning ? delay : null
     );
 
-
     useEffect(() => {
         return () => {
             console.log("willUnmount");
         };
     }, []);
 
-
     function handleIsRunningChange(e) {
         setIsRunning(!isRunning);
     }
 
-
-  function handleSkipButton(e) {
-    setIsRunning(false);
-    if (timer.recipeSteps[timer.stepIndex + 1] === undefined) {
-      props.history.push("/recipe/review/" + props.match.params.recipeID);
-    } else if (timer.stepIndex === 0) {
-      setTimer({
-        ...timer,
-        timeNow: timer.recipeSteps[timer.stepIndex + 1].time * 10,
-        waterNow: 0,
-        stepNow: timer.recipeSteps[timer.stepIndex + 1],
-        waterTotal: timer.recipeSteps[timer.stepIndex].amount,
-        stepIndex: timer.stepIndex + 1
-      });
-    } else {
-      setTimer({
-        ...timer,
-        timeNow: timer.recipeSteps[timer.stepIndex + 1].time * 10,
-        waterNow: 0,
-        stepNow: timer.recipeSteps[timer.stepIndex + 1],
-        waterTotal: timer.recipeSteps
-          .slice(0, timer.stepIndex + 1)
-          .reduce((sum, num, index) => {
-            if (index === 1) {
-              sum = sum.amount + num.amount;
-            } else {
-              sum = sum + num.amount;
-            }
-            return sum;
-          }),
-        stepIndex: timer.stepIndex + 1
-      });
-
+    function handleSkipButton(e) {
+        setIsRunning(false);
+        if (timer.recipeSteps[timer.stepIndex + 1] === undefined) {
+            props.history.push("/recipe/review/" + props.match.params.recipeID);
+        } else if (timer.stepIndex === 0) {
+            setTimer({
+                ...timer,
+                timeNow: timer.recipeSteps[timer.stepIndex + 1].time * 10,
+                waterNow: 0,
+                stepNow: timer.recipeSteps[timer.stepIndex + 1],
+                waterTotal: timer.recipeSteps[timer.stepIndex].amount,
+                stepIndex: timer.stepIndex + 1
+            });
+        } else {
+            setTimer({
+                ...timer,
+                timeNow: timer.recipeSteps[timer.stepIndex + 1].time * 10,
+                waterNow: 0,
+                stepNow: timer.recipeSteps[timer.stepIndex + 1],
+                waterTotal: timer.recipeSteps
+                    .slice(0, timer.stepIndex + 1)
+                    .reduce((sum, num, index) => {
+                        if (index === 1) {
+                            sum = sum.amount + num.amount;
+                        } else {
+                            sum = sum + num.amount;
+                        }
+                        return sum;
+                    }),
+                stepIndex: timer.stepIndex + 1
+            });
+        }
     }
 
     return (
@@ -112,32 +109,33 @@ function Counter(props) {
                     <Timer timerNow={timer.timeNow} />
                 </div>
 
-
                 <div className="col-4 align-items-center">
                     <Water
-        waterTotal={timer.waterTotal}
-        stepNow={timer.stepNow}
-        waterNow={timer.waterNow}
-      />
+                        waterTotal={timer.waterTotal}
+                        stepNow={timer.stepNow}
+                        waterNow={timer.waterNow}
+                    />
                 </div>
                 <div className="col-8">
-                    <TimerButton isRunning={isRunning} onClick={handleIsRunningChange} />
-      <Fab
-        color="primary"
-        aria-label="add"
-        // className={classes.fab}
-        onClick={handleSkipButton}
-      >
-        <SkipNextIcon />
-      </Fab>
-                   
+                    <TimerButton
+                        isRunning={isRunning}
+                        onClick={handleIsRunningChange}
+                    />
+                    <Fab
+                        color="primary"
+                        aria-label="add"
+                        // className={classes.fab}
+                        onClick={handleSkipButton}
+                    >
+                        <SkipNextIcon />
+                    </Fab>
                 </div>
                 <div className="col-12">
                     <WaterBar
-        waterTotal={timer.waterTotal}
-        stepNow={timer.stepNow}
-        waterNow={timer.waterNow}
-      />
+                        waterTotal={timer.waterTotal}
+                        stepNow={timer.stepNow}
+                        waterNow={timer.waterNow}
+                    />
                 </div>
             </div>
             <div className="row">
@@ -148,7 +146,6 @@ function Counter(props) {
             </div>
         </div>
     );
-
 }
 
 function useInterval(callback, delay) {
