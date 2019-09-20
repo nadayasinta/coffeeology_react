@@ -71,6 +71,9 @@ const actionsRecipes = store => ({
   setDeleteRecipeStatus(state, value) {
     return { deleteRecipeStatus: value };
   },
+  setDataUserMe(state, value){
+    return { userMe : value }
+  },
   // axios
 
   async postRecipe(state, data) {
@@ -197,7 +200,7 @@ const actionsRecipes = store => ({
 
     await axios(config)
       .then(response => {
-        console.log("response.data.data", response.data.data);
+        console.log("data get recipe by id", response.data.data);
         store.setState({
           recipeDetails: response.data.data.recipeDetails
         });
@@ -207,7 +210,10 @@ const actionsRecipes = store => ({
         store.setState({ recipe: response.data.data.recipe });
         store.setState({ recipeCreator: response.data.data.user });
       })
-      .catch(error => console.log("Error getRecipeById", error));
+      .catch(error => {
+        store.setState({ recipe: false });
+        console.log("Error getRecipeById", error)
+      });
   },
   async getReview(state, paramsInput) {
     console.log(paramsInput);
@@ -233,15 +239,12 @@ const actionsRecipes = store => ({
     };
     await axios(config)
       .then(response => {
-        console.log("data users ", response.data.data);
+        console.log("data get profile ", response.data.data);
         store.setState({ userMe: response.data.data });
       })
       .catch(error => {
+        store.setState({ userMe: false });        
         console.log(error.response);
-        Toast.fire({
-          type: "error",
-          title: `${error.response.data.message}`
-        });
       });
   },
   async deleteRecipe(state, id) {

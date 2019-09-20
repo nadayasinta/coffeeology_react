@@ -128,9 +128,9 @@ const initialState = {
   login: 0,
 
   // url
-  // baseURL: "http://0.0.0.0:5000",
+  baseURL: "http://0.0.0.0:5000",
 
-  baseURL: "https://api.coffeology.shop",
+  // baseURL: "https://api.coffeology.shop",
 
   //
   statusRegister: null,
@@ -267,7 +267,7 @@ const initialState = {
   myBrew: null,
 
   // users Profile
-  userMe: [],
+  userMe: null,
   changePasswordStatus: false,
   editProfileStatus: false,
 
@@ -286,8 +286,8 @@ const initialState = {
   }),
 
   // another user
-  user: [],
-  userBrew: [],
+  user: null,
+  userBrew: null,
 
   //import back image
 
