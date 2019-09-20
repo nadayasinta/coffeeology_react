@@ -128,6 +128,91 @@ const initialState = {
     login: 0,
 
     // url
+    baseURL: "http://0.0.0.0:5000",
+
+    // baseURL: "https://api.coffeology.shop",
+
+    //
+    statusRegister: null,
+
+    // data method
+
+    recipesSelection: null,
+    recipesSearch: null,
+
+    recipe: null,
+    // name: "Ultimate v60",
+    // methodID: 1,
+    // beanName: "Beans Gayoo Bourbon",
+    // beanProcess: "Full Wash",
+    // beanRoasting: "Medium",
+    // rating: 45,
+    // favoriteCount: 20,
+    // time: 100,
+    // coffeeWeight: 17,
+    // water: 200,
+    // icon: require("../assets/images/StepIcon/stir.png")
+    recipeDetails: {
+        //   fragrance: 0.4,
+        //   aroma: 0.4,
+        //   cleanliness: 0.4,
+        //   sweetness: 0.3,
+        //   taste: 0.3,
+        //   acidity: 0.5,
+        //   aftertaste: 0.5,
+        //   balance: 0.5,
+        //   globalTaste: 0.5,
+        //   body: 0.5,
+        //   note: "lorem isum",
+        //   grindSize: "medium",
+        //   waterTemp: 92
+    },
+    recipeSteps: [
+        {
+            recipeID: 1,
+            stepNumber: 1,
+            stepType: 1,
+            note: "wow",
+            time: 100,
+            amount: 20
+        },
+        {
+            recipeID: 1,
+            stepNumber: 2,
+            stepType: 4,
+            note: "wow",
+            time: 150,
+            amount: 0
+        },
+        {
+            recipeID: 1,
+            stepNumber: 3,
+            stepType: 6,
+            note: "wow",
+            time: 50,
+            amount: 80
+        }
+    ],
+    recipeCreator: [],
+    difficulties: ["Mudah", "Sedang", "Sulit"],
+    reviews: [],
+    // search
+    searchParams: {},
+    searchKeyword: "",
+
+    originsParams: {},
+    difficultiesParams: {},
+    methodsParams: {},
+
+    // method
+    methodID: 0,
+
+    // data user
+    name: "",
+    emailValidStatus: false,
+    login: 0,
+
+    // url
     // baseURL: "http://0.0.0.0:5000",
 
     baseURL: "https://api.coffeology.shop",
@@ -211,6 +296,60 @@ const initialState = {
         { id: 4, name: "toraja" },
         { id: 5, name: "lainnya" }
     ],
+
+    bean: {
+        id: 1,
+        originID: 1,
+        name: "bean1",
+        photo:
+            "http://3.bp.blogspot.com/-NlbLDQ72yfg/VgLQFnMkCSI/AAAAAAAADaY/eiX1XdNv0uI/s1600/kopiaceh.jpg",
+        fragrance: 0.4,
+        flavor: 0.4,
+        aftertaste: 0.5,
+        acidity: 0.5,
+        body: 0.5,
+        balance: 0.5,
+        uniformity: 0.3,
+        cleanCups: 0.5,
+        sweetness: 0.3,
+        overall: 0.4,
+        description:
+            "Coffee trees are planted in Jernih Jaya Village locate Arabica Simalungun Location: North Sumatera cupping: September 2017 by Gayo Cuppers Team in Gunung Tujuh, Kerinci District, Jambi Province. Coffee plantation are grown in the altitute od 1,200 - 1,400 meter above sea level in the Mount Kerinci areas. Beside of coffee, the location is well known for agro tourism.",
+        cupping: "cupping",
+        advantage: ["advantage1", "advantage1"],
+        disadvantage: ["disadvantage1", "disadvantage2", "disadvantage3"],
+        location: "location"
+    },
+
+    //history data
+    historyID: "",
+    // recipe in page activity
+    history: null,
+
+    myBrew: null,
+
+    // users Profile
+    userMe: null,
+    changePasswordStatus: false,
+    editProfileStatus: false,
+
+    Toast: Swal.mixin({
+        toast: true,
+        position: "center",
+        showConfirmButton: false,
+        timer: 2000
+    }),
+
+    Toast: Swal.mixin({
+        toast: true,
+        position: "top",
+        showConfirmButton: false,
+        timer: 2000
+    }),
+
+    // another user
+    user: null,
+    userBrew: null,
 
     // beans data
     beans: {
