@@ -64,17 +64,14 @@ class RecipeSelection extends React.Component {
       recipeSteps: this.props.recipeSteps
     })
     await this.props.getReview({ recipeID: this.props.match.params.recipeID });
-    console.log("inininini", this.props.reviews)
 
     // this.props.setRecipeSteps(this.state.recipeSteps);
     this.props.setResetTimer();
 
     if (sessionStorage.getItem("token") !== null) {
       await this.props.getProfile();
-      console.log("id user", this.props.userMe.id);
-      await this.setState({userID : this.props.userMe.id})
+      await this.setState({ userID: this.props.userMe.id })
     }
-    console.log("id user resep", this.props.recipe.userID);
   }
 
   convertSeconds(secondsInput) {
@@ -91,8 +88,8 @@ class RecipeSelection extends React.Component {
 
   handleOnClickButton = async event => {
     event.preventDefault();
-    if (sessionStorage.getItem("token") === null){
-      return this.setState({showStartDemo : true})
+    if (sessionStorage.getItem("token") === null) {
+      return this.setState({ showStartDemo: true })
     } else {
       await this.props.setRecipeSteps(this.state.recipeSteps);
       sessionStorage.setItem(
@@ -138,7 +135,7 @@ class RecipeSelection extends React.Component {
     await this.setState({ showDelete: false });
   };
 
-  handleEditRecipe = async (e, id) =>{
+  handleEditRecipe = async (e, id) => {
     e.preventDefault();
     await sessionStorage.setItem("Recipe", JSON.stringify(this.props.recipe))
     await sessionStorage.setItem("RecipeDetail", JSON.stringify(this.props.recipeDetails))
@@ -184,7 +181,7 @@ class RecipeSelection extends React.Component {
           {this.state.userID === this.props.recipe.userID ? (
             <div align="right">
               <button
-                onClick={e =>this.handleEditRecipe(e, this.props.match.params.recipeID)}
+                onClick={e => this.handleEditRecipe(e, this.props.match.params.recipeID)}
                 type="button"
                 className="btn btn-secondary btn-sm mr-2"
               >
@@ -202,8 +199,8 @@ class RecipeSelection extends React.Component {
               </button>
             </div>
           ) : (
-            <div></div>
-          )}
+              <div></div>
+            )}
 
           <div className="container">
 
@@ -256,7 +253,7 @@ class RecipeSelection extends React.Component {
                   className="w-75 bgcolor2"
                   src={this.props.methods[this.props.recipe.methodID - 1].icon}
                 />
-                <br/>
+                <br />
                 <h6>{this.props.methods[this.props.recipe.methodID - 1].name}</h6>
               </div>
               <div className="col-8 ">
@@ -505,30 +502,30 @@ class RecipeSelection extends React.Component {
                 </button>
               </div>
               {/* if user has not log in */}
-            <Modal show={this.state.showStartDemo}>
-              <Modal.Body>Anda Harus Login Terlebih Dahulu</Modal.Body>
-              <Modal.Footer>
-                <Button
-                  variant="secondary"
-                  onClick={e => {
-                    e.preventDefault();
-                    this.setState({ showStartDemo: false });
-                  }}
-                >
-                  Batal
+              <Modal show={this.state.showStartDemo}>
+                <Modal.Body>Anda Harus Login Terlebih Dahulu</Modal.Body>
+                <Modal.Footer>
+                  <Button
+                    variant="secondary"
+                    onClick={e => {
+                      e.preventDefault();
+                      this.setState({ showStartDemo: false });
+                    }}
+                  >
+                    Batal
                 </Button>
-                <Button
-                  value="Submit"
-                  type="submit"
-                  variant="primary"
-                  onClick={e =>
-                    this.props.history.push("/login")
-                  }
-                >
-                  Login
+                  <Button
+                    value="Submit"
+                    type="submit"
+                    variant="primary"
+                    onClick={e =>
+                      this.props.history.push("/login")
+                    }
+                  >
+                    Login
                 </Button>
-              </Modal.Footer>
-            </Modal>
+                </Modal.Footer>
+              </Modal>
             </div>
           </div>
         </div>

@@ -59,16 +59,12 @@ class InputStep extends React.Component {
         // validation waterAmount every Step = waterAmount Recipe
         let recipes = JSON.parse(sessionStorage.getItem("Recipe"));
 
-        console.log("data recipe water ", recipes.water);
-        console.log("this state temporary", this.state.stepTemporary);
 
         let totalWaterStep = parseInt(this.waterAmount.current.value);
         this.state.stepTemporary.map(
             (step, index) =>
                 (totalWaterStep = totalWaterStep + parseInt(step.amount))
         );
-        console.log("data total water step", totalWaterStep);
-        console.log("data curent water amount", this.waterAmount.current.value);
 
         if (parseInt(totalWaterStep) > parseInt(recipes.water)) {
             totalWaterStep -= this.waterAmount.current.value;
@@ -157,26 +153,26 @@ class InputStep extends React.Component {
                     <form onSubmit={this.handleSubmit}>
                         {/* form jumlah air */}
                         {parseInt(this.props.stepTypeNumberSelected) === 1 ||
-                        parseInt(this.props.stepTypeNumberSelected) === 2 ||
-                        parseInt(this.props.stepTypeNumberSelected) === 12 ? (
-                            <div
-                                className="form-group mt-3"
-                                style={{ textAlign: "left" }}
-                            >
-                                <label for="Jumlah Air">Jumlah Air </label>
-                                <input
-                                    type="number"
-                                    className="form-control"
-                                    id="Jumlah Air"
-                                    placeholder="Masukkan Jumlah air"
-                                    ref={this.waterAmount}
-                                    min="0"
-                                    required
-                                />
-                            </div>
-                        ) : (
-                            <div ref={this.waterAmount}></div>
-                        )}
+                            parseInt(this.props.stepTypeNumberSelected) === 2 ||
+                            parseInt(this.props.stepTypeNumberSelected) === 12 ? (
+                                <div
+                                    className="form-group mt-3"
+                                    style={{ textAlign: "left" }}
+                                >
+                                    <label for="Jumlah Air">Jumlah Air </label>
+                                    <input
+                                        type="number"
+                                        className="form-control"
+                                        id="Jumlah Air"
+                                        placeholder="Masukkan Jumlah air"
+                                        ref={this.waterAmount}
+                                        min="0"
+                                        required
+                                    />
+                                </div>
+                            ) : (
+                                <div ref={this.waterAmount}></div>
+                            )}
 
                         {/* form catatan */}
                         <div

@@ -63,7 +63,6 @@ class RecipesSelection extends React.Component {
   };
 
   render() {
-    console.log(this.props);
     if (this.props.recipesSelection === null) {
       return <img src={loading} alt="loading..." />;
     } else if (_.isEmpty(this.props.recipesSelection.recipes)) {
@@ -92,14 +91,14 @@ class RecipesSelection extends React.Component {
             {this.props.recipesSelection.pageNow === 1 ? (
               <span></span>
             ) : (
-              <Pagination.First onClick={this.handlePreviousPageButton} />
-            )}
+                <Pagination.First onClick={this.handlePreviousPageButton} />
+              )}
             {this.props.recipesSelection.pageNow ===
-            this.props.recipesSelection.pageTotal ? (
-              <span></span>
-            ) : (
-              <Pagination.Last onClick={this.handleNextPageButton} />
-            )}
+              this.props.recipesSelection.pageTotal ? (
+                <span></span>
+              ) : (
+                <Pagination.Last onClick={this.handleNextPageButton} />
+              )}
           </Pagination>
         </div>
       );
