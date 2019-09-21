@@ -127,6 +127,11 @@ class AddStep extends React.Component {
         />
         <div className="container">
           <div className="row justify-content-center">
+          <div className="col-12">
+              <h4 className="font-weight-bold mb-0">
+                  TAMBAH LANGKAH
+              </h4>
+          </div>
             <div className="col-12">
               <form onSubmit={this.handleSubmit}>
                 <div className="form-group">

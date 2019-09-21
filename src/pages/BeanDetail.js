@@ -32,7 +32,7 @@ class BeanDetail extends React.Component {
                 <img
                     className="backbutton"
                     src={this.props.backButton}
-                    onClick=""
+                    onClick={event => this.props.history.push("/beans")}
                 />
                 <div className="container">
                     <div className="row">
@@ -92,6 +92,6 @@ class BeanDetail extends React.Component {
 }
 
 export default connect(
-    "bean, origins, backbutton",
+    "bean, origins, backButton",
     actionsBeans
 )(BeanDetail);

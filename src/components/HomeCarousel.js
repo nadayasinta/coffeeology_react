@@ -1,5 +1,8 @@
 import React from "react";
 import Carousel from "react-bootstrap/Carousel";
+import HomeImage1 from "../assets/images/home1.jpg";
+import HomeImage2 from "../assets/images/home2.jpg";
+import HomeImage3 from "../assets/images/home3.jpg";
 
 function HomeCarousel() {
     return (
@@ -7,7 +10,7 @@ function HomeCarousel() {
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    src="https://static2.bigstockphoto.com/2/1/3/large2/312271711.jpg"
+                    src={HomeImage1}
                     alt="First slide"
                 />
                 <Carousel.Caption>
@@ -21,7 +24,7 @@ function HomeCarousel() {
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    src="https://static2.bigstockphoto.com/2/1/3/large2/312271711.jpg"
+                    src={HomeImage2}
                     alt="Third slide"
                 />
 
@@ -35,7 +38,7 @@ function HomeCarousel() {
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    src="https://static2.bigstockphoto.com/2/1/3/large2/312271711.jpg"
+                    src={HomeImage3}
                     alt="Third slide"
                 />
 

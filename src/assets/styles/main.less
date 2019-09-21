@@ -80,6 +80,18 @@
 
 // page brewing
 .brewing {
+    .methodcard {
+        .methodname {
+            height: 55px;
+        }
+        // row {
+        //     display: flex; /* equal height of the children */
+        // }
+        // .col-12 {
+        //     flex: 1; /* additionally, equal width */
+        // }
+        // height: 180px;
+    }
     .rowhomeimage {
         margin-right: -30px;
         margin-left: -30px;
@@ -126,6 +138,31 @@
                 color: white;
                 padding: 0 0 15px 0;
             }
+        }
+        .progress {
+            height: 30px;
+            .bg-info {
+                background-color: #c3935b !important;
+            }
+        }
+        .CircularProgressbar .CircularProgressbar-path {
+            stroke: #c3935b;
+        }
+
+        .CircularProgressbar .CircularProgressbar-text {
+            fill: white;
+        }
+        // play button
+        .makeStyles-start-76:hover {
+            background-color: #53686b;
+        }
+        // pause button
+        .makeStyles-pause-320:hover {
+            background-color: #ff0015;
+        }
+        // skip button
+        .MuiFab-primary:hover {
+            background-color: #303f9f;
         }
     }
 }
@@ -183,9 +220,9 @@
 // back button
 .backbutton {
     position: absolute;
-    top: 75px;
+    top: 80px;
     left: 10px;
-    width: 15%;
+    width: 50px;
     padding: 10px;
     &:hover {
         background-color: #bcbcbc;
