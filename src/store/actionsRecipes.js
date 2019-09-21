@@ -80,6 +80,12 @@ const actionsRecipes = store => ({
   setShowPutRecipe(state, value){
     return { showPutRecipe : value}
   },
+  setRecipeDetails(state, value){
+    return { recipeDetails : value}
+  },
+  setRecipeCreator(state, value){
+    return { recipeCreator : value}
+  },
   // axios
 
   async postRecipe(state, data) {

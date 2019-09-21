@@ -53,8 +53,11 @@ class RecipeSelection extends React.Component {
   };
 
   componentWillUnmount() {
-    this.props.setRecipe(null);
     this.props.setDataUserMe(null);
+    this.props.setRecipe(null);
+    this.props.setRecipeDetails(null);
+    this.props.setRecipeSteps(null);
+    this.props.setRecipeCreator([]);
   }
 
   async componentDidMount() {
@@ -71,8 +74,9 @@ class RecipeSelection extends React.Component {
 
     if (sessionStorage.getItem("token") !== null) {
       await this.props.getProfile();
-      console.log("id user", this.props.userMe.id);
-      await this.setState({userID : this.props.userMe.id})
+      if (this.props.userMe !== false){
+        await this.setState({userID : this.props.userMe.id})
+      }
     }
     console.log("id user resep", this.props.recipe.userID);
   }
@@ -148,12 +152,7 @@ class RecipeSelection extends React.Component {
   }
 
   render() {
-    if (this.props.recipe === null) {
-      return <img src={loading} alt="loading..." />;
-    } else if (
-      sessionStorage.getItem("token") !== null &&
-      this.props.userMe === null
-    ) {
+    if (this.props.recipe === null || this.props.userMe === null ) {
       return <img src={loading} alt="loading..." />;
     } else if (this.props.recipe === false) {
       return (

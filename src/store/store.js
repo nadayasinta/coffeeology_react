@@ -56,58 +56,11 @@ const initialState = {
   recipesSearch: null,
 
   recipe: null,
-  // name: "Ultimate v60",
-  // methodID: 1,
-  // beanName: "Beans Gayoo Bourbon",
-  // beanProcess: "Full Wash",
-  // beanRoasting: "Medium",
-  // rating: 45,
-  // favoriteCount: 20,
-  // time: 100,
-  // coffeeWeight: 17,
-  // water: 200,
-  // icon: require("../assets/images/StepIcon/stir.png")
-  recipeDetails: {
-    //   fragrance: 0.4,
-    //   aroma: 0.4,
-    //   cleanliness: 0.4,
-    //   sweetness: 0.3,
-    //   taste: 0.3,
-    //   acidity: 0.5,
-    //   aftertaste: 0.5,
-    //   balance: 0.5,
-    //   globalTaste: 0.5,
-    //   body: 0.5,
-    //   note: "lorem isum",
-    //   grindSize: "medium",
-    //   waterTemp: 92
-  },
-  recipeSteps: [
-    {
-      recipeID: 1,
-      stepNumber: 1,
-      stepType: 1,
-      note: "wow",
-      time: 100,
-      amount: 20
-    },
-    {
-      recipeID: 1,
-      stepNumber: 2,
-      stepType: 4,
-      note: "wow",
-      time: 150,
-      amount: 0
-    },
-    {
-      recipeID: 1,
-      stepNumber: 3,
-      stepType: 6,
-      note: "wow",
-      time: 50,
-      amount: 80
-    }
-  ],
+
+  recipeDetails: null,
+  
+  recipeSteps: null,
+
   recipeCreator: [],
   difficulties: ["Mudah", "Sedang", "Sulit"],
   reviews: [],
@@ -266,60 +219,62 @@ const initialState = {
     userBrew: null,
 
     // beans data
-    beans: {
-        1: [
-            { id: 1, originID: 1, name: "bean1" },
-            { id: 2, originID: 1, name: "bean2" }
-        ],
+    beans: null,
+    // {
+    //     1: [
+    //         { id: 1, originID: 1, name: "bean1" },
+    //         { id: 2, originID: 1, name: "bean2" }
+    //     ],
 
-        2: [
-            { id: 3, originID: 2, name: "bean3" },
-            { id: 4, originID: 2, name: "bean4" }
-        ],
+    //     2: [
+    //         { id: 3, originID: 2, name: "bean3" },
+    //         { id: 4, originID: 2, name: "bean4" }
+    //     ],
 
-        3: [
-            { id: 5, originID: 3, name: "bean5" },
-            { id: 6, originID: 3, name: "bean6" }
-        ],
+    //     3: [
+    //         { id: 5, originID: 3, name: "bean5" },
+    //         { id: 6, originID: 3, name: "bean6" }
+    //     ],
 
-        4: [
-            { id: 7, originID: 4, name: "bean7" },
-            { id: 8, originID: 4, name: "bean8" }
-        ]
-    },
+    //     4: [
+    //         { id: 7, originID: 4, name: "bean7" },
+    //         { id: 8, originID: 4, name: "bean8" }
+    //     ]
+    // },
     // another user
     user: null,
     userBrew: null,
 
-    bean: {
-        id: 1,
-        originID: 1,
-        name: "bean1",
-        photo:
-            "http://3.bp.blogspot.com/-NlbLDQ72yfg/VgLQFnMkCSI/AAAAAAAADaY/eiX1XdNv0uI/s1600/kopiaceh.jpg",
-        fragrance: 0.4,
-        flavor: 0.4,
-        aftertaste: 0.5,
-        acidity: 0.5,
-        body: 0.5,
-        balance: 0.5,
-        uniformity: 0.3,
-        cleanCups: 0.5,
-        sweetness: 0.3,
-        overall: 0.4,
-        description:
-            "Coffee trees are planted in Jernih Jaya Village locate Arabica Simalungun Location: North Sumatera cupping: September 2017 by Gayo Cuppers Team in Gunung Tujuh, Kerinci District, Jambi Province. Coffee plantation are grown in the altitute od 1,200 - 1,400 meter above sea level in the Mount Kerinci areas. Beside of coffee, the location is well known for agro tourism.",
-        cupping: "cupping",
-        advantage: ["advantage1", "advantage1"],
-        disadvantage: ["disadvantage1", "disadvantage2", "disadvantage3"],
-        location: "location"
-    },
+    bean: null,
+    // {
+    //     id: 1,
+    //     originID: 1,
+    //     name: "bean1",
+    //     photo:
+    //         "http://3.bp.blogspot.com/-NlbLDQ72yfg/VgLQFnMkCSI/AAAAAAAADaY/eiX1XdNv0uI/s1600/kopiaceh.jpg",
+    //     fragrance: 0.4,
+    //     flavor: 0.4,
+    //     aftertaste: 0.5,
+    //     acidity: 0.5,
+    //     body: 0.5,
+    //     balance: 0.5,
+    //     uniformity: 0.3,
+    //     cleanCups: 0.5,
+    //     sweetness: 0.3,
+    //     overall: 0.4,
+    //     description:
+    //         "Coffee trees are planted in Jernih Jaya Village locate Arabica Simalungun Location: North Sumatera cupping: September 2017 by Gayo Cuppers Team in Gunung Tujuh, Kerinci District, Jambi Province. Coffee plantation are grown in the altitute od 1,200 - 1,400 meter above sea level in the Mount Kerinci areas. Beside of coffee, the location is well known for agro tourism.",
+    //     cupping: "cupping",
+    //     advantage: ["advantage1", "advantage1"],
+    //     disadvantage: ["disadvantage1", "disadvantage2", "disadvantage3"],
+    //     location: "location"
+    // },
 
 
   //import button image
   homeButton: require("../assets/images/home.png"),
   menuButton: require("../assets/images/menu.png"),
-   backButton: require("../assets/images/back.png")
+   backButton: require("../assets/images/back.png"),
 
   // show when post or put recipe
   showPostRecipe: false,
