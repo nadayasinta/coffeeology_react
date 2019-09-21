@@ -38,7 +38,7 @@ const actionsProfile = (store) => ({
   resetEditProfileStatus(state) {
     return { editProfileStatus: false };
   },
-  // axios for profile me
+  // make request with axios to get user data
   async getProfile(state) {
     const config = {
       method: 'get',
@@ -53,8 +53,10 @@ const actionsProfile = (store) => ({
       })
       .catch((error) => {
         store.setState({ userMe: false });
+        console.log(error);
       });
   },
+  // make request with axios to put user data
   async editProfile(state, data) {
     const config = {
       method: 'put',
@@ -80,6 +82,7 @@ const actionsProfile = (store) => ({
         });
       });
   },
+  // make request with axios to put user password data
   async editPassword(state, data) {
     const config = {
       method: 'put',
@@ -104,6 +107,7 @@ const actionsProfile = (store) => ({
         });
       });
   },
+  // make request with axios to get token for login
   async login(state, data) {
     const config = {
       method: 'post',
@@ -121,8 +125,7 @@ const actionsProfile = (store) => ({
         });
       });
   },
-
-  // other user
+  // make request with axios to get user data, for user profile
   async getProfileByID(state, data) {
     const config = {
       method: 'get',
@@ -134,8 +137,10 @@ const actionsProfile = (store) => ({
       })
       .catch((error) => {
         store.setState({ user: false });
+        console.log(error);
       });
   },
+  // make request with axios to get recipe of user by userID
   async getUserBrew(state, data) {
     const config = {
       method: 'get',
