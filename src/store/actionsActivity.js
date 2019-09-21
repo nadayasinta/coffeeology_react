@@ -28,11 +28,12 @@ const actionsActivity = store => ({
       })
       .catch(error => console.log("Error getHistory", error));
   },
-  async getMyBrew(state) {
+  async getMyBrew(state, paramsInput) {
     console.log("test get myBrew");
     let config = {
       method: "get",
       url: store.getState().baseURL + "/recipes/user",
+      params: paramsInput,
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token")
       }

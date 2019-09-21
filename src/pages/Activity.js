@@ -146,5 +146,7 @@ export default function FullWidthTabs(props) {
                 <div />
             )}
         </div>
+
     );
+
 }
