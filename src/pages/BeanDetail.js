@@ -37,9 +37,9 @@ class BeanDetail extends React.Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
-                            <h3 className="font-weight-bold mb-0">
+                            <h4 className="font-weight-bold mb-0">
                                 {this.props.bean.name}
-                            </h3>
+                            </h4>
                         </div>
                         <div className="col-12">
                             <h6 className="text-secondary">

@@ -1,10 +1,10 @@
 @import url("https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,900|Nunito:300,400,400i,600,700,800,900|Oswald:300,400,500,600,700|Roboto:300,400,400i,500,700,900&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Be+Vietnam:700,800&display=swap");
 
 @fontoswald: "Oswald", sans-serif;
 @fontlato: "Lato", sans-serif;
 @fontnunito: "Nunito", sans-serif;
 @fontroboto: "Roboto", sans-serif;
-
 @color1 :#3b383e;
 @color2 :#53686B;
 @color3 :#6C757D;
@@ -18,6 +18,7 @@
 .bgcolor1 {
     background-color: @color1;
 }
+
 .bgcolor2 {
     border-color: @color2;
     border-style: solid;
@@ -25,44 +26,121 @@
     padding: 10px;
 }
 
+// PAGE
+// all page
 .allpage {
     min-height: 100%;
     font-family: @fontnunito !important;
     a {
         text-decoration: none !important;
         color: @color1;
+        &:hover {
+            color: @color1;
+        }
     }
-    a:hover {
-        color: @color1;
+
+    // header
+    .header {
+        height: 75px;
+        background-color: @color2;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #919ea0;
     }
+
     // navbar
     .navbar {
         a {
             text-decoration: none !important;
-
             color: @color1;
             h6 {
                 margin-bottom: 0;
             }
-        }
-
-        a:hover {
-            color: #663f30;
+            &:hover {
+                color: #663f30;
+            }
         }
         img:hover {
             transform: scale(1.1);
         }
     }
 }
-.header {
-    height: 75px;
-    background-color: @color2;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #919ea0;
+
+// page activity
+.activity {
+    .MuiBox-root-97 {
+        padding-left: 0;
+        padding-right: 0;
+        font-family: @fontnunito !important;
+    }
+    h6 {
+        font-family: @fontnunito !important;
+    }
 }
 
+// page brewing
+.brewing {
+    .rowhomeimage {
+        margin-right: -30px;
+        margin-left: -30px;
+        margin-top: -25px;
+        .homecarousel {
+            width: 100%;
+        }
+    }
+}
+
+//  error page
+.errorpage {
+    height: 100%;
+    margin: -15px;
+    margin-top: -25px;
+    .errorimage {
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        width: 100%;
+        padding-bottom: 60px;
+    }
+}
+
+// demo page
+.demopage {
+    .timersection {
+        background-color: @color1;
+        margin-right: -30px !important;
+        margin-left: -30px !important;
+        margin-top: -25px !important;
+        .timer {
+            width: 100%;
+            .timerminute {
+                font-size: 90px;
+                font-family: @fontroboto;
+                font-weight: 900;
+                color: white;
+            }
+            .timersecond {
+                font-size: 50px;
+                font-family: @fontroboto;
+                font-weight: 900;
+                color: white;
+                padding: 0 0 15px 0;
+            }
+        }
+    }
+}
+
+// review page
+.review {
+    .SocialMediaShareButton {
+        display: inline-block;
+    }
+}
+
+//COMPONENT
+// recipe card
 .recipeCard {
+    font-family: @fontnunito !important;
     max-width: 420px;
     h4 {
         font-size: 20px;
@@ -81,145 +159,7 @@
     }
 }
 
-// steps
-
-.toggle-base {
-    height: 20px;
-}
-
-.toggle-enter {
-    animation-name: fade-in;
-    animation-duration: 300ms;
-}
-
-.toggle-leave {
-    animation-name: fade-out;
-    animation-duration: 300ms;
-}
-
-@keyframes fade-in {
-    from {
-        opacity: 0;
-        height: 0px;
-    }
-
-    to {
-        opacity: 1;
-        height: 20px;
-    }
-}
-
-@keyframes fade-out {
-    from {
-        opacity: 1;
-        height: 20px;
-    }
-
-    to {
-        opacity: 0;
-        height: 0px;
-    }
-}
-
-// activity
-.activity {
-    .MuiBox-root-97 {
-        padding-left: 0;
-        padding-right: 0;
-        font-family: @fontnunito !important;
-    }
-    h6 {
-        font-family: @fontnunito !important;
-    }
-    .activityBar {
-        // margin-top: -25px !important;
-    }
-}
-
-.brewing {
-    .rowhomeimage {
-        margin-right: -30px;
-        margin-left: -30px;
-        margin-top: -25px;
-        .homeimage {
-            width: 100%;
-        }
-    }
-}
-
-// overlay
-.overlaycontainer {
-    position: relative;
-}
-
-.overlay {
-    opacity: 1;
-    display: block;
-    width: 100%;
-    height: auto;
-    transition: 0.5s ease;
-    backface-visibility: hidden;
-}
-
-.middle {
-    transition: 0.5s ease;
-    opacity: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    text-align: center;
-}
-
-.overlaycontainer:hover .overlay {
-    opacity: 0.3;
-}
-
-.overlaycontainer:hover .middle {
-    opacity: 1;
-}
-
-.text {
-    background-color: @color2;
-    color: @color4;
-    font-size: 16px;
-    padding: 16px 32px;
-}
-
-.backbutton {
-    position: absolute;
-    top: 75px;
-    left: 10px;
-    width: 15%;
-    padding: 10px;
-    &:hover {
-        background-color: #bcbcbc;
-        border-radius: 50%;
-    }
-}
-.homebutton {
-    padding: 10px;
-    height: 100%;
-    &:hover {
-        background-color: #bcbcbc;
-        border-radius: 50%;
-    }
-}
-.errorpage {
-    height: 100%;
-    margin: -15px;
-    margin-top: -25px;
-    .errorimage {
-        position: absolute;
-        bottom: 0px;
-        left: 0px;
-        width: 100%;
-        padding-bottom: 60px;
-    }
-}
-
-// filter
+// filter search
 .scrolls {
     overflow-x: scroll;
     overflow-y: hidden;
@@ -232,7 +172,6 @@
     background-color: @color2;
     height: 20px;
 }
-
 .MuiPaper-root {
     max-width: 480px;
     justify-items: center;
@@ -241,30 +180,106 @@
     margin: auto;
 }
 
-// review
-.SocialMediaShareButton {
-    display: inline-block;
+// back button
+.backbutton {
+    position: absolute;
+    top: 75px;
+    left: 10px;
+    width: 15%;
+    padding: 10px;
+    &:hover {
+        background-color: #bcbcbc;
+        border-radius: 50%;
+    }
 }
 
-.demopage {
-    margin-right: -15px !important;
-    margin-left: -15px !important;
-    margin-top: -25px;
-    background-color: @color1;
+// home button
+.homebutton {
+    padding: 10px;
+    height: 100%;
+    &:hover {
+        background-color: #bcbcbc;
+        border-radius: 50%;
+    }
+}
 
-    .timersection {
-        background-color: @color1;
+// pagination
+.pagination-lg {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    .page-link {
+        padding: 0 17px !important;
+        color: @color3;
+        font-size: 35px !important;
     }
-    .timerminute {
-        font-size: 70px;
-        font-weight: bold;
-        font-family: @fontoswald;
-        color: white;
+}
+
+// overlay
+.overlaycontainer {
+    position: relative;
+}
+.overlay {
+    opacity: 1;
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: 0.5s ease;
+    backface-visibility: hidden;
+}
+.middle {
+    transition: 0.5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+}
+.overlaycontainer:hover .overlay {
+    opacity: 0.3;
+}
+.overlaycontainer:hover .middle {
+    opacity: 1;
+}
+.text {
+    background-color: @color2;
+    color: @color4;
+    font-size: 16px;
+    padding: 16px 32px;
+}
+
+// steps
+.toggle-base {
+    height: 20px;
+}
+.toggle-enter {
+    animation-name: fade-in;
+    animation-duration: 300ms;
+}
+.toggle-leave {
+    animation-name: fade-out;
+    animation-duration: 300ms;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        height: 0px;
     }
-    .timersecond {
-        font-size: 50px;
-        font-weight: bold;
-        font-family: @fontoswald;
-        color: white;
+    to {
+        opacity: 1;
+        height: 20px;
+    }
+}
+@keyframes fade-out {
+    from {
+        opacity: 1;
+        height: 20px;
+    }
+
+    to {
+        opacity: 0;
+        height: 0px;
     }
 }

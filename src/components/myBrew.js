@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Pagination from "react-bootstrap/Pagination";
 
 // import store
@@ -41,19 +41,7 @@ class MyBrew extends React.Component {
     this.props.setMyBrew(null);
   };
 
-  handlePreviousPageButton = event => {
-    event.preventDefault();
-    this.setState({ pagination: this.state.pagination - 1 }, () => {
-      this.props.getMyBrew({ p: this.state.pagination });
-    });
-  };
 
-  handleNextPageButton = event => {
-    event.preventDefault();
-    this.setState({ pagination: this.state.pagination + 1 }, () => {
-      this.props.getMyBrew({ p: this.state.pagination });
-    });
-  };
 
   render() {
     if (this.props.myBrew === null) {
@@ -63,16 +51,20 @@ class MyBrew extends React.Component {
     } else {
       return (
         <div>
-          <Link to="/recipes/create">
-            <button className="btn btn-primary">Tambah Guide</button>
-          </Link>
+          <button
+            className="btn btn-primary"
+            type="button"
+            onClick={this.props.createRecipe}
+          >
+            Tambah Guide
+          </button>
           {this.props.myBrew.data.map((value, key) => (
             <div className="col-12">
               <Link to={`/recipe/${value.id}`}>
                 <RecipeCard
                   className="w-100"
                   pageType="pageMyBrew"
-                  methodIcon={this.props.methods[value.methodID - 1].icon}
+                  method={this.props.methods[value.methodID - 1]}
                   data={value}
                   time={this.convertSeconds(value.time)}
                 />
@@ -93,6 +85,7 @@ class MyBrew extends React.Component {
           </Pagination>
         </div>
       );
+
     }
   }
 }

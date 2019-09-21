@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Modal } from "react-bootstrap";
 
 // import store
 import { connect } from "unistore/react";
@@ -8,6 +9,8 @@ import actionsRecipes from "../store/actionsRecipes";
 // import img
 import Plus from "../assets/images/plus.png";
 import timer from "../assets/images/RecipeIcon/timer.png";
+import water from "../assets/images/RecipeIcon/water.png"
+import loading from "../assets/images/loading.gif";
 
 class AddStep extends React.Component {
   constructor(props) {
@@ -19,23 +22,10 @@ class AddStep extends React.Component {
   }
 
   componentDidMount = async () => {
-    await this.props.getRecipeByID(this.props.match.params.recipeID);    
-    if (sessionStorage.getItem("note") === null) {
-      sessionStorage.setItem("note", this.props.recipeDetails.note);
-      this.note.current.value = this.props.recipeDetails.note;
-    } else {
-      this.note.current.value = sessionStorage.getItem("note");
-    }
-    if (sessionStorage.getItem("stepTemporary") !== null) {
-      await this.setState({
-        stepTemporary: JSON.parse(sessionStorage.getItem("stepTemporary"))
-      });
-    } else {
-      sessionStorage.setItem("stepTemporary", JSON.stringify(this.props.recipeSteps))
-      await this.setState({
-        stepTemporary: this.props.recipeSteps
-      });
-    }
+    this.note.current.value = sessionStorage.getItem("note");
+    await this.setState({
+      stepTemporary: JSON.parse(sessionStorage.getItem("stepTemporary"))
+    });
   };
 
   convertSeconds(value) {
@@ -83,47 +73,61 @@ class AddStep extends React.Component {
     recipeDetails["note"] = this.note.current.value;
 
     // validation waterAmount every Step = waterAmount Recipe
-    let totalWaterStep = 0
-    this.state.stepTemporary.map((step, index) => (totalWaterStep = totalWaterStep + step.amount))
+    let totalWaterStep = 0;
+    this.state.stepTemporary.map(
+      (step, index) => (totalWaterStep = totalWaterStep + step.amount)
+    );
     if (parseInt(totalWaterStep) > parseInt(recipes.water)) {
       return this.props.Toast.fire({
-          type: "error",
-          title: `Total Air Pada Step Melebihi ${recipes.water} ml`
-        });
+        type: "error",
+        title: `Total Air Pada Step Melebihi ${recipes.water} ml`
+      });
     } else if (parseInt(totalWaterStep) < parseInt(recipes.water)) {
       return this.props.Toast.fire({
         type: "error",
-        title: `Total Air Pada Step Masih Kurang ${parseInt(recipes.water) - parseInt(totalWaterStep)} ml`
+        title: `Total Air Pada Step Masih Kurang ${parseInt(recipes.water) -
+          parseInt(totalWaterStep)} ml`
       });
     }
+    this.props.setShowPutRecipe(true)
 
-    let time = 0;
-    steps.map((step, index) => (time = time + step.time));
-    recipes["time"] = time;
-
-    let data = {
-      recipes: recipes,
-      recipeDetails: recipeDetails,
-      steps: steps
-    };
-
-    await this.props.putRecipe(data)
-
-    if (sessionStorage.getItem("Recipe") === null) {
-      this.props.history.push(`/recipe/${this.props.match.params.recipeID}`);
-    }  else {
-      return console.log("ulangi")
-    }
+    setTimeout(async () => {
+      let time = 0;
+      steps.map((step, index) => (time = time + step.time));
+      recipes["time"] = time;
+  
+      let data = {
+        recipes: recipes,
+        recipeDetails: recipeDetails,
+        steps: steps
+      };
+  
+      await this.props.putRecipe(data, this.props.match.params.recipeID);
+  
+      if (sessionStorage.getItem("Recipe") === null) {
+        this.props.history.push(`/recipe/${this.props.match.params.recipeID}`);
+      } else {
+        return console.log("ulangi");
+      }
+    }, 500);
   };
 
   render() {
     return (
       <div>
-        <img className="backbutton" src={this.props.backButton} onClick={event => this.props.history.push(`/recipe/edit/${this.props.match.params.recipeID}`)} />
+        <img
+          className="backbutton"
+          src={this.props.backButton}
+          onClick={event =>
+            this.props.history.push(
+              `/recipe/edit/${this.props.match.params.recipeID}`
+            )
+          }
+        />
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-12">
-              <form onSubmit={this.handleSubmit} >
+              <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
                   <div className="row justify-content-center bg-success mb-2">
                     <label for="note">Catatan</label>
@@ -145,16 +149,7 @@ class AddStep extends React.Component {
                 <div className="card">
                   {this.state.stepTemporary.map((step, index) => {
                     return (
-                      <div className="card-body" key={index}>
-                        <div className="row justify-content-end">
-                          <button
-                            type="button"
-                            onClick={e => this.deteleStep(e, index)}
-                            className="btn btn-primary"
-                          >
-                            X
-                          </button>
-                        </div>
+                      <div className="card-body border" key={index}>
                         <div className="row justify-content-between">
                           <div className="col-4">
                             <img
@@ -167,11 +162,37 @@ class AddStep extends React.Component {
                             {this.props.stepTypes[step.stepTypeID].name}
                           </div>
                           <div className="col-4">
-                            <img className="mr-2" src={timer} width="20%" alt="altTag" />
-                            {this.convertSeconds(step.time)}
+                            <div className="row justify-content-center mb-3">
+                              <img
+                                className="mr-2"
+                                src={timer}
+                                width="20%"
+                                alt="altTag"
+                              />
+                              {this.convertSeconds(step.time)}s
+                            </div>
+                            {parseInt(step.stepTypeID) === 1 ||
+                            parseInt(step.stepTypeID) === 2 ||
+                            parseInt(step.stepTypeID) === 12 ? (
+                              <div className="row justify-content-center">
+                                <img src={water} width="20%" alt="AltTag" />
+                                {step.amount} ml
+                              </div>
+                            ) : (
+                              <div></div>
+                            )}
                           </div>
                         </div>
-                        <hr></hr>
+                        <div className="row justify-content-end">
+                          <button
+                            type="button"
+                            onClick={e => this.deteleStep(e, index)}
+                            className="btn btn-primary"
+                            width="50%"
+                          >
+                            X
+                          </button>
+                        </div>
                       </div>
                     );
                   })}
@@ -199,6 +220,16 @@ class AddStep extends React.Component {
                   Simpan
                 </button>
               </form>
+                      {/* page loading when pust new recipe */}
+        <Modal show={this.props.showPutRecipe}>
+          <div className="container-fluid">
+            <div className="row justify-content-center" style={{margin: "0 auto"}} >
+              <Modal.Header>
+                <img src={loading} alt="altTag" width="300px" ></img>
+              </Modal.Header>
+            </div>
+          </div>
+        </Modal>
             </div>
           </div>
         </div>
@@ -208,6 +239,6 @@ class AddStep extends React.Component {
 }
 
 export default connect(
-  "Toast, stepTypes, stepTemporary, methods, grinds, flavors, origins, recipeDetails, backButton, recipe, recipeSteps, waterLimit, recipeCreator, reviews, userMe",
+  "Toast, stepTypes, stepTemporary, methods, grinds, flavors, origins, recipeDetails, backButton, recipe, recipeSteps, waterLimit, recipeCreator, reviews, userMe, showPutRecipe",
   actionsRecipes
 )(AddStep);
