@@ -10,6 +10,7 @@ const Toast = Swal.mixin({
 });
 
 const actionsProfile = (store) => ({
+  // setter login state
   setLogin(state) {
     return { login: store.getState().login + 1 };
   },
@@ -17,6 +18,7 @@ const actionsProfile = (store) => ({
   setDataUser(state, value) {
     return { user: value };
   },
+  // setter dataUserBrew state
   setDataUserBrew(state, value) {
     return { userBrew: value };
   },
@@ -24,17 +26,18 @@ const actionsProfile = (store) => ({
   setDataUserMe(state, value) {
     return { userMe: value };
   },
+  // setter profileView state
   setProfileView(state, value) {
     return { profileView: value };
   },
+  // setter to reset changePasswordStatus state
   resetChangePasswordStatus(state) {
     return { changePasswordStatus: false };
   },
+  // setter to reset editProfileStatus state
   resetEditProfileStatus(state) {
     return { editProfileStatus: false };
   },
-
-
   // axios for profile me
   async getProfile(state) {
     const config = {
