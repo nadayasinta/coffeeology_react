@@ -28,10 +28,7 @@ const validationSchema = Yup.object({
     .email('Email tidak valid')
     .required('Email tidak boleh kosong'),
   password: Yup.string('')
-    .min(
-      6,
-      'Gunakan huruf besar, huruf kecil dan angka. Minimal 6 karakter.',
-    )
+    .min(6, 'Gunakan huruf besar, huruf kecil dan angka. Minimal 6 karakter.')
     .matches(
       /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])[\w\d]{6,30}$/,
       'Gunakan huruf besar, huruf kecil dan angka. Minimal 6 karakter.',
@@ -80,30 +77,26 @@ const Register = (props) => {
   });
 
   return (
-    <div>
-      <img
-        className="backbutton "
-        src={props.backButton}
-        onClick={(event) => props.history.push('/login')}
-      />
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <HumanHandsup />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-                        Register
-          </Typography>
-          <Formik
-            initialValues={dataRegister}
-            onSubmit={handleOnSubmit}
-            validationSchema={validationSchema}
-            render={(props) => <RegisterForm {...props} />}
-          />
-        </div>
-      </Container>
-    </div>
+  <div>
+  <img className="backbutton " src={props.backButton} onClick={(event) => props.history.push('/login')} />
+  <Container component="main" maxWidth="xs">
+  <CssBaseline />
+  <div className={classes.paper}>
+  <Avatar className={classes.avatar}>
+  <HumanHandsup />
+					</Avatar>
+  <Typography component="h1" variant="h5">
+						Register
+					</Typography>
+  <Formik
+  initialValues={dataRegister}
+  onSubmit={handleOnSubmit}
+  validationSchema={validationSchema}
+  render={(props) => <RegisterForm {...props} />}
+					/>
+				</div>
+			</Container>
+		</div>
   );
 };
 
