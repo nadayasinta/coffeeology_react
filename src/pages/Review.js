@@ -44,7 +44,6 @@ class Review extends React.Component {
   handleChange = event => {
     this.setState(
       { [event.target.name]: event.target.value },
-      console.log(event.target.name, event.target.value)
     );
   };
 
@@ -61,7 +60,6 @@ class Review extends React.Component {
         }
       },
       async () => {
-        await console.log("aaaa", this.state.review);
 
         await this.props.postReview(this.state.review);
         await this.props.history.push("/activity");

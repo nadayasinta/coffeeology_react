@@ -1,21 +1,21 @@
-import React from "react";
+import React from 'react';
 
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import Visibility from "@material-ui/icons/Visibility";
-import VisibilityOff from "@material-ui/icons/VisibilityOff";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import IconButton from "@material-ui/core/IconButton";
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import IconButton from '@material-ui/core/IconButton';
 
 // import store
 
-import useStyles from "../store/style";
+import useStyles from '../store/style';
 
 // Register form. will be rendered with
-const RegisterForm = props => {
+const RegisterForm = (props) => {
   const classes = useStyles();
   const [values, setValues] = React.useState({
-    showPassword: false
+    showPassword: false,
   });
 
   const {
@@ -25,7 +25,7 @@ const RegisterForm = props => {
     handleSubmit,
     handleChange,
     isValid,
-    setFieldTouched
+    setFieldTouched,
   } = props;
 
   const change = (name, e) => {
@@ -37,7 +37,7 @@ const RegisterForm = props => {
     setValues({ ...values, showPassword: !values.showPassword });
   };
 
-  const handleMouseDownPassword = event => {
+  const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
 
@@ -54,8 +54,8 @@ const RegisterForm = props => {
         name="email"
         value={email}
         autoComplete="email"
-        onChange={change.bind(null, "email")}
-        helperText={touched.email ? errors.email : ""}
+        onChange={change.bind(null, 'email')}
+        helperText={touched.email ? errors.email : ''}
         error={touched.email && Boolean(errors.email)}
         autoFocus
       />
@@ -69,9 +69,9 @@ const RegisterForm = props => {
         label="Nama"
         id="name"
         value={name}
-        onChange={change.bind(null, "name")}
+        onChange={change.bind(null, 'name')}
         error={touched.name && Boolean(errors.name)}
-        helperText={touched.name ? errors.name : ""}
+        helperText={touched.name ? errors.name : ''}
       />
       <TextField
         required
@@ -84,10 +84,10 @@ const RegisterForm = props => {
         label="Kata sandi"
         type="password"
         id="password"
-        onChange={change.bind(null, "password")}
+        onChange={change.bind(null, 'password')}
         autoComplete="current-password"
-        type={values.showPassword ? "text" : "password"}
-        helperText={touched.password ? errors.password : ""}
+        type={values.showPassword ? 'text' : 'password'}
+        helperText={touched.password ? errors.password : ''}
         error={touched.password && Boolean(errors.password)}
         InputProps={{
           endAdornment: (
@@ -100,7 +100,7 @@ const RegisterForm = props => {
                 {values.showPassword ? <Visibility /> : <VisibilityOff />}
               </IconButton>
             </InputAdornment>
-          )
+          ),
         }}
       />
 

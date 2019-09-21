@@ -69,8 +69,6 @@ class Profile extends React.Component {
       await this.props.getProfile();
       await this.setState({ editProfileView: false });
       await this.props.resetEditProfileStatus();
-    } else {
-      return console.log("ulang");
     }
   };
 
@@ -83,8 +81,6 @@ class Profile extends React.Component {
       passwordNew: this.state.passwordNew
     };
 
-    console.log("data password tes");
-    console.log("data password", data);
     await this.props.editPassword(data);
 
     // if data is not valid
@@ -102,7 +98,6 @@ class Profile extends React.Component {
         showPasswordNew: false
       });
     } else {
-      return console.log("salah");
     }
   };
 

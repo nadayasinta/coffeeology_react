@@ -106,8 +106,6 @@ class AddStep extends React.Component {
   
       if (sessionStorage.getItem("Recipe") === null) {
         this.props.history.push(`/recipe/${this.props.match.params.recipeID}`);
-      } else {
-        return console.log("ulangi");
       }
     }, 500);
   };
