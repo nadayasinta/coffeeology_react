@@ -52,6 +52,9 @@
 .activity h6 {
   font-family: "Nunito", sans-serif !important;
 }
+.brewing .methodcard .methodname {
+  height: 55px;
+}
 .brewing .rowhomeimage {
   margin-right: -30px;
   margin-left: -30px;
@@ -94,6 +97,27 @@
   color: white;
   padding: 0 0 15px 0;
 }
+.demopage .timersection .progress {
+  height: 30px;
+}
+.demopage .timersection .progress .bg-info {
+  background-color: #c3935b !important;
+}
+.demopage .timersection .CircularProgressbar .CircularProgressbar-path {
+  stroke: #c3935b;
+}
+.demopage .timersection .CircularProgressbar .CircularProgressbar-text {
+  fill: white;
+}
+.demopage .timersection .makeStyles-start-76:hover {
+  background-color: #53686b;
+}
+.demopage .timersection .makeStyles-pause-320:hover {
+  background-color: #ff0015;
+}
+.demopage .timersection .MuiFab-primary:hover {
+  background-color: #303f9f;
+}
 .review .SocialMediaShareButton {
   display: inline-block;
 }
@@ -133,9 +157,9 @@
 }
 .backbutton {
   position: absolute;
-  top: 75px;
+  top: 80px;
   left: 10px;
-  width: 15%;
+  width: 50px;
   padding: 10px;
 }
 .backbutton:hover {

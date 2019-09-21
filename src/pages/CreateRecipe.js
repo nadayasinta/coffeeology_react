@@ -125,6 +125,11 @@ class CreateRecipe extends React.Component {
           onClick={event => this.props.history.push("/activity")}
         />
         <div className="container">
+          <div className="row justify-content-center">
+              <h4 className="font-weight-bold mb-0">
+                  BUAT RESEP
+              </h4>
+          </div>
           <form onSubmit={this.submitRecipe}>
             <div className=" row ">
               <label htmlFor="name">Nama Resep</label>
@@ -178,8 +183,8 @@ class CreateRecipe extends React.Component {
                 <option value="3">Sulit</option>)
               </select>
             </div>
-            <div className=" row ">
-              <div className=" col-3  ">
+            <div className=" row justify-content-center">
+              <div className=" col-5 m-1 ">
                 <div className=" row justify-content-center border">
                   <div className=" col-12">
                     <label htmlFor="coffeeWeight">
@@ -210,7 +215,7 @@ class CreateRecipe extends React.Component {
                 </div>
               </div>
 
-              <div className=" col-3  ">
+              <div className=" col-5 m-1  ">
                 <div className=" row justify-content-center border">
                   <div className=" col-12">
                     <label htmlFor="water">
@@ -241,7 +246,7 @@ class CreateRecipe extends React.Component {
                 </div>
               </div>
 
-              <div className=" col-3 ">
+              <div className=" col-5 m-1  ">
                 <div className=" row justify-content-center border">
                   <div className=" col-12">
                     <label htmlFor="grindSize">
@@ -277,7 +282,7 @@ class CreateRecipe extends React.Component {
                 </div>
               </div>
 
-              <div className=" col-3">
+              <div className=" col-5 m-1 ">
                 <div className=" row justify-content-center border">
                   <div className=" col-12">
                     <label htmlFor="waterTemp">
@@ -309,7 +314,7 @@ class CreateRecipe extends React.Component {
               </div>
             </div>
 
-            <div className=" row justify-content-center bg-warning">
+            <div className=" row bg-light py-3 justify-content-center bg-warning">
               Profile Biji
             </div>
 

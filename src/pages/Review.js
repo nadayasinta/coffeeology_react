@@ -69,6 +69,11 @@ class Review extends React.Component {
         );
     };
 
+    componentWillUnmount() {
+        sessionStorage.removeItem("RecipeDetail");
+        sessionStorage.removeItem("Recipe");
+    }
+
     render() {
         return (
             <div>

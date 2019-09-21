@@ -53,7 +53,7 @@ class InputStep extends React.Component {
             return this.props.Toast.fire({
                 type: "error",
                 title: "Waktu Tidak Boleh Kosong"
-              });
+            });
         }
 
         // validation waterAmount every Step = waterAmount Recipe
@@ -74,8 +74,10 @@ class InputStep extends React.Component {
             totalWaterStep -= this.waterAmount.current.value;
             return this.props.Toast.fire({
                 type: "error",
-                title: `Jumlah Air Tidak Valid, Anda Hanya bisa menambahkan maksimal ${parseInt(recipes.water) - parseInt(totalWaterStep)} ml`
-              });
+                title: `Jumlah Air Tidak Valid, Anda Hanya bisa menambahkan maksimal ${parseInt(
+                    recipes.water
+                ) - parseInt(totalWaterStep)} ml`
+            });
         }
 
         // set total time
@@ -106,7 +108,11 @@ class InputStep extends React.Component {
                 />
                 <div className="container px-0">
                     <div className="row justify-content-center">
-                        {/* pilih tahapan */}
+                        <div className="col-12">
+                            <h4 className="font-weight-bold mb-0">
+                                DETAIL LANGKAH
+                            </h4>
+                        </div>
                         <div className="col-6">
                             <div
                                 className="form-group"
@@ -235,6 +241,6 @@ class InputStep extends React.Component {
 }
 
 export default connect(
-  "Toast, stepTypeNumberSelected, stepTypes, stepTypeNumber, stepNumber, stepTemporary, backButton",
-  actionsRecipes
+    "Toast, stepTypeNumberSelected, stepTypes, stepTypeNumber, stepNumber, stepTemporary, backButton",
+    actionsRecipes
 )(InputStep);

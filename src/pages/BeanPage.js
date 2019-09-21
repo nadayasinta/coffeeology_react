@@ -24,7 +24,7 @@ class BeanPage extends React.Component {
                                             as={Card.Header}
                                             eventKey={origin.id}
                                         >
-                                            {origin.name}
+                                            {origin.name.toUpperCase()}
                                         </Accordion.Toggle>
                                         {this.props.beans[origin.id].map(
                                             (bean, index) => (

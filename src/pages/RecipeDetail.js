@@ -43,8 +43,6 @@ class RecipeSelection extends React.Component {
   };
 
   handleShowReview = async () => {
-    this.props.getReview({ recipeID: this.props.match.params.recipeID });
-    console.log("inininini", this.props.reviews);
     this.setState({ showReview: true });
   };
 
@@ -64,7 +62,9 @@ class RecipeSelection extends React.Component {
       water: this.props.recipe.water,
       ratio: this.props.recipe.water / this.props.recipe.coffeeWeight,
       recipeSteps: this.props.recipeSteps
-    });
+    })
+    await this.props.getReview({ recipeID: this.props.match.params.recipeID });
+    console.log("inininini", this.props.reviews)
 
     // this.props.setRecipeSteps(this.state.recipeSteps);
     this.props.setResetTimer();
@@ -453,7 +453,7 @@ class RecipeSelection extends React.Component {
                     bsStyle="primary"
                     onClick={this.handleShowReview}
                   >
-                    {this.props.recipe.reviewCount} &nbsp; Review
+                    {this.props.reviews.length} &nbsp; Review
                   </Button>
 
                   <Modal
