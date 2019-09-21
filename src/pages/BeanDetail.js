@@ -27,6 +27,9 @@ class BeanDetail extends React.Component {
     };
 
     render() {
+        console.log('b', this.props.bean)
+
+        console.log('a', this.props.bean.description)
         return (
             <div>
                 <img
@@ -64,19 +67,14 @@ class BeanDetail extends React.Component {
                                 {this.props.bean.description}
                             </p>
                         </div>
-                        <div className="col-6">
+                        <div className="col-12">
                             <h6 className="border-bottom">ADVANTAGE</h6>
+                            {this.props.bean.advantage}
 
-                            {this.props.bean.advantage.map((adv, index) => (
-                                <h6>adv</h6>
-                            ))}
                         </div>
-                        <div className="col-6">
+                        <div className="col-12 pt-4">
                             <h6 className="border-bottom">DISADVANTAGE</h6>
-
-                            {this.props.bean.disadvantage.map((adv, index) => (
-                                <h6>adv</h6>
-                            ))}
+                            {this.props.bean.disadvantage}
                         </div>
 
                         <div className="col-12 pt-4">
@@ -86,7 +84,7 @@ class BeanDetail extends React.Component {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
         );
     }
 }

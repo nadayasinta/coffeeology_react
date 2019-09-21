@@ -21,7 +21,7 @@ const actionsBeans = (store) => ({
     };
     await axios(config)
       .then((response) => {
-        store.setState({ bean: response.data.data });
+        store.setState({ bean: response.data.data[0] });
       })
       .catch((error) => {
         console.log('Error getBeanById', error);

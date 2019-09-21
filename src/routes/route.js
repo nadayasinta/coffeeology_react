@@ -53,96 +53,96 @@ function Routes() {
                 <Switch>
                   <Route exact path="/" component={Brewing} />
                   <Route
-                      exact
-                      path="/test"
-                      component={Test}
-                    />
+                    exact
+                    path="/test"
+                    component={Test}
+                  />
                   <Route
-                      exact
-                      path="/recipe/:recipeID"
-                      component={RecipeDetail}
-                    />
+                    exact
+                    path="/recipe/:recipeID"
+                    component={RecipeDetail}
+                  />
                   <Route
-                      exact
-                      path="/recipe/demo/:recipeID"
-                      component={RecipeDemo}
-                    />
+                    exact
+                    path="/recipe/demo/:recipeID"
+                    component={RecipeDemo}
+                  />
                   <Route
-                      exact
-                      path="/recipe/review/:recipeID"
-                      component={Review}
-                    />
+                    exact
+                    path="/recipe/review/:recipeID"
+                    component={Review}
+                  />
                   <Route
-                      exact
-                      path="/login"
-                      component={SignIn}
-                    />
+                    exact
+                    path="/login"
+                    component={SignIn}
+                  />
                   <Route
-                      exact
-                      path="/register"
-                      component={Register}
-                    />
+                    exact
+                    path="/register"
+                    component={Register}
+                  />
                   <Route
-                      exact
-                      path="/activity"
-                      component={Activity}
-                    />
+                    exact
+                    path="/activity"
+                    component={Activity}
+                  />
                   <Route
-                      exact
-                      path="/recipes/create"
-                      component={CreateRecipe}
-                    />
+                    exact
+                    path="/recipes/create"
+                    component={CreateRecipe}
+                  />
                   <Route
-                      exact
-                      path="/recipes/create/addstep"
-                      component={AddStep}
-                    />
+                    exact
+                    path="/recipes/create/addstep"
+                    component={AddStep}
+                  />
                   <Route
-                      exact
-                      path="/recipes/create/inputstep"
-                      component={InputStep}
-                    />
+                    exact
+                    path="/recipes/create/inputstep"
+                    component={InputStep}
+                  />
                   <Route
-                      exact
-                      path="/recipes/:methodID"
-                      component={RecipesSelection}
-                    />
+                    exact
+                    path="/recipes/:methodID"
+                    component={RecipesSelection}
+                  />
                   <Route
-                      exact
-                      path="/profile/me"
-                      component={Profile}
-                    />
+                    exact
+                    path="/profile/me"
+                    component={Profile}
+                  />
                   <Route
-                      exact
-                      path="/profile/:userID"
-                      component={User}
-                    />
+                    exact
+                    path="/profile/:userID"
+                    component={User}
+                  />
                   <Route
-                      exact
-                      path="/search"
-                      component={Search}
-                    />
+                    exact
+                    path="/search"
+                    component={Search}
+                  />
                   <Route
-                      exact
-                      path="/beans"
-                      component={BeanPage}
-                    />
+                    exact
+                    path="/beans"
+                    component={BeanPage}
+                  />
                   <Route
-                      exact
-                      path="/beans/:beanID"
-                      component={BeanDetail}
-                    />
+                    exact
+                    path="/beans/:beanID"
+                    component={BeanDetail}
+                  />
 
                   <Route
-                      exact
-                      path="/recipe/edit/:recipeID"
-                      component={EditRecipe}
-                    />
+                    exact
+                    path="/recipe/edit/:recipeID"
+                    component={EditRecipe}
+                  />
                   <Route
-                      exact
-                      path="/recipe/edit/addstep/:recipeID"
-                      component={EditRecipeAddStep}
-                    />
+                    exact
+                    path="/recipe/edit/addstep/:recipeID"
+                    component={EditRecipeAddStep}
+                  />
                   <Route component={ErrorPage} />
                 </Switch>
                 <Navbar />

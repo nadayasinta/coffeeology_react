@@ -75,7 +75,6 @@ function Counter(props) {
         stepIndex: timer.stepIndex + 1,
       });
     } else {
-
       setTimer({
         ...timer,
         timeNow: timer.recipeSteps[timer.stepIndex + 1].time * 10,
