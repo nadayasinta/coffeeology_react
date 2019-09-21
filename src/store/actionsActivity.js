@@ -4,6 +4,7 @@ import axios from "axios";
 // import { getThemeProps } from "@material-ui/styles";
 
 const actionsActivity = store => ({
+
     setMyBrew(state, value) {
         return { MyBrew: value };
     },
@@ -46,6 +47,7 @@ const actionsActivity = store => ({
             })
             .catch(error => console.log("Error getMyBrew", error));
     }
+
 });
 
 export default actionsActivity;

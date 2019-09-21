@@ -19,6 +19,7 @@ const Toast = Swal.mixin({
 });
 
 const initialState = {
+
     // data recipe
     recipes: [
         // {
@@ -81,6 +82,7 @@ const initialState = {
         //   note: "lorem isum",
         //   grindSize: "medium",
         //   waterTemp: 92
+
     },
     recipeSteps: [
         {
