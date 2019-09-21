@@ -20,8 +20,8 @@ const stepTypes = {
     icon: require("../assets/images/StepIcon/stir.png")
   },
   6: {
-    name: "Press",
-    icon: require("../assets/images/StepIcon/stir.png")
+    name: "Tekan",
+    icon: require("../assets/images/StepIcon/button.png")
   },
   7: {
     name: "Tambah Ice",
@@ -30,14 +30,6 @@ const stepTypes = {
   8: {
     name: "Tambah Kopi",
     icon: require("../assets/images/StepIcon/coffee-grain.png")
-  },
-  9: {
-    name: "Tekan",
-    icon: require("../assets/images/StepIcon/button.png")
-  },
-  10: {
-    name: "Put The Lid On",
-    icon: require("../assets/images/StepIcon/stir.png")
   },
   12: {
     name: "Custom",

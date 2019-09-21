@@ -271,7 +271,6 @@ const Filter = props => {
               <option value={"difficulty"}>
                 Tingkat Kesulitan (Mudah-Sulit)
               </option>
-              <option value={4}>Tingkat Kesulitan (Sulit-Mudah)</option>
             </Select>
           </FormControl>
           <br />
