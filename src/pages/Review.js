@@ -30,13 +30,12 @@ class Review extends React.Component {
       rating: '',
       photo: '',
       ratingLabels: {
-        1: 'USELESS',
-        2: 'POOR',
+        1: 'SANGAT BURUK',
+        2: 'BURUK',
         3: 'OK',
-        4: 'GOOD',
-        5: 'EXCELENT',
+        4: 'BAGUS',
+        5: 'SANGAN BAGUS',
       },
-      rating: 3,
       review: {},
     };
   }

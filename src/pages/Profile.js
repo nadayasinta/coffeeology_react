@@ -1,14 +1,12 @@
 import React from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
-import { Redirect, Link } from 'react-router-dom';
-
+import { Redirect } from 'react-router-dom';
 // import material ui
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import ButtonUI from '@material-ui/core/Button';
 
 // import image
 import profileIcon from '../assets/images/profile.png';
@@ -141,6 +139,7 @@ class Profile extends React.Component {
                 src={profileIcon}
                 style={{ borderRadius: '50%', backgroundColor: '#000000' }}
                 width="100px"
+                alt="profileIcon"
               />{' '}
               <br />
               <h4 className="pt-1">

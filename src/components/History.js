@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'unistore/react';
 import Pagination from 'react-bootstrap/Pagination';
-import HistoryCard from './historyCard';
+import HistoryCard from './HistoryCard';
 import actionsActivity from '../store/actionsActivity';
 
 import loading from '../assets/images/loading.gif';

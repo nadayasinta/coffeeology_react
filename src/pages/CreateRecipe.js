@@ -4,7 +4,7 @@ import React from 'react';
 import { connect } from 'unistore/react';
 
 // import components
-import RadarRecipe from '../components/radarRecipe';
+import RadarRecipe from '../components/RadarRecipe';
 
 class CreateRecipe extends React.Component {
   constructor(props) {

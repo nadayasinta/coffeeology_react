@@ -1,19 +1,20 @@
 import axios from 'axios';
 import Swal from 'sweetalert2';
+// eslint-disable-next-line
 import store from './store';
 
 const Toast = Swal.mixin({
   toast: true,
   position: 'center',
   showConfirmButton: false,
-  timer: 2000
+  timer: 2000,
 });
 
 const ToastTop = Swal.mixin({
   toast: true,
   position: 'top',
   showConfirmButton: false,
-  timer: 2000
+  timer: 2000,
 });
 
 const actionsUsers = (store) => ({
@@ -29,7 +30,7 @@ const actionsUsers = (store) => ({
     const config = {
       method: 'post',
       url: `${store.getState().baseURL}/token`,
-      data
+      data,
     };
     axios(config)
       .then((response) => {
@@ -39,7 +40,7 @@ const actionsUsers = (store) => ({
       .catch((error) => {
         Toast.fire({
           type: 'error',
-          title: error.response.data.message
+          title: error.response.data.message,
         });
       });
   },
@@ -50,14 +51,14 @@ const actionsUsers = (store) => ({
     const config = {
       method: 'post',
       url: `${store.getState().baseURL}/users`,
-      data
+      data,
     };
     axios(config)
       .then(async (response) => {
         const config = {
           method: 'post',
           url: `${store.getState().baseURL}/token`,
-          data
+          data,
         };
         await axios(config)
           .then((response) => {
@@ -74,7 +75,7 @@ const actionsUsers = (store) => ({
         /* eslint-enable no-console */
         ToastTop.fire({
           type: 'error',
-          title: error.response.data.message
+          title: error.response.data.message,
         });
       });
   },
@@ -82,7 +83,7 @@ const actionsUsers = (store) => ({
   // logout user
   logout(state) {
     sessionStorage.removeItem('token');
-  }
+  },
 });
 
 export default actionsUsers;

@@ -8,11 +8,7 @@ function header() {
       <div className="row h-100 mx-0">
         <div className="col-12 text-center h-100">
           <Link to="/">
-            <img
-              src={logo}
-              className="logoIcon h-100"
-              alt="altTag"
-            />
+            <img src={logo} className="logoIcon h-100" alt="altTag" />
           </Link>
         </div>
       </div>

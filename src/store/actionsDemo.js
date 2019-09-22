@@ -1,13 +1,7 @@
 import axios from 'axios';
-import Swal from 'sweetalert2';
-import store from './store';
 
-const Toast = Swal.mixin({
-  toast: true,
-  position: 'center',
-  showConfirmButton: false,
-  timer: 2000,
-});
+// eslint-disable-next-line
+import store from './store';
 
 const actionsDemo = (store) => ({
   // setter timer state

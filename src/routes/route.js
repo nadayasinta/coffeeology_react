@@ -3,15 +3,15 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 // import store
 import store from '../store/store';
-import { Provider, connect } from 'unistore/react';
+import { Provider } from 'unistore/react';
 
 // import pages
 import RecipesSelection from '../pages/RecipesSelection';
 import Brewing from '../pages/Brewing';
 import RecipeDetail from '../pages/RecipeDetail';
-import RecipeDemo from '../pages/TimerTest/timerPage';
+import RecipeDemo from '../pages/Timer/TimerPage';
 import SignIn from '../pages/SignIn';
-import Register from '../pages/register';
+import Register from '../pages/Register';
 import Activity from '../pages/Activity';
 import CreateRecipe from '../pages/CreateRecipe';
 import AddStep from '../pages/AddStep';
@@ -20,15 +20,15 @@ import Review from '../pages/Review';
 import Profile from '../pages/Profile';
 import Search from '../pages/SearchPage';
 import ErrorPage from '../pages/ErrorPage';
-import User from '../pages/User';
+import User from '../pages/OtherUserProfile';
 import EditRecipe from '../pages/EditRecipe';
 import EditRecipeAddStep from '../pages/EditRecipeAddStep';
 import BeanPage from '../pages/BeanPage';
 import BeanDetail from '../pages/BeanDetail';
 
 // import component
-import Navbar from '../components/navbar';
-import Header from '../components/header';
+import Navbar from '../components/Navbar';
+import Header from '../components/Header';
 
 function Routes() {
   return (

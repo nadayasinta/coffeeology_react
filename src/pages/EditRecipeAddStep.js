@@ -16,7 +16,7 @@ class AddStep extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      stepTemporary: []
+      stepTemporary: [],
     };
     this.note = React.createRef();
   }
@@ -24,7 +24,7 @@ class AddStep extends React.Component {
   componentDidMount = async () => {
     this.note.current.value = sessionStorage.getItem('note');
     await this.setState({
-      stepTemporary: JSON.parse(sessionStorage.getItem('stepTemporary'))
+      stepTemporary: JSON.parse(sessionStorage.getItem('stepTemporary')),
     });
   };
 
@@ -44,18 +44,18 @@ class AddStep extends React.Component {
     event.preventDefault();
 
     const temp = this.state.stepTemporary.filter(
-      (step, index) => index !== idx
+      (step, index) => index !== idx,
     );
     await this.setState(
       {
-        stepTemporary: temp
+        stepTemporary: temp,
       },
       () => {
         sessionStorage.setItem(
           'stepTemporary',
-          JSON.stringify(this.state.stepTemporary)
+          JSON.stringify(this.state.stepTemporary),
         );
-      }
+      },
     );
   };
   // handle when user clicked addStep Button, redirect to inputstep page
@@ -76,18 +76,18 @@ class AddStep extends React.Component {
     // validation waterAmount every Step = waterAmount Recipe
     let totalWaterStep = 0;
     this.state.stepTemporary.map(
-      (step, index) => (totalWaterStep = totalWaterStep + step.amount)
+      (step, index) => (totalWaterStep = totalWaterStep + step.amount),
     );
     if (parseInt(totalWaterStep) > parseInt(recipes.water)) {
       return this.props.Toast.fire({
         type: 'error',
-        title: `Total Air Pada Step Melebihi ${recipes.water} ml`
+        title: `Total Air Pada Step Melebihi ${recipes.water} ml`,
       });
     } else if (parseInt(totalWaterStep) < parseInt(recipes.water)) {
       return this.props.Toast.fire({
         type: 'error',
         title: `Total Air Pada Step Masih Kurang ${parseInt(recipes.water) -
-          parseInt(totalWaterStep)} ml`
+          parseInt(totalWaterStep)} ml`,
       });
     }
     this.props.setShowPutRecipe(true);
@@ -100,7 +100,7 @@ class AddStep extends React.Component {
       let data = {
         recipes: recipes,
         recipeDetails: recipeDetails,
-        steps: steps
+        steps: steps,
       };
 
       await this.props.putRecipe(data, this.props.match.params.recipeID);
@@ -119,9 +119,10 @@ class AddStep extends React.Component {
           src={this.props.backButton}
           onClick={(event) =>
             this.props.history.push(
-              `/recipe/edit/${this.props.match.params.recipeID}`
+              `/recipe/edit/${this.props.match.params.recipeID}`,
             )
           }
+          alt="backButton"
         />
         <div className="container">
           <div className="row justify-content-center">
@@ -242,5 +243,5 @@ class AddStep extends React.Component {
 
 export default connect(
   'Toast, stepTypes, stepTemporary, methods, grinds, flavors, origins, recipeDetails, backButton, recipe, recipeSteps, waterLimit, recipeCreator, reviews, userMe, showPutRecipe',
-  actionsRecipes
+  actionsRecipes,
 )(AddStep);

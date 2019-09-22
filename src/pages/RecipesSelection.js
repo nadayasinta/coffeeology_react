@@ -5,7 +5,7 @@ import { connect } from 'unistore/react';
 import actionsRecipes from '../store/actionsRecipes';
 
 // import component
-import RecipeCard from '../components/recipeCard';
+import RecipeCard from '../components/RecipeCard';
 import Pagination from 'react-bootstrap/Pagination';
 import loading from '../assets/images/loading.gif';
 

@@ -5,10 +5,9 @@ import SkipNextIcon from '@material-ui/icons/SkipNext';
 import Fab from '@material-ui/core/Fab';
 import actionsDemo from '../../store/actionsDemo';
 
-import Timer from './timer';
-import TimerButton from './timerButton';
+import Timer from './Timer';
+import TimerButton from './TimerButton';
 import RecipeSteps from './RecipeSteps';
-import RecipeStepNow from './RecipeStepNow';
 import WaterBar from './WaterBar';
 import Water from './Water';
 

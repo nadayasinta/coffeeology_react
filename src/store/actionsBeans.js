@@ -1,4 +1,5 @@
 import axios from 'axios';
+// eslint-disable-next-line
 import store from './store';
 
 const actionsBeans = (store) => ({

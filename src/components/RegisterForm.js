@@ -51,7 +51,6 @@ const RegisterForm = (props) => {
         required
         variant="outlined"
         margin="normal"
-        required
         fullWidth
         id="email"
         label="Email"
@@ -67,7 +66,6 @@ const RegisterForm = (props) => {
         required
         variant="outlined"
         margin="normal"
-        required
         fullWidth
         name="name"
         label="Nama"
@@ -81,12 +79,10 @@ const RegisterForm = (props) => {
         required
         variant="outlined"
         margin="normal"
-        required
         fullWidth
         value={password}
         name="password"
         label="Kata sandi"
-        type="password"
         id="password"
         onChange={change.bind(null, 'password')}
         autoComplete="current-password"

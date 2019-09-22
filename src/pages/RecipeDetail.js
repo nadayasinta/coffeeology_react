@@ -10,7 +10,7 @@ import StepCard from '../components/stepCard';
 import ReviewCard from '../components/ReviewCard';
 
 // import components
-import RadarRecipe from '../components/radarRecipe';
+import RadarRecipe from '../components/RadarRecipe';
 import Disqus from 'disqus-react';
 
 import loading from '../assets/images/loading.gif';
@@ -171,6 +171,7 @@ class RecipeSelection extends React.Component {
             className="backbutton"
             src={this.props.backButton}
             onClick={(event) => this.props.history.goBack()}
+            alt="backButton"
           />
           <h3>Data Resep Tidak Ada</h3>
         </div>
@@ -178,7 +179,7 @@ class RecipeSelection extends React.Component {
     } else {
       const disqusShortname = 'coffeology'; //found in your Disqus.com dashboard
       const disqusConfig = {
-        url: 'http://localhost:3000/recipe/' + this.props.match.params.recipeID, //this.props.pageUrl
+        url: 'https://coffeology/recipe/' + this.props.match.params.recipeID, //this.props.pageUrl
         identifier: this.props.match.params.recipeID, //this.props.uniqueId
         title: 'Title of Your Article' + this.props.match.params.recipeID, //this.props.title
       };
@@ -189,6 +190,7 @@ class RecipeSelection extends React.Component {
             className="backbutton"
             src={this.props.backButton}
             onClick={(event) => this.props.history.goBack()}
+            alt="backButton"
           />
           {this.state.userID === this.props.recipe.userID ? (
             <div align="right">
@@ -265,6 +267,7 @@ class RecipeSelection extends React.Component {
                 <img
                   className="w-75 bgcolor2"
                   src={this.props.methods[this.props.recipe.methodID - 1].icon}
+                  alt="methodIcon"
                 />
                 <br />
                 <h6>

@@ -14,25 +14,23 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 // import component
 
-import History from '../components/history';
-import MyBrew from '../components/myBrew';
+import History from '../components/History';
+import MyBrew from '../components/MyBrew';
 
 function TabPanel(props) {
-  const {
- children, value, index, ...other 
-} = props;
+  const { children, value, index, ...other } = props;
 
   return (
-  <Typography
-  component="div"
-  role="tabpanel"
-  hidden={value !== index}
-  id={`full-width-tabpanel-${index}`}
-  aria-labelledby={`full-width-tab-${index}`}
-  {...other}
-		>
-  <Box p={3}>{children}</Box>
-		</Typography>
+    <Typography
+      component="div"
+      role="tabpanel"
+      hidden={value !== index}
+      id={`full-width-tabpanel-${index}`}
+      aria-labelledby={`full-width-tab-${index}`}
+      {...other}
+    >
+      <Box p={3}>{children}</Box>
+    </Typography>
   );
 }
 
@@ -94,50 +92,54 @@ export default function Activity(props) {
   }
 
   return (
-  <div>
-  {sessionStorage.getItem('token') ? <div /> : <Redirect to="/login" />}
-  <div className="container-fluid activity px-0">
-  <div className="row">
-  <div className="col-12">
-  <div className={classes.root}>
-  <AppBar className="acitivityBar" position="static" color="default">
-  <Tabs
-  value={value}
-  onChange={handleChange}
-  indicatorColor="primary"
-  textColor="primary"
-  variant="fullWidth"
-  aria-label="full width tabs example"
-								>
-  <Tab label="Guide Saya" {...a11yProps(0)} />
-  <Tab label="Histori" {...a11yProps(1)} />
-								</Tabs>
-							</AppBar>
-  <SwipeableViews
-  axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-  index={value}
-  onChangeIndex={handleChangeIndex}
-							>
-  <TabPanel value={value} index={0} dir={theme.direction}>
-  <MyBrew createRecipe={handleCreateRecipe} />
-								</TabPanel>
-  <TabPanel value={value} index={1} dir={theme.direction}>
-  <History />
-								</TabPanel>
-							</SwipeableViews>
-						</div>
-					</div>
-				</div>
-			</div>
-  {value === 0 ? (
-  <Link to="/recipes/create">
-  <Fab color="primary" aria-label="add" className={classesFab.fab}>
-  <AddIcon />
-					</Fab>
-				</Link>
-			) : (
-  <div />
-			)}
-		</div>
+    <div>
+      {sessionStorage.getItem('token') ? <div /> : <Redirect to="/login" />}
+      <div className="container-fluid activity px-0">
+        <div className="row">
+          <div className="col-12">
+            <div className={classes.root}>
+              <AppBar
+                className="acitivityBar"
+                position="static"
+                color="default"
+              >
+                <Tabs
+                  value={value}
+                  onChange={handleChange}
+                  indicatorColor="primary"
+                  textColor="primary"
+                  variant="fullWidth"
+                  aria-label="full width tabs example"
+                >
+                  <Tab label="Guide Saya" {...a11yProps(0)} />
+                  <Tab label="Histori" {...a11yProps(1)} />
+                </Tabs>
+              </AppBar>
+              <SwipeableViews
+                axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+                index={value}
+                onChangeIndex={handleChangeIndex}
+              >
+                <TabPanel value={value} index={0} dir={theme.direction}>
+                  <MyBrew createRecipe={handleCreateRecipe} />
+                </TabPanel>
+                <TabPanel value={value} index={1} dir={theme.direction}>
+                  <History />
+                </TabPanel>
+              </SwipeableViews>
+            </div>
+          </div>
+        </div>
+      </div>
+      {value === 0 ? (
+        <Link to="/recipes/create">
+          <Fab color="primary" aria-label="add" className={classesFab.fab}>
+            <AddIcon />
+          </Fab>
+        </Link>
+      ) : (
+        <div />
+      )}
+    </div>
   );
 }

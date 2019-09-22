@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 // import component
-import RecipeCard from '../components/recipeCard';
+import RecipeCard from '../components/RecipeCard';
 
 // import image
 import profileIcon from '../assets/images/profile.png';
@@ -13,7 +13,7 @@ import { connect } from 'unistore/react';
 import actionsProfile from '../store/actionsProfile';
 import useStyles from '../store/style';
 
-class Profile extends React.Component {
+class OtherUserProfile extends React.Component {
   componentDidMount = async () => {
     if (sessionStorage.getItem('token') !== null) {
       await this.props.getProfile();
@@ -123,4 +123,4 @@ export default connect(
   'userMe, Toast, user, userBrew, methods',
   actionsProfile,
   useStyles,
-)(Profile);
+)(OtherUserProfile);

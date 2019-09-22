@@ -17,8 +17,8 @@ import SearchIcon from '@material-ui/icons/Search';
 
 import Pagination from 'react-bootstrap/Pagination';
 import actionsRecipes from '../store/actionsRecipes';
-import RecipeCard from '../components/recipeCard';
-import Filter from '../components/filter';
+import RecipeCard from '../components/RecipeCard';
+import Filter from '../components/Filter';
 import loading from '../assets/images/loading.gif';
 
 const _ = require('lodash');

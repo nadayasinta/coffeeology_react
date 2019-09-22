@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'unistore/react';
 
 // import component
-import MethodCard from '../components/methodCard';
+import MethodCard from '../components/MethodCard';
 import HomeCarousel from '../components/HomeCarousel';
 
 // import image
@@ -20,7 +20,8 @@ class Brewing extends React.Component {
           </div>
           <div className="row justify-content-center pt-3">
             <div className="col-12">
-              <h4 className="font-weight-bold">ini judulnya apa</h4>
+              <br />
+              <h4 className="font-weight-bold">Metode Brewing</h4>
             </div>
             {this.props.methods.map((method, index) => (
               <div

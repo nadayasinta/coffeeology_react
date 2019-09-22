@@ -7,7 +7,7 @@ import { connect } from 'unistore/react';
 import actionsActivity from '../store/actionsActivity';
 
 // import component
-import RecipeCard from './recipeCard';
+import RecipeCard from './RecipeCard';
 
 // import img
 import loading from '../assets/images/loading.gif';

@@ -124,6 +124,7 @@ class AddStep extends React.Component {
           className="backbutton"
           src={this.props.backButton}
           onClick={(event) => this.props.history.push('/recipes/create')}
+          alt="backButton"
         />
         <div className="container">
           <div className="row justify-content-center">

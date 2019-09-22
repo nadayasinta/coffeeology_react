@@ -1,5 +1,7 @@
 import axios from 'axios';
 import Swal from 'sweetalert2';
+
+// eslint-disable-next-line
 import store from './store';
 
 const Toast = Swal.mixin({
