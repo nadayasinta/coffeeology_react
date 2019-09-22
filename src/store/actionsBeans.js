@@ -2,6 +2,7 @@ import axios from 'axios';
 import store from './store';
 
 const actionsBeans = (store) => ({
+  // make request with axios to get beans data
   async getBeans(state) {
     const config = {
       method: 'get',
@@ -14,6 +15,7 @@ const actionsBeans = (store) => ({
       })
       .catch((error) => console.log('Error getBeans', error));
   },
+  // make request with axios to get beans detail data by id
   async getBeanById(state, data) {
     const config = {
       method: 'get',

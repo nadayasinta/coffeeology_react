@@ -20,9 +20,7 @@ class Brewing extends React.Component {
           </div>
           <div className="row justify-content-center pt-3">
             <div className="col-12">
-              <h4 className="font-weight-bold">
-                                ini judulnya apa
-              </h4>
+              <h4 className="font-weight-bold">ini judulnya apa</h4>
             </div>
             {this.props.methods.map((method, index) => (
               <div
@@ -30,10 +28,7 @@ class Brewing extends React.Component {
                              py-1 px-2"
               >
                 <Link to={`/recipes/${method.id}`}>
-                  <MethodCard
-                    name={method.name}
-                    icon={method.icon}
-                  />
+                  <MethodCard name={method.name} icon={method.icon} />
                 </Link>
               </div>
             ))}

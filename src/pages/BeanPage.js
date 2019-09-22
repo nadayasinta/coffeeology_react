@@ -4,6 +4,7 @@ import Card from 'react-bootstrap/Card';
 import { connect } from 'unistore/react';
 import { Link } from 'react-router-dom';
 import actionsBeans from '../store/actionsBeans';
+
 import loading from '../assets/images/loading.gif';
 
 class BeanPage extends React.Component {
