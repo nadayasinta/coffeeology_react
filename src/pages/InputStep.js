@@ -98,6 +98,7 @@ class InputStep extends React.Component {
           className="backbutton "
           src={this.props.backButton}
           onClick={(event) => this.props.history.goBack()}
+          alt="backButton"
         />
         <div className="container px-0">
           <div className="row justify-content-center">

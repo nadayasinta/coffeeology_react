@@ -6,7 +6,6 @@ import RecipeCard from '../components/recipeCard';
 
 // import image
 import profileIcon from '../assets/images/profile.png';
-import editProfile from '../assets/images/edit-profile.png';
 import loading from '../assets/images/loading.gif';
 
 // import store
@@ -15,8 +14,7 @@ import actionsProfile from '../store/actionsProfile';
 import useStyles from '../store/style';
 
 class Profile extends React.Component {
-
-   componentDidMount =  () => {
+  componentDidMount = async () => {
     if (sessionStorage.getItem('token') !== null) {
       await this.props.getProfile();
       if (
@@ -34,7 +32,6 @@ class Profile extends React.Component {
   };
 
   componentWillUnmount = () => {
-
     // reset props from store back to null
     this.props.setDataUser(null);
     this.props.setDataUserBrew(null);
@@ -72,9 +69,10 @@ class Profile extends React.Component {
                 src={profileIcon}
                 style={{
                   borderRadius: '50%',
-                  backgroundColor: '#000000'
+                  backgroundColor: '#000000',
                 }}
                 width="100px"
+                alt="profileIcon"
               />
             </div>
             <h3>{this.props.user.name}</h3>
@@ -124,5 +122,5 @@ class Profile extends React.Component {
 export default connect(
   'userMe, Toast, user, userBrew, methods',
   actionsProfile,
-  useStyles
+  useStyles,
 )(Profile);

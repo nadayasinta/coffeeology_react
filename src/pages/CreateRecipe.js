@@ -5,7 +5,6 @@ import { connect } from 'unistore/react';
 
 // import components
 import RadarRecipe from '../components/radarRecipe';
-import { JsxEmit } from 'typescript';
 
 class CreateRecipe extends React.Component {
   constructor(props) {
@@ -123,6 +122,7 @@ class CreateRecipe extends React.Component {
           className="backbutton"
           src={this.props.backButton}
           onClick={(event) => this.props.history.push('/activity')}
+          alt="backButton"
         />
         <div className="container">
           <div className="row justify-content-center">

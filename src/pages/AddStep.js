@@ -64,7 +64,7 @@ class AddStep extends React.Component {
       },
     );
   };
-  
+
   // handle when user clicked addStep Button, redirect to inputstep page
   addStep = (e) => {
     e.preventDefault();
@@ -91,7 +91,7 @@ class AddStep extends React.Component {
         title: `Total Air Pada Step Melebihi ${recipes.water} ml`,
       });
     } else if (parseInt(totalWaterStep) < parseInt(recipes.water)) {
-      return this.props.Toast.fire(s{
+      return this.props.Toast.fire({
         type: 'error',
         title: `Total Air Pada Step Masih Kurang ${parseInt(recipes.water) -
           parseInt(totalWaterStep)} ml`,

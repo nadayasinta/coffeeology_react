@@ -6,7 +6,6 @@ import actionsRecipes from '../store/actionsRecipes';
 
 // import components
 import Radar from '../components/radarRecipe';
-import { JsxEmit } from 'typescript';
 
 class CreateRecipe extends React.Component {
   constructor(props) {
@@ -125,6 +124,7 @@ class CreateRecipe extends React.Component {
               `/recipe/${this.props.match.params.recipeID}`,
             )
           }
+          alt="backButton"
         />
         <div className="container">
           <form onSubmit={this.submitRecipe}>

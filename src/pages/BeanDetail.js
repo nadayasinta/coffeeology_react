@@ -36,6 +36,7 @@ class BeanDetail extends React.Component {
           className="backbutton"
           src={this.props.backButton}
           onClick={(event) => this.props.history.push('/beans')}
+          alt="backButton"
         />
         <div className="container">
           <div className="row">
