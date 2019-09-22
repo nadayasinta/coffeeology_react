@@ -77,26 +77,32 @@ const Register = (props) => {
   });
 
   return (
-  <div>
-  <img className="backbutton " src={props.backButton} onClick={(event) => props.history.push('/login')} />
-  <Container component="main" maxWidth="xs">
-  <CssBaseline />
-  <div className={classes.paper}>
-  <Avatar className={classes.avatar}>
-  <HumanHandsup />
-					</Avatar>
-  <Typography component="h1" variant="h5">
-						Register
-					</Typography>
-  <Formik
-  initialValues={dataRegister}
-  onSubmit={handleOnSubmit}
-  validationSchema={validationSchema}
-  render={(props) => <RegisterForm {...props} />}
-					/>
-				</div>
-			</Container>
-		</div>
+
+    <div>
+      <img
+        className="backbutton "
+        src={props.backButton}
+        onClick={(event) => props.history.push('/login')}
+      />
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <HumanHandsup />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Register
+          </Typography>
+          <Formik
+            initialValues={dataRegister}
+            onSubmit={handleOnSubmit}
+            validationSchema={validationSchema}
+            render={(props) => <RegisterForm {...props} />}
+          />
+        </div>
+      </Container>
+    </div>
+
   );
 };
 

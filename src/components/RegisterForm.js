@@ -18,6 +18,7 @@ const RegisterForm = (props) => {
     showPassword: false,
   });
 
+  // parse props
   const {
     values: { name, email, password },
     errors,
@@ -28,11 +29,14 @@ const RegisterForm = (props) => {
     setFieldTouched,
   } = props;
 
+  // handle onChange in input form
   const change = (name, e) => {
     e.persist();
     handleChange(e);
     setFieldTouched(name, true, false);
   };
+
+  // handle show/hide password form
   const handleClickShowPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword });
   };

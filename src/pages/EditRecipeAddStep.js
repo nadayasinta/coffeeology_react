@@ -1,16 +1,16 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { Modal } from "react-bootstrap";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Modal } from 'react-bootstrap';
 
 // import store
-import { connect } from "unistore/react";
-import actionsRecipes from "../store/actionsRecipes";
+import { connect } from 'unistore/react';
+import actionsRecipes from '../store/actionsRecipes';
 
 // import img
-import Plus from "../assets/images/plus.png";
-import timer from "../assets/images/RecipeIcon/timer.png";
-import water from "../assets/images/RecipeIcon/water.png"
-import loading from "../assets/images/loading.gif";
+import Plus from '../assets/images/plus.png';
+import timer from '../assets/images/RecipeIcon/timer.png';
+import water from '../assets/images/RecipeIcon/water.png';
+import loading from '../assets/images/loading.gif';
 
 class AddStep extends React.Component {
   constructor(props) {
@@ -22,9 +22,9 @@ class AddStep extends React.Component {
   }
 
   componentDidMount = async () => {
-    this.note.current.value = sessionStorage.getItem("note");
+    this.note.current.value = sessionStorage.getItem('note');
     await this.setState({
-      stepTemporary: JSON.parse(sessionStorage.getItem("stepTemporary"))
+      stepTemporary: JSON.parse(sessionStorage.getItem('stepTemporary'))
     });
   };
 
@@ -52,25 +52,26 @@ class AddStep extends React.Component {
       },
       () => {
         sessionStorage.setItem(
-          "stepTemporary",
+          'stepTemporary',
           JSON.stringify(this.state.stepTemporary)
         );
       }
     );
   };
-
-  addStep = e => {
+  // handle when user clicked addStep Button, redirect to inputstep page
+  addStep = (e) => {
     e.preventDefault();
-    sessionStorage.setItem("note", this.note.current.value);
-    this.props.history.push("/recipes/create/inputstep");
+    sessionStorage.setItem('note', this.note.current.value);
+    this.props.history.push('/recipes/create/inputstep');
   };
 
-  handleSubmit = async e => {
+  // handle when user clicked submit button, post recipe with data from sessionStorage
+  handleSubmit = async (e) => {
     e.preventDefault();
-    let recipes = JSON.parse(sessionStorage.getItem("Recipe"));
-    let steps = JSON.parse(sessionStorage.getItem("stepTemporary"));
-    let recipeDetails = JSON.parse(sessionStorage.getItem("RecipeDetail"));
-    recipeDetails["note"] = this.note.current.value;
+    let recipes = JSON.parse(sessionStorage.getItem('Recipe'));
+    let steps = JSON.parse(sessionStorage.getItem('stepTemporary'));
+    let recipeDetails = JSON.parse(sessionStorage.getItem('RecipeDetail'));
+    recipeDetails['note'] = this.note.current.value;
 
     // validation waterAmount every Step = waterAmount Recipe
     let totalWaterStep = 0;
@@ -79,32 +80,32 @@ class AddStep extends React.Component {
     );
     if (parseInt(totalWaterStep) > parseInt(recipes.water)) {
       return this.props.Toast.fire({
-        type: "error",
+        type: 'error',
         title: `Total Air Pada Step Melebihi ${recipes.water} ml`
       });
     } else if (parseInt(totalWaterStep) < parseInt(recipes.water)) {
       return this.props.Toast.fire({
-        type: "error",
+        type: 'error',
         title: `Total Air Pada Step Masih Kurang ${parseInt(recipes.water) -
           parseInt(totalWaterStep)} ml`
       });
     }
-    this.props.setShowPutRecipe(true)
+    this.props.setShowPutRecipe(true);
 
     setTimeout(async () => {
       let time = 0;
       steps.map((step, index) => (time = time + step.time));
-      recipes["time"] = time;
-  
+      recipes['time'] = time;
+
       let data = {
         recipes: recipes,
         recipeDetails: recipeDetails,
         steps: steps
       };
-  
+
       await this.props.putRecipe(data, this.props.match.params.recipeID);
-  
-      if (sessionStorage.getItem("Recipe") === null) {
+
+      if (sessionStorage.getItem('Recipe') === null) {
         this.props.history.push(`/recipe/${this.props.match.params.recipeID}`);
       }
     }, 500);
@@ -116,7 +117,7 @@ class AddStep extends React.Component {
         <img
           className="backbutton"
           src={this.props.backButton}
-          onClick={event =>
+          onClick={(event) =>
             this.props.history.push(
               `/recipe/edit/${this.props.match.params.recipeID}`
             )
@@ -184,7 +185,7 @@ class AddStep extends React.Component {
                         <div className="row justify-content-end">
                           <button
                             type="button"
-                            onClick={e => this.deteleStep(e, index)}
+                            onClick={(e) => this.deteleStep(e, index)}
                             className="btn btn-primary"
                             width="50%"
                           >
@@ -197,7 +198,7 @@ class AddStep extends React.Component {
                   <hr />
                   <div className="card-body">
                     <Link
-                      onClick={e => this.addStep(e)}
+                      onClick={(e) => this.addStep(e)}
                       to="/recipes/create/inputstep"
                     >
                       <img
@@ -218,16 +219,19 @@ class AddStep extends React.Component {
                   Simpan
                 </button>
               </form>
-                      {/* page loading when pust new recipe */}
-        <Modal show={this.props.showPutRecipe}>
-          <div className="container-fluid">
-            <div className="row justify-content-center" style={{margin: "0 auto"}} >
-              <Modal.Header>
-                <img src={loading} alt="altTag" width="300px" ></img>
-              </Modal.Header>
-            </div>
-          </div>
-        </Modal>
+              {/* page loading when pust new recipe */}
+              <Modal show={this.props.showPutRecipe}>
+                <div className="container-fluid">
+                  <div
+                    className="row justify-content-center"
+                    style={{ margin: '0 auto' }}
+                  >
+                    <Modal.Header>
+                      <img src={loading} alt="altTag" width="300px"></img>
+                    </Modal.Header>
+                  </div>
+                </div>
+              </Modal>
             </div>
           </div>
         </div>
@@ -237,6 +241,6 @@ class AddStep extends React.Component {
 }
 
 export default connect(
-  "Toast, stepTypes, stepTemporary, methods, grinds, flavors, origins, recipeDetails, backButton, recipe, recipeSteps, waterLimit, recipeCreator, reviews, userMe, showPutRecipe",
+  'Toast, stepTypes, stepTemporary, methods, grinds, flavors, origins, recipeDetails, backButton, recipe, recipeSteps, waterLimit, recipeCreator, reviews, userMe, showPutRecipe',
   actionsRecipes
 )(AddStep);

@@ -18,9 +18,7 @@ import History from '../components/history';
 import MyBrew from '../components/myBrew';
 
 function TabPanel(props) {
-  const {
-    children, value, index, ...other
-  } = props;
+  const { children, value, index, ...other } = props;
 
   return (
     <Typography
@@ -37,7 +35,6 @@ function TabPanel(props) {
 }
 
 TabPanel.propTypes = {
-  children: PropTypes.node,
   index: PropTypes.any.isRequired,
   value: PropTypes.any.isRequired,
 };
@@ -60,7 +57,6 @@ const useStyles = makeStyles((theme) => ({
 
 const useStylesFab = makeStyles((theme) => ({
   fab: {
-    // margin: theme.spacing(1)
     position: 'fixed',
     bottom: '90px',
     marginLeft: '150px',
@@ -70,17 +66,18 @@ const useStylesFab = makeStyles((theme) => ({
   },
 }));
 
-
-export default function FullWidthTabs(props) {
+export default function Activity(props) {
   const classes = useStyles();
   const classesFab = useStylesFab();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
 
+  // handle change value from Tabs component
   function handleChange(event, newValue) {
     setValue(newValue);
   }
 
+  // handle change value from SwipeableViews component
   function handleChangeIndex(index) {
     setValue(index);
   }
@@ -132,15 +129,10 @@ export default function FullWidthTabs(props) {
             </div>
           </div>
         </div>
-
       </div>
       {value === 0 ? (
         <Link to="/recipes/create">
-          <Fab
-            color="primary"
-            aria-label="add"
-            className={classesFab.fab}
-          >
+          <Fab color="primary" aria-label="add" className={classesFab.fab}>
             <AddIcon />
           </Fab>
         </Link>
@@ -148,6 +140,5 @@ export default function FullWidthTabs(props) {
         <div />
       )}
     </div>
-
   );
 }

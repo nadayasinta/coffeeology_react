@@ -23,14 +23,16 @@ import Swal from 'sweetalert2';
 import actionsUsers from '../store/actionUsers';
 import useStyles from '../store/style';
 
-// import alert
-
+// Sign in form component
 const SignInForm = (props) => {
   const classes = useStyles();
+
+  // create state
   const [values, setValues] = React.useState({
     showPassword: false,
   });
 
+  // defining props
   const {
     values: { email, password },
     errors,
@@ -41,11 +43,14 @@ const SignInForm = (props) => {
     setFieldTouched,
   } = props;
 
+  // handle change in input form
   const change = (name, e) => {
     e.persist();
     handleChange(e);
     setFieldTouched(name, true, false);
   };
+
+  // handle show/hide password form
   const handleClickShowPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword });
   };
@@ -71,8 +76,7 @@ const SignInForm = (props) => {
         helperText={touched.email ? errors.email : ''}
         error={touched.email && Boolean(errors.email)}
         autoFocus
-      />
-      {' '}
+      />{' '}
       <TextField
         required
         variant="outlined"
@@ -122,6 +126,7 @@ const SignInForm = (props) => {
   );
 };
 
+// schema validation created with yup
 const validationSchema = Yup.object({
   email: Yup.string('Masukan Email Anda')
     .email('Email tidak valid')
@@ -172,12 +177,12 @@ const SignIn = (props) => {
 
   return (
     <div>
-
       {sessionStorage.getItem('token') ? <Redirect to="/" /> : <div />}
       <img
         className="backbutton "
         src={props.backButton}
         onClick={(event) => props.history.goBack()}
+        alt="backButton"
       />
       <Container component="main" maxWidth="xs">
         <CssBaseline />

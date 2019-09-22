@@ -2,12 +2,15 @@ import axios from 'axios';
 import store from './store';
 
 const actionsActivity = (store) => ({
+  // setter mybrew
   setMyBrew(state, value) {
     return { MyBrew: value };
   },
+  // setter history
   setHistory(state, value) {
     return { history: value };
   },
+  // make request with axios to get history data
   async getHistory(state, paramsInput) {
     const config = {
       method: 'get',
@@ -26,6 +29,7 @@ const actionsActivity = (store) => ({
         console.log('Error getHistory', error);
       });
   },
+  // make request with axios to get myBrew data
   async getMyBrew(state, paramsInput) {
     const config = {
       method: 'get',
