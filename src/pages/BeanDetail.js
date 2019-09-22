@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'unistore/react';
 import RadarBean from '../components/radarBean';
 import actionsBeans from '../store/actionsBeans';
+
 import loading from '../assets/images/loading.gif';
 
 class BeanDetail extends React.Component {

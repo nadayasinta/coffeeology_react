@@ -37,7 +37,6 @@ function TabPanel(props) {
 }
 
 TabPanel.propTypes = {
-  children: PropTypes.node,
   index: PropTypes.any.isRequired,
   value: PropTypes.any.isRequired,
 };
@@ -60,7 +59,6 @@ const useStyles = makeStyles((theme) => ({
 
 const useStylesFab = makeStyles((theme) => ({
   fab: {
-    // margin: theme.spacing(1)
     position: 'fixed',
     bottom: '90px',
     center: '0px',
@@ -71,16 +69,18 @@ const useStylesFab = makeStyles((theme) => ({
   // },
 }));
 
-export default function FullWidthTabs(props) {
+export default function Activity(props) {
   const classes = useStyles();
   const classesFab = useStylesFab();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
 
+  // handle change value from Tabs component
   function handleChange(event, newValue) {
     setValue(newValue);
   }
 
+  // handle change value from SwipeableViews component
   function handleChangeIndex(index) {
     setValue(index);
   }
