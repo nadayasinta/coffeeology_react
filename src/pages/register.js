@@ -77,6 +77,7 @@ const Register = (props) => {
   });
 
   return (
+
     <div>
       <img
         className="backbutton "
@@ -101,6 +102,7 @@ const Register = (props) => {
         </div>
       </Container>
     </div>
+
   );
 };
 

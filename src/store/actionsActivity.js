@@ -1,7 +1,5 @@
 import axios from 'axios';
 import store from './store';
-// import Swal from "sweetalert2";
-// import { getThemeProps } from "@material-ui/styles";
 
 const actionsActivity = (store) => ({
   // setter mybrew
