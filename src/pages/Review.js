@@ -16,22 +16,24 @@ import { connect } from 'unistore/react';
 import actionsDemo from '../store/actionsDemo';
 
 class Review extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			content: '',
-			rating: 3,
-			photo: '',
-			ratingLabels: {
-				1: 'SANGAT BURUK',
-				2: 'BURUK',
-				3: 'OK',
-				4: 'BAGUS',
-				5: 'SANGAT BAGUS'
-			},
-			review: {}
-		};
-	}
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      content: '',
+      rating: 3,
+      photo: '',
+      ratingLabels: {
+        1: 'SANGAT BURUK',
+        2: 'BURUK',
+        3: 'OK',
+        4: 'BAGUS',
+        5: 'SANGAT BAGUS',
+      },
+      review: {},
+    };
+  }
+
 
 	// handle form input change
 	handleChange = (event) => {
