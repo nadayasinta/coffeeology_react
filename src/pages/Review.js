@@ -27,14 +27,14 @@ class Review extends React.Component {
     super(props);
     this.state = {
       content: '',
-      rating: '',
+      rating: 3,
       photo: '',
       ratingLabels: {
         1: 'SANGAT BURUK',
         2: 'BURUK',
         3: 'OK',
         4: 'BAGUS',
-        5: 'SANGAN BAGUS',
+        5: 'SANGAT BAGUS',
       },
       review: {},
     };

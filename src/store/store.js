@@ -48,14 +48,12 @@ const initialState = {
   history: null,
   myBrew: null,
 
-
   // search
   searchParams: {},
   searchKeyword: '',
   originsParams: {},
   difficultiesParams: {},
   methodsParams: {},
-
 
   // user profile
   userMe: null,
@@ -68,11 +66,9 @@ const initialState = {
     timer: 2000,
   }),
 
-
   // another user profile
   user: null,
   userBrew: null,
-
 
   // method data
   methods: [
@@ -145,7 +141,6 @@ const initialState = {
     { id: 4, name: 'toraja' },
     { id: 5, name: 'lainnya' },
   ],
-
 
   // import button image
   homeButton: require('../assets/images/home.png'),
