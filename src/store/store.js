@@ -135,10 +135,10 @@ const initialState = {
 
   // origin data
   origins: [
-    { id: 1, name: 'jawa' },
-    { id: 2, name: 'sumatera' },
-    { id: 3, name: 'flores' },
-    { id: 4, name: 'toraja' },
+    { id: 1, name: 'Jawa' },
+    { id: 2, name: 'Sumatera' },
+    { id: 3, name: 'Flores' },
+    { id: 4, name: 'Toraja' },
     { id: 5, name: 'lainnya' },
   ],
 
