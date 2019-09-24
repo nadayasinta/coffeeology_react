@@ -1,6 +1,6 @@
 import React from 'react';
 
-function HistoryCard(props) {
+const HistoryCard = (props) => {
   return (
     <div className="container-fluid recipeCard border mt-3">
       <div className="row h-100 pt-2 ">
@@ -17,6 +17,6 @@ function HistoryCard(props) {
       </div>
     </div>
   );
-}
+};
 
 export default HistoryCard;

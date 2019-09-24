@@ -53,6 +53,6 @@ const HomeCarousel = () => {
       </Carousel.Item>
     </Carousel>
   );
-}
+};
 
 export default HomeCarousel;

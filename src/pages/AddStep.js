@@ -7,7 +7,7 @@ import { connect } from 'unistore/react';
 import actionsRecipes from '../store/actionsRecipes';
 
 // import img
-import Plus from '../assets/images/plus.png';
+import plus from '../assets/images/plus.png';
 import timer from '../assets/images/RecipeIcon/timer.png';
 import water from '../assets/images/RecipeIcon/water.png';
 import loading from '../assets/images/loading.gif';
@@ -34,7 +34,8 @@ class AddStep extends React.Component {
     }
   };
 
-  convertSeconds(value) {
+  // function to handle convert seconds to minute:second
+  convertSeconds = (value) => {
     let minutes = Math.floor(parseInt(value) / 60);
     let seconds = parseInt(value) - minutes * 60;
     if (minutes < 10) {
@@ -44,25 +45,21 @@ class AddStep extends React.Component {
       seconds = `0${seconds}`;
     }
     return `${minutes}:${seconds}`;
-  }
+  };
 
+  // to handle delete step
   deteleStep = async (event, idx) => {
     event.preventDefault();
 
     const temp = this.state.stepTemporary.filter(
       (step, index) => index !== idx,
     );
-    await this.setState(
-      {
-        stepTemporary: temp,
-      },
-      () => {
-        sessionStorage.setItem(
-          'stepTemporary',
-          JSON.stringify(this.state.stepTemporary),
-        );
-      },
-    );
+    await this.setState({ stepTemporary: temp }, () => {
+      sessionStorage.setItem(
+        'stepTemporary',
+        JSON.stringify(this.state.stepTemporary),
+      );
+    });
   };
 
   // handle when user clicked addStep Button, redirect to inputstep page
@@ -208,7 +205,7 @@ class AddStep extends React.Component {
                     >
                       <img
                         className="mr-2"
-                        src={Plus}
+                        src={plus}
                         alt="alt tag"
                         width="6%"
                       />

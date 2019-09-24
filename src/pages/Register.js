@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 
 import Avatar from '@material-ui/core/Avatar';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -77,7 +77,6 @@ const Register = (props) => {
   });
 
   return (
-
     <div>
       <img
         className="backbutton "
@@ -102,7 +101,6 @@ const Register = (props) => {
         </div>
       </Container>
     </div>
-
   );
 };
 

@@ -43,14 +43,12 @@ class InputStep extends React.Component {
         title: 'Catatan tidak boleh kosong',
       });
     }
-
     // to handle if user input water amount
     if (parseInt(this.waterAmount.current.value) > 0) {
       await this.setState({
         waterAmount: parseInt(this.waterAmount.current.value),
       });
     }
-
     // to handle not valid Duration Time
     if (
       parseInt(this.second.current.value) === 0 &&
@@ -61,10 +59,8 @@ class InputStep extends React.Component {
         title: 'Waktu Tidak Boleh Kosong',
       });
     }
-
     // validation waterAmount every Step = waterAmount Recipe
     let recipes = JSON.parse(sessionStorage.getItem('Recipe'));
-
     let totalWaterStep = parseInt(this.waterAmount.current.value);
     this.state.stepTemporary.map(
       (step, index) =>

@@ -14,6 +14,6 @@ const AmountWater = (props) => {
       />
     </div>
   );
-}
+};
 
 export default AmountWater;
