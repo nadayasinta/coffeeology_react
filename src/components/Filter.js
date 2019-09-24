@@ -54,7 +54,6 @@ const Filter = (props) => {
 
   const handleChangeSort = (event) => {
     event.preventDefault();
-    // setSort(event.target.value);
     setSort(event.target.value);
   };
   // create state

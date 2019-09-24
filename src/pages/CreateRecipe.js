@@ -383,7 +383,7 @@ class CreateRecipe extends React.Component {
                 required
               />
             </div>
-            <RadarRecipe 
+            <RadarRecipe
               data={{
                 fragrance: this.state.fragrance,
                 aroma: this.state.aroma,
@@ -435,6 +435,6 @@ class CreateRecipe extends React.Component {
 }
 
 // export default Steps;
-export default connect(
-  'methods, grinds, flavors, origins, recipeDetails, backButton',
-)(CreateRecipe);
+export default connect('methods, grinds, flavors, origins, backButton')(
+  CreateRecipe,
+);

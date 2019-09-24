@@ -21,7 +21,7 @@ class RecipesSelection extends React.Component {
   }
 
   // convert input in seconds to string with format 'minute:seconds
-  convertSeconds(secondsInput) {
+  convertSeconds = (secondsInput) => {
     let minutes = Math.floor(parseInt(secondsInput) / 60);
     let seconds = parseInt(secondsInput) - minutes * 60;
     if (minutes < 10) {
@@ -31,20 +31,20 @@ class RecipesSelection extends React.Component {
       seconds = `0${seconds}`;
     }
     return `${minutes}:${seconds}`;
-  }
+  };
 
-  async componentDidMount() {
-    // get recipe by methodID from param in endpoint and page right now
+  // get recipe by methodID from param in endpoint and page right now
+  componentDidMount = async () => {
     await this.props.getRecipesSelection({
       methodID: this.props.match.params.methodID,
       p: this.state.pagination,
     });
-  }
+  };
 
   // reset props in store
-  componentWillUnmount() {
+  componentWillUnmount = () => {
     this.props.setRecipesSelection(null);
-  }
+  };
 
   // handle change page button
   handlePreviousPageButton = (event) => {
