@@ -12,7 +12,7 @@ import timer from '../assets/images/RecipeIcon/timer.png';
 import water from '../assets/images/RecipeIcon/water.png';
 import loading from '../assets/images/loading.gif';
 
-class AddStep extends React.Component {
+class EditRecipeAddStep extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,7 +28,8 @@ class AddStep extends React.Component {
     });
   };
 
-  convertSeconds(value) {
+  // function to handle convert seconds to minute:second
+  convertSeconds = (value) => {
     let minutes = Math.floor(parseInt(value) / 60);
     let seconds = parseInt(value) - minutes * 60;
     if (minutes < 10) {
@@ -38,8 +39,9 @@ class AddStep extends React.Component {
       seconds = `0${seconds}`;
     }
     return `${minutes}:${seconds}`;
-  }
+  };
 
+  // to handle delete step
   deteleStep = async (event, idx) => {
     event.preventDefault();
 
@@ -58,6 +60,7 @@ class AddStep extends React.Component {
       },
     );
   };
+
   // handle when user clicked addStep Button, redirect to inputstep page
   addStep = (e) => {
     e.preventDefault();
@@ -242,6 +245,6 @@ class AddStep extends React.Component {
 }
 
 export default connect(
-  'Toast, stepTypes, stepTemporary, methods, grinds, flavors, origins, recipeDetails, backButton, recipe, recipeSteps, waterLimit, recipeCreator, reviews, userMe, showPutRecipe',
+  'Toast, stepTypes, stepTemporary, recipeDetails, backButton, recipe, showPutRecipe',
   actionsRecipes,
-)(AddStep);
+)(EditRecipeAddStep);
