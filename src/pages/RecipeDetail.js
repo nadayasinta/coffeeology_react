@@ -218,7 +218,7 @@ class RecipeDetail extends React.Component {
               </button>
             </div>
           ) : (
-            <div></div>
+            <div className="pt-4"></div>
           )}
 
           <div className="container">

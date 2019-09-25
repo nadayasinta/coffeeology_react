@@ -124,7 +124,7 @@ class CreateRecipe extends React.Component {
           onClick={(event) => this.props.history.push('/activity')}
           alt="backButton"
         />
-        <div className="container">
+        <div className="container pt-4">
           <div className="row justify-content-center">
             <h4 className="font-weight-bold mb-0">BUAT RESEP</h4>
           </div>
@@ -312,7 +312,7 @@ class CreateRecipe extends React.Component {
               </div>
             </div>
 
-            <div className=" row bg-light mt-4 py-2 border-top border-bottom justify-content-center bg-warning">
+            <div className=" row bg-light mt-4 py-2 border-top border-bottom justify-content-center ">
               PROFILE BIJI
             </div>
 
@@ -383,7 +383,10 @@ class CreateRecipe extends React.Component {
                 required
               />
             </div>
-            <RadarRecipe
+            <div className=" row bg-light mt-4 mb-2 py-2 border-top border-bottom justify-content-center ">
+              RASA
+            </div>
+            <RadarRecipe 
               data={{
                 fragrance: this.state.fragrance,
                 aroma: this.state.aroma,
