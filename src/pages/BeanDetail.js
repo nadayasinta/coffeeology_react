@@ -24,8 +24,8 @@ class BeanDetail extends React.Component {
 					/>
 					<div className="container">
 						<div className="row">
-							<div className="col-12">
-								<h4 className="font-weight-bold mb-0">{this.props.bean.name}</h4>
+							<div className="col-12 pt-4">
+								<h4 className="font-weight-bold mb-0">{this.props.bean.name.toUpperCase()}</h4>
 							</div>
 							<div className="col-12">
 								<h6 className="text-secondary">
