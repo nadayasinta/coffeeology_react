@@ -17,7 +17,7 @@ const RadarRecipe = (props) => {
         globalTaste: props.data.globalTaste,
         body: props.data.body,
       },
-      meta: { color: 'blue' },
+      meta: { color: 'burlywood' },
     },
   ];
 

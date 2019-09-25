@@ -180,7 +180,7 @@ class Profile extends React.Component {
               <div align="left">
                 <button
                   type="button"
-                  className="btn btn-primary btn-block"
+                  className="btn btn-dark btn-block"
                   onClick={(e) => {
                     e.preventDefault();
                     this.setState({ editPasswordView: true });
@@ -194,7 +194,7 @@ class Profile extends React.Component {
                 <button
                   onClick={(e) => this.handleLogot(e)}
                   type="button"
-                  className="btn btn-primary  btn-block"
+                  className="btn btn-dark  btn-block"
                 >
                   Keluar
                 </button>
