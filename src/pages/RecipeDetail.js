@@ -428,7 +428,7 @@ class RecipeDetail extends React.Component {
               <div className="col-5">
                 <ButtonToolbar>
                   <Button
-                    className="btn-block"
+                    className="btn-block btn-secondary"
                     bsStyle="primary"
                     onClick={this.handleShowComment}
                   >
@@ -458,7 +458,7 @@ class RecipeDetail extends React.Component {
                       />
                     </Modal.Body>
                     <Modal.Footer>
-                      <Button onClick={this.handleHideComment}>Close</Button>
+                      <Button className="btn-secondary" onClick={this.handleHideComment}>Close</Button>
                     </Modal.Footer>
                   </Modal>
                 </ButtonToolbar>
@@ -467,7 +467,7 @@ class RecipeDetail extends React.Component {
               <div className="col-5 ">
                 <ButtonToolbar>
                   <Button
-                    className="btn-block"
+                    className="btn-block btn-secondary"
                     bsStyle="primary"
                     onClick={this.handleShowReview}
                   >
@@ -497,7 +497,7 @@ class RecipeDetail extends React.Component {
                       </div>
                     </Modal.Body>
                     <Modal.Footer>
-                      <Button onClick={this.handleHideReview}>Close</Button>
+                      <Button className="btn-secondary" onClick={this.handleHideReview}>Close</Button>
                     </Modal.Footer>
                   </Modal>
                 </ButtonToolbar>
@@ -516,7 +516,7 @@ class RecipeDetail extends React.Component {
               <div className="col-12 my-3">
                 <button
                   type="button"
-                  className="btn btn-danger btn-block"
+                  className="btn btn-dark btn-block"
                   onClick={this.handleOnClickButton}
                 >
                   Mulai
@@ -538,7 +538,7 @@ class RecipeDetail extends React.Component {
                   <Button
                     value="Submit"
                     type="submit"
-                    variant="primary"
+                    variant="secondary"
                     onClick={(e) => this.props.history.push('/login')}
                   >
                     Login

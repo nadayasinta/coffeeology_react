@@ -188,7 +188,7 @@ class InputStep extends React.Component {
 						</div>
 						{/* form submit */}
 						<div className="form-group mt-3">
-							<button type="submit" className="btn btn-primary btn-block" value="Submit">
+							<button type="submit" className="btn btn-dark btn-block" value="Submit">
 								{' '}
 								Tambah{' '}
 							</button>

@@ -17,7 +17,7 @@ const RadarBean = (props) => {
         sweetness: props.data.sweetness,
         overall: props.data.overall,
       },
-      meta: { color: 'blue' },
+      meta: { color: 'burlywood' },
     },
   ];
 

@@ -172,7 +172,7 @@ class AddStep extends React.Component {
 																		<button
 																			type="button"
 																			onClick={(e) => this.deteleStep(e, index)}
-																			className="btn btn-primary"
+																			className="btn btn-dark"
 																			width="50%"
 																		>
 																			X
@@ -229,7 +229,7 @@ class AddStep extends React.Component {
 										</Link>
 									</div>
 								</div>
-								<button type="submit" className="btn btn-primary btn-block mt-4" value="Submit">
+								<button type="submit" className="btn btn-dark btn-block mt-4" value="Submit">
 									Simpan
 								</button>
 							</form>
