@@ -60,67 +60,68 @@ const SignInForm = (props) => {
   };
 
   return (
-    <form className={classes.form} onSubmit={handleSubmit}>
-      <TextField
-        required
-        variant="outlined"
-        margin="normal"
-        fullWidth
-        id="email"
-        label="Email Address"
-        name="email"
-        value={email}
-        autoComplete="email"
-        onChange={change.bind(null, 'email')}
-        helperText={touched.email ? errors.email : ''}
-        error={touched.email && Boolean(errors.email)}
-        autoFocus
-      />{' '}
-      <TextField
-        required
-        variant="outlined"
-        margin="normal"
-        fullWidth
-        name="password"
-        value={password}
-        label="Password"
-        id="password"
-        type={values.showPassword ? 'text' : 'password'}
-        onChange={change.bind(null, 'password')}
-        error={touched.password && Boolean(errors.password)}
-        helperText={touched.password ? errors.password : ''}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton
-                aria-label="toggle password visibility"
-                onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
-              >
-                {values.showPassword ? <Visibility /> : <VisibilityOff />}
-              </IconButton>
-            </InputAdornment>
-          ),
-        }}
-      />
-      <Button
-        fullWidth
-        variant="contained"
-        color="primary"
-        className={classes.submit}
-        type="submit"
-        disable={!isValid}
-      >
-        Sign In
-      </Button>
-      <Grid container className="justify-content-center">
-        <Grid item>
-          ------------ ATAU ------------
-          <br />
-          {/* <Link to="/register">Don't have an account? Sign Up</Link> */}
-        </Grid>
-      </Grid>
-    </form>
+  <form className={classes.form} onSubmit={handleSubmit}>
+  <TextField
+  required
+  variant="outlined"
+  margin="normal"
+  fullWidth
+  id="email"
+  label="Email Address"
+  name="email"
+  value={email}
+  autoComplete="email"
+  onChange={change.bind(null, 'email')}
+  helperText={touched.email ? errors.email : ''}
+  error={touched.email && Boolean(errors.email)}
+  autoFocus
+			/>
+{' '}
+  <TextField
+  required
+  variant="outlined"
+  margin="normal"
+  fullWidth
+  name="password"
+  value={password}
+  label="Password"
+  id="password"
+  type={values.showPassword ? 'text' : 'password'}
+  onChange={change.bind(null, 'password')}
+  error={touched.password && Boolean(errors.password)}
+  helperText={touched.password ? errors.password : ''}
+  InputProps={{
+				  endAdornment: (
+  <InputAdornment position="end">
+  <IconButton
+  aria-label="toggle password visibility"
+  onClick={handleClickShowPassword}
+  onMouseDown={handleMouseDownPassword}
+							>
+  {values.showPassword ? <Visibility /> : <VisibilityOff />}
+							</IconButton>
+						</InputAdornment>
+				  ),
+				}}
+			/>
+  <Button
+  fullWidth
+  variant="contained"
+  color="primary"
+  className={classes.submit}
+  type="submit"
+  disable={!isValid}
+			>
+				Sign In
+			</Button>
+  <Grid container className="justify-content-center">
+  <Grid item>
+					------------ ATAU ------------
+  <br />
+  {/* <Link to="/register">Don't have an account? Sign Up</Link> */}
+				</Grid>
+			</Grid>
+		</form>
   );
 };
 
@@ -174,43 +175,38 @@ const SignIn = (props) => {
   };
 
   return (
-    <div>
-      {sessionStorage.getItem('token') ? <Redirect to="/" /> : <div />}
-      <img
-        className="backbutton "
-        src={props.backButton}
-        onClick={(event) => props.history.goBack()}
-        alt="backButton"
-      />
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <HumanHandsup />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <Formik
-            initialValues={dataSignIn}
-            onSubmit={handleOnSubmit}
-            validationSchema={validationSchema}
-            render={(props) => <SignInForm {...props} />}
-          />
+  <div>
+  {sessionStorage.getItem('token') ? <Redirect to="/" /> : <div />}
+  <img
+  className="backbutton "
+  src={props.backButton}
+  onClick={(event) => props.history.goBack()}
+  alt="backButton"
+			/>
+  <Container component="main" maxWidth="xs">
+  <CssBaseline />
+  <div className={classes.paper}>
+  <Avatar className={classes.avatar}>
+  <HumanHandsup />
+					</Avatar>
+  <Typography component="h1" variant="h5">
+						Sign in
+					</Typography>
+  <Formik
+  initialValues={dataSignIn}
+  onSubmit={handleOnSubmit}
+  validationSchema={validationSchema}
+  render={(props) => <SignInForm {...props} />}
+					/>
 
-          <Link to="/register">
-            <Button
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
-              Sign Up
-            </Button>
-          </Link>
-        </div>
-      </Container>
-    </div>
+  <Link to="/register">
+  <Button fullWidth variant="contained" color="primary" className={classes.submit}>
+							Sign Up
+						</Button>
+					</Link>
+				</div>
+			</Container>
+		</div>
   );
 };
 

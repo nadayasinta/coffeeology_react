@@ -5,19 +5,18 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { HumanHandsup } from 'mdi-material-ui';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import Swal from 'sweetalert2';
 
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 // import store
 import { connect } from 'unistore/react';
-import Swal from 'sweetalert2';
 import actionsUsers from '../store/actionUsers';
 import useStyles from '../store/style';
 
+// import components
 import RegisterForm from '../components/RegisterForm';
-
-// import alert
 
 // validation schema with Yup module
 const validationSchema = Yup.object({
@@ -77,30 +76,26 @@ const Register = (props) => {
   });
 
   return (
-    <div>
-      <img
-        className="backbutton "
-        src={props.backButton}
-        onClick={(event) => props.history.push('/login')}
-      />
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <HumanHandsup />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Register
-          </Typography>
-          <Formik
-            initialValues={dataRegister}
-            onSubmit={handleOnSubmit}
-            validationSchema={validationSchema}
-            render={(props) => <RegisterForm {...props} />}
-          />
-        </div>
-      </Container>
-    </div>
+  <div>
+  <img className="backbutton " src={props.backButton} onClick={(event) => props.history.push('/login')} />
+  <Container component="main" maxWidth="xs">
+  <CssBaseline />
+  <div className={classes.paper}>
+  <Avatar className={classes.avatar}>
+  <HumanHandsup />
+					</Avatar>
+  <Typography component="h1" variant="h5">
+						Register
+					</Typography>
+  <Formik
+  initialValues={dataRegister}
+  onSubmit={handleOnSubmit}
+  validationSchema={validationSchema}
+  render={(props) => <RegisterForm {...props} />}
+					/>
+				</div>
+			</Container>
+		</div>
   );
 };
 
