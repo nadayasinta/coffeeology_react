@@ -54,7 +54,6 @@ const Filter = (props) => {
 
   const handleChangeSort = (event) => {
     event.preventDefault();
-    // setSort(event.target.value);
     setSort(event.target.value);
   };
   // create state
@@ -256,6 +255,9 @@ const Filter = (props) => {
               <option value="brewCount">Terpopuler</option>
               <option value="difficulty">
                 Tingkat Kesulitan (Mudah-Sulit)
+              </option>
+              <option value="difficultyDesc">
+                Tingkat Kesulitan (Sulit-Mudah)
               </option>
             </Select>
           </FormControl>

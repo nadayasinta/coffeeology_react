@@ -7,7 +7,7 @@ import actionsRecipes from '../store/actionsRecipes';
 // import components
 import RadarRecipe from '../components/RadarRecipe';
 
-class CreateRecipe extends React.Component {
+class EditRecipe extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -438,6 +438,6 @@ class CreateRecipe extends React.Component {
 
 // export default Steps;
 export default connect(
-  'methods, grinds, flavors, origins, recipeDetails, backButton, recipe, stepTypes, recipeSteps, waterLimit, backButton, recipeCreator, reviews, userMe',
+  'methods, grinds, flavors, origins, backButton, recipe, backButton',
   actionsRecipes,
-)(CreateRecipe);
+)(EditRecipe);

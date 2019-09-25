@@ -7,7 +7,7 @@ import { connect } from 'unistore/react';
 import actionsRecipes from '../store/actionsRecipes';
 
 // import img
-import Plus from '../assets/images/plus.png';
+import plus from '../assets/images/plus.png';
 import timer from '../assets/images/RecipeIcon/timer.png';
 import water from '../assets/images/RecipeIcon/water.png';
 import loading from '../assets/images/loading.gif';
@@ -224,7 +224,7 @@ class AddStep extends React.Component {
 									})}
 									<div className="border mt-2 mb-4 py-4">
 										<Link onClick={(e) => this.addStep(e)} to="/recipes/create/inputstep">
-											<img className="mr-2" src={Plus} alt="alt tag" width="6%" />
+											<img className="mr-2" src={plus} alt="alt tag" width="6%" />
 											Add Steps
 										</Link>
 									</div>

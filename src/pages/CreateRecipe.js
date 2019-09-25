@@ -438,6 +438,6 @@ class CreateRecipe extends React.Component {
 }
 
 // export default Steps;
-export default connect(
-  'methods, grinds, flavors, origins, recipeDetails, backButton',
-)(CreateRecipe);
+export default connect('methods, grinds, flavors, origins, backButton')(
+  CreateRecipe,
+);

@@ -6,7 +6,7 @@ import { connect } from 'unistore/react';
 import actionsRecipes from '../store/actionsRecipes';
 
 // import component
-import StepCard from '../components/stepCard';
+import StepCard from '../components/StepCard';
 import ReviewCard from '../components/ReviewCard';
 
 // import components
@@ -15,7 +15,7 @@ import Disqus from 'disqus-react';
 
 import loading from '../assets/images/loading.gif';
 
-class RecipeSelection extends React.Component {
+class RecipeDetail extends React.Component {
   constructor(props, context) {
     super(props, context);
 
@@ -87,7 +87,10 @@ class RecipeSelection extends React.Component {
     return `${minutes}:${seconds}`;
   }
 
-  // handle on Click button, check if token is null, redirect to login page, if token exist, redirect to recipe demo
+  /* 
+  handle on Click button, check if token is null, redirect to login page
+  if token exist, redirect to recipe demo 
+  */
   handleOnClickButton = async (event) => {
     event.preventDefault();
     if (sessionStorage.getItem('token') === null) {
@@ -551,6 +554,6 @@ class RecipeSelection extends React.Component {
 }
 
 export default connect(
-  'recipe, stepTypes, recipeDetails, recipeSteps, waterLimit, backButton, recipeCreator, methods, reviews, userMe, grinds, deleteRecipeStatus',
+  'recipe, recipeDetails, recipeSteps, backButton, recipeCreator, methods, reviews, userMe, grinds, deleteRecipeStatus',
   actionsRecipes,
-)(RecipeSelection);
+)(RecipeDetail);
