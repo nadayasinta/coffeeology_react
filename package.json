@@ -7,7 +7,7 @@
     "@material-ui/icons": "^4.4.1",
     "@material-ui/lab": "^4.0.0-alpha.26",
     "@types/react-transition-group": "^4.2.2",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "bootstrap": "^4.3.1",
     "disqus-react": "^1.0.7",
     "eslint-config-airbnb-base": "^14.0.0",
