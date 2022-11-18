@@ -34,7 +34,7 @@
     "react-notification-alert": "0.0.12",
     "react-radar": "^2.0.0-beta.111",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "3.1.1",
+    "react-scripts": "5.0.1",
     "react-share": "^3.0.1",
     "react-svg-radar-chart": "git+https://github.com/Spyna/react-svg-radar-chart.git",
     "react-swipeable-views": "^0.13.3",
